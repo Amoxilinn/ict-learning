@@ -1,3 +1,16 @@
+# 发布记录：GitHub 开源与 Pages
+
+2026-10-24（Asia/Shanghai），用户授权将本地网站开源并部署至 GitHub Pages。
+
+- 公开仓库：https://github.com/Amoxilinn/ict-learning
+- 在线网站：https://amoxilinn.github.io/ict-learning/
+- 原创代码和原创教程文字采用 MIT；第三方考纲图片、赛事截图与引用资料的权利说明见 `THIRD_PARTY_NOTICES.md`。
+- `main` 分支推送触发 `.github/workflows/pages.yml`：构建、JavaScript 语法检查、3663 项现有断言，通过后发布 `dist/`。
+- 已验证线上首页和第一章导航可用。下方“未上传、未部署”是此前各轮的历史状态。
+- 本地 `.openai/` 项目元数据、缓存、环境配置不纳入 Git。
+
+---
+
 # 当前状态：初学者阅读版已完成本轮改写
 
 更新：2026-10-24（Asia/Shanghai）。本节优先于下方历史记录。
