@@ -18,11 +18,11 @@ for(const s of scenes){
  }
 }
 const tcp=scene('tcp');
-assert.deepEqual(plain(tcp.steps[2].rows),[['客户端','ESTABLISHED'],['服务器','SYN-RECEIVED']]);checks++;
-assert.deepEqual(plain(tcp.steps[3].rows),[['客户端','ESTABLISHED'],['服务器','ESTABLISHED']]);checks++;
-ok(tcp.steps[1].message[2].includes('Seq=100')&&tcp.steps[2].message[2].includes('Ack=101')&&tcp.steps[3].message[2].includes('Ack=501'),'SYN consumes one sequence number');
-ok(scene('arp-local').steps[2].rows[0][0]==='192.168.10.20','local destination resolved');
-ok(scene('arp-gateway').steps[2].rows[0][0]==='192.168.10.1','remote destination resolves gateway');
+assert.deepEqual(plain(tcp.steps[3].rows),[['客户端','ESTABLISHED'],['服务器','SYN-RECEIVED']]);checks++;
+assert.deepEqual(plain(tcp.steps[4].rows),[['客户端','ESTABLISHED'],['服务器','ESTABLISHED']]);checks++;
+ok(tcp.events[0].label.includes('Seq=100')&&tcp.events[1].label.includes('Ack=101')&&tcp.events[2].label.includes('Ack=501'),'SYN consumes one sequence number');
+ok(scene('arp-local').steps[4].rows[0][0]==='192.168.10.20','local destination resolved');
+ok(scene('arp-gateway').steps[4].rows[0][0]==='192.168.10.1','remote destination resolves gateway');
 ok(scene('arp-gateway').steps.every(s=>s.rows.every(r=>r[0]!=='192.0.2.20')),'never cache remote IP as a local neighbor');
 let r=t.forwarding({},'A','B');
 assert.deepEqual(plain(r.out),['B','C']);checks++;
@@ -35,11 +35,59 @@ ok(t.forwarding({},'A','B').table.B===undefined,'destination cannot create a MAC
 ok(scene('switch-learning').steps[2].rows.length===1&&scene('switch-learning').steps[5].rows.length===2,'switch learning snapshots');
 ok(scene('vrp').steps[3].rows[1][1]==='新描述 / 旧配置','return does not save');
 ok(scene('vrp').steps[4].rows[1][1]==='新描述 / 新描述','successful save updates startup configuration');
-ok(scene('encapsulation').steps[3].fields[0][0].startsWith('目的 MAC'),'Ethernet field order starts with destination');
+ok(scene('encapsulation').steps[3].packet.header[0][0].startsWith('目的 MAC'),'Ethernet field order starts with destination');
+// ICT-002 opts in without changing other chapter scenarios.
+for(const s of scenes.filter(s=>!s.unit.startsWith('ICT-002.')))ok(!s.richSequence&&!s.steps.some(step=>step.prediction||step.packet),'new interactions restricted to ICT-002');
+for(const s of scenes.filter(s=>s.richSequence)){
+ const ids=new Set(s.events.map(event=>event.id));
+ for(const event of s.events)ok(event.to.length>0&&event.to.every(to=>to!==event.from&&s.actors[to]),'message recipients exist');
+ for(const step of s.steps){
+  for(const event of [step.event,...(step.also||[])].filter(Boolean))ok(ids.has(event.id)&&['sent','received','lost'].includes(event.phase),'valid message phase');
+  if(step.actorStates)ok(step.actorStates.length===s.actors.length,'each ARP actor has a state');
+  if(step.actions)for(const action of step.actions)ok(t.nextIndex(s,s.steps.indexOf(step),action.target)===action.target,'branch transition exists');
+  if(step.prediction){
+   const from=s.steps.indexOf(step);
+   for(const [target,answer] of Object.entries(step.prediction.answers)){
+    ok(t.nextIndex(s,from,Number(target))===Number(target),'prediction checks a reachable operation');
+    ok(step.prediction.choices[answer.correct]&&answer.reason.length>20,'prediction has a valid answer and explanation');
+    for(let choice=0;choice<step.prediction.choices.length;choice++)ok(t.predictionResult(s,from,choice,Number(target)).correct===(choice===answer.correct),'correct and incorrect choices evaluated separately');
+    ok(t.predictionResult(s,from,undefined,Number(target))===null,'prediction can be skipped');
+   }
+  }
+ }
+}
+assert.deepEqual(plain(tcp.steps[1].rows),[['客户端','SYN-SENT'],['服务器','LISTEN']]);checks++;
+ok(tcp.steps[5].rows[1][1]==='SYN-RECEIVED'&&tcp.steps[5].rows[0][1]==='ESTABLISHED','lost final ACK does not establish server');
+ok(t.nextIndex(tcp,4)===null&&t.nextIndex(tcp,5)===null,'both observation branches stop explicitly');
+ok(t.nextIndex(tcp,3)===null&&t.nextIndex(tcp,3,99)===null,'ACK branch requires a valid operation');
+const lostPath=[0,1,2,3,5],receivedPath=[0,1,2,3,4];
+ok(t.protocolState(tcp,lostPath).find(e=>e.id==='ack').phase==='lost','lost history never includes successful receipt');
+ok(t.protocolState(tcp,receivedPath).find(e=>e.id==='ack').phase==='received','delivery history records receipt');
+ok(t.protocolState(tcp,[0,1]).length===1&&t.protocolState(tcp,[0,1])[0].phase==='sent','SYN in flight does not reveal future replies');
+ok(t.protocolState(tcp,[0,1,2]).find(e=>e.id==='synack').phase==='sent','server reply shown in flight after SYN receipt');
+ok(t.predictionResult(tcp,3,0,4).correct&&!t.predictionResult(tcp,3,0,5).correct,'same prediction is evaluated against the chosen ACK outcome');
+for(const id of ['arp-local','arp-gateway']){
+ const a=scene(id);
+ ok(a.events[0].broadcast&&a.events[0].to.join()==='1,2','ARP broadcast reaches target and bystander');
+ ok(a.events[1].to.join()==='0','ARP reply unicasts to requester');
+ ok(a.steps[0].actorStates[1]===a.steps[1].actorStates[1]&&a.steps[0].actorStates[2]===a.steps[1].actorStates[2],'sending request does not alter recipients');
+ ok(a.steps[2].actorStates[0]===a.steps[3].actorStates[0],'sending response does not change requester state');
+ ok(a.steps[4].actorStates[1]===a.steps[5].actorStates[1],'sending data does not alter next hop before receipt');
+ ok(a.steps[5].actorStates[0]===a.steps[6].actorStates[0],'remote receipt does not imply sender confirmation');
+ ok(a.steps.slice(0,4).every(s=>s.rows.length===0)&&a.steps[4].rows.length===1,'A cache changes on reply receipt, not reply send');
+ ok(t.protocolState(a,[0,1,2,3]).find(e=>e.id==='reply').phase==='sent','ARP response can be observed in flight');
+ ok(t.protocolState(a,[0,1,2,3,4]).find(e=>e.id==='reply').phase==='received','ARP cache update coincides with response receipt');
+}
+const packets=scene('encapsulation').steps.map(s=>s.packet);
+const layers=node=>[node.kind,...(node.payload?layers(node.payload):[])];
+assert.deepEqual(plain(layers(packets[3])),['ethernet','ip','tcp','app']);checks++;
+for(let i=1;i<packets.length;i++)ok(JSON.stringify(packets[i].payload)===JSON.stringify(packets[i-1]),'previous packet remains fully nested and intact');
+ok(packets[3].trailer[0][0]==='FCS · 4B','FCS belongs to outer Ethernet frame');
 const glossary=ctx.window.ICT_TEACHING_DATA.glossary;
 ok(new Set(glossary.map(g=>g.id)).size===glossary.length,'unique glossary IDs');
 ok(new Set(glossary.flatMap(g=>g.terms)).size===glossary.flatMap(g=>g.terms).length,'unambiguous aliases');
-for(const g of glossary)ok(g.plain&&g.detail&&g.terms.length,'term has plain explanation and detail');
+for(const g of glossary){ok(g.plain&&g.detail&&g.terms.length,'legacy term explanation retained');ok(g.beginner&&g.definition,'two-level term content exists');const html=t.termExplanation(g,true);ok(html.includes('通俗解释')&&html.includes('<details class="term-definition">')&&!html.includes('<details open'),'formal definition is collapsed by default')}
+ok(!t.termExplanation(glossary[0],false).includes('term-definition'),'other chapters retain existing glossary presentation');
 const crypto=require('node:crypto'),index=fs.readFileSync(__dirname+'/dist/index.html','utf8');
 for(const f of ['teaching.js','teaching-data.js'])ok(index.includes(f+'?v='+crypto.createHash('sha256').update(fs.readFileSync(__dirname+'/dist/'+f)).digest('hex').slice(0,12)),'cache version '+f);
 console.log(`PASS ${checks} teaching assertions: snapshots, TCP timing, ARP next hop, switching and glossary.`);

@@ -230,7 +230,7 @@
       "id": "encapsulation",
       "unit": "ICT-002.01",
       "title": "封装：给同一份内容逐层加说明",
-      "summary": "点选字段可查看作用。块宽不表示字段字节数。",
+      "summary": "每次封装都把上一层整体放进新一层；点击头部可看字段。",
       "columns": [
         "层次",
         "交付对象"
@@ -238,95 +238,167 @@
       "steps": [
         {
           "title": "应用数据",
-          "text": "以已经建立的 TCP 连接发送一段应用数据为例。",
-          "fields": [
-            [
-              "应用数据",
-              "应用协议解释的内容。"
-            ]
-          ],
+          "text": "从浏览器要发送的一份内容开始。本例 TCP 连接已建立。",
           "rows": [
             [
               "应用层",
               "对端应用"
             ]
-          ]
+          ],
+          "packet": {
+            "kind": "app",
+            "label": "应用数据",
+            "content": "浏览器请求内容",
+            "detail": "这是同一份示例数据；封装增加外层说明，不在每一层复制一份内容。"
+          },
+          "nextLabel": "包入下一层 →"
         },
         {
           "title": "TCP 段",
-          "text": "TCP 加入源/目的端口、序号、确认号等头部信息。",
-          "fields": [
-            [
-              "TCP 头",
-              "端口区分端点进程，序号与确认号支持有序可靠传输。"
-            ],
-            [
-              "应用数据",
-              "TCP 提供字节流，不保留应用每次写入的边界。"
-            ]
-          ],
+          "text": "TCP 头加在内容前面；应用数据完整留在 TCP 段内。",
           "rows": [
             [
               "传输层",
               "端口标识的端点"
             ]
-          ]
+          ],
+          "packet": {
+            "kind": "tcp",
+            "label": "TCP 段",
+            "header": [
+              [
+                "源端口 / 目的端口",
+                "区分两端的应用通信端点。"
+              ],
+              [
+                "序号 / 确认号",
+                "跟踪字节及期望收到的位置。"
+              ]
+            ],
+            "payload": {
+              "kind": "app",
+              "label": "应用数据",
+              "content": "浏览器请求内容",
+              "detail": "这是同一份示例数据；封装增加外层说明，不在每一层复制一份内容。"
+            }
+          },
+          "nextLabel": "包入下一层 →"
         },
         {
           "title": "IPv4 包",
-          "text": "IPv4 头给出源 IP、目的 IP、TTL 和上层协议等信息。",
-          "fields": [
-            [
-              "IPv4 头",
-              "本例 Protocol=6，表示负载交给 TCP。"
-            ],
-            [
-              "TCP 头",
-              "仍在 IP 负载内。"
-            ],
-            [
-              "应用数据",
-              "仍在 TCP 负载内。"
-            ]
-          ],
+          "text": "把整个 TCP 段放入 IPv4 包的载荷中，再加 IPv4 头。",
           "rows": [
             [
               "网际层",
               "目的 IP 标识的网络端点"
             ]
-          ]
+          ],
+          "packet": {
+            "kind": "ip",
+            "label": "IPv4 包",
+            "header": [
+              [
+                "源 IP / 目的 IP",
+                "标明发送端与最终目的端。"
+              ],
+              [
+                "TTL / Protocol",
+                "限制转发次数；Protocol=6 表示里面是 TCP 段。"
+              ]
+            ],
+            "payload": {
+              "kind": "tcp",
+              "label": "TCP 段",
+              "header": [
+                [
+                  "源端口 / 目的端口",
+                  "区分两端的应用通信端点。"
+                ],
+                [
+                  "序号 / 确认号",
+                  "跟踪字节及期望收到的位置。"
+                ]
+              ],
+              "payload": {
+                "kind": "app",
+                "label": "应用数据",
+                "content": "浏览器请求内容",
+                "detail": "这是同一份示例数据；封装增加外层说明，不在每一层复制一份内容。"
+              }
+            }
+          },
+          "nextLabel": "包入下一层 →"
         },
         {
           "title": "以太网帧",
-          "text": "帧头负责本链路交付，FCS 用于检测帧传输差错；接收端按相反顺序解析。",
-          "fields": [
-            [
-              "目的 MAC · 6B",
-              "本链路的下一跳接口。"
-            ],
-            [
-              "源 MAC · 6B",
-              "本链路发送接口。"
-            ],
-            [
-              "类型 · 2B",
-              "本例为 0x0800，表示 IPv4。"
-            ],
-            [
-              "IPv4 包",
-              "包含 IPv4 头、TCP 头和应用数据。"
-            ],
-            [
-              "FCS · 4B",
-              "用于检测差错，不是加密或可靠重传机制。"
-            ]
-          ],
+          "text": "整个 IPv4 包装进帧的数据区，帧头在前、FCS 在后。内层仍完整保留。",
           "rows": [
             [
               "网络接入层",
               "本链路下一跳"
             ]
-          ]
+          ],
+          "packet": {
+            "kind": "ethernet",
+            "label": "以太网帧",
+            "header": [
+              [
+                "目的 MAC · 6B",
+                "本链路下一跳接口。"
+              ],
+              [
+                "源 MAC · 6B",
+                "本链路发送接口。"
+              ],
+              [
+                "类型 · 2B",
+                "0x0800 表示里面是 IPv4 包。"
+              ]
+            ],
+            "payload": {
+              "kind": "ip",
+              "label": "IPv4 包",
+              "header": [
+                [
+                  "源 IP / 目的 IP",
+                  "标明发送端与最终目的端。"
+                ],
+                [
+                  "TTL / Protocol",
+                  "限制转发次数；Protocol=6 表示里面是 TCP 段。"
+                ]
+              ],
+              "payload": {
+                "kind": "tcp",
+                "label": "TCP 段",
+                "header": [
+                  [
+                    "源端口 / 目的端口",
+                    "区分两端的应用通信端点。"
+                  ],
+                  [
+                    "序号 / 确认号",
+                    "跟踪字节及期望收到的位置。"
+                  ]
+                ],
+                "payload": {
+                  "kind": "app",
+                  "label": "应用数据",
+                  "content": "浏览器请求内容",
+                  "detail": "这是同一份示例数据；封装增加外层说明，不在每一层复制一份内容。"
+                }
+              }
+            },
+            "trailer": [
+              [
+                "FCS · 4B",
+                "检测整个帧的传输差错；不负责重传或加密。"
+              ]
+            ]
+          },
+          "nextLabel": "包入下一层 →",
+          "terminal": true,
+          "endLabel": "封装完成"
         }
       ],
       "boundary": "Ethernet II + IPv4 + TCP 示例，无 VLAN 标签、IP/TCP 选项及分片。未画前导码、帧起始定界符及可能的填充；不是按比例的完整位布局。ARP 直接封装在以太网内，不套在 IPv4 中。",
@@ -339,13 +411,15 @@
           "RFC 9293 · TCP",
           "https://www.rfc-editor.org/rfc/rfc9293.html"
         ]
-      ]
+      ],
+      "prevLabel": "拆开外层",
+      "hideTable": true
     },
     {
       "id": "tcp",
       "unit": "ICT-002.02",
       "title": "三次握手：两端状态何时改变？",
-      "summary": "箭头以接收端收到该报文为本步完成点。",
+      "summary": "先预测，再发送或交付报文；在途报文不会提前改变接收端。",
       "actors": [
         "客户端",
         "服务器"
@@ -356,8 +430,8 @@
       ],
       "steps": [
         {
-          "title": "初始状态",
-          "text": "服务器已被动打开并监听；客户端尚未发起连接。",
+          "title": "准备连接",
+          "text": "服务器已打开监听；客户端还未发起连接。",
           "rows": [
             [
               "客户端",
@@ -367,16 +441,51 @@
               "服务器",
               "LISTEN"
             ]
-          ]
+          ],
+          "nextLabel": "发送 SYN →"
         },
         {
-          "title": "SYN 到达服务器",
-          "text": "客户端主动打开后进入 SYN-SENT。服务器收到 SYN，发送 SYN+ACK 后进入 SYN-RECEIVED。",
-          "message": [
-            0,
-            1,
-            "SYN · Seq=100"
+          "title": "SYN 已发出，尚未到达",
+          "text": "客户端已进入等待回复状态。服务器还没有收到 SYN。",
+          "rows": [
+            [
+              "客户端",
+              "SYN-SENT"
+            ],
+            [
+              "服务器",
+              "LISTEN"
+            ]
           ],
+          "nextLabel": "交付 SYN →",
+          "prediction": {
+            "prompt": "服务器收到这份 SYN 并发出回复后，会进入哪种状态？",
+            "choices": [
+              {
+                "label": "继续监听 LISTEN"
+              },
+              {
+                "label": "等待最后确认 SYN-RECEIVED"
+              },
+              {
+                "label": "连接已建立 ESTABLISHED"
+              }
+            ],
+            "answers": {
+              "2": {
+                "correct": 1,
+                "reason": "收到 SYN 并发出 SYN+ACK 后，服务器等待最后确认；还没有进入 ESTABLISHED。"
+              }
+            }
+          },
+          "event": {
+            "id": "syn",
+            "phase": "sent"
+          }
+        },
+        {
+          "title": "服务器收到 SYN，发出 SYN+ACK",
+          "text": "服务器收到 SYN 后才改变状态。回复已发出，但客户端还没有收到。",
           "rows": [
             [
               "客户端",
@@ -386,16 +495,42 @@
               "服务器",
               "SYN-RECEIVED"
             ]
-          ]
+          ],
+          "also": [
+            {
+              "id": "synack",
+              "phase": "sent"
+            }
+          ],
+          "nextLabel": "交付 SYN+ACK →",
+          "prediction": {
+            "prompt": "客户端收到 SYN+ACK 并发出 ACK 后，哪一端已建立连接？",
+            "choices": [
+              {
+                "label": "只有客户端"
+              },
+              {
+                "label": "两端都已建立"
+              },
+              {
+                "label": "两端都还没建立"
+              }
+            ],
+            "answers": {
+              "3": {
+                "correct": 0,
+                "reason": "客户端此时进入 ESTABLISHED；服务器要等最后 ACK 到达后才进入 ESTABLISHED。"
+              }
+            }
+          },
+          "event": {
+            "id": "syn",
+            "phase": "received"
+          }
         },
         {
-          "title": "SYN+ACK 到达客户端",
-          "text": "客户端收到合法 SYN+ACK 后进入 ESTABLISHED，并发出最后的 ACK。服务器此时仍等待 ACK。",
-          "message": [
-            1,
-            0,
-            "SYN+ACK · Seq=500 · Ack=101"
-          ],
+          "title": "客户端收到回复，最后 ACK 在途",
+          "text": "客户端已建立连接并发出 ACK；服务器仍在等它。选择交付或让这份 ACK 丢失。",
           "rows": [
             [
               "客户端",
@@ -405,16 +540,54 @@
               "服务器",
               "SYN-RECEIVED"
             ]
-          ]
+          ],
+          "also": [
+            {
+              "id": "ack",
+              "phase": "sent"
+            }
+          ],
+          "actions": [
+            {
+              "label": "交付 ACK",
+              "target": 4,
+              "kind": "deliver"
+            },
+            {
+              "label": "让 ACK 丢失",
+              "target": 5,
+              "kind": "drop"
+            }
+          ],
+          "prediction": {
+            "prompt": "先选服务器将处于的状态，再选择一种 ACK 处理方式验证。",
+            "choices": [
+              {
+                "label": "连接已建立 ESTABLISHED"
+              },
+              {
+                "label": "仍在等待确认 SYN-RECEIVED"
+              }
+            ],
+            "answers": {
+              "4": {
+                "correct": 0,
+                "reason": "ACK 到达且确认号有效，服务器进入 ESTABLISHED。"
+              },
+              "5": {
+                "correct": 1,
+                "reason": "ACK 没有到达，服务器无法据此完成连接建立；客户端仍是 ESTABLISHED。"
+              }
+            }
+          },
+          "event": {
+            "id": "synack",
+            "phase": "received"
+          }
         },
         {
-          "title": "ACK 到达服务器",
-          "text": "服务器收到合法 ACK 后进入 ESTABLISHED。SYN 各占用一个序号，因此确认号分别为 101 和 501。",
-          "message": [
-            0,
-            1,
-            "ACK · Seq=101 · Ack=501"
-          ],
+          "title": "服务器收到最后 ACK",
+          "text": "两端现在都已建立连接；应用是否成功还要继续验证。",
           "rows": [
             [
               "客户端",
@@ -424,150 +597,502 @@
               "服务器",
               "ESTABLISHED"
             ]
-          ]
+          ],
+          "terminal": true,
+          "event": {
+            "id": "ack",
+            "phase": "received"
+          }
+        },
+        {
+          "title": "最后 ACK 丢失",
+          "text": "服务器没有收到确认，仍在等待；客户端已经建立连接。可回退后改为交付，对比两种结果。",
+          "rows": [
+            [
+              "客户端",
+              "ESTABLISHED"
+            ],
+            [
+              "服务器",
+              "SYN-RECEIVED"
+            ]
+          ],
+          "terminal": true,
+          "event": {
+            "id": "ack",
+            "phase": "lost"
+          }
         }
       ],
-      "boundary": "普通主动/被动打开，无丢包、重传、同时打开或 SYN 携带数据，初始序号为教学选值。ACK 本身不消耗序号；握手完成不等于业务请求已成功，也不代表连接已加密。",
+      "boundary": "普通主动/被动打开，无同时打开或 SYN 数据，初始序号为教学选值。接收 SYN 与发出 SYN+ACK、接收 SYN+ACK 与发出 ACK 分别合并为一个观察点。最后 ACK 可选择丢失：实际服务器通常会重传 SYN+ACK，客户端再次确认；此处停在丢失后，未模拟定时器、重传与最终超时。动画不表示实际时延。SYN 消耗一个序号，纯 ACK 不消耗序号。",
       "sources": [
         [
           "RFC 9293 §3.5 · 连接建立",
           "https://www.rfc-editor.org/rfc/rfc9293.html#section-3.5"
         ]
+      ],
+      "richSequence": true,
+      "stateKind": "tcp",
+      "hideTable": true,
+      "events": [
+        {
+          "id": "syn",
+          "from": 0,
+          "to": [
+            1
+          ],
+          "short": "SYN",
+          "label": "SYN · Seq=100"
+        },
+        {
+          "id": "synack",
+          "from": 1,
+          "to": [
+            0
+          ],
+          "short": "SYN+ACK",
+          "label": "SYN+ACK · Seq=500 · Ack=101"
+        },
+        {
+          "id": "ack",
+          "from": 0,
+          "to": [
+            1
+          ],
+          "short": "ACK",
+          "label": "ACK · Seq=101 · Ack=501"
+        }
       ]
     },
     {
       "id": "arp-local",
       "unit": "ICT-002.04",
       "title": "ARP：问的是本地终端，还是网关？",
-      "summary": "切换场景会回到起点，并清空这次演示的缓存。",
+      "summary": "A：192.168.10.10/24，目的：192.168.10.20。先判断该问谁，再观察广播与缓存。",
       "variant": "arp",
       "label": "同网段目的",
       "actors": [
-        "A · 192.168.10.10",
-        "B · 192.168.10.20"
+        "A",
+        "B",
+        "旁听终端 C"
       ],
       "columns": [
-        "A 的 ARP 缓存 IP",
-        "MAC（示例末字节）"
+        "A 缓存的下一跳 IP",
+        "对应 MAC"
       ],
       "steps": [
         {
-          "title": "选择下一跳",
-          "text": "A 的前缀为 /24。B 位于同网段，下一跳为 B 自己，缓存为空。",
-          "rows": []
+          "title": "先选择本链路下一跳",
+          "text": "A 的 ARP 缓存为空。选择要询问的 IP，再发送请求验证。",
+          "rows": [],
+          "actorStates": [
+            "准备发送",
+            "尚未收到请求",
+            "尚未收到请求"
+          ],
+          "nextLabel": "发送 ARP 请求 →",
+          "prediction": {
+            "prompt": "这次应询问哪个 IP 对应的 MAC？",
+            "choices": [
+              {
+                "label": "192.168.10.20（B）"
+              },
+              {
+                "label": "192.168.10.1（网关）"
+              },
+              {
+                "label": "192.0.2.20（远端服务器）"
+              }
+            ],
+            "answers": {
+              "1": {
+                "correct": 0,
+                "reason": "先确定本链路下一跳，再解析它的 MAC。B 是直连目的，不必先找网关。"
+              }
+            }
+          }
         },
         {
-          "title": "广播询问",
-          "text": "ARP 请求询问谁拥有 192.168.10.20；以太网目的 MAC 为 FF:FF:FF:FF:FF:FF。同 VLAN 其他成员也会收到。",
-          "message": [
-            0,
-            1,
-            "请求 · Who has 192.168.10.20?"
+          "title": "广播请求在途",
+          "text": "A 发出以太网广播，目的 MAC 是 FF:FF:FF:FF:FF:FF；此时还未收到响应。",
+          "rows": [],
+          "actorStates": [
+            "等待地址",
+            "尚未收到请求",
+            "尚未收到请求"
           ],
-          "rows": []
+          "nextLabel": "交付广播请求 →",
+          "prediction": {
+            "prompt": "本例同一 VLAN 的哪些成员会收到这个请求？",
+            "choices": [
+              {
+                "label": "只有 B"
+              },
+              {
+                "label": "B 和 C"
+              },
+              {
+                "label": "远端服务器也会收到"
+              }
+            ],
+            "answers": {
+              "2": {
+                "correct": 1,
+                "reason": "广播会交付同 VLAN 内的其他成员；C 也会收到，但目标 IP 不属于 C，它不会按本例发送回答。"
+              }
+            }
+          },
+          "event": {
+            "id": "request",
+            "phase": "sent"
+          }
         },
         {
-          "title": "B 单播回应",
-          "text": "B 回答自己的 MAC。A 收到响应后建立映射；交换机的 MAC 表是另一张表。",
-          "message": [
-            1,
-            0,
-            "响应 · 192.168.10.20 is at …0B"
+          "title": "同 VLAN 成员收到广播",
+          "text": "B 的 IP 匹配请求，会回答；C 的 IP 不匹配，不回答。A 的缓存仍为空。",
+          "rows": [],
+          "actorStates": [
+            "等待地址",
+            "目标匹配，准备回答",
+            "请求不匹配，不回答"
           ],
+          "nextLabel": "发送 ARP 响应 →",
+          "event": {
+            "id": "request",
+            "phase": "received"
+          }
+        },
+        {
+          "title": "单播响应在途",
+          "text": "B 只把响应发回 A。响应未到达 A，A 的缓存还没有增加表项。",
+          "rows": [],
+          "actorStates": [
+            "等待地址",
+            "已发出响应",
+            "请求不匹配，不回答"
+          ],
+          "nextLabel": "交付 ARP 响应 →",
+          "prediction": {
+            "prompt": "A 收到这份响应后，应新增哪条映射？",
+            "choices": [
+              {
+                "label": "192.168.10.20 → 02:00:00:00:00:0B"
+              },
+              {
+                "label": "远端 IP → 网关 MAC（混用两个端点）"
+              },
+              {
+                "label": "交换机端口 → A 的 IP"
+              }
+            ],
+            "answers": {
+              "4": {
+                "correct": 0,
+                "reason": "ARP 缓存记录本链路下一跳 IP 到 MAC 的映射，不记录交换机端口。"
+              }
+            }
+          },
+          "event": {
+            "id": "reply",
+            "phase": "sent"
+          }
+        },
+        {
+          "title": "A 收到响应，更新缓存",
+          "text": "A 现在知道 192.168.10.20 对应的 MAC；可以准备发送目的 IP 为 192.168.10.20 的数据包。",
           "rows": [
             [
               "192.168.10.20",
               "02:00:00:00:00:0B"
             ]
-          ]
+          ],
+          "actorStates": [
+            "映射已就绪",
+            "已发出响应",
+            "请求不匹配，不回答"
+          ],
+          "nextLabel": "发送数据帧 →",
+          "event": {
+            "id": "reply",
+            "phase": "received"
+          }
         },
         {
-          "title": "交付数据帧",
-          "text": "A 将目的 IP 为 B 的 IP 包，装入目的 MAC 为 B 的以太网帧发送。",
-          "message": [
-            0,
-            1,
-            "IPv4 数据 · 目的 MAC=…0B"
-          ],
+          "title": "数据帧发出",
+          "text": "以太网目的 MAC=02:00:00:00:00:0B；内部 IP 包目的仍为 192.168.10.20。",
           "rows": [
             [
               "192.168.10.20",
               "02:00:00:00:00:0B"
             ]
-          ]
+          ],
+          "actorStates": [
+            "已发出数据",
+            "已发出响应",
+            "请求不匹配，不回答"
+          ],
+          "nextLabel": "交付数据帧 →",
+          "event": {
+            "id": "data",
+            "phase": "sent"
+          }
+        },
+        {
+          "title": "本链路下一跳收到数据",
+          "text": "B 收到目的为自己的帧；这不等于所有上层业务都已成功。",
+          "rows": [
+            [
+              "192.168.10.20",
+              "02:00:00:00:00:0B"
+            ]
+          ],
+          "actorStates": [
+            "已发出数据",
+            "收到本链路数据",
+            "请求不匹配，不回答"
+          ],
+          "terminal": true,
+          "event": {
+            "id": "data",
+            "phase": "received"
+          }
         }
       ],
-      "boundary": "IPv4 以太网、同一 VLAN、无冲突或攻击；缓存开始为空，只显示 A 的缓存。图仅画通信双方，请求实际广播给本 VLAN 其他成员；不模拟超时、代理 ARP 或非请求方缓存更新。",
+      "boundary": "IPv4 以太网，同 VLAN、无冲突/攻击，A 的缓存初始为空，仅显示 A 的缓存。C 是不同 IP 的第三台终端；广播收到事件是合并观察点，不表示成员同时收到。交换机转发过程省略；二层广播不会被路由器原样转发到远端。未模拟非请求方缓存更新、代理 ARP、定时器与超时。数据到达下一跳不证明最终业务成功。",
       "sources": [
         [
           "RFC 826 · ARP",
           "https://www.rfc-editor.org/rfc/rfc826.html"
         ]
+      ],
+      "richSequence": true,
+      "events": [
+        {
+          "id": "request",
+          "from": 0,
+          "to": [
+            1,
+            2
+          ],
+          "broadcast": true,
+          "short": "ARP 请求",
+          "label": "广播请求 · 谁是 192.168.10.20？"
+        },
+        {
+          "id": "reply",
+          "from": 1,
+          "to": [
+            0
+          ],
+          "short": "ARP 响应",
+          "label": "单播响应 · 192.168.10.20 对应 02:00:00:00:00:0B"
+        },
+        {
+          "id": "data",
+          "from": 0,
+          "to": [
+            1
+          ],
+          "short": "IPv4 数据",
+          "label": "单播数据 · 目的 IP=192.168.10.20 · 目的 MAC=02:00:00:00:00:0B"
+        }
       ]
     },
     {
       "id": "arp-gateway",
       "unit": "ICT-002.04",
       "title": "ARP：问的是本地终端，还是网关？",
-      "summary": "切换场景会回到起点，并清空这次演示的缓存。",
+      "summary": "A：192.168.10.10/24，目的：192.0.2.20。先判断该问谁，再观察广播与缓存。",
       "variant": "arp",
       "label": "跨网段目的",
       "actors": [
-        "A · 192.168.10.10",
-        "网关 · 192.168.10.1"
+        "A",
+        "网关",
+        "旁听终端 C"
       ],
       "columns": [
-        "A 的 ARP 缓存 IP",
-        "MAC"
+        "A 缓存的下一跳 IP",
+        "对应 MAC"
       ],
       "steps": [
         {
-          "title": "选择网关",
-          "text": "A 为 /24，目的为 192.0.2.20。按本例默认路由，下一跳选择 192.168.10.1。",
-          "rows": []
+          "title": "先选择本链路下一跳",
+          "text": "A 的 ARP 缓存为空。选择要询问的 IP，再发送请求验证。",
+          "rows": [],
+          "actorStates": [
+            "准备发送",
+            "尚未收到请求",
+            "尚未收到请求"
+          ],
+          "nextLabel": "发送 ARP 请求 →",
+          "prediction": {
+            "prompt": "这次应询问哪个 IP 对应的 MAC？",
+            "choices": [
+              {
+                "label": "192.168.10.20（B）"
+              },
+              {
+                "label": "192.168.10.1（网关）"
+              },
+              {
+                "label": "192.0.2.20（远端服务器）"
+              }
+            ],
+            "answers": {
+              "1": {
+                "correct": 1,
+                "reason": "先确定本链路下一跳，再解析它的 MAC。远端服务器不在本广播域，不能直接向它广播 ARP。"
+              }
+            }
+          }
         },
         {
-          "title": "广播询问网关",
-          "text": "A 询问 192.168.10.1 的 MAC，目的 MAC 为全 F。不对远端 192.0.2.20 广播 ARP。",
-          "message": [
-            0,
-            1,
-            "请求 · Who has 192.168.10.1?"
+          "title": "广播请求在途",
+          "text": "A 发出以太网广播，目的 MAC 是 FF:FF:FF:FF:FF:FF；此时还未收到响应。",
+          "rows": [],
+          "actorStates": [
+            "等待地址",
+            "尚未收到请求",
+            "尚未收到请求"
           ],
-          "rows": []
+          "nextLabel": "交付广播请求 →",
+          "prediction": {
+            "prompt": "本例同一 VLAN 的哪些成员会收到这个请求？",
+            "choices": [
+              {
+                "label": "只有 网关"
+              },
+              {
+                "label": "网关 和 C"
+              },
+              {
+                "label": "远端服务器也会收到"
+              }
+            ],
+            "answers": {
+              "2": {
+                "correct": 1,
+                "reason": "广播会交付同 VLAN 内的其他成员；C 也会收到，但目标 IP 不属于 C，它不会按本例发送回答。"
+              }
+            }
+          },
+          "event": {
+            "id": "request",
+            "phase": "sent"
+          }
         },
         {
-          "title": "网关回应",
-          "text": "网关本地接口返回自己的 MAC。ARP 广播请求不会被路由器原样转发到服务器网段。",
-          "message": [
-            1,
-            0,
-            "响应 · 192.168.10.1 is at …01"
+          "title": "同 VLAN 成员收到广播",
+          "text": "网关 的 IP 匹配请求，会回答；C 的 IP 不匹配，不回答。A 的缓存仍为空。",
+          "rows": [],
+          "actorStates": [
+            "等待地址",
+            "目标匹配，准备回答",
+            "请求不匹配，不回答"
           ],
+          "nextLabel": "发送 ARP 响应 →",
+          "event": {
+            "id": "request",
+            "phase": "received"
+          }
+        },
+        {
+          "title": "单播响应在途",
+          "text": "网关 只把响应发回 A。响应未到达 A，A 的缓存还没有增加表项。",
+          "rows": [],
+          "actorStates": [
+            "等待地址",
+            "已发出响应",
+            "请求不匹配，不回答"
+          ],
+          "nextLabel": "交付 ARP 响应 →",
+          "prediction": {
+            "prompt": "A 收到这份响应后，应新增哪条映射？",
+            "choices": [
+              {
+                "label": "192.168.10.1 → 02:00:00:00:00:01"
+              },
+              {
+                "label": "远端 IP → 网关 MAC（混用两个端点）"
+              },
+              {
+                "label": "交换机端口 → A 的 IP"
+              }
+            ],
+            "answers": {
+              "4": {
+                "correct": 0,
+                "reason": "ARP 缓存记录本链路下一跳 IP 到 MAC 的映射，不记录交换机端口。"
+              }
+            }
+          },
+          "event": {
+            "id": "reply",
+            "phase": "sent"
+          }
+        },
+        {
+          "title": "A 收到响应，更新缓存",
+          "text": "A 现在知道 192.168.10.1 对应的 MAC；可以准备发送目的 IP 为 192.0.2.20 的数据包。",
           "rows": [
             [
               "192.168.10.1",
               "02:00:00:00:00:01"
             ]
-          ]
+          ],
+          "actorStates": [
+            "映射已就绪",
+            "已发出响应",
+            "请求不匹配，不回答"
+          ],
+          "nextLabel": "发送数据帧 →",
+          "event": {
+            "id": "reply",
+            "phase": "received"
+          }
         },
         {
-          "title": "先交给网关",
-          "text": "帧的目的 MAC 是网关；包的目的 IP 仍为 192.0.2.20。后续交付由网关查路由决定。",
-          "message": [
-            0,
-            1,
-            "IPv4 数据 · 目的 IP=192.0.2.20"
-          ],
+          "title": "数据帧发出",
+          "text": "以太网目的 MAC=02:00:00:00:00:01；内部 IP 包目的仍为 192.0.2.20。",
           "rows": [
             [
               "192.168.10.1",
               "02:00:00:00:00:01"
             ]
-          ]
+          ],
+          "actorStates": [
+            "已发出数据",
+            "已发出响应",
+            "请求不匹配，不回答"
+          ],
+          "nextLabel": "交付数据帧 →",
+          "event": {
+            "id": "data",
+            "phase": "sent"
+          }
+        },
+        {
+          "title": "本链路下一跳收到数据",
+          "text": "网关收到帧后仍需按路由继续转发，远端服务器尚未出现在这段演示中。",
+          "rows": [
+            [
+              "192.168.10.1",
+              "02:00:00:00:00:01"
+            ]
+          ],
+          "actorStates": [
+            "已发出数据",
+            "收到本链路数据",
+            "请求不匹配，不回答"
+          ],
+          "terminal": true,
+          "event": {
+            "id": "data",
+            "phase": "received"
+          }
         }
       ],
-      "boundary": "假设默认网关在 A 的直连 /24 内，接口可用。只画 A 到网关这一段，不模拟远端网络。广播请求也会到达本 VLAN 其他成员。",
+      "boundary": "IPv4 以太网，同 VLAN、无冲突/攻击，A 的缓存初始为空，仅显示 A 的缓存。C 是不同 IP 的第三台终端；广播收到事件是合并观察点，不表示成员同时收到。交换机转发过程省略；二层广播不会被路由器原样转发到远端。未模拟非请求方缓存更新、代理 ARP、定时器与超时。数据到达下一跳不证明最终业务成功。",
       "sources": [
         [
           "RFC 826 · ARP",
@@ -577,6 +1102,38 @@
           "RFC 1812 · 下一跳选择",
           "https://www.rfc-editor.org/rfc/rfc1812.html"
         ]
+      ],
+      "richSequence": true,
+      "events": [
+        {
+          "id": "request",
+          "from": 0,
+          "to": [
+            1,
+            2
+          ],
+          "broadcast": true,
+          "short": "ARP 请求",
+          "label": "广播请求 · 谁是 192.168.10.1？"
+        },
+        {
+          "id": "reply",
+          "from": 1,
+          "to": [
+            0
+          ],
+          "short": "ARP 响应",
+          "label": "单播响应 · 192.168.10.1 对应 02:00:00:00:00:01"
+        },
+        {
+          "id": "data",
+          "from": 0,
+          "to": [
+            1
+          ],
+          "short": "IPv4 数据",
+          "label": "单播数据 · 目的 IP=192.0.2.20 · 目的 MAC=02:00:00:00:00:01"
+        }
       ]
     }
   ]

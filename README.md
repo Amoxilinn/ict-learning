@@ -20,7 +20,7 @@
 
 ## 维护
 
-ICT-001—ICT-003 已接入数据驱动的拓扑、报文结构、协议时序与状态表，以及首次术语解释。组件接口、技术边界和分批推广顺序见 [教学可视化组件体系](docs/教学可视化组件体系.md)。场景与词库分别维护在 `content/visualizations.json`、`content/glossary.json`；无新增运行时依赖。
+ICT-001—ICT-003 已接入数据驱动的拓扑、报文结构、协议时序与状态表，以及首次术语解释。ICT-002 进一步支持嵌套封装、明确的发送/接收阶段、ACK 丢失对比、嵌入式预测反馈和按需展开的专业定义；这些新增交互仅在本课启用。组件接口、技术边界和分批推广顺序见 [教学可视化组件体系](docs/教学可视化组件体系.md)。场景与词库分别维护在 `content/visualizations.json`、`content/glossary.json`；无新增运行时依赖。
 
 原始内容保留在 `content/`，其中旧版训练字段仅用于保留维护源资料，不向网站输出。`curriculum.json`维护九阶段顺序，`pedagogy.json`维护94章导语。`build.py`输出六组阅读数据及按推荐顺序编排的离线手册。页面代码在 `dist/index.html`、`dist/app.js`、`dist/diagrams.js`、`dist/style.css`。
 
