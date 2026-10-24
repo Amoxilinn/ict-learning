@@ -49,7 +49,7 @@ function sequence(actors,steps,index,options={}){
  }
  return `<div class="teach-sequence" aria-label="协议时序"><div class="teach-actors">${actors.map(a=>`<strong>${e(a)}</strong>`).join('')}</div>${steps.slice(0,index+1).filter(s=>s.message).map(s=>{let [from,to,label]=s.message;return `<div class="teach-message ${from>to?'reverse':''}"><span>${e(label)}</span><b aria-label="${e(actors[from])} 到 ${e(actors[to])}">${from>to?'←':'→'}</b></div>`}).join('')||'<p class="teach-wait">尚未发送报文</p>'}</div>`;
 }
-function stateTable(columns,rows,previous=[]){return `<div class="table-wrap"><table class="teach-table"><caption>当前状态（“已变化”标记与上一步不同的行）</caption><thead><tr>${columns.map(c=>`<th scope="col">${e(c)}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.map(row=>{let changed=!previous.some(r=>JSON.stringify(r)===JSON.stringify(row));return `<tr class="${changed?'changed':''}">${row.map((v,i)=>`<td>${e(v)}${i===0&&changed?'<small> · 已变化</small>':''}</td>`).join('')}</tr>`}).join(''):`<tr><td colspan="${columns.length}">暂无表项</td></tr>`}</tbody></table></div>`}
+function stateTable(columns,rows,previous=[]){return `<div class="table-wrap"><table class="teach-table"><caption>当前状态（“已变化”标记与上一步不同的行）</caption><thead><tr>${columns.map(c=>`<th scope="col">${e(c)}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.map(row=>{let changed=previous.length>0&&!previous.some(r=>JSON.stringify(r)===JSON.stringify(row));return `<tr class="${changed?'changed':''}">${row.map((v,i)=>`<td>${e(v)}${i===0&&changed?'<small> · 已变化</small>':''}</td>`).join('')}</tr>`}).join(''):`<tr><td colspan="${columns.length}">暂无表项</td></tr>`}</tbody></table></div>`}
 const mac=h=>'02:00:00:00:00:0'+({A:'A',B:'B',C:'C'}[h]);
 function forwarding(table,src,dst){let next={...table,[src]:src},out=next[dst]?[next[dst]].filter(p=>p!==src):['A','B','C'].filter(p=>p!==src);return {table:next,out,kind:next[dst]===src?'同入口过滤':next[dst]?'已知单播':'未知单播泛洪'}}
 function switching(){let table={},steps=[{title:'空表开始',text:'三个端口均属于 VLAN 10 且可转发。依次发送 A→B、B→A、A→B。',rows:[]}];for(let [src,dst] of [['A','B'],['B','A'],['A','B']]){
@@ -90,14 +90,14 @@ function mount(root){root.querySelectorAll('[data-teach]').forEach(host=>{
 });}
 function annotate(root,options={}){
  if(!data.glossary.length)return;
- const seen=new Set(),glossary=data.glossary.filter(g=>!g.chapters||g.chapters.includes(options.chapter)),entries=glossary.flatMap(g=>g.terms.map(t=>[t,g])).sort((a,b)=>b[0].length-a[0].length),pattern=new RegExp(entries.map(([t])=>t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),'g');
+ const seen=new Set(),glossary=data.glossary.filter(g=>g.annotate!==false&&(!g.chapters||g.chapters.includes(options.chapter))),entries=glossary.flatMap(g=>g.terms.map(t=>[t,g])).sort((a,b)=>b[0].length-a[0].length),pattern=new RegExp(entries.map(([t])=>t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),'g');
  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),texts=[];while(walker.nextNode())texts.push(walker.currentNode);
- for(let node of texts){if(options.layered&&node.parentElement.closest('.syllabus-detail'))continue;if(node.parentElement.closest('a,button,pre,code,script,style,h1,h2,h3,summary,.teach-host,.chapter-outline,.toc,.term-first'))continue;
+ for(let node of texts){if(options.layered&&node.parentElement.closest('.syllabus-detail'))continue;if(node.parentElement.closest('a,button,pre,code,script,style,h1,h2,h3,h4,summary,details,.teach-host,.chapter-intro,.chapter-outline,.chapter-objectives,.chapter-advanced,.worked-example,.unit-check,.unit-goal,.unit-takeaway,.unit-advanced,.unit-visual,.inline-diagram,.progress-panel,.toc,.term-first'))continue;
  let text=node.textContent,fragment=document.createDocumentFragment(),last=0;pattern.lastIndex=0;let match;
  while((match=pattern.exec(text))){let term=match[0],g=entries.find(([t])=>t===term)[1];if(/[A-Za-z0-9]/.test(term[0])&&(/[A-Za-z0-9]/.test(text[match.index-1]||'')||/[A-Za-z0-9]/.test(text[match.index+term.length]||'')))continue;if(seen.has(g.id))continue;seen.add(g.id);fragment.append(text.slice(last,match.index));let wrapper=document.createElement('span');wrapper.className='term-first';let b=document.createElement('button');b.className='term-button';b.type='button';b.dataset.term=g.id;b.textContent=term;b.setAttribute('aria-label',term+'：查看术语解释');wrapper.append(b,document.createTextNode('（'+(options.layered?g.hint||g.beginner||g.plain:g.plain)+'）'));fragment.append(wrapper);last=match.index+term.length;}
  if(last){fragment.append(text.slice(last));node.replaceWith(fragment);}
  }
- let button=document.createElement('button');button.type='button';button.className='secondary term-library';button.textContent='统一术语库 · 点击查阅';button.onclick=()=>openGlossary(undefined,options);root.querySelector('.chapter-intro')?.append(button);
+ let button=document.createElement('button');button.type='button';button.className='secondary term-library';button.textContent='术语表 · 点击查阅';button.onclick=()=>openGlossary(undefined,options);root.querySelector('.chapter-intro')?.append(button);
  root.addEventListener('click',event=>{let b=event.target.closest('[data-term]');if(b)openGlossary(b.dataset.term,options)});
 }
 function termExplanation(g,layered=false){

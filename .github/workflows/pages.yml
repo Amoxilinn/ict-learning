@@ -26,10 +26,13 @@ jobs:
       - name: Build and validate
         run: |
           python3 build.py
+          python3 scripts/audit_content.py
+          python3 -m py_compile build.py scripts/audit_content.py scripts/validate_rewrite.py scripts/merge_rewrite.py scripts/make_batches_final.py
           node --check dist/app.js
           node --check dist/diagrams.js
-          node test-models.cjs
           node --check dist/teaching.js
+          node scripts/render_check.cjs
+          node test-models.cjs
           node test-teaching.cjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4

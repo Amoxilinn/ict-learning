@@ -32,3 +32,88 @@
 .teach-visual{scroll-margin-top:18px}
 /* Keep the receipt dot visible beside the packet's direction marker. */
 .event-received .flow-token{transform:translateX(calc(-50% - 12px))}.event-received .flow-reverse .flow-token{transform:translateX(calc(-50% + 12px))}
+
+/* 教程版：学习目标、层次、检查、案例与进度。 */
+.progress-toggle{border:1px solid #cfe0d5;background:#fff;color:#2f6b56;border-radius:6px;padding:8px 13px;font-size:12px;margin:4px 0 18px;display:inline-flex;align-items:center;gap:6px}
+.progress-toggle:hover{background:#f0f7f2;border-color:#9fc5b2}
+.progress-toggle.done{background:#e8f4ec;border-color:#8cb9a2;color:#1c6048;font-weight:600}
+.progress-toggle.bottom{margin-top:28px}
+.chapter-intro .chapter-why{margin-top:14px!important;padding-top:12px;border-top:1px solid #d5e5da;font-size:14px!important}
+.chapter-objectives{margin:16px 0 8px!important;padding:14px 18px!important;background:#fff;border:1px solid #d7e6dc;border-radius:7px}
+.chapter-objectives h3{font-size:13px!important;margin:0 0 8px!important;color:#265c49}
+.chapter-objectives ul{margin:0!important;padding-left:20px!important}
+.chapter-objectives li{font-size:13px!important;line-height:1.9;color:#3f5c4e}
+.chapter-outcome{font-size:13px!important;color:#3f5c4e!important;margin-top:10px!important}
+.reading-position{display:flex;flex-wrap:wrap;gap:4px 14px}
+.unit-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:34px}
+.level-badge{display:inline-block;font-size:10px;line-height:1;padding:4px 8px;border-radius:4px;white-space:nowrap;letter-spacing:.3px}
+.level-core{background:#e6f3ea;color:#1e664a;border:1px solid #bfdcc9}
+.level-advanced{background:#eef2fa;color:#3f5f8a;border:1px solid #cbd8ec}
+.level-detail{background:#f6f0e6;color:#82612e;border:1px solid #e4d5ba}
+.unit-time{font-size:11px;color:#6b8173}
+.unit-goal{font-size:14px!important;color:#2c5745!important;background:#f3f8f4;border-left:3px solid #5b9a7e;padding:9px 14px;margin-top:12px!important;border-radius:0 5px 5px 0}
+.unit-lead{font-size:15px!important;color:#334f42!important}
+.unit-subsection h3{margin-top:24px!important;font-size:16px!important;color:#2f5947!important}
+.unit-subsection p{font-size:15px;line-height:2;color:#425d50}
+.unit-takeaway{background:#edf6f0!important;border:1px solid #d4e7db;border-left:3px solid #4f9477;padding:11px 15px;border-radius:4px;font-size:14px!important;color:#2c5745!important;margin-top:22px!important}
+.unit-check{margin:18px 0;padding:14px 16px;background:#faf8f1;border:1px solid #e8e0ca;border-radius:6px}
+.check-question{font-size:13.5px!important;color:#5e4f2e!important;margin:0!important;line-height:1.9}
+.check-answer{margin-top:10px!important;border:0!important;padding:0!important}
+.check-answer summary{color:#7b6534!important;font-size:12px!important}
+.check-answer p{font-size:13px!important;color:#4d4636!important;margin-top:8px!important}
+.check-why{font-size:12.5px!important;color:#6b6350!important;border-top:1px dashed #ddd2b6;padding-top:8px}
+.worked-example{margin:24px 0;padding:20px 22px;border:1px solid #d7e5dc;border-left:3px solid #4f9477;background:#fcfefd;border-radius:5px}
+.worked-example h3{margin:0 0 12px!important;font-size:16px!important;color:#2d5a46}
+.worked-example .example-setup{font-size:14px!important;color:#4a6255!important}
+.worked-example .example-conclusion{font-size:14px!important;color:#2d5744!important;border-top:1px solid #dce9e1;padding-top:11px;margin-top:14px!important}
+.unit-advanced{margin:20px 0}
+.unit-advanced details.advanced-block{border:1px solid #e0e7e2;border-radius:5px;padding:10px 14px;margin-top:8px;background:#fbfcfb}
+.unit-advanced details.advanced-block summary{font-size:12px;color:#5f7768}
+.unit-advanced details.advanced-block p,.unit-advanced details.advanced-block li{font-size:12.5px!important;line-height:1.9;color:#52685a!important}
+.unit-advanced details.advanced-block pre{font-size:11px;padding:14px;margin-top:10px}
+.unit-advanced .command-notes{padding-left:18px;margin-top:10px}
+.unit-visual{margin:20px 0 6px}
+.visual-cue{font-size:12px!important;color:#4d6d5c!important;background:#f4f8f4;border-left:2px solid #a8c8b5;padding:8px 12px;margin-bottom:8px!important}
+.inline-diagram{margin-top:20px!important}
+.inline-diagram summary{font-size:13px!important}
+.chapter-recap{margin-top:36px}
+.next-bridge{margin-top:20px;padding:14px 18px;background:#eef5f0;border-radius:6px;border-left:3px solid #6aa287}
+.next-bridge strong{display:block;font-size:12px;color:#376b56;margin-bottom:4px;letter-spacing:.5px}
+.next-bridge p{font-size:14px!important;margin:0!important;color:#3f5c4e!important}
+.chapter-advanced{margin-top:25px!important;border:1px solid var(--line);border-radius:6px;padding:12px 16px;background:#fbfcfb}
+.chapter-advanced summary{font-size:13px;color:#41695a}
+.progress-panel{display:grid;grid-template-columns:1fr 220px;gap:24px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:9px;padding:22px 24px;margin:25px 0 10px;max-width:880px}
+.progress-panel h2{font-size:18px;margin:4px 0 6px}
+.progress-panel h2 b{font-size:26px;color:#16684e}
+.progress-panel p{font-size:12px;color:#5f7869;margin:0}
+.progress-track{height:9px;background:#e9f0eb;border-radius:20px;overflow:hidden}
+.progress-track i{display:block;height:100%;background:linear-gradient(90deg,#4e9a78,#77b596);border-radius:20px;transition:width .25s}
+.progress-track.small{height:4px;margin:-2px 0 12px;max-width:420px}
+.progress-track.mini{height:3px;margin:0 5px 6px 21px}
+.learning-nav summary{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.learning-nav summary>span:first-child{flex:1}
+.stage-count{font-size:10px;color:#6f8878;font-weight:500;white-space:nowrap;background:#f0f5f1;padding:1px 6px;border-radius:8px}
+.learning-nav li a.done{color:#3d7a5c}
+.learning-nav li a.done::after{content:" ✓";font-size:10px;color:#4f9a72}
+.learning-chapters a.done strong{color:#3a7a5b}
+.outline-items{display:flex;flex-wrap:wrap;gap:7px 14px}
+.outline-items a{display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.outline-level{font-size:9px;padding:2px 5px;border-radius:3px;background:#eef3ef;color:#5e7a69;white-space:nowrap}
+.outline-advanced .outline-level{background:#eef2fa;color:#4c6690}
+.outline-detail .outline-level{background:#f6f0e6;color:#82612e}
+.toc a.toc-advanced{color:#4c6690}
+.toc a.toc-detail{color:#82612e}
+.toc a.toc-core{color:#3d6e58}
+body.printing details{display:block}
+@media(max-width:800px){.progress-panel{grid-template-columns:1fr;gap:14px;padding:18px}.unit-goal{font-size:13px!important}.chapter-objectives{padding:12px!important}.worked-example{padding:16px}.unit-lead{font-size:14px!important}.unit-subsection p{font-size:14px}.unit-meta{margin-top:28px}.level-badge{font-size:9px}.progress-toggle{font-size:12px}}
+@media(max-width:520px){.lesson h2{font-size:17px}.unit-subsection h3{font-size:15px!important}.chapter-intro .chapter-why{font-size:13px!important}.progress-panel h2{font-size:16px}.progress-panel h2 b{font-size:23px}.unit-time{display:none}.check-question{font-size:13px!important}}
+@media print{.progress-toggle,.progress-panel,.progress-track,.stage-count,.level-badge,.unit-time{display:none!important}.unit-goal,.unit-takeaway,.unit-check,.worked-example{border:1px solid #ccc!important;background:white!important}.unit-advanced details,.chapter-advanced{display:block!important;border:1px solid #ccc}.unit-advanced details>summary,.chapter-advanced>summary{color:#111}}
+/* 移动端：教学组件内部可横向滚动，但不得把整页撑宽。 */
+html,body{max-width:100%;overflow-x:hidden}
+.shell,main,.lesson-layout,.lesson,.knowledge-section,.unit-visual,.teach-card,.teach-visual,.table-wrap{min-width:0;max-width:100%}
+.teach-visual{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.teach-status,.teach-controls,.unit-check,.worked-example,.chapter-intro{min-width:0;max-width:100%}
+@media(max-width:520px){.teach-topology{min-width:500px}.teach-card{padding:11px}.teach-visual{margin-left:-2px;margin-right:-2px}}
+.method-panel{max-width:880px}
+.method-panel .sub{font-size:14px;line-height:2;color:#4c6556}
+.loading{padding:80px 0;text-align:center;color:#5f7a6a;font-size:14px}

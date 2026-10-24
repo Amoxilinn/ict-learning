@@ -1,0 +1,604 @@
+{
+ "batch": "batch-10",
+ "stage": {
+  "id": "stage-5",
+  "title": "连接分支与虚拟网络",
+  "description": "先看广域接入和VPN，再学标签、隧道、业务路径及组播。",
+  "chapters": [
+   "ICT-024",
+   "ICT-027",
+   "ICT-028",
+   "ICT-026",
+   "ICT-025",
+   "ICT-029",
+   "ICT-019",
+   "ICT-030",
+   "ICT-031",
+   "ICT-020",
+   "ICT-021",
+   "ICT-022",
+   "ICT-023",
+   "ICT-032",
+   "ICT-033"
+  ]
+ },
+ "chapters": [
+  {
+   "id": "ICT-025",
+   "group": "数通",
+   "category": "广域网技术",
+   "title": "Segment Routing技术",
+   "detail": "SR-MPLS的原理及配置",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-026",
+    "ICT-012"
+   ],
+   "old_intro": "MPLS能用标签转发，如何让入口直接决定经过哪些段？从节点段与邻接段构成标签栈的例子理解SR-MPLS。",
+   "old_outcome": "解释标签栈执行顺序，理解IGP扩展、SID规划与策略引流的配置依赖。",
+   "old_readingNote": "",
+   "old_explanation": "SR-MPLS用标签栈编码一串Segment，节点SID可表示到节点的路径，邻接SID表示特定链路。控制面发布SID，入口压入栈，中间按MPLS转发。",
+   "old_deep": "节点SID通常沿IGP到节点的最优路径前进；邻接SID指示特定本地链路，标签意义范围与分配方式要核对。标签栈越深，硬件压栈深度与MTU越需关注，不能无限增加段数。",
+   "previous_chapter": "ICT-026",
+   "next_chapter": "ICT-029",
+   "previous_title": "MPLS相关技术",
+   "next_title": "BGP/MPLS IP VPN",
+   "chapter_title": "Segment Routing技术",
+   "stage": {
+    "id": "stage-5",
+    "title": "连接分支与虚拟网络",
+    "description": "先看广域接入和VPN，再学标签、隧道、业务路径及组播。"
+   }
+  },
+  {
+   "id": "ICT-029",
+   "group": "数通",
+   "category": "VPN技术",
+   "title": "BGP/MPLS IP VPN",
+   "detail": "BGP/MPLS IP VPN基本原理及配置",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-026",
+    "ICT-027",
+    "ICT-013"
+   ],
+   "old_intro": "运营商如何让两家客户的多个分支互联，同时允许客户地址重叠？把VRF、MP-BGP和MPLS标签组合起来看一条租户报文。",
+   "old_outcome": "解释CE/PE/P、RD与RT、两层标签和双向VPN路由。",
+   "old_readingNote": "",
+   "old_explanation": "CE接入PE的VRF，MP-BGP传VPN路由，骨干以标签转发。RD使重叠前缀唯一；RT控制导入/导出。外层标签到PE，内层标签标识业务上下文。",
+   "old_deep": "入PE按VRF查表，把VPN标签置于内层，再用到出PE的传输标签封装；P设备通常只处理外层。出PE依据内层标签恢复VPN上下文。RT匹配仍需下一跳与骨干LSP可达才能真正转发。",
+   "previous_chapter": "ICT-025",
+   "next_chapter": "ICT-019",
+   "previous_title": "Segment Routing技术",
+   "next_title": "IPv6过渡技术",
+   "chapter_title": "BGP/MPLS IP VPN",
+   "stage": {
+    "id": "stage-5",
+    "title": "连接分支与虚拟网络",
+    "description": "先看广域接入和VPN，再学标签、隧道、业务路径及组播。"
+   }
+  },
+  {
+   "id": "ICT-019",
+   "group": "数通",
+   "category": "IPv6技术",
+   "title": "IPv6过渡技术",
+   "detail": "双栈、6PE、6VPE、NAT64等过渡技术的原理及配置",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-017",
+    "ICT-018",
+    "ICT-013",
+    "ICT-026",
+    "ICT-027",
+    "ICT-029"
+   ],
+   "old_intro": "旧网络仍使用IPv4，新业务需要IPv6，怎样让二者逐步共存？先比较双栈、承载与翻译，再决定哪些节点需要理解哪一种协议。",
+   "old_outcome": "区分双栈、6PE、6VPE和NAT64的适用前提及隔离边界。",
+   "old_readingNote": "本章安排在MPLS与BGP/MPLS VPN之后，便于直接理解6PE与6VPE的承载和隔离差异。先比较双栈、隧道承载与协议翻译，再按场景选择。",
+   "old_explanation": "双栈让两种协议并行；6PE以MPLS骨干承载IPv6公网，6VPE扩展到IPv6 VPN；NAT64在协议间转换，常配合DNS64。隧道、标签承载和地址转换不能混为一谈。",
+   "old_deep": "双栈要求两端协议栈与对应路由；6PE在IPv4/MPLS骨干承载IPv6公网，6VPE通过VPN实例隔离IPv6租户。NAT64改变协议及地址，需要考虑入站映射、应用携带地址和DNS64行为。",
+   "previous_chapter": "ICT-029",
+   "next_chapter": "ICT-030",
+   "previous_title": "BGP/MPLS IP VPN",
+   "next_title": "VXLAN",
+   "chapter_title": "IPv6过渡技术",
+   "stage": {
+    "id": "stage-5",
+    "title": "连接分支与虚拟网络",
+    "description": "先看广域接入和VPN，再学标签、隧道、业务路径及组播。"
+   }
+  },
+  {
+   "id": "ICT-030",
+   "group": "数通",
+   "category": "VPN技术",
+   "title": "VXLAN",
+   "detail": "VXLAN基本原理及配置（通过VXLAN构建虚拟网络）",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-004",
+    "ICT-009",
+    "ICT-027"
+   ],
+   "old_intro": "虚拟机搬到另一排机架，能否仍处于同一个逻辑二层网络？先把原始以太网帧放入UDP/IP外层，再跟踪两个隧道端点。",
+   "old_outcome": "区分VTEP、VNI和Underlay，解释封装、MTU及远端映射。",
+   "old_readingNote": "",
+   "old_explanation": "VXLAN把租户以太网帧封装在UDP/IP之内，VTEP是隧道端点，24位VNI标识逻辑网络。Underlay必须提供VTEP IP可达与足够MTU；Overlay负责租户业务。",
+   "old_deep": "租户帧的源/目的MAC在内层；外层源/目的IP是VTEP，网络中间设备依外层IP转发。VNI并非VLAN编号，两者通过业务域映射。典型VXLAN封装增加约50字节，以是否包含外层标签与内层帧为准，MTU规划应据实际报文核算。",
+   "previous_chapter": "ICT-019",
+   "next_chapter": "ICT-031",
+   "previous_title": "IPv6过渡技术",
+   "next_title": "EVPN",
+   "chapter_title": "VXLAN",
+   "stage": {
+    "id": "stage-5",
+    "title": "连接分支与虚拟网络",
+    "description": "先看广域接入和VPN，再学标签、隧道、业务路径及组播。"
+   }
+  }
+ ],
+ "units": [
+  {
+   "id": "ICT-025.01",
+   "parent": "ICT-025",
+   "term": "SR-MPLS原理",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "传统逐跳IP转发由各路由器分别选下一跳；Segment Routing（分段路由，SR）允许入口把需要执行的转发指令组合起来。SR-MPLS以MPLS标签表示Segment ID（SID），例如节点SID表示按最短路径到某个节点，邻接SID表示经过某条指定邻接。\n入口将一组SID压成标签栈，栈顶先执行，后续指令藏在更内层。\n“标签16003”本身没有全球固定含义，必须结合网络发布的SID、SRGB范围与本地转发表理解。节点SID通常允许利用IGP等价路径，未必限定每一条物理链路；要精确经过某条链路，须使用适当邻接SID或其他策略。标签栈需要设备支持相应深度，承载链路还要能容纳封装后的报文。",
+   "process": [
+    "控制平面发布R3与R4的节点SID；教学示例分别记为16003、16004，真实取值由规划决定。",
+    "R1把16003置于先处理的位置，再安排16004；数据先沿IGP到R3，再执行去R4的指令。",
+    "如果R1到R3又有两条等价路径，节点SID仍可能分担流量；要求固定物理链路时，需加入邻接级约束。"
+   ],
+   "walkthrough": {
+    "title": "SR-MPLS原理：一步步看结果",
+    "setup": "R1到R4有R1—R2—R4和R1—R3—R4两条路径，业务要求先经过R3。",
+    "steps": [
+     "控制平面发布R3与R4的节点SID；教学示例分别记为16003、16004，真实取值由规划决定。",
+     "R1把16003置于先处理的位置，再安排16004；数据先沿IGP到R3，再执行去R4的指令。",
+     "如果R1到R3又有两条等价路径，节点SID仍可能分担流量；要求固定物理链路时，需加入邻接级约束。"
+    ],
+    "conclusion": "SR-MPLS把路径意图放在入口标签指令中，节点约束与链路约束不能混为一谈。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "业务没有经过指定物理链路",
+    "cause": "只用了节点SID而未施加邻接约束",
+    "check": "核对SID类型、标签栈与IGP路径",
+    "fix": "按需求设计节点或邻接指令并检查标签深度"
+   },
+   "sources": [
+    {
+     "title": "RFC 8402 · Segment Routing Architecture",
+     "url": "https://www.rfc-editor.org/rfc/rfc8402",
+     "version": "RFC 8402；原理参考，结合后续更新",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "Segment Routing技术"
+  },
+  {
+   "id": "ICT-025.02",
+   "parent": "ICT-025",
+   "term": "SR-MPLS配置",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "SR-MPLS配置的顺序应与它依赖的状态一致：先建立可用的IGP和MPLS转发基础，再规划全网SRGB与节点SID，确认IGP已经发布这些信息，最后给业务配置策略。SRGB是全局SID映射到本地标签的范围，节点索引必须在设计范围内，并避免冲突。\n不能只在入口填一串标签，就假设中间设备知道如何执行。\n把“控制平面看到了SID”与“数据平面可以交换标签”分开验证：先核对邻居、SID数据库和标签转发表，再测试入口到终点的路径。流量工程策略还要确认候选路径有效、所需带宽与实际链路匹配，以及链路失效后的备选行为。下面给出支持两阶段提交的NetEngine类设备单节点关键片段：先启用SR，再在IS-IS中声明SR能力和SRGB，最后为Loopback前缀分配索引。\nR2、R3必须使用各自唯一NET、地址与索引；互联地址与接口IS-IS需先配置，不能只复制R1片段。",
+   "process": [
+    "先让R1能通过IGP到达R3的Loopback；此时普通IP转发已经可用，便于隔离后续问题。",
+    "在各节点启用匹配的SR能力并发布节点索引，检查R1解析出的R3节点标签是否与规划一致。",
+    "业务绑定去R3的SR路径后，观察标签转发表与逐跳路径；若缺标签或路径无效，业务不应被误标为部署完成。"
+   ],
+   "walkthrough": {
+    "title": "SR-MPLS配置：一步步看结果",
+    "setup": "R1、R2、R3组成承载网，规划节点索引1、2、3，并使用一致的16000起始SRGB示意。",
+    "steps": [
+     "先让R1能通过IGP到达R3的Loopback；此时普通IP转发已经可用，便于隔离后续问题。",
+     "在各节点启用匹配的SR能力并发布节点索引，检查R1解析出的R3节点标签是否与规划一致。",
+     "业务绑定去R3的SR路径后，观察标签转发表与逐跳路径；若缺标签或路径无效，业务不应被误标为部署完成。"
+    ],
+    "conclusion": "配置验收需要同时看到SID发布、标签转发与业务结果，不能只凭策略名称存在。"
+   },
+   "config": {
+    "code": "segment-routing\n quit\nisis 1\n cost-style wide\n segment-routing mpls\n segment-routing global-block 16000 16999\n quit\ninterface LoopBack0\n isis enable 1\n isis prefix-sid index 1\n quit\ncommit\ndisplay segment-routing prefix mpls forwarding",
+    "platform": "华为EDOC1100362944的NetEngine/VRP两阶段提交语法关键片段；前提为既有IS-IS进程、唯一NET、Loopback与链路地址和接口IS-IS。索引1对应本机节点，R2/R3另行规划；非全网完整配置，未在赛事设备执行。",
+    "notes": "SRGB 16000—16999是教学范围；设备真实可用范围需核对。commit提交候选配置，转发表应出现相应节点前缀。"
+   },
+   "commandNotes": [],
+   "fault": {
+    "symptom": "SR策略存在但不能转发",
+    "cause": "SID未正确发布或标签转发表不完整",
+    "check": "比较IGP SID数据库与各跳入出标签",
+    "fix": "修正SRGB/SID与MPLS能力后验证数据面"
+   },
+   "sources": [
+    {
+     "title": "RFC 8660 · Segment Routing with MPLS Data Plane",
+     "url": "https://www.rfc-editor.org/rfc/rfc8660",
+     "version": "RFC 8660；原理参考，结合后续更新",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "华为 · IS-IS SR-MPLS BE配置关键步骤",
+     "url": "https://info.support.huawei.com/hedex/api/pages/EDOC1100362944/AZN04029/05/resources/vrp/dc_vrp_sr_all_cfg_0252.html",
+     "version": "EDOC1100362944；原示例包含GRE与TI-LFA，本节仅说明SR启用与SID发布",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "Segment Routing技术"
+  },
+  {
+   "id": "ICT-029.01",
+   "parent": "ICT-029",
+   "term": "BGP/MPLS IP VPN原理",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "BGP/MPLS IP VPN让运营商通过共享骨干承载多个客户的独立三层网络。CE是客户边界，PE是连接客户的运营商边界，P是骨干转发节点。PE用VRF分离客户路由，用RD让地址重叠的客户前缀在BGP中保持唯一，用RT决定哪些VPN实例导入和导出这些路由。\n业务报文常带两层标签：外层将报文送到远端PE，内层帮助远端PE选择VPN业务转发上下文。P节点只需处理承载标签，通常不必保存所有客户私网路由。必须把RD与RT分开记忆：改变唯一性标识不等于授权另一个VPN接收路由。VPN路由已经学到，还要保证下一跳PE可达且相应标签路径存在；该方案提供隔离，默认不等于加密。",
+   "process": [
+    "PE2学习B前缀，加RD并携带RT和VPN标签，通过MP-BGP发布到PE1。",
+    "PE1的客户VRF导入匹配RT的路由；A去B的包在PE1压入业务标签和到PE2的外层承载标签。",
+    "P沿外层标签转发，PE2用业务标签进入正确VPN并交付B；其他租户不会仅因目的前缀相同而收到此包。"
+   ],
+   "walkthrough": {
+    "title": "BGP/MPLS IP VPN原理：一步步看结果",
+    "setup": "CE-A—PE1—P—PE2—CE-B属于同一企业VPN，A网段10.1.0.0/24，B为10.2.0.0/24。",
+    "steps": [
+     "PE2学习B前缀，加RD并携带RT和VPN标签，通过MP-BGP发布到PE1。",
+     "PE1的客户VRF导入匹配RT的路由；A去B的包在PE1压入业务标签和到PE2的外层承载标签。",
+     "P沿外层标签转发，PE2用业务标签进入正确VPN并交付B；其他租户不会仅因目的前缀相同而收到此包。"
+    ],
+    "conclusion": "RD解决路由区分，RT控制路由归属，双层标签连接承载与客户业务。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "BGP收到VPN路由但客户不能访问",
+    "cause": "RT导入或承载下一跳标签不满足",
+    "check": "比较VPN BGP、VRF与PE间标签路径",
+    "fix": "修正RT并恢复到远端PE的承载路径"
+   },
+   "sources": [
+    {
+     "title": "RFC 4364 · BGP/MPLS IP VPNs",
+     "url": "https://www.rfc-editor.org/rfc/rfc4364",
+     "version": "RFC 4364；原理参考，结合后续更新",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "BGP/MPLS IP VPN"
+  },
+  {
+   "id": "ICT-029.02",
+   "parent": "ICT-029",
+   "term": "BGP/MPLS IP VPN配置",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "部署BGP/MPLS IP VPN可分成三张检查表。第一张是承载网：IGP让PE的Loopback互通，MPLS提供PE间标签路径。第二张是VPN控制面：两端建立合适的MP-BGP邻居并启用VPN地址族，传递带RD、RT和标签的VPN路由。\n第三张是客户接入：接口绑定VRF，CE与PE交换私网路由，并规划正确导入导出策略。\n顺序很重要：承载没通时先调客户ACL通常无效，RT不匹配时反复重建LDP也无法导入路由。验证时先看本地VRF是否有CE路由，再看VPN BGP中是否发布与接收，再看远端VRF是否导入，最后用真实源地址验证双向数据。路由泄露需求必须显式设计，不应为了“先通”把所有RT随意配置成一样。",
+   "process": [
+    "先验证PE1与PE2的Loopback及MPLS路径，避免客户VPN依赖不可达的BGP下一跳。",
+    "PE1导出10.1.0.0/24并附RT 65000:100；PE2导入该RT，路由才进入它的VPN_A。",
+    "若PE2错误只导入65000:200，BGP可能已收到路由但VRF仍没有10.1.0.0/24；修正RT后再验证数据。"
+   ],
+   "walkthrough": {
+    "title": "BGP/MPLS IP VPN配置：一步步看结果",
+    "setup": "PE1的VPN_A使用RD 65000:1，PE2使用65000:2，两者以RT 65000:100共享企业路由。",
+    "steps": [
+     "先验证PE1与PE2的Loopback及MPLS路径，避免客户VPN依赖不可达的BGP下一跳。",
+     "PE1导出10.1.0.0/24并附RT 65000:100；PE2导入该RT，路由才进入它的VPN_A。",
+     "若PE2错误只导入65000:200，BGP可能已收到路由但VRF仍没有10.1.0.0/24；修正RT后再验证数据。"
+    ],
+    "conclusion": "将承载可达、VPN路由传播、VRF导入分开核查，才能定位具体配置层。"
+   },
+   "config": {
+    "code": "display ip vpn-instance verbose\ndisplay ip routing-table vpn-instance VPN_A\ndisplay bgp vpnv4 all routing-table\ndisplay mpls lsp",
+    "platform": "VRP BGP/MPLS VPN查询示例；需相应VPN/MPLS能力",
+    "notes": "只展示本节关键关系；两端地址、路由与安全策略需配套，尚未在赛事设备执行。"
+   },
+   "commandNotes": [],
+   "fault": {
+    "symptom": "远端VRF缺客户前缀",
+    "cause": "VPN路由的RT与导入配置不一致",
+    "check": "检查发布RT和远端导入RT",
+    "fix": "按业务权限修正导入导出并验证隔离"
+   },
+   "sources": [
+    {
+     "title": "RFC 4364 · BGP/MPLS IP VPNs",
+     "url": "https://www.rfc-editor.org/rfc/rfc4364",
+     "version": "RFC 4364；原理参考，结合后续更新",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "BGP/MPLS IP VPN"
+  },
+  {
+   "id": "ICT-019.01",
+   "parent": "ICT-019",
+   "term": "双栈",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "双栈是在终端或设备同时运行IPv4和IPv6，两套地址、路由、邻居与安全策略各自生效。域名可同时返回A与AAAA，客户端按自身策略尝试连接，失败回退与并发尝试行为依实现而异。IPv4可达不证明IPv6可达；若存在AAAA而IPv6路径失效，应用可能先等待再回退，表现为变慢。\n演进需要同时核对监听、DNS、准入、监控与日志，不是给接口加一个IPv6地址就全部完成。双栈不执行跨协议转换，纯IPv6端点仍无法仅凭中间双栈网络访问纯IPv4端点。两族安全边界应等价，防止只控制IPv4而出现IPv6绕过。",
+   "process": [
+    "双族接口与路由就绪",
+    "DNS返回A/AAAA",
+    "客户端选择目标族",
+    "相应族独立转发/控制",
+    "分别监测故障回退"
+   ],
+   "walkthrough": {
+    "title": "分别测试双栈两条路径",
+    "setup": "网站同时有IPv4和IPv6记录，客户端也同时有两种地址。",
+    "steps": [
+     "IPv4请求可能经IPv4默认路由和NAT，IPv6请求走IPv6路由与对应安全规则，两者有独立依赖。",
+     "本例IPv4连接正常、IPv6连接超时，客户端的尝试和回退行为可能使网页变慢。",
+     "分族测试DNS、路由、服务监听和策略，修复失败的一族；一条路径成功不能证明另一条也正常。"
+    ],
+    "conclusion": "可能先尝试IPv6再回退导致变慢，依具体客户端而异。分别测两族路径、DNS、服务监听与安全策略。"
+   },
+   "config": {
+    "code": "system-view\ninterface GigabitEthernet 0/0/0\n ip address 192.0.2.1 255.255.255.0\n ipv6 enable\n ipv6 address 2001:db8:12::1/64\n quit\ndisplay ip routing-table\ndisplay ipv6 routing-table",
+    "platform": "支持双栈的VRP路由接口",
+    "notes": "地址为文档范围；两族路由、应用与安全策略独立完成。未在实机执行。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。",
+    "ip address给当前三层接口配置地址和掩码；终端的默认网关应指向所在网段的真实网关接口。对端地址、返回路由和必要许可仍需单独准备。"
+   ],
+   "fault": {
+    "symptom": "IPv6越权访问",
+    "cause": "只实施IPv4策略",
+    "check": "对比双栈准入/ACL与日志",
+    "fix": "建立两族等价的控制边界"
+   },
+   "sources": [
+    {
+     "title": "RFC 8200 · IPv6",
+     "url": "https://www.rfc-editor.org/rfc/rfc8200",
+     "version": "2017 / RFC 8200",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "IPv6过渡技术"
+  },
+  {
+   "id": "ICT-019.02",
+   "parent": "ICT-019",
+   "term": "6PE",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "6PE让分散的IPv6站点借用已有IPv4/MPLS骨干互通，边缘PE运行双栈，核心P依标签转发而无需逐跳维护客户IPv6路由。MP-BGP在PE之间传递带标签IPv6可达性，外层传输标签用于到出口PE，内层标签帮助IPv6业务转发。\n它通常面向公共IPv6路由，不能仅凭6PE实现多租户重叠IPv6前缀隔离；6VPE另加入VRF与VPNv6。底层IPv4路由、MPLS LSP、PE的客户IPv6路由与下一跳解析缺一不可。检查时要把CE侧原始IPv6包与核心标签栈对应，并允许PHP等正常标签变化，不能因出口只剩一层标签就认定异常。",
+   "process": [
+    "IPv4 IGP/LSP连接PE",
+    "PE学习客户IPv6前缀",
+    "MP-BGP交换带标签路由",
+    "入口压业务/传输标签",
+    "出口恢复IPv6交CE"
+   ],
+   "walkthrough": {
+    "title": "核心不跑IPv6也承载IPv6",
+    "setup": "两个双栈PE之间使用IPv4/MPLS核心，P路由器只按传输标签转发。",
+    "steps": [
+     "PE间交换带标签的IPv6可达信息，入口为客户IPv6业务准备相应封装与标签。",
+     "报文在核心P上按MPLS标签转发，P无需据客户IPv6地址逐包查普通IPv6路由。",
+     "出口PE恢复IPv6业务并转交客户。该流程仍依赖MPLS和PE能力，不能理解成任何IPv4网络都自动能承载IPv6。"
+    ],
+    "conclusion": "可以，若PE双栈、带标签路由与IPv4/MPLS传输均成立，P主要处理传输标签而不查客户IPv6路由。"
+   },
+   "config": {
+    "code": "system-view\nbgp 65000\n peer 2.2.2.2 as-number 65000\n peer 2.2.2.2 connect-interface LoopBack 0\n ipv6-family unicast\n  peer 2.2.2.2 enable\n  peer 2.2.2.2 label-route-capability\n  network 2001:db8:1:: 64\n  quit\n quit\ncommit\ndisplay bgp ipv6 routing-table",
+    "platform": "CloudEngine12800 V200R022C10 6PE命令族",
+    "notes": "底层IGP/LDP已通，Loopback0=1.1.1.1，对端2.2.2.2；CE精确IPv6路由已存在。按设备核对ipv6-family/commit方式；不是完整全网配置。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。",
+    "commit用于相应两阶段配置平台使候选配置生效；其他平台的提交与保存机制可能不同，提交也不能替代业务验证或持久化检查。"
+   ],
+   "fault": {
+    "symptom": "有路由无业务",
+    "cause": "传输LSP/标签无效",
+    "check": "核对BGP标签、IPv4下一跳与LFIB",
+    "fix": "恢复连续标签转发及PE业务映射"
+   },
+   "sources": [
+    {
+     "title": "6PE",
+     "url": "https://www.rfc-editor.org/rfc/rfc4798",
+     "version": "RFC 4798",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "IPv6过渡技术"
+  },
+  {
+   "id": "ICT-019.03",
+   "parent": "ICT-019",
+   "term": "6VPE",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "6VPE在IPv4/MPLS骨干上为不同租户承载IPv6 VPN，PE为每个租户维护独立IPv6 VRF，允许不同租户使用重叠前缀。RD使VPNv6路由编码唯一，RT控制实例导入/导出，内层VPN标签恢复租户上下文，外层标签到出口PE。\n与6PE的差异不是单纯多加一层标签，而是路由和转发有独立租户上下文。接口绑定、VPNv6邻居使能、CE侧路由、RT及底层LSP都应检查。全局IPv6表没有路由不能证明租户表没有；隔离也不自动提供加密，跨不可信承载的保密性要另行设计。\n跨域部署还需区分Option A/B/C的边界与标签处理，不能机械照搬单AS配置。",
+   "process": [
+    "CE路由进入IPv6 VRF",
+    "编码VPNv6并附RT/标签",
+    "PE间MP-BGP交换",
+    "远端按RT导入VRF",
+    "双层标签到出口并按租户转发"
+   ],
+   "walkthrough": {
+    "title": "两个相同IPv6前缀的租户",
+    "setup": "租户A和B都使用2001:db8:10::/64，连接不同PE上的各自VPN。",
+    "steps": [
+     "PE用独立VRF保存每个租户的IPv6路由，避免在同一全局表内混淆相同前缀。",
+     "MP-BGP中的VPN路由编码和RT导入关系表达唯一性及成员关系，底层MPLS提供承载。",
+     "目的同为2001:db8:10::10时，入接口的VRF决定查哪张表；只配两条全局路由不能替代这种隔离。"
+    ],
+    "conclusion": "不能可靠表达独立上下文。应分VRF、唯一VPN路由编码和受控RT，再核对接口归属及策略。"
+   },
+   "config": {
+    "code": "system-view\nip vpn-instance TENANT-A\n ipv6-family\n  route-distinguisher 65000:1\n  vpn-target 65000:100 both\n  quit\n quit\nbgp 65000\n peer 2.2.2.2 as-number 65000\n peer 2.2.2.2 connect-interface LoopBack 0\n ipv6-family vpnv6\n  peer 2.2.2.2 enable\n  quit\n quit\ndisplay bgp vpnv6 all routing-table",
+    "platform": "支持6VPE的NetEngine/VRP命令族",
+    "notes": "这是VRF/VPNv6骨架，需补接口绑定、客户路由和骨干MPLS；VRP8需commit，精确语法以选定产品指南为准。未在实机执行。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "收到VPNv6未入VRF",
+    "cause": "RT或地址族不符",
+    "check": "查VPNv6表、RT和实例表",
+    "fix": "修正最小必要导入关系"
+   },
+   "sources": [
+    {
+     "title": "IPv6 MPLS VPN",
+     "url": "https://www.rfc-editor.org/rfc/rfc4659",
+     "version": "RFC 4659",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "IPv6过渡技术"
+  },
+  {
+   "id": "ICT-019.04",
+   "parent": "ICT-019",
+   "term": "NAT64",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "NAT64在IPv6与IPv4之间转换，既不是双栈也不是只做同协议地址改写。IPv6-only终端常通过DNS64获得合成AAAA，其前缀与IPv4目的编码使包被路由到转换器；转换器选择IPv4源地址/端口并维护映射，回包再还原IPv6。\nDNS64不负责实际转发，NAT64不自动保证DNS正确。IPv4字面量、应用载荷嵌地址、分片与ICMP转换均有兼容边界，不能以一次网页成功代表全部应用兼容。需同时核对转换前缀路由、匹配规则、地址池、资源与两侧安全策略，还要观察会话超时及回程是否经过同一转换状态。",
+   "process": [
+    "DNS64合成AAAA",
+    "终端发往合成IPv6地址",
+    "前缀路由引入NAT64",
+    "改写两侧头部并建映射",
+    "回包据状态恢复IPv6"
+   ],
+   "walkthrough": {
+    "title": "由IPv6访问IPv4服务",
+    "setup": "IPv4服务为192.0.2.33，教学例子使用合成前缀64:ff9b::/96。",
+    "steps": [
+     "将192、0、2、33转换为十六进制c0、00、02、21，组合为c000:0221。",
+     "合成IPv6地址为64:ff9b::c000:221，DNS64可在适用条件下提供这种地址，NAT64负责协议/地址转换。",
+     "实际请求仍需被路由到转换设备并有有效映射和回程；写对合成地址只是编码正确，不证明业务已连通。"
+    ],
+    "conclusion": "IPv4十六进制c000:0221，合成64:ff9b::c000:221；计算只表明编码，还需有效引流、转换及回程。"
+   },
+   "config": {
+    "code": "display nat64 instance\ndisplay nat64 session all\ndisplay ipv6 routing-table",
+    "platform": "NetEngine8000 M14/M8/M4 V800R024C10SPC500 NAT64命令族",
+    "notes": "完整NAT64依赖服务资源、实例、池、ACL与引流模式；查询用于核验。按该平台NAT64配置章节补全部前置资源，不把查询当作已部署。"
+   },
+   "commandNotes": [
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "有AAAA不通",
+    "cause": "未引流或池/回程错误",
+    "check": "查前缀路由、转换表及内外抓包",
+    "fix": "修正状态/引流/回程而非仅改DNS"
+   },
+   "sources": [
+    {
+     "title": "有状态NAT64",
+     "url": "https://www.rfc-editor.org/rfc/rfc6146",
+     "version": "RFC 6146",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "IPv6过渡技术"
+  },
+  {
+   "id": "ICT-030.01",
+   "parent": "ICT-030",
+   "term": "VXLAN原理",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "传统VLAN主要在二层网络内隔离广播域，跨机房或大规模虚拟化时容易受到规模与拓扑限制。VXLAN把原始以太网帧封装进UDP/IP，让它跨三层承载网传输。隧道端点称为VTEP，24位VNI标识虚拟二层网络。物理IP网络称Underlay，建立在其上的虚拟业务网称Overlay。\n入口VTEP先根据本地接入关系确定VNI，再把原始帧装进以自身和远端VTEP为源目的的外层报文。中间路由器只看外层IP，不必学习所有租户MAC。出口按VNI找到正确广播域并恢复原始帧。VNI提供隔离标识而非加密；VXLAN也不会自动解决远端MAC发现，需静态配置、泛洪学习或EVPN等控制面。\n封装额外开销还要求检查MTU。",
+   "process": [
+    "A发给B的原始帧到VTEP1，VTEP1把本地VLAN10映射到VNI 10010。",
+    "已知B在VTEP2时，VTEP1增加VXLAN/UDP/IP外层，目的为VTEP2；骨干不按B的MAC转发。",
+    "VTEP2去掉外层并按VNI 10010交付B；若误配置为VNI 10020，就进入了不同业务网络。"
+   ],
+   "walkthrough": {
+    "title": "VXLAN原理：一步步看结果",
+    "setup": "主机A、B分居两台VTEP后，均属于VNI 10010，地址为10.10.0.10和10.10.0.20。",
+    "steps": [
+     "A发给B的原始帧到VTEP1，VTEP1把本地VLAN10映射到VNI 10010。",
+     "已知B在VTEP2时，VTEP1增加VXLAN/UDP/IP外层，目的为VTEP2；骨干不按B的MAC转发。",
+     "VTEP2去掉外层并按VNI 10010交付B；若误配置为VNI 10020，就进入了不同业务网络。"
+    ],
+    "conclusion": "VLAN是本地接入标识，VNI是Overlay业务标识，两端映射关系必须正确。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "VTEP互通但同网段终端不通",
+    "cause": "接入VLAN到VNI映射或MAC位置错误",
+    "check": "核对两端广播域、VNI和远端MAC",
+    "fix": "修正映射与端点发现而非随意改终端IP"
+   },
+   "sources": [
+    {
+     "title": "RFC 7348 · VXLAN",
+     "url": "https://www.rfc-editor.org/rfc/rfc7348",
+     "version": "RFC 7348；原理参考，结合后续更新",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "VXLAN"
+  },
+  {
+   "id": "ICT-030.02",
+   "parent": "ICT-030",
+   "term": "VXLAN构建虚拟网络",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "通过VXLAN构建虚拟网络，应先完成Underlay，再建立Overlay。Underlay要让VTEP地址双向可达、链路MTU可容纳封装；Overlay要创建业务广播域、VNI与VTEP关系，并把本地接入口映射到正确业务。跨子网通信还需要三层网关，仅有同VNI二层隧道不足以代替路由。\n先用最小的两个VTEP与两个终端理解数据路径。静态方式需要维护远端VTEP和广播、未知单播、组播流量的复制关系；EVPN方式则通过控制面分发端点可达信息。排查时分开看接入口归属、MAC位置、VNI隧道和Underlay路由。相同VNI不代表业务必然互通，缺少MAC发现或入口映射时仍会失败；同时避免把两个租户误接入同一个VNI。",
+   "process": [
+    "先测试10.255.0.1与10.255.0.2互通；这是隧道外层的基础，不涉及终端业务地址。",
+    "各接入口加入本地业务广播域并关联VNI 10010，建立VTEP邻接或EVPN端点学习关系。",
+    "A发送ARP请求时按设计复制到远端；B回复后建立MAC位置，再观察单播封装及A—B互通。"
+   ],
+   "walkthrough": {
+    "title": "VXLAN构建虚拟网络：一步步看结果",
+    "setup": "VTEP1为10.255.0.1、VTEP2为10.255.0.2，终端A、B使用VNI 10010。",
+    "steps": [
+     "先测试10.255.0.1与10.255.0.2互通；这是隧道外层的基础，不涉及终端业务地址。",
+     "各接入口加入本地业务广播域并关联VNI 10010，建立VTEP邻接或EVPN端点学习关系。",
+     "A发送ARP请求时按设计复制到远端；B回复后建立MAC位置，再观察单播封装及A—B互通。"
+    ],
+    "conclusion": "建网顺序是承载、业务映射、端点发现、真实流量，任何一步都不能省略。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "同VNI广播不能到达远端",
+    "cause": "复制列表或控制面端点发现不完整",
+    "check": "观察ARP、BUM复制与隧道端点",
+    "fix": "补齐受支持的静态或EVPN发现机制"
+   },
+   "sources": [
+    {
+     "title": "RFC 7348 · VXLAN",
+     "url": "https://www.rfc-editor.org/rfc/rfc7348",
+     "version": "RFC 7348；原理参考，结合后续更新",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "VXLAN"
+  }
+ ],
+ "chapter_sequence": [
+  "ICT-025",
+  "ICT-029",
+  "ICT-019",
+  "ICT-030"
+ ],
+ "neighbors": {
+  "before": "ICT-026",
+  "after": "ICT-031"
+ }
+}

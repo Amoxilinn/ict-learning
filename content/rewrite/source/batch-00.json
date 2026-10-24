@@ -1,0 +1,282 @@
+{
+ "batch": "batch-00",
+ "stage": {
+  "id": "stage-1",
+  "title": "先让两台电脑说上话",
+  "description": "认识设备、地址和数据在网络中的旅行。先读基础概念，再接触命令。",
+  "chapters": [
+   "ICT-001",
+   "ICT-002",
+   "ICT-003"
+  ]
+ },
+ "chapters": [
+  {
+   "id": "ICT-001",
+   "group": "数通",
+   "category": "数通基础知识",
+   "title": "数通基础知识",
+   "detail": "了解VRP系统、基本网络常识等",
+   "depth": "了解",
+   "prerequisites": [],
+   "old_intro": "电脑插上网线后，数据要经过哪些设备才能到达另一台电脑？先分清终端、交换机、路由器，再认识管理这些设备的VRP命令界面。",
+   "old_outcome": "画出终端—交换机—路由器的路径，区分链路、地址与应用；看懂命令所在视图。",
+   "old_readingNote": "",
+   "old_explanation": "VRP用不同视图划分配置范围。用户视图用尖括号，系统和接口视图用方括号；运行配置与启动配置不同。链路、地址、路由、应用是排障的四层观察点。",
+   "old_deep": "先用display version识别平台，再看display interface brief确认物理与协议状态。接口up/up只说明接口状态，不代表远端应用正常。进入配置视图前写出预期行为，改后回读运行配置并测试；需要保留时再保存。",
+   "previous_chapter": null,
+   "next_chapter": "ICT-002",
+   "previous_title": null,
+   "next_title": "TCP/IP协议基础",
+   "chapter_title": "数通基础知识",
+   "stage": {
+    "id": "stage-1",
+    "title": "先让两台电脑说上话",
+    "description": "认识设备、地址和数据在网络中的旅行。先读基础概念，再接触命令。"
+   }
+  },
+  {
+   "id": "ICT-003",
+   "group": "数通",
+   "category": "交换技术",
+   "title": "以太网交换基础",
+   "detail": "了解基本以太网交换流程，了解MAC地址学习等流程",
+   "depth": "了解",
+   "prerequisites": [
+    "ICT-002"
+   ],
+   "old_intro": "三台电脑接在同一台交换机上，交换机怎样把一份数据交给正确的人？从一张空的MAC地址表开始，跟着三次发送观察它如何学习。",
+   "old_outcome": "逐帧解释源地址学习、目的地址查表以及泛洪与过滤。",
+   "old_readingNote": "",
+   "old_explanation": "交换机在收到帧时按源MAC与入端口学习，在同VLAN内查目的MAC。已知单播只出对应端口，未知单播及广播泛洪到同VLAN其他可转发端口；目的端口等于入端口时过滤。",
+   "old_deep": "学习表键通常包含VLAN和MAC，记录来源端口与老化时间。收到A→B的帧时只依据源A学习，不能因为目的B出现就学到B位置；B回包后才能学到B。MAC漂移意味着同一VLAN的源MAC不断从不同端口出现，需排查环路、迁移或聚合配置。",
+   "previous_chapter": "ICT-002",
+   "next_chapter": "ICT-004",
+   "previous_title": "TCP/IP协议基础",
+   "next_title": "VLAN",
+   "chapter_title": "以太网交换基础",
+   "stage": {
+    "id": "stage-1",
+    "title": "先让两台电脑说上话",
+    "description": "认识设备、地址和数据在网络中的旅行。先读基础概念，再接触命令。"
+   }
+  }
+ ],
+ "units": [
+  {
+   "id": "ICT-001.01",
+   "parent": "ICT-001",
+   "term": "VRP系统",
+   "depth": "了解",
+   "explain": "VRP可看作设备的操作与管理平台：同一条命令在用户、系统、接口视图下意义或可用性不同。尖括号表示用户视图，方括号中出现接口名表示正修改该接口。运行配置在内存中立即影响设备，启动配置在下次启动时读取，两者不能混同。学习时先确认版本、型号和命令帮助，再做最小变更；退出视图不等于保存，保存也不证明业务目标达成。\n配置后的回读与业务测试应成为固定步骤。",
+   "process": [
+    "登录进入用户视图",
+    "display version识别版本与型号",
+    "进入系统/接口视图修改单项",
+    "回读运行配置并验证业务",
+    "需要持久化时保存并核对启动文件"
+   ],
+   "walkthrough": {
+    "title": "把设备改名并理解保存",
+    "setup": "一台实验交换机原名为HUAWEI，计划改为LAB-SW1。",
+    "steps": [
+     "登录后看到<HUAWEI>，尖括号表明处于用户视图，先用display version读型号和版本。",
+     "执行system-view进入系统视图，再执行sysname LAB-SW1，提示符随名称变化，运行配置已经改变。",
+     "return回用户视图，回读当前配置。若希望重启后保留，还要执行目标平台支持的保存操作并检查启动文件；退出视图本身不保存。"
+    ],
+    "conclusion": "变更只进入运行配置，未正确写入下次启动配置。核对display startup指向的配置文件，再在隔离实验中保存并复测。"
+   },
+   "config": {
+    "code": "display version\ndisplay interface brief\nsystem-view\nsysname LAB-SW1\nreturn\ndisplay current-configuration\ndisplay startup",
+    "platform": "常见VRP V200学习语法；具体功能与接口按目标型号核对",
+    "notes": ""
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "重启丢配置",
+    "cause": "未保存或启动文件错误",
+    "check": "检查display startup和配置文件",
+    "fix": "使用正确启动文件并保存后重新验证"
+   },
+   "sources": [
+    {
+     "title": "华为 S12700 / S12700E 以太网交换配置指南",
+     "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+     "version": "V200R023C00",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [
+    {
+     "id": "vrp",
+     "title": "命令视图与保存，是两件事",
+     "summary": "逐步观察提示符与配置状态；命令仅作教学示例。",
+     "boundary": "常见 VRP V200 即时生效配置模式示意；其他平台可能需要 commit。提示符、接口名、保存过程随版本变化。本演示不连接设备，不模拟重启，也不证明业务可达。"
+    }
+   ],
+   "chapter_title": "数通基础知识"
+  },
+  {
+   "id": "ICT-001.02",
+   "parent": "ICT-001",
+   "term": "基本网络常识",
+   "depth": "了解",
+   "explain": "先把四个对象分开：终端是发起或接收业务的电脑、手机；交换机连接局域网设备，常按MAC地址转发；路由器连接不同IP网段，按目的IP选下一跳；应用是浏览器、聊天或文件服务等实际程序。链路指设备间连接，协议指双方约定的消息格式与处理规则。\n网络通信要同时满足链路、地址、转发与应用四类条件。链路up说明接口检测到连接，不能证明VLAN一致；主机获得IP不能证明掩码、网关、DNS都正确。MAC标识本链路接口，IP用于三层寻址，端口号区分传输层应用。带宽是单位时间可传数据能力，时延是一次到达花费时间，丢包率与抖动又是独立指标。\n排障先缩小影响范围，再按层收集证据，比反复重启或只测一次ping更有效。",
+   "process": [
+    "应用产生数据",
+    "传输层以端口标识进程",
+    "IP确定目的和下一跳",
+    "链路层封装并发送",
+    "接收端逐层交付"
+   ],
+   "walkthrough": {
+    "title": "从电脑到网站的一条路径",
+    "setup": "电脑A接交换机SW1，SW1上联路由器R1，网站在远端网络。",
+    "steps": [
+     "网线接好只解决物理连接，A还需要IP、掩码；访问远端时还需要可用的默认网关。",
+     "A按目的IP选择下一跳，把数据帧交给交换机；SW1按MAC转发，R1按IP查路由。",
+     "如果目标IP可访问而域名不可用，把观察点移到DNS；若能建TCP连接却网页报错，继续查TLS和应用，不能只凭一次ping判断。"
+    ],
+    "conclusion": "不能。ICMP连通不说明DNS、TCP、TLS、应用、拥塞和丢包正常；还需测试目标协议、解析与时延/吞吐。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "只有域名失败",
+    "cause": "DNS配置或解析服务异常",
+    "check": "对比IP访问与域名解析",
+    "fix": "修正DNS与允许的解析路径"
+   },
+   "sources": [
+    {
+     "title": "RFC 826 · ARP",
+     "url": "https://www.rfc-editor.org/rfc/rfc826",
+     "version": "1982 / RFC 826",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [
+    {
+     "id": "journey",
+     "title": "同一份数据，逐段交给谁？",
+     "summary": "点击下一步，区分最终目的 IP 与每段链路的接收接口。",
+     "boundary": "假设服务器网段直连路由器，链路、路由及 ARP 就绪，无 NAT、隧道、分片和策略阻断。IP 地址不变不代表整个 IP 头不变。箭头表示转发事件，不代表耗时或物理距离。"
+    }
+   ],
+   "chapter_title": "数通基础知识"
+  },
+  {
+   "id": "ICT-003.01",
+   "parent": "ICT-003",
+   "term": "以太网交换流程",
+   "depth": "了解",
+   "explain": "以太网帧把链路上的发送者与接收者写成源MAC和目的MAC。交换机的MAC表记录“某个VLAN中的某个MAC目前应从哪个端口到达”。单播指向一个接收接口，广播发给本广播域；未知单播只是交换机暂不知道出口，目的地址并没有变成广播地址。\n交换机收到以太网帧后要先确认入口/VLAN与安全检查，再从源地址学习，按目的地址在所属广播域内决定出口。已知单播只转向查得端口；未知单播与广播通常向同VLAN其他可转发端口泛洪，不能跨VLAN任意扩散。帧不应原路从同一入端口再发出，STP阻塞和端口隔离也会限制候选出口。\n学习转发是数据面的行为，查到MAC表项不等于目标应用在线；表项老化还可能把原来的已知单播变为未知泛洪。",
+   "process": [
+    "确定入端口与VLAN",
+    "学习源MAC",
+    "在该VLAN查目的MAC",
+    "过滤入端口及不可转发端口",
+    "单播或泛洪到候选出口"
+   ],
+   "walkthrough": {
+    "title": "第一次发送为什么会泛洪",
+    "setup": "SW1的口1连A、口2连B、口3连C，三口同属VLAN10且可转发，MAC表初始为空。",
+    "steps": [
+     "A向B发帧，SW1先记录“VLAN10中A在口1”，这是根据源MAC学习。",
+     "SW1查目的B没有结果，于是把帧复制到口2和口3，不再发回口1；C也可能收到这次未知单播。",
+     "B回包从口2进入后，SW1学到B在口2。下次A发往B即可直接出端口2，减少无关复制。"
+    ],
+    "conclusion": "通常为口2和口3，而不是只出B端口；交换机尚不知道B位置，排除入端口后泛洪。若STP或隔离限制，还应扣除相应端口。"
+   },
+   "config": {
+    "code": "display mac-address\ndisplay vlan\ndisplay stp brief",
+    "platform": "常见VRP V200学习语法；具体功能与接口按目标型号核对",
+    "notes": ""
+   },
+   "commandNotes": [
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "已知MAC仍不通",
+    "cause": "对应出口不转发或终端不可达",
+    "check": "比较VLAN、STP与出口计数",
+    "fix": "恢复正确二层路径再验证上层"
+   },
+   "sources": [
+    {
+     "title": "华为 S12700 / S12700E 以太网交换配置指南",
+     "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+     "version": "V200R023C00",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "RFC 826 · ARP",
+     "url": "https://www.rfc-editor.org/rfc/rfc826",
+     "version": "1982 / RFC 826",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "以太网交换基础"
+  },
+  {
+   "id": "ICT-003.02",
+   "parent": "ICT-003",
+   "term": "MAC地址学习",
+   "depth": "了解",
+   "explain": "动态MAC学习从收到帧的源MAC出发，将MAC、VLAN与入口关联，并随新源帧刷新。只把某地址放在目的字段不能使交换机学到其真实位置，必须观察该地址作为源从哪口进入。相同MAC可出现在不同VLAN，表项应带VLAN上下文；同VLAN同一MAC不断在端口间变化则是漂移，可能由环路、接线错误或合法迁移造成。\n老化减少无效状态，却意味着沉默终端的表项可能消失。应把学习、老化和实际转发分开解释。",
+   "process": [
+    "源帧进入",
+    "以VLAN+源MAC查表",
+    "新增或更新入口及时间",
+    "后续源帧刷新",
+    "到期未刷新则老化"
+   ],
+   "walkthrough": {
+    "title": "目的地址不会自动被学习",
+    "setup": "A不断从口1向B发送，B始终不发送任何帧。",
+    "steps": [
+     "每帧的源MAC都是A，SW1反复刷新A到口1的表项和老化时间。",
+     "虽然帧里总出现目的B，SW1仍不能据此知道B接在哪个口，所以不会凭目的字段学习B。",
+     "B终于从口2发一帧后，SW1才能记录B到口2；若同一MAC随后又从另一口出现，需要结合迁移或环路判断。"
+    ],
+    "conclusion": "帧只让交换机学习源A，目的B不会被学习。B必须发送帧，或者有合适静态表项，交换机才知道其出口。"
+   },
+   "config": {
+    "code": "display mac-address\ndisplay interface brief",
+    "platform": "常见VRP V200学习语法；具体功能与接口按目标型号核对",
+    "notes": ""
+   },
+   "commandNotes": [
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "MAC反复漂移",
+    "cause": "环路或不正确双归",
+    "check": "按时间/端口比对日志与STP",
+    "fix": "消除环路或配置正确聚合后确认漂移停止"
+   },
+   "sources": [
+    {
+     "title": "华为 S12700 / S12700E 以太网交换配置指南",
+     "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+     "version": "V200R023C00",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "以太网交换基础"
+  }
+ ],
+ "chapter_sequence": [
+  "ICT-001",
+  "ICT-003"
+ ],
+ "neighbors": {
+  "before": null,
+  "after": "ICT-004"
+ }
+}

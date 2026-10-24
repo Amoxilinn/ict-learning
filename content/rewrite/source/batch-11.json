@@ -1,0 +1,627 @@
+{
+ "batch": "batch-11",
+ "stage": {
+  "id": "stage-5",
+  "title": "连接分支与虚拟网络",
+  "description": "先看广域接入和VPN，再学标签、隧道、业务路径及组播。",
+  "chapters": [
+   "ICT-024",
+   "ICT-027",
+   "ICT-028",
+   "ICT-026",
+   "ICT-025",
+   "ICT-029",
+   "ICT-019",
+   "ICT-030",
+   "ICT-031",
+   "ICT-020",
+   "ICT-021",
+   "ICT-022",
+   "ICT-023",
+   "ICT-032",
+   "ICT-033"
+  ]
+ },
+ "chapters": [
+  {
+   "id": "ICT-031",
+   "group": "数通",
+   "category": "VPN技术",
+   "title": "EVPN",
+   "detail": "EVPN基本原理及配置（EVPN在园区和SD-WAN的应用）",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-013",
+    "ICT-030"
+   ],
+   "old_intro": "VTEP怎么知道远端终端在哪里，是否只能不断泛洪？从通告一条MAC/IP位置的BGP路由理解EVPN，再看园区与分支应用。",
+   "old_outcome": "区分控制平面与数据平面，解释终端路由、隔离与跨站点引流。",
+   "old_readingNote": "",
+   "old_explanation": "EVPN以BGP分发以太网相关可达信息，可承载于MPLS或VXLAN。常见MAC/IP路由用于端点学习，前缀路由用于三层业务；业务RT不匹配会使路由不能进入目标实例。",
+   "old_deep": "EVPN地址族承载多种路由类型；MAC/IP通告常用Type2，前缀通告常用Type5，但支持与用途依场景。RD唯一化路由，RT控制导入。EVPN与VXLAN可组合，但EVPN并不专指VXLAN封装。",
+   "previous_chapter": "ICT-030",
+   "next_chapter": "ICT-020",
+   "previous_title": "VXLAN",
+   "next_title": "IPv6+",
+   "chapter_title": "EVPN",
+   "stage": {
+    "id": "stage-5",
+    "title": "连接分支与虚拟网络",
+    "description": "先看广域接入和VPN，再学标签、隧道、业务路径及组播。"
+   }
+  },
+  {
+   "id": "ICT-020",
+   "group": "数通",
+   "category": "IPv6+技术",
+   "title": "IPv6+",
+   "detail": "IPv6+（IPv6 Enhanced）的概念、内涵",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-019"
+   ],
+   "old_intro": "网络已有IPv6地址，为什么还要讨论IPv6+？从业务需要指定路径、保障资源与观察质量出发，理解多种能力如何组合。",
+   "old_outcome": "区分基础IPv6转发与增强能力，解释路径、切片、测量及自动化的关系。",
+   "old_readingNote": "",
+   "old_explanation": "IPv6+是围绕IPv6的增强技术体系，包含SRv6、网络切片、随流检测等方向；不是一种新IP首部版本。应从可编程转发、业务保障和可观测性理解应用价值。",
+   "old_deep": "面向低时延业务可研究SRv6的路径编排，面向隔离业务研究切片，面向可观测性研究IFIT。三者解决不同问题，能组合但不能互相替代；部署能力受芯片、版本与控制器限制。",
+   "previous_chapter": "ICT-031",
+   "next_chapter": "ICT-021",
+   "previous_title": "EVPN",
+   "next_title": "SRv6分段路由",
+   "chapter_title": "IPv6+",
+   "stage": {
+    "id": "stage-5",
+    "title": "连接分支与虚拟网络",
+    "description": "先看广域接入和VPN，再学标签、隧道、业务路径及组播。"
+   }
+  },
+  {
+   "id": "ICT-021",
+   "group": "数通",
+   "category": "IPv6+技术",
+   "title": "SRv6分段路由",
+   "detail": "SRv6的基本概念、SRH报文格式、SRv6 BE及SRv6 TE Policy的工作原理及配置",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-017",
+    "ICT-025"
+   ],
+   "old_intro": "业务希望依次经过指定节点，能不能把路径意图交给入口路由器？先认识SID，再逐跳观察IPv6目的地址和SRH如何变化。",
+   "old_outcome": "读懂段列表、Segments Left、端点行为，区分BE与TE Policy。",
+   "old_readingNote": "",
+   "old_explanation": "SRv6用IPv6 SID表达节点或功能，SRH保存段列表及Segments Left。BE依赖IGP可达性，TE Policy通过有序段约束路径；要检查SID可达、端点行为与封装MTU。",
+   "old_deep": "SID不仅可以指向节点，也可表示端点执行的行为。SRH的Segments Left指示剩余处理位置，不能把文本列出的SID顺序直接当成报文编码顺序。BE依IGP最优路径，TE Policy通常由颜色、端点与候选路径等选择业务路径。",
+   "previous_chapter": "ICT-020",
+   "next_chapter": "ICT-022",
+   "previous_title": "IPv6+",
+   "next_title": "FlexE网络切片",
+   "chapter_title": "SRv6分段路由",
+   "stage": {
+    "id": "stage-5",
+    "title": "连接分支与虚拟网络",
+    "description": "先看广域接入和VPN，再学标签、隧道、业务路径及组播。"
+   }
+  },
+  {
+   "id": "ICT-022",
+   "group": "数通",
+   "category": "IPv6+技术",
+   "title": "FlexE网络切片",
+   "detail": "网络切片的应用场景、FlexE的基本概念",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-038",
+    "ICT-020"
+   ],
+   "old_intro": "同一张网络既传普通下载又传对带宽敏感的业务，怎样划出可分配资源？从共享队列与物理层时隙的差异理解切片和FlexE。",
+   "old_outcome": "计算时隙分配，区分逻辑隔离、带宽资源与端到端保障。",
+   "old_readingNote": "",
+   "old_explanation": "FlexE将以太网PHY带宽以时隙方式分配给不同Client，可用于硬隔离承载。业务切片还涉及端到端资源、控制和运维，不是创建一个VLAN就自动获得带宽保障。",
+   "old_deep": "PHY提供物理容量，FlexE Group组合资源，Calendar把时隙映射给Client。时隙数与可用带宽受平台限制；切片还需业务分类、承载映射和跨节点一致性，单段硬隔离不等于端到端保障。",
+   "previous_chapter": "ICT-021",
+   "next_chapter": "ICT-023",
+   "previous_title": "SRv6分段路由",
+   "next_title": "IFIT随流检测技术",
+   "chapter_title": "FlexE网络切片",
+   "stage": {
+    "id": "stage-5",
+    "title": "连接分支与虚拟网络",
+    "description": "先看广域接入和VPN，再学标签、隧道、业务路径及组播。"
+   }
+  }
+ ],
+ "units": [
+  {
+   "id": "ICT-031.01",
+   "parent": "ICT-031",
+   "term": "EVPN原理",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "VXLAN回答“如何封装”，EVPN进一步回答“某个MAC或IP位于哪个远端”。EVPN使用BGP分发以太网业务的可达信息，让VTEP或PE不必只靠数据泛洪学习所有位置。学习时先掌握MAC/IP通告路由，它把端点与对应下一跳关联起来，再理解多归属、广播复制与IP前缀等其他路由用途。\nEVPN是控制面，实际数据面可以是MPLS或VXLAN，不能把两个名词当成同一协议。RT决定业务路由导入范围，VNI等标识连接相应数据面。已收到EVPN路由不意味着转发完成：下一跳必须在Underlay中可达，业务导入与本地接入映射也要正确。\nMAC移动时，控制面需要更新位置，防止仍将流量送往旧站点。",
+   "process": [
+    "VTEP2从本地学习B后，通过EVPN发布B的MAC/IP可达信息并指向自己。",
+    "VTEP1导入同一业务的路由，获得“B在VTEP2”的位置，不必为每次通信向所有VTEP泛洪。",
+    "A向B发包时，VTEP1按端点映射封装到VTEP2；若Underlay到VTEP2中断，BGP端点信息仍不能完成交付。"
+   ],
+   "walkthrough": {
+    "title": "EVPN原理：一步步看结果",
+    "setup": "A在VTEP1、B在VTEP2，VNI为10010，B的MAC记作00:00:00:00:00:0b。",
+    "steps": [
+     "VTEP2从本地学习B后，通过EVPN发布B的MAC/IP可达信息并指向自己。",
+     "VTEP1导入同一业务的路由，获得“B在VTEP2”的位置，不必为每次通信向所有VTEP泛洪。",
+     "A向B发包时，VTEP1按端点映射封装到VTEP2；若Underlay到VTEP2中断，BGP端点信息仍不能完成交付。"
+    ],
+    "conclusion": "EVPN传播业务位置，Underlay负责把封装报文真正送达对应位置。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "EVPN路由正常但隧道数据不通",
+    "cause": "远端下一跳在Underlay中不可达",
+    "check": "同时检查EVPN端点和底层IP路由",
+    "fix": "恢复Underlay与封装MTU后再测业务"
+   },
+   "sources": [
+    {
+     "title": "RFC 8365 · EVPN Overlay Solution",
+     "url": "https://www.rfc-editor.org/rfc/rfc8365",
+     "version": "RFC 8365；原理参考，结合后续更新",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "EVPN"
+  },
+  {
+   "id": "ICT-031.02",
+   "parent": "ICT-031",
+   "term": "园区应用",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "园区里办公、访客、摄像头可能分布在多栋楼，按物理端口逐处维护VLAN与访问策略会越来越复杂。EVPN配合VXLAN可把业务接入与物理承载分离：接入设备将端口或用户放入业务网络，VTEP通过EVPN交换端点信息，虚拟网关和策略再控制各业务之间的访问。\n从零理解时先把一张物理图与一张业务图分开画。物理图表示接入、汇聚与核心如何用IP互联；业务图表示办公用户属于哪个VNI/VRF，以及允许访问哪些服务器。用户移动到另一栋楼时，业务策略可以随接入关系重新下发，但不是所有平台都自动保持地址、会话和安全上下文。\n部署需核对网关位置、控制器角色、认证与策略联动，不能只创建VNI就称为完整园区方案。",
+   "process": [
+    "A、B接入不同物理交换机，但都映射办公业务，EVPN发布各自MAC位置。",
+    "A到B的流量经过VXLAN承载；A到C跨业务时进入三层网关与访问控制，不能因两者物理相邻就放行。",
+    "A搬到2号楼后，认证与业务映射更新到新接入口，EVPN同步新位置；验证地址与会话是否满足设计。"
+   ],
+   "walkthrough": {
+    "title": "园区应用：一步步看结果",
+    "setup": "办公A在1号楼，办公B在2号楼，摄像头C也在2号楼；办公VNI10010，摄像头VNI10020。",
+    "steps": [
+     "A、B接入不同物理交换机，但都映射办公业务，EVPN发布各自MAC位置。",
+     "A到B的流量经过VXLAN承载；A到C跨业务时进入三层网关与访问控制，不能因两者物理相邻就放行。",
+     "A搬到2号楼后，认证与业务映射更新到新接入口，EVPN同步新位置；验证地址与会话是否满足设计。"
+    ],
+    "conclusion": "物理连通、虚拟业务归属和访问策略是三个不同层次。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "跨楼办公用户进入访客网络",
+    "cause": "认证或接入口业务映射错误",
+    "check": "比较身份授权、VNI和VRF归属",
+    "fix": "修正业务映射并回收旧位置状态"
+   },
+   "sources": [
+    {
+     "title": "RFC 8365 · EVPN Overlay Solution",
+     "url": "https://www.rfc-editor.org/rfc/rfc8365",
+     "version": "RFC 8365；原理参考，结合后续更新",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "EVPN"
+  },
+  {
+   "id": "ICT-031.03",
+   "parent": "ICT-031",
+   "term": "SD-WAN应用",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "SD-WAN负责把多个分支通过可编排的Overlay互联，EVPN可以作为其中一种业务控制面分发路由或端点可达信息。理解二者关系时，不应认为所有SD-WAN都必须采用EVPN；具体厂商方案、版本和业务类型会决定其控制协议与隧道机制。\n典型思路是在分支边缘设备建立安全隧道，通过控制器或路由控制机制传播租户网络可达性，再按应用、链路质量与策略选择出口。EVPN传递业务信息的范围必须与租户隔离保持一致。控制面知道目的分支，不代表当前承载满足时延要求；链路测量与选路策略还要继续决定哪条隧道承载业务。\n排查时将“学不到业务路由”和“已学到路由但走了劣质链路”分开分析。",
+   "process": [
+    "A、B把租户F的网段发布到相应控制面；只导入F路由，避免其他租户误通。",
+    "边缘设备建立到B的Overlay隧道，A访问B时先确定业务目的与租户，再选择可用隧道。",
+    "专线丢包升高时，质量策略可将财务业务转移到符合要求的互联网隧道；EVPN路由本身并不等价于质量检测。"
+   ],
+   "walkthrough": {
+    "title": "SD-WAN应用：一步步看结果",
+    "setup": "分支A、B各有互联网和专线两条链路，财务业务属于租户F。",
+    "steps": [
+     "A、B把租户F的网段发布到相应控制面；只导入F路由，避免其他租户误通。",
+     "边缘设备建立到B的Overlay隧道，A访问B时先确定业务目的与租户，再选择可用隧道。",
+     "专线丢包升高时，质量策略可将财务业务转移到符合要求的互联网隧道；EVPN路由本身并不等价于质量检测。"
+    ],
+    "conclusion": "业务可达信息与应用选路配合工作，具体控制协议以方案文档为准。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "分支路由存在但语音仍卡顿",
+    "cause": "路由可达不代表链路质量合格",
+    "check": "核对隧道质量、应用分类与策略命中",
+    "fix": "修正质量策略并验证实际流量所走路径"
+   },
+   "sources": [
+    {
+     "title": "华为 IP知识百科 · SD-WAN",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/SD-WAN.html",
+     "version": "通用原理；设备特性与命令依产品版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "EVPN"
+  },
+  {
+   "id": "ICT-020.01",
+   "parent": "ICT-020",
+   "term": "IPv6+概念",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "IPv6+是围绕IPv6连接、编程、保障与智能运维的增强技术体系，不能把它当作IPv6之后另一种基础地址版本。基础IPv6提供128位寻址与统一承载，SRv6表达路径和服务行为，切片分配与隔离资源，IFIT等观察真实业务质量，各自解决不同问题。\n它们可以组合，但不存在一条通用“开启IPv6+”命令自动获得所有效果。技术选择应由业务约束反推，并核对芯片、软件、控制器和运维能力，不能见到IPv6地址就认定已有硬隔离或低时延承诺。系统仍需要容量、故障域、安全与跨域设计，验收需看实际业务指标，不只核对功能列表。",
+   "process": [
+    "定义业务SLA",
+    "保证基础IPv6可达",
+    "选择所需增强能力",
+    "关联转发/资源/检测设计",
+    "按业务指标验收"
+   ],
+   "walkthrough": {
+    "title": "有IPv6地址不等于有切片",
+    "setup": "网络已全面配置IPv6，关键业务希望获得独立带宽和指定路径。",
+    "steps": [
+     "IPv6基础能力提供地址与转发，并不会因为地址变长就自动保留带宽。",
+     "需要按需求组合SRv6路径、资源保障和测量等能力，并检查每跳是否支持和正确映射。",
+     "若只部署IPv6却没有资源机制，下载仍可能与关键业务争抢队列；应在负载下验证实际目标。"
+    ],
+    "conclusion": "没有。地址与基本转发不自动保留硬带宽，需资源/切片机制、端到端映射和负载下测试。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "只有开关没有保障",
+    "cause": "未落实路径/资源/测量",
+    "check": "要求业务指标与资源证据",
+    "fix": "逐项落实机制和验收"
+   },
+   "sources": [
+    {
+     "title": "RFC 8200 · IPv6",
+     "url": "https://www.rfc-editor.org/rfc/rfc8200",
+     "version": "2017 / RFC 8200",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "IPv6+"
+  },
+  {
+   "id": "ICT-020.02",
+   "parent": "ICT-020",
+   "term": "IPv6+内涵",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "IPv6+的内涵应放进业务生命周期理解：控制系统把意图转换为路径与资源约束，设备执行编程转发和适当隔离，检测与遥测反馈真实质量，再由策略控制调整。闭环必须有统计窗口、阈值、滞回、权限及回滚，不能每次瞬时抖动都触发改路，否则可能把噪声放大成震荡与乱序。\n路径、切片、检测不是相互替代技术，切片不能消除传播距离，IFIT测得质量也不会自动扩容。每个环节应能说明输入、执行动作和验证证据；跨域协调、时钟条件与故障后剩余容量仍是基础前提，不能用“智能”二字掩盖约束。",
+   "process": [
+    "业务意图变约束",
+    "计算路径与资源",
+    "设备执行及业务引流",
+    "随流检测反馈",
+    "受控调整并复测"
+   ],
+   "walkthrough": {
+    "title": "测量驱动调优也需要稳定机制",
+    "setup": "控制器每秒收到业务时延样本，阈值为20毫秒，某次突发达到21毫秒。",
+    "steps": [
+     "若一超阈就切路、下一秒又切回，测量噪声可能触发震荡，造成乱序或连接变化。",
+     "使用连续窗口、滞回与保持时间，确认持续劣化后才选择满足要求的候选路径。",
+     "切换后继续测量并保留回退条件，形成观察—判断—动作—验证闭环；不能把自动化理解为无限频繁改配置。"
+    ],
+    "conclusion": "短突发和测量噪声可能引起来回切换，导致乱序/中断。需要窗口、滞回、保持时间、回滚及事后验证。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "下发成功体验未变",
+    "cause": "未命中业务或资源不足",
+    "check": "查引流计数/路径/指标",
+    "fix": "修正绑定和容量后对照验证"
+   },
+   "sources": [
+    {
+     "title": "RFC 8200 · IPv6",
+     "url": "https://www.rfc-editor.org/rfc/rfc8200",
+     "version": "2017 / RFC 8200",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "IPv6+"
+  },
+  {
+   "id": "ICT-021.01",
+   "parent": "ICT-021",
+   "term": "SRv6概念",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "SRv6使用128位IPv6 SID表达一段路径或端点功能，由入口对部分转发意图作有序编码。SID的可路由部分用于到达，功能部分及相应端点行为决定到达后如何处理；End、End.X、End.DT6并非同一动作。一个节点可有多个功能SID，不能只看地址可ping就认定服务正确。\n普通IPv6中转节点不一定解析全部段，但被选中的端点必须支持要求的行为。外层IPv6/SRH增加长度，MTU、可压入段数与芯片处理能力均有约束。部署需要Locator可达、SID分配、服务表绑定和回程协同，单独创建Locator不代表VPN或流量工程已经完成。",
+   "process": [
+    "规划Locator/SID与行为",
+    "保证SID的Underlay可达",
+    "入口封装并选段",
+    "端点执行相应行为",
+    "出口交付正确业务上下文"
+   ],
+   "walkthrough": {
+    "title": "到达节点和进入租户服务不同",
+    "setup": "入口R1要经过节点R2，并最终在出口R3交给租户A的路由表。",
+    "steps": [
+     "节点SID可表达到达R2等网络位置，Underlay需能到达其地址，端点按对应行为处理。",
+     "出口服务SID不仅是一个可达地址，还表示解封装并进入特定服务上下文等动作，具体取决于SID行为。",
+     "若把出口SID映射到租户B，底层即使全通也会交错业务；必须同时检查可达、行为和租户关联。"
+    ],
+    "conclusion": "前者主要表达到达节点的转发意图，服务SID还规定端点执行特定处理，如解封装后查某VRF；可达不能替代行为正确。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "Locator通服务不通",
+    "cause": "端点行为/VRF映射错",
+    "check": "查本地SID及查表上下文",
+    "fix": "修正服务绑定与业务路由"
+   },
+   "sources": [
+    {
+     "title": "SRv6网络编程",
+     "url": "https://www.rfc-editor.org/rfc/rfc8986",
+     "version": "RFC 8986",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "IPv6段路由头",
+     "url": "https://www.rfc-editor.org/rfc/rfc8754",
+     "version": "RFC 8754",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "SRv6分段路由"
+  },
+  {
+   "id": "ICT-021.02",
+   "parent": "ICT-021",
+   "term": "SRH报文格式",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "SRH是IPv6 Routing Header的一种，Routing Type为4。Next Header链接后续首部，Hdr Ext Len按规范单位表示扩展长度，Last Entry指段列表最后索引，Segments Left用于跟踪剩余处理位置，还有Flags、Tag及可选TLV。\n列表按规范的逆向索引组织，不能把图示S1→S2→S3直接理解为数组0、1、2依次存放并执行。分析每一跳时应同时写当前IPv6目的、Segments Left和接下来选中的数组项。还要区分完整SRH、简化封装等合法变体，不把单一示例套到所有报文。\n每加SID会增加头长，需纳入路径MTU与硬件段深度预算。",
+   "process": [
+    "入口按规范编码列表",
+    "设当前活动SID为IPv6目的",
+    "端点检查行为与剩余段",
+    "更新索引及活动目的",
+    "最后段按行为交付"
+   ],
+   "walkthrough": {
+    "title": "SRH里的列表为什么反着看",
+    "setup": "教学完整SRH的行进顺序为S1→S2→S3，忽略压缩与特殊封装变体。",
+    "steps": [
+     "Segment List通常按索引存为[0]=S3、[1]=S2、[2]=S1，Last Entry为2，入口活动目的为S1。",
+     "S1初始Segments Left=2；S1执行对应端点行为后减为1，并令活动目的为Segment List[1]即S2。S2处理后减为0，活动目的变为List[0]即S3。",
+     "到S3时Segments Left已经为0，按最终SID所定义的行为处理，不再按普通End行为继续取负索引。看数组时需同时看活动目的、剩余段与端点动作；压缩等变体另行分析。"
+    ],
+    "conclusion": "通常List[0]=S3、[1]=S2、[2]=S1，Last Entry=2；入口活动DA为S1，后续结合Segments Left处理。简化封装变体须另外分析。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "段顺序错误",
+    "cause": "混淆列表显示和执行索引",
+    "check": "对照DA、Last Entry与Segments Left",
+    "fix": "按规范重建并逐跳复查"
+   },
+   "sources": [
+    {
+     "title": "IPv6段路由头",
+     "url": "https://www.rfc-editor.org/rfc/rfc8754",
+     "version": "RFC 8754",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "SRv6分段路由"
+  },
+  {
+   "id": "ICT-021.03",
+   "parent": "ICT-021",
+   "term": "SRv6 BE",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "SRv6 BE在SID之间依赖IPv6Underlay的最优路由与可能的ECMP，重点是借助可达SID承载业务，不显式锁定每条物理链路。入口可以用出口服务SID将业务送到相应端点，出口仍需正确的解封装和查表行为。拓扑、cost或等价路径变化可能改变实际经过的中间节点，所以BE不能被解释为固定物理路径承诺。\n应先核对IPv6Underlay和Locator通告，再校验业务路由递归到的服务SID及VRF；最后检查封装、MTU和回程。普通ping到Locator成功只证明一部分可达，不能代替封装业务流端到端验收。",
+   "process": [
+    "Underlay计算SID路径",
+    "出口发布业务/服务SID",
+    "入口业务递归并封装",
+    "中转按IPv6最优转发",
+    "出口执行服务行为"
+   ],
+   "walkthrough": {
+    "title": "只指定出口仍由底层决定中间路径",
+    "setup": "R1到出口SID有R2和R4两条Underlay可用路径，业务采用SRv6 BE方式。",
+    "steps": [
+     "入口主要将业务指向相应出口或服务SID，普通转发依赖Underlay路由的最优或等价路径。",
+     "某次链路代价变化后，中间路径可能从R2改经R4，但出口业务意图仍相同。",
+     "若业务明确必须经过R2，就需要表达相应约束的策略机制，不能用BE的可达性当成必经节点保证。"
+    ],
+    "conclusion": "不保证，BE依Underlay最优/等价路径；要施加特定段约束需对应TE Policy等机制。"
+   },
+   "config": {
+    "code": "system-view\nsegment-routing ipv6\n encapsulation source-address 2001:db8:1::1\n locator PE1 ipv6-prefix 2001:db8:100:: 64 static 32\n quit\nospfv3 1\n segment-routing ipv6 locator PE1\n quit\ncommit",
+    "platform": "NetEngine VRP8，EVPN L3VPNv6 over OSPFv3 SRv6BE示例命令族",
+    "notes": "Locator/IGP片段不是完整业务；须补Underlay、出口行为、VPN/EVPN路由及BE绑定，参数依目标版本。未实机执行。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "commit用于相应两阶段配置平台使候选配置生效；其他平台的提交与保存机制可能不同，提交也不能替代业务验证或持久化检查。"
+   ],
+   "fault": {
+    "symptom": "SID能ping业务失败",
+    "cause": "只验可达未验服务",
+    "check": "查递归、端点行为、VRF与回程",
+    "fix": "补正确业务和服务绑定"
+   },
+   "sources": [
+    {
+     "title": "SRv6网络编程",
+     "url": "https://www.rfc-editor.org/rfc/rfc8986",
+     "version": "RFC 8986",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "SRv6分段路由"
+  },
+  {
+   "id": "ICT-021.04",
+   "parent": "ICT-021",
+   "term": "SRv6 TE Policy",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "SRv6 TE Policy把到端点的一类业务绑定到候选路径，常以Color与Endpoint等信息表达策略身份和路由关联。候选路径有优先级，内部可有多个带权段列表；策略存在或up不等于用户流量已被引入。段列表约束若是节点段，段间仍可能走IGP最优/等价链路，不能自动承诺每个物理跳。\nBinding SID可把策略抽象成可引用行为，具体能力受产品限制。验收应同时核对策略有效性、选中候选、SID可达、业务命中、大包与失效回退，并对照实际路径，不能只凭控制器“下发成功”即视为达标。",
+   "process": [
+    "定义Color/Endpoint",
+    "配置可达段列表与候选",
+    "选有效高优先级路径",
+    "把业务引入策略",
+    "沿段转发并按设计失效切换"
+   ],
+   "walkthrough": {
+    "title": "Policy正常但业务没有进去",
+    "setup": "设备有一条R1经R2到R3的TE Policy，状态up，但用户业务仍走另一条最短路。",
+    "steps": [
+     "先检查策略的端点、候选路径和段列表，确认它自身有有效转发能力。",
+     "再检查业务前缀是否通过Color、递归或明确绑定被引入这条Policy；没有引流时用户仍按原规则转发。",
+     "绑定后用对应业务统计和路径证据验证，不能只截图Policy up就宣布满足业务路径目标。"
+    ],
+    "conclusion": "先查业务是否通过Color/递归或显式绑定进入该Policy，再看所选候选与段列表；对象up不代表业务命中。"
+   },
+   "config": {
+    "code": "display segment-routing ipv6 te policy\ndisplay ipv6 routing-table",
+    "platform": "支持SRv6TE Policy的NetEngine VRP8",
+    "notes": "核验片段；完整配置需选定版本的Color/Endpoint、Segment List、候选与业务绑定。查询不等于已配置，未实机执行。"
+   },
+   "commandNotes": [
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "策略up流不进",
+    "cause": "业务Color/Endpoint或绑定错",
+    "check": "查路由属性和策略命中",
+    "fix": "纠正引流后重测路径"
+   },
+   "sources": [
+    {
+     "title": "SR Policy架构",
+     "url": "https://www.rfc-editor.org/rfc/rfc9256",
+     "version": "RFC 9256",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "SRv6网络编程",
+     "url": "https://www.rfc-editor.org/rfc/rfc8986",
+     "version": "RFC 8986",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "SRv6分段路由"
+  },
+  {
+   "id": "ICT-022.01",
+   "parent": "ICT-022",
+   "term": "切片应用场景",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "网络切片将共享基础设施的资源和逻辑网络按业务需求分配，让不同业务获得适合的拓扑、带宽、时延与可靠性。逻辑隔离避免地址/转发表混杂，硬管道进一步在物理或时隙资源上划界，二者不是同义。FlexE可提供链路级资源划分，端到端切片还需要每跳映射、业务分类、容量、保护和检测共同成立。\n切片不能消除传播距离和全部节点处理时间，关键业务不应只凭空载ping宣称低时延。验收应让竞争切片满载，并加入单链路失效，观察故障后剩余容量是否仍满足承诺，明确隔离边界所在层次。",
+   "process": [
+    "SLA转换为资源需求",
+    "选择隔离层次",
+    "规划每跳映射与保护",
+    "分类业务进入切片",
+    "满载及故障下验收"
+   ],
+   "walkthrough": {
+    "title": "VLAN隔离不等于带宽隔离",
+    "setup": "医疗业务与普通下载分属两个VLAN，共用一条1Gb/s出口。",
+    "steps": [
+     "VLAN将二层广播域分开，但两类流仍可能竞争同一个物理出口和队列资源。",
+     "若目标是可保证的带宽，需要额外资源规划及沿途一致的映射机制，明确故障后是否仍满足。",
+     "用下载制造负载后测医疗业务时延、丢包和可用容量，才能验证目标；单看VLAN不同无法证明资源保障。"
+    ],
+    "conclusion": "VLAN主要提供逻辑广播域划分，不自动提供硬带宽保障。还需合适资源机制、端到端映射及负载下测试。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "切片间仍互相影响",
+    "cause": "共享段/队列未隔离或分类错",
+    "check": "沿路径查资源和分类命中",
+    "fix": "补齐端到端映射及容量"
+   },
+   "sources": [
+    {
+     "title": "RFC 8200 · IPv6",
+     "url": "https://www.rfc-editor.org/rfc/rfc8200",
+     "version": "2017 / RFC 8200",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "FlexE网络切片"
+  },
+  {
+   "id": "ICT-022.02",
+   "parent": "ICT-022",
+   "term": "FlexE概念",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "FlexE在MAC与PHY之间引入Shim，将一个或多个PHY组成Group，再按Calendar时隙给不同Client分配资源，打破传统MAC速率与单PHY的一一对应。Bonding合多PHY成更大速率，Channelization分资源给多客户端，Sub-rating仅用部分物理容量，三者应用不同。\n标准常见100G PHY分20个5G时隙用于说明原理；产品可能扩展更细粒度，不能假设所有型号固定支持1G。双端Group、PHY、Client与时隙映射需一致，总容量够也不证明映射正确。还应检查Calendar切换与PHY失效后的客户端容量，物理口up不能代替Client状态验收。",
+   "process": [
+    "PHY加入Group",
+    "Shim用Calendar分时隙",
+    "Client映射到资源",
+    "双端按相同关系收发",
+    "监控组/Client与故障后容量"
+   ],
+   "walkthrough": {
+    "title": "给FlexE Client分配时隙",
+    "setup": "教学条件为每个时隙5Gb/s，Client需要35Gb/s，暂不讨论其他粒度与型号扩展。",
+    "steps": [
+     "35÷5=7，所以需要规划7个对应时隙，而不是按物理口数量直接相加。",
+     "两端应在相容的Group与Calendar上形成一致映射，发送的Client内容才能被正确还原。",
+     "若一端分7格、另一端按6格解释，即使物理链路up也可能业务异常；同时核对PHY、Calendar和Client状态。"
+    ],
+    "conclusion": "需7格，双端映射不一致可能使Client或业务异常；不能只看PHY up。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "PHY up Client异常",
+    "cause": "时隙/Calendar不一致",
+    "check": "比对组、Client ID和映射",
+    "fix": "纠正双端关系并按产品流程切换"
+   },
+   "sources": [
+    {
+     "title": "RFC 8200 · IPv6",
+     "url": "https://www.rfc-editor.org/rfc/rfc8200",
+     "version": "2017 / RFC 8200",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "FlexE网络切片"
+  }
+ ],
+ "chapter_sequence": [
+  "ICT-031",
+  "ICT-020",
+  "ICT-021",
+  "ICT-022"
+ ],
+ "neighbors": {
+  "before": "ICT-030",
+  "after": "ICT-023"
+ }
+}

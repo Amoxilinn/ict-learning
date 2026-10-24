@@ -1,0 +1,750 @@
+{
+ "batch": "batch-02",
+ "stage": {
+  "id": "stage-2",
+  "title": "搭建一个局域网",
+  "description": "先划分广播域，再学习多链路的容量、环路和设备冗余。",
+  "chapters": [
+   "ICT-004",
+   "ICT-005",
+   "ICT-007",
+   "ICT-008",
+   "ICT-006"
+  ]
+ },
+ "chapters": [
+  {
+   "id": "ICT-004",
+   "group": "数通",
+   "category": "交换技术",
+   "title": "VLAN",
+   "detail": "VLAN、VLANIF、MUX VLAN、VLAN聚合等技术原理及配置",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-003"
+   ],
+   "old_intro": "办公室和访客使用同一套交换机，怎样让两组电脑的广播彼此隔离？先建立VLAN，再讨论不同VLAN之间为什么需要网关。",
+   "old_outcome": "分清VLAN、端口归属、Trunk标签和VLANIF，再比较MUX与VLAN聚合。",
+   "old_readingNote": "",
+   "old_explanation": "VLAN划分二层广播域；Access把无标签终端归入PVID，Trunk承载多个VLAN。VLANIF提供三层网关。MUX VLAN控制主从/从从访问；VLAN聚合用Super-VLAN集中三层地址，各Sub-VLAN仍隔离二层广播。",
+   "old_deep": "Access口收到无标签帧后归入PVID；出Access口时通常去除对应标签。Trunk入方向不仅看PVID，还检查允许VLAN；无标签帧归PVID后仍需被允许。常见VRP行为下，出Trunk且VLAN等于PVID时不带标签，其他允许VLAN带802.1Q标签。VLANIF的IP决定网关地址，它不能替代二层成员及链路放行。MUX VLAN要区分Principal、Separate、Group角色；VLAN聚合需核对Super/Sub关系和ARP代理需求。",
+   "previous_chapter": "ICT-003",
+   "next_chapter": "ICT-005",
+   "previous_title": "以太网交换基础",
+   "next_title": "链路聚合",
+   "chapter_title": "VLAN",
+   "stage": {
+    "id": "stage-2",
+    "title": "搭建一个局域网",
+    "description": "先划分广播域，再学习多链路的容量、环路和设备冗余。"
+   }
+  },
+  {
+   "id": "ICT-005",
+   "group": "数通",
+   "category": "交换技术",
+   "title": "链路聚合",
+   "detail": "Eth-Trunk技术原理及配置",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-004"
+   ],
+   "old_intro": "两台交换机只有一条上联，带宽不够且断线就停网，能否并联两根网线？先认识逻辑聚合，再解释为什么一条下载未必变快。",
+   "old_outcome": "理解Eth-Trunk、LACP与逐流分担，读懂成员状态及容量变化。",
+   "old_readingNote": "",
+   "old_explanation": "多个物理口合为逻辑口以增加总带宽与冗余。LACP协商成员状态；哈希通常按流选一条链路，单流不一定叠加所有成员带宽。两端模式、VLAN、速率和成员状态必须相容。",
+   "old_deep": "Eth-Trunk是逻辑端口，二层VLAN属性应在聚合接口统一规划。LACP依系统优先级、端口优先级等决定活动成员；实际活动数还受最大活动链路数等约束。不要把未加入同一聚合的平行链路直接接通，以免引入二层环路。",
+   "previous_chapter": "ICT-004",
+   "next_chapter": "ICT-007",
+   "previous_title": "VLAN",
+   "next_title": "STP",
+   "chapter_title": "链路聚合",
+   "stage": {
+    "id": "stage-2",
+    "title": "搭建一个局域网",
+    "description": "先划分广播域，再学习多链路的容量、环路和设备冗余。"
+   }
+  },
+  {
+   "id": "ICT-007",
+   "group": "数通",
+   "category": "交换技术",
+   "title": "STP",
+   "detail": "生成树的防环原理及配置",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-003",
+    "ICT-005"
+   ],
+   "old_intro": "为了防止断线而多接一根网线，为什么反而可能让全网变慢？从广播沿环路不断复制开始，理解生成树为何需要暂时阻断一条路径。",
+   "old_outcome": "推导根桥、根端口与指定端口，解释阻断与故障后的路径恢复。",
+   "old_readingNote": "",
+   "old_explanation": "STP以桥ID选根，再按到根开销等比较规则选根端口和指定端口，阻塞冗余路径防止二层环路。广播帧没有三层TTL保护，环路会放大广播与MAC漂移。",
+   "old_deep": "桥ID先比优先级再比MAC；非根桥从收到的根路径信息中选最优根端口。比较不是仅看端口带宽，还可能进入发送桥ID、发送端口ID等逐级决胜。规划核心为根可避免路径绕行，面向终端的边缘端口需配合BPDU保护。",
+   "previous_chapter": "ICT-005",
+   "next_chapter": "ICT-008",
+   "previous_title": "链路聚合",
+   "next_title": "RSTP、MSTP",
+   "chapter_title": "STP",
+   "stage": {
+    "id": "stage-2",
+    "title": "搭建一个局域网",
+    "description": "先划分广播域，再学习多链路的容量、环路和设备冗余。"
+   }
+  },
+  {
+   "id": "ICT-008",
+   "group": "数通",
+   "category": "交换技术",
+   "title": "RSTP、MSTP",
+   "detail": "RSTP和MSTP的原理及配置",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-007"
+   ],
+   "old_intro": "STP已经能防环，为什么还需要RSTP和MSTP？分别从缩短切换等待、让不同VLAN使用不同上联这两个问题理解改进。",
+   "old_outcome": "区分RSTP快速转换条件与MSTP的实例、区域及VLAN映射。",
+   "old_readingNote": "",
+   "old_explanation": "RSTP用端口角色与握手机制缩短收敛，边缘端口面向终端。MSTP把多个VLAN映射到实例实现不同树；区域名称、修订号和VLAN映射共同决定区域一致性。",
+   "old_deep": "RSTP的Proposal/Agreement依赖点到点链路与同步条件；边缘端口收到BPDU后的行为取决于保护配置。MSTP实例可分别选择根，让不同VLAN利用不同上联；区域边界与外部生成树关系也必须设计。",
+   "previous_chapter": "ICT-007",
+   "next_chapter": "ICT-006",
+   "previous_title": "STP",
+   "next_title": "堆叠和集群",
+   "chapter_title": "RSTP、MSTP",
+   "stage": {
+    "id": "stage-2",
+    "title": "搭建一个局域网",
+    "description": "先划分广播域，再学习多链路的容量、环路和设备冗余。"
+   }
+  },
+  {
+   "id": "ICT-006",
+   "group": "数通",
+   "category": "交换技术",
+   "title": "堆叠和集群",
+   "detail": "iStack、CSS等技术原理及配置",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-005",
+    "ICT-008"
+   ],
+   "old_intro": "两台交换机如何对外表现得像一台设备？把“增加一根链路”和“合并设备管理与转发”分开理解，再看堆叠与集群。",
+   "old_outcome": "区分iStack和CSS的使用对象，理解成员身份、主备及分裂风险。",
+   "old_readingNote": "",
+   "old_explanation": "iStack/CSS把多机组合为逻辑设备，统一管理与控制；需考虑主备选举、堆叠链路、跨设备聚合及分裂检测。型号与版本决定支持方式，不能把所有交换机都按相同命令配置。",
+   "old_deep": "堆叠/集群共享逻辑控制和管理身份，M-LAG保留两个独立控制平面。堆叠链路拓扑影响带宽与分裂风险；上电与主备倒换不能只看物理接线，还要核对成员ID、版本和配置兼容。",
+   "previous_chapter": "ICT-008",
+   "next_chapter": "ICT-009",
+   "previous_title": "RSTP、MSTP",
+   "next_title": "静态路由",
+   "chapter_title": "堆叠和集群",
+   "stage": {
+    "id": "stage-2",
+    "title": "搭建一个局域网",
+    "description": "先划分广播域，再学习多链路的容量、环路和设备冗余。"
+   }
+  }
+ ],
+ "units": [
+  {
+   "id": "ICT-004.01",
+   "parent": "ICT-004",
+   "term": "VLAN",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "VLAN是虚拟局域网，把一套交换网络分成多个二层广播域。Access口通常连接一个所属VLAN的普通终端，Trunk口承载多个VLAN。802.1Q标签是帧上的VLAN标识，PVID是端口接收无标签帧时通常用来归类的默认VLAN编号；允许列表则决定哪些VLAN可以通过，二者不能互相替代。\nVLAN在一台或多台交换机上划分独立二层广播域，编号是逻辑归属，不是IP子网本身。终端常发送无标签帧，Access入口以配置的VLAN归类；Trunk承载多个VLAN，以标签区分，PVID与允许列表共同决定无标签接收和出方向处理。\n两端Trunk都允许某VLAN且VLAN实际创建，才能形成预期二层路径。同一IP网段并不能穿透VLAN隔离；反之同一VLAN也可能因终端掩码/策略不同而无法完成业务。",
+   "process": [
+    "无标签帧进入Access口",
+    "归入接口VLAN",
+    "Trunk按允许列表承载并处理标签",
+    "对端按标签/PVID分类",
+    "目标Access口去标签交付"
+   ],
+   "walkthrough": {
+    "title": "两个部门共用交换机",
+    "setup": "员工A接SW1口1属于VLAN10，访客B接口2属于VLAN20，两者不配置三层互通。",
+    "steps": [
+     "A发ARP广播时，SW1只向VLAN10中的可转发成员复制，因此B不会因同接一台交换机而收到该广播。",
+     "若VLAN10要跨SW1和SW2，互联Trunk需承载10，远端员工接入口也要属于10。",
+     "只在Trunk放行10而把远端接入口设为20，不会自动把VLAN10变成20；VLAN边界与端口归属必须一致。"
+    ],
+    "conclusion": "不能。Trunk允许列表不把VLAN10自动改成20；B接入口不在帧所属广播域，需改正确归属或使用设计好的三层转发。"
+   },
+   "config": {
+    "code": "system-view\nvlan batch 10 20\ninterface GigabitEthernet 0/0/1\n port link-type access\n port default vlan 10\n quit\ninterface GigabitEthernet 0/0/24\n port link-type trunk\n port trunk allow-pass vlan 10 20\n quit\ndisplay vlan",
+    "platform": "常见VRP V200学习语法；具体功能与接口按目标型号核对",
+    "notes": ""
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。",
+    "port default vlan指定Access端口归属；port trunk allow-pass vlan决定Trunk允许的VLAN。先创建VLAN，再设置成员口与互联放行，最后看MAC表和真实通信。"
+   ],
+   "fault": {
+    "symptom": "端口up同VLAN不通",
+    "cause": "VLAN缺失/允许列表不一致",
+    "check": "逐跳查VLAN和MAC表",
+    "fix": "恢复一致成员与允许列表"
+   },
+   "sources": [
+    {
+     "title": "华为 S12700 / S12700E 以太网交换配置指南",
+     "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+     "version": "V200R023C00",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "VLAN"
+  },
+  {
+   "id": "ICT-004.02",
+   "parent": "ICT-004",
+   "term": "VLANIF",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "VLANIF是VLAN对应的三层逻辑接口，给二层终端提供可ARP到的网关地址。终端跨网段时把帧交给网关MAC，交换机以目的IP查路由并从目标VLAN重新封装。创建VLANIF和地址不意味着一定up：所属VLAN、二层成员与链路状态必须满足平台规定。\n终端的网关应位于其本地子网，两个VLAN通常规划不同IP子网。把同一地址配在两台独立网关上会制造冲突，需冗余协议时应另行设计虚拟身份。",
+   "process": [
+    "源主机判断跨网段",
+    "ARP本VLAN网关",
+    "VLANIF接收三层包",
+    "查路由选择目标VLAN",
+    "ARP目标并生成新帧"
+   ],
+   "walkthrough": {
+    "title": "跨VLAN访问经过网关",
+    "setup": "A为VLAN10的192.168.10.10/24，B为VLAN20的192.168.20.20/24，网关分别为各VLANIF的.1。",
+    "steps": [
+     "A判断B不在本地网段，先解析192.168.10.1的MAC，把帧交给VLANIF10。",
+     "三层设备查路由，发现192.168.20.0/24连接在VLANIF20，解析B的MAC并从VLAN20发送新帧。",
+     "B回包交给192.168.20.1，执行反向路径；若B没有默认网关，去程即使到达，回程仍可能失败。"
+    ],
+    "conclusion": "通常不能。主机需要正确下一跳；设备有三层接口不能自动替终端选网关。配置A/B各自本地VLANIF地址并确认回程。"
+   },
+   "config": {
+    "code": "system-view\nvlan batch 10 20\ninterface Vlanif 10\n ip address 192.168.10.1 255.255.255.0\n quit\ninterface Vlanif 20\n ip address 192.168.20.1 255.255.255.0\n quit\ndisplay ip interface brief\ndisplay ip routing-table",
+    "platform": "支持三层VLANIF的S系列VRP V200设备",
+    "notes": "至少相应二层成员/接口需满足VLANIF协议up条件；终端分别接入正确VLAN并使用各自网关。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。",
+    "ip address给当前三层接口配置地址和掩码；终端的默认网关应指向所在网段的真实网关接口。对端地址、返回路由和必要许可仍需单独准备。"
+   ],
+   "fault": {
+    "symptom": "VLANIF down",
+    "cause": "该VLAN没有满足条件的活动二层成员",
+    "check": "检查VLAN存在、端口成员与协议状态",
+    "fix": "恢复成员链路而非反复重配IP"
+   },
+   "sources": [
+    {
+     "title": "华为 S12700 / S12700E 以太网交换配置指南",
+     "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+     "version": "V200R023C00",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "VLAN"
+  },
+  {
+   "id": "ICT-004.03",
+   "parent": "ICT-004",
+   "term": "MUX VLAN",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "MUX VLAN用于控制用户之间和用户到公共服务器的二层访问关系。Principal主VLAN可与从VLAN通信；Group互通型从VLAN允许其内部成员互通，但不同从VLAN之间仍隔离；Separate隔离型从VLAN使其内部用户也不能彼此二层互通。\n它并非简单“所有VLAN互通”，需要在角色关系和相关接入口使能MUX行为。跨设备部署还要承载所需VLAN并保持角色规划。实验矩阵至少应分别测试主到从、同Group、同Separate与不同从VLAN。",
+   "process": [
+    "创建主/从VLAN",
+    "在主VLAN关联Group和Separate",
+    "接入口归对应VLAN并启用MUX",
+    "跨设备链路放行所需VLAN",
+    "按角色矩阵测试互通与隔离"
+   ],
+   "walkthrough": {
+    "title": "宿舍之间隔离但能访问公共服务器",
+    "setup": "示意Principal VLAN2连接公共服务器，Separate VLAN4连接两台宿舍电脑A和B。",
+    "steps": [
+     "MUX关系定义哪些从VLAN可以访问主VLAN；这里A和B都允许访问VLAN2公共资源。",
+     "Separate角色要求其成员相互隔离，因此A不能因为和B同处VLAN4就直接互访。",
+     "若另一组用户需要组内互通，可使用适当的Group角色；角色关系和型号支持需核对，不能用普通VLAN的直觉替代。"
+    ],
+    "conclusion": "Separate定义其成员之间隔离，同时允许访问主VLAN公共资源。该行为正是MUX的目标，不能因为相同VLAN编号就预期互通。"
+   },
+   "config": {
+    "code": "system-view\nvlan batch 2 3 4\nvlan 2\n mux-vlan\n subordinate group 3\n subordinate separate 4\n quit\ninterface GigabitEthernet 0/0/1\n port link-type access\n port default vlan 2\n port mux-vlan enable vlan 2\n quit\ninterface GigabitEthernet 0/0/2\n port link-type access\n port default vlan 3\n port mux-vlan enable vlan 3\n quit\ninterface GigabitEthernet 0/0/3\n port link-type access\n port default vlan 4\n port mux-vlan enable vlan 4\n quit\ndisplay mux-vlan",
+    "platform": "S5700/S6700 V200R024C10支持MUX VLAN的型号",
+    "notes": "依据官方汇聚设备示例改编。主VLAN2、Group3、Separate4；增加同类终端时逐接口同样配置。老版本命令可能不带vlan参数。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。",
+    "port default vlan指定Access端口归属；port trunk allow-pass vlan决定Trunk允许的VLAN。先创建VLAN，再设置成员口与互联放行，最后看MAC表和真实通信。"
+   ],
+   "fault": {
+    "symptom": "角色配置存在却未隔离",
+    "cause": "接入口未启用MUX或型号语法不同",
+    "check": "display mux-vlan并回读各接入口",
+    "fix": "按对应版本使能正确接口MUX关系"
+   },
+   "sources": [
+    {
+     "title": "华为 S12700 / S12700E 以太网交换配置指南",
+     "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+     "version": "V200R023C00",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "VLAN"
+  },
+  {
+   "id": "ICT-004.04",
+   "parent": "ICT-004",
+   "term": "VLAN聚合",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "VLAN聚合让多个二层Sub-VLAN共用一个Super-VLAN的三层地址空间与网关，从而减少为每个广播域分别划分子网的地址消耗。Sub-VLAN保留二层隔离，Super-VLAN不等于把它们直接合并成一个广播域。同子网跨Sub-VLAN时，主机先ARP对方地址而不是网关；按需要在Super-VLANIF启用相应代理ARP，网关才可帮助解析并转发。\n是否允许这种互访是设计选择，不能将代理功能一律开启当作隔离保证。",
+   "process": [
+    "接入口划入各Sub-VLAN",
+    "创建不直接接物理口的Super-VLAN",
+    "关联Sub并在Super-VLANIF配置网关",
+    "按需求开启跨Sub代理ARP",
+    "观察代理MAC与三层转发"
+   ],
+   "walkthrough": {
+    "title": "共享地址段却保持二层隔离",
+    "setup": "A为192.168.100.10/24在Sub-VLAN10，B为192.168.100.20/24在Sub-VLAN20，网关位于Super-VLAN。",
+    "steps": [
+     "A认为B是同网段，首先ARP B，但Sub-VLAN之间不转发这类二层广播，所以B不能直接回应。",
+     "在支持并正确配置跨Sub代理ARP的设计中，网关可代答，使A把发往B的包先交给网关。",
+     "网关再路由到B所在Sub-VLAN。Super-VLAN共享三层地址资源，不能理解成把各Sub的广播域直接合并。"
+    ],
+    "conclusion": "A认为B在本链路而ARP B，但广播不跨Sub。按设计配置Super-VLANIF的跨Sub代理后可由网关代答并路由转发；不是靠普通Trunk合并广播。"
+   },
+   "config": {
+    "code": "system-view\nvlan batch 10 20 100\nvlan 100\n aggregate-vlan\n access-vlan 10 20\n quit\ninterface Vlanif 100\n ip address 192.168.100.1 255.255.255.0\n arp-proxy inter-sub-vlan-proxy enable\n quit\ndisplay vlan 100\ndisplay arp",
+    "platform": "支持VLAN Aggregation的VRP设备；例见NE40E-M2 V800R024C00SPC500",
+    "notes": "接入口加入Sub-VLAN10或20，两端同用192.168.100.0/24和网关.1；Super-VLAN不直接接物理口、Sub-VLAN不另配VLANIF。型号支持先核对。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。",
+    "ip address给当前三层接口配置地址和掩码；终端的默认网关应指向所在网段的真实网关接口。对端地址、返回路由和必要许可仍需单独准备。"
+   ],
+   "fault": {
+    "symptom": "Super配置后仍无ARP",
+    "cause": "漏关联Sub或代理条件未满足",
+    "check": "检查Super/Sub关系、VLANIF状态与代理命令",
+    "fix": "按需求补齐关联与代理，不在Sub另配冲突VLANIF"
+   },
+   "sources": [
+    {
+     "title": "华为 S12700 / S12700E 以太网交换配置指南",
+     "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+     "version": "V200R023C00",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "VLAN"
+  },
+  {
+   "id": "ICT-005.01",
+   "parent": "ICT-005",
+   "term": "Eth-Trunk原理",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "Eth-Trunk把若干物理接口组成一条逻辑链路，用逻辑接口统一承载VLAN等业务属性。LACP在两端交换系统和端口信息，帮助选出可一致转发的活动成员；不是只把两根线插上就自动聚合。常见负载分担按流哈希，一个流通常固定在一个成员以避免乱序，所以两条1G不保证单个TCP流达到2G。\n聚合可以承受成员故障，但故障后总容量下降，原本不拥塞的业务也可能丢包，可靠性与容量必须分别验证。",
+   "process": [
+    "配置逻辑聚合属性",
+    "物理口加入同一聚合",
+    "LACP核对成员并选活动链路",
+    "按哈希分配不同流",
+    "成员故障后重分担且总容量下降"
+   ],
+   "walkthrough": {
+    "title": "聚合链路断一根后的容量",
+    "setup": "两条1Gb/s链路组成Eth-Trunk，业务由多个流构成，总输入1.6Gb/s。",
+    "steps": [
+     "正常时哈希可将不同流分配到不同成员，总业务可能超过单成员1Gb/s；同一流通常固定走一个成员。",
+     "一条链路失效后，聚合可能仍保持up，但剩余容量只有约1Gb/s，流会重新分担。",
+     "若1.6Gb/s持续输入，剩余链路会拥塞，产生排队或丢包。因此链路不断不代表容量不损失。"
+    ],
+    "conclusion": "逻辑链路可能仍up，但剩余只有1G，1.6G持续输入将拥塞并丢包。不断链不等于业务容量未损失。"
+   },
+   "config": {
+    "code": "system-view\ninterface Eth-Trunk 1\n mode lacp-static\n port link-type trunk\n port trunk allow-pass vlan 10 20\n quit\ninterface GigabitEthernet 0/0/1\n eth-trunk 1\n quit\ninterface GigabitEthernet 0/0/2\n eth-trunk 1\n quit\ndisplay eth-trunk 1",
+    "platform": "常见VRP V200学习语法；具体功能与接口按目标型号核对",
+    "notes": ""
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。",
+    "interface Eth-Trunk配置逻辑聚合口，物理接口下的eth-trunk将该端口加入本机聚合组。两端本地编号可不同，但成员、模式与对端身份必须相容。"
+   ],
+   "fault": {
+    "symptom": "单流只有一条速率",
+    "cause": "正常逐流哈希可能性",
+    "check": "查成员Selected与多流分布",
+    "fix": "不盲目改逐包分担，按业务容量设计"
+   },
+   "sources": [
+    {
+     "title": "华为 S12700 / S12700E 以太网交换配置指南",
+     "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+     "version": "V200R023C00",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "链路聚合"
+  },
+  {
+   "id": "ICT-005.02",
+   "parent": "ICT-005",
+   "term": "Eth-Trunk配置",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "聚合配置的关键是双端模式与成员一致，并把业务属性统一放在Eth-Trunk逻辑接口上。先确认接口没有冲突配置、速率和链路能力满足目标平台限制，再创建逻辑口、选择LACP模式、加入物理成员。验证不能只看Eth-Trunk本身up，还要看每个成员是否被选中、对端系统标识和活动数是否合理。\n遇到部分成员不转发，重点排除接错对端、各端成员没有归入各自预期的聚合组或接口错误，而不是立刻增加允许VLAN。\n两端的本地Eth-Trunk编号不要求相同：SW1的Eth-Trunk1可对接SW2的Eth-Trunk10，前提是各端成员正确归组、模式兼容且识别到正确的对端系统。",
+   "process": [
+    "准备接口并核对接线",
+    "创建Eth-Trunk并设lacp-static",
+    "加入两条成员",
+    "统一逻辑口Trunk/VLAN属性",
+    "检查聚合及逐成员状态并测试故障"
+   ],
+   "walkthrough": {
+    "title": "把两条物理口加入同一聚合",
+    "setup": "SW1与SW2用GE0/0/1和GE0/0/2互联，计划作为Eth-Trunk1承载VLAN10。",
+    "steps": [
+     "两侧建立匹配的聚合，选择兼容的LACP模式，将两个物理口加入同一逻辑接口。",
+     "在逻辑Eth-Trunk配置Trunk与允许VLAN10，检查两端成员是否处于预期选中状态，不能只看物理口up。",
+     "若一根线误接到第三台独立交换机，LACP看到不同对端身份，通常不能把两根线都作为同一个正常聚合使用。"
+    ],
+    "conclusion": "一般不能，LACP对端系统身份不同，成员可能不被同时选中。要让跨设备聚合成立需受支持的堆叠/M-LAG等设计。"
+   },
+   "config": {
+    "code": "system-view\ninterface Eth-Trunk 1\n mode lacp-static\n port link-type trunk\n port trunk allow-pass vlan 10 20\n quit\ninterface GigabitEthernet 0/0/1\n eth-trunk 1\n quit\ninterface GigabitEthernet 0/0/2\n eth-trunk 1\n quit\ndisplay eth-trunk 1",
+    "platform": "常见VRP V200学习语法；具体功能与接口按目标型号核对",
+    "notes": ""
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。",
+    "interface Eth-Trunk配置逻辑聚合口，物理接口下的eth-trunk将该端口加入本机聚合组。两端本地编号可不同，但成员、模式与对端身份必须相容。"
+   ],
+   "fault": {
+    "symptom": "逻辑口up但仅一个Selected",
+    "cause": "对端聚合/接线或活动数配置不一致",
+    "check": "逐成员比较LACP信息",
+    "fix": "修正双端归属及物理接线"
+   },
+   "sources": [
+    {
+     "title": "华为 S12700 / S12700E 以太网交换配置指南",
+     "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+     "version": "V200R023C00",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "链路聚合"
+  },
+  {
+   "id": "ICT-007.01",
+   "parent": "ICT-007",
+   "term": "防环原理",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "二层以太网没有类似IP TTL的逐跳寿命限制。平行链路形成环时，广播与未知单播可反复复制，交换机还会不断从不同口学到相同源MAC。STP通过交换BPDU，先选根桥，再依据到根路径信息为非根桥选择根端口、为网段选指定端口，将部分冗余口置于不转发状态，形成无环树。\n比较顺序从根ID、根路径开销等逐级进行，不能简单认定“速度最快的口必定转发”。拓扑变化时再利用冗余链路恢复连接。",
+   "process": [
+    "BPDU传播根候选信息",
+    "按最小桥ID选根",
+    "非根选择最优到根端口",
+    "各网段选指定端口",
+    "冗余端口阻塞形成树"
+   ],
+   "walkthrough": {
+    "title": "三台交换机形成三角环",
+    "setup": "SW1、SW2、SW3两两互联，同一VLAN中存在闭合二层路径，未启用防环时广播可能循环。",
+    "steps": [
+     "STP先通过BPDU选举根桥，桥ID较优者成为参考点；优先级相同时比较MAC等字段。",
+     "非根设备选择到根的最优根端口，每段选择指定端口，剩余冗余路径上的端口不转发普通数据。",
+     "拓扑因此变成树。主路径失效后可重新计算并启用备用路径，既保留冗余又避免稳定状态的广播环路。"
+    ],
+    "conclusion": "在同一STP选举域且无更优桥时，桥ID中更小的MAC获胜，即...10。优先级先于MAC比较。"
+   },
+   "config": {
+    "code": "system-view\nstp mode stp\nstp priority 0\nquit\ndisplay stp brief\ndisplay stp",
+    "platform": "S系列VRP V200 STP学习示例",
+    "notes": "仅在隔离三交换机拓扑的指定根桥执行。其他设备设置更大的桥优先级数值，降低其成为根桥的优先程度；根桥优先级取值步长需依命令参考。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "广播暴涨MAC漂移",
+    "cause": "STP被禁或BPDU不能到达",
+    "check": "查端口STP与BPDU计数，先限制故障范围",
+    "fix": "恢复防环及正确链路，不在生产网试接环路"
+   },
+   "sources": [
+    {
+     "title": "华为 S12700 / S12700E 以太网交换配置指南",
+     "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+     "version": "V200R023C00",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "STP"
+  },
+  {
+   "id": "ICT-007.02",
+   "parent": "ICT-007",
+   "term": "STP配置",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "STP部署应把根桥位置与核心业务路径对齐，否则默认MAC决定根桥可能引入绕行。首先设置全网期望模式并规划主根/备根，随后再考虑端口开销、边缘与保护；任意降低优先级会重选根并影响转发。验证时要同时看根ID、根端口、指定/阻塞角色及业务路径，不能只确认stp enable。\n面对终端口与交换机互联口应采用不同策略，互联口错误配置BPDU过滤可能直接失去防环。",
+   "process": [
+    "规划主根/备根位置",
+    "配置统一STP模式与桥优先级",
+    "确认端口cost与角色",
+    "记录稳定转发树",
+    "注入链路故障并量测恢复"
+   ],
+   "walkthrough": {
+    "title": "把根桥放到网络核心",
+    "setup": "两台核心C1/C2与接入交换机A构成冗余路径，设计希望C1为主根、C2为备根。",
+    "steps": [
+     "先根据拓扑规划根位置，再使用目标平台支持的优先级或根角色配置，使C1更优、C2次之。",
+     "查看根ID和A的根端口，确认上行路径符合设计，而不是只看配置里存在STP命令。",
+     "若误把接入A设得最优，根可能跑到边缘导致绕行；修正角色后还需重新观察端口状态和业务路径。"
+    ],
+    "conclusion": "根据设计将核心作为主根、另一核心作备根，再确认接入到核心的根路径；优先级不是越低越应随便配置。"
+   },
+   "config": {
+    "code": "system-view\nstp mode stp\nstp priority 0\nquit\ndisplay stp brief\ndisplay stp",
+    "platform": "S系列VRP V200 STP学习示例",
+    "notes": "仅在隔离三交换机拓扑的指定根桥执行。其他设备设置更大的桥优先级数值，降低其成为根桥的优先程度；根桥优先级取值步长需依命令参考。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "根桥与设计不符",
+    "cause": "优先级遗漏或接入有更小桥ID",
+    "check": "读取实际Root ID与Bridge ID",
+    "fix": "按计划修正优先级并评估重收敛"
+   },
+   "sources": [
+    {
+     "title": "华为 S12700 / S12700E 以太网交换配置指南",
+     "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+     "version": "V200R023C00",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "STP"
+  },
+  {
+   "id": "ICT-008.01",
+   "parent": "ICT-008",
+   "term": "RSTP",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "RSTP保留树形防环思想，但通过端口角色、点到点链路上的Proposal/Agreement握手和备份路径处理缩短收敛。Discarding、Learning、Forwarding是常见状态，Alternate可在主路径故障时提供替代。\n边缘端口用于只接终端的链路，能够快速进入转发；它不是关闭防环的万能开关，接入交换机时不能随意当边缘口。收到BPDU后的行为与BPDU保护配置有关，保护可能使端口错误关闭，因此需要连同恢复方式一起测试。",
+   "process": [
+    "选择根与端口角色",
+    "点到点链路发起Proposal",
+    "对端同步其他相关端口并Agreement",
+    "允许满足条件端口快速转发",
+    "失效时启用合适替代路径"
+   ],
+   "walkthrough": {
+    "title": "边缘端口为何能更快转发",
+    "setup": "A的接入口只连接一台PC，上联口连接另一台交换机，运行RSTP。",
+    "steps": [
+     "PC口按明确终端用途配置为边缘，可更快转发；上联口需要参加桥间拓扑与快速协商。",
+     "若把上联也误设成边缘，并启用BPDU保护，它收到对端BPDU后可能被保护关闭。",
+     "这说明端口用途与配置冲突。纠正角色和接线后按平台流程恢复，不能为恢复连通而把全网保护长期关闭。"
+    ],
+    "conclusion": "该口收到交换机BPDU触发保护，说明它并非纯终端边缘。应纠正端口角色/接线，按平台流程恢复，而不是为通网关闭全部保护。"
+   },
+   "config": {
+    "code": "system-view\nstp mode rstp\ninterface GigabitEthernet 0/0/1\n stp edged-port enable\n quit\nstp bpdu-protection\nquit\ndisplay stp brief",
+    "platform": "S系列VRP V200支持RSTP及BPDU保护的设备",
+    "notes": "GE0/0/1只接终端，不接交换机。保护动作可能使端口错误关闭，应在实验中核对恢复机制。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "快速收敛未发生",
+    "cause": "链路非点到点或兼容旧STP",
+    "check": "查模式、双工、端口类型及邻端协议",
+    "fix": "按实际链路规划，不能强假设所有端口都快速转发"
+   },
+   "sources": [
+    {
+     "title": "华为 S12700 / S12700E 以太网交换配置指南",
+     "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+     "version": "V200R023C00",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "RSTP、MSTP"
+  },
+  {
+   "id": "ICT-008.02",
+   "parent": "ICT-008",
+   "term": "MSTP",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "MSTP把多个VLAN映射到少量生成树实例，不同实例可选不同根，从而让不同业务利用不同冗余上联。一个区域内的名称、修订级别、VLAN到实例映射必须一致，三者并非只看名称。实例0/CIST与区域间树承担连接作用，未显式映射的VLAN需要知道实际归属。\n配置映射后还需按设备命令使区域配置生效，并把各实例根位置与三层网关规划协同，否则虽无环仍可能绕行。",
+   "process": [
+    "统一区域名称/修订/映射",
+    "激活区域配置",
+    "按实例规划主根和备根",
+    "各VLAN沿所属实例树转发",
+    "区域不一致时形成边界行为"
+   ],
+   "walkthrough": {
+    "title": "两个VLAN使用不同上联",
+    "setup": "C1与C2都连接接入A，设计实例1承载VLAN10、实例2承载VLAN20。",
+    "steps": [
+     "同一MST区域内设备需保持区域名、修订级别及VLAN到实例映射一致，否则不能按预期作为同一区域协作。",
+     "让C1在实例1更优、C2在实例2更优，A对不同实例可能选择不同根路径，利用两条上联。",
+     "若一侧把VLAN20误映射到实例1，名称相同也不能掩盖映射差异；核对摘要及实际端口角色后再判断负载分担。"
+    ],
+    "conclusion": "不能，VLAN映射摘要不同，名称与修订相同也不够。应逐项比较并激活一致配置后再观察端口角色。"
+   },
+   "config": {
+    "code": "system-view\nstp mode mstp\nstp region-configuration\n region-name LAB\n revision-level 1\n instance 1 vlan 10\n instance 2 vlan 20\n active region-configuration\n quit\nstp instance 1 root primary\nstp instance 2 root secondary\nquit\ndisplay stp region-configuration\ndisplay stp brief",
+    "platform": "S12700/S12700E V200R023C00等支持MSTP的VRP设备",
+    "notes": "所有区域成员名称、修订号、映射一致；另一核心把实例1设secondary、实例2设primary。二层VLAN与链路需事先就绪。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "同名仍出现边界",
+    "cause": "修订或映射不一致/未激活",
+    "check": "display stp region-configuration逐项比对",
+    "fix": "统一并激活区域配置，重查实例角色"
+   },
+   "sources": [
+    {
+     "title": "华为 S12700 / S12700E 以太网交换配置指南",
+     "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+     "version": "V200R023C00",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "RSTP、MSTP"
+  },
+  {
+   "id": "ICT-006.01",
+   "parent": "ICT-006",
+   "term": "iStack",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "iStack把多台支持的盒式交换机形成一台逻辑设备，主设备负责统一管理与控制，备设备用于管理角色接管，其他成员仍参与数据转发。成员ID决定接口编号，变更ID可能使原接口配置失配；逻辑堆叠口由受支持的物理成员口组成。环形与链形连接对单链故障的冗余不同，堆叠分裂还可能使两部分同时使用同一逻辑身份，需双主检测。\niStack与M-LAG并非同义：前者逻辑统一，后者通常保持独立控制平面。",
+   "process": [
+    "核对型号版本混插与线缆支持",
+    "规划唯一成员ID和优先级",
+    "配置受支持物理口进入逻辑堆叠口",
+    "按手册保存/重启/接线建立",
+    "验证角色、拓扑与双主保护"
+   ],
+   "walkthrough": {
+    "title": "堆叠后接口编号跟谁走",
+    "setup": "两台支持iStack的实验交换机分别标识为成员1和2，终端接在成员2的一个端口上。",
+    "steps": [
+     "建立堆叠后，管理员面对一个逻辑系统，但接口名仍需包含成员身份，才能指明实际物理位置。",
+     "若改成员2的编号，旧配置中的接口引用可能不再对应原端口；配置迁移必须随编号变化核对。",
+     "出现成员分裂时，两部分可能产生身份或转发冲突，因此还要按目标型号设计检测、链路与恢复，不能只验证管理界面合一。"
+    ],
+    "conclusion": "接口名含成员ID，改ID生效后旧编号对应的接口配置可能不再作用，必须按目标版本迁移配置，不能只看堆叠角色成功。"
+   },
+   "config": {
+    "code": "display version\ndisplay stack\ndisplay stack configuration\ndisplay stack port",
+    "platform": "S系列iStack V200命令族",
+    "notes": "这是堆叠验证命令集。堆叠口配置/成员重编号会影响接口与可能要求重启，必须按所选型号官方堆叠向导生成，不把通用查询当成已建堆。"
+   },
+   "commandNotes": [],
+   "fault": {
+    "symptom": "成员不加入",
+    "cause": "型号版本或逻辑堆叠口/线缆不支持",
+    "check": "检查产品堆叠支持表、端口与版本",
+    "fix": "按匹配组合和接线重建，不套用其他型号命令"
+   },
+   "sources": [
+    {
+     "title": "华为 S12700 / S12700E 以太网交换配置指南",
+     "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+     "version": "V200R023C00",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "堆叠和集群"
+  },
+  {
+   "id": "ICT-006.02",
+   "parent": "ICT-006",
+   "term": "CSS",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "CSS面向相应框式交换机，将两个机框虚拟成逻辑设备，提供统一转发与管理。其连接方式可能使用集群卡或受支持业务口，所需线卡、端口模式和软件步骤都随产品变化。成员ID应不同，角色优先级不能与STP“数值越小越优”混淆，CSS指定优先级通常数值越大越有利于当主。\n启用可能触发重启；实验应先备份、规划接口与检测链路，再在隔离环境按手册实施，运行后不随意更改成员ID造成分裂。",
+   "process": [
+    "核对框/卡/连接模式",
+    "给两框设不同CSS ID",
+    "规划优先级与双主检测",
+    "按手册启用并重启生效",
+    "验证双框角色、集群链路与业务倒换"
+   ],
+   "walkthrough": {
+    "title": "框式设备集群的成员身份",
+    "setup": "两台支持CSS的框式交换机拟组成集群，示意两框最初都使用成员ID 1。",
+    "steps": [
+     "先按设备文档规划不同成员身份，例如1和2，避免相同ID使集群成员无法正确区分。",
+     "建立集群后核对主备角色、集群链路和业务端口，逻辑管理统一不等于所有硬件故障都被隔离。",
+     "改ID或集群链路是系统级变更，应结合版本与迁移步骤处理；不能把它当作无影响的设备别名修改。"
+    ],
+    "conclusion": "应先把一侧ID改为2，保证不同成员标识。集群建立后随意改ID可能导致分裂，不能把改ID当无影响的命名操作。"
+   },
+   "config": {
+    "code": "system-view\nset css id 1\nset css priority 200\ncss enable\n# 另一框单独配置set css id 2；按实际卡型完成端口模式和物理连接\ndisplay css status",
+    "platform": "S12700/S12700E V200R025C00，官方Configuring CSS Software",
+    "notes": "片段仅给出成员标识/角色与使能，不省略硬件/端口类型步骤。css enable可能提示重启；仅按产品手册在隔离环境执行。"
+   },
+   "commandNotes": [],
+   "fault": {
+    "symptom": "CSS无法成立",
+    "cause": "两框ID相同或硬件/端口模式不兼容",
+    "check": "display css status及检查卡型/版本",
+    "fix": "纠正唯一ID和受支持连接方式"
+   },
+   "sources": [
+    {
+     "title": "华为 S12700 / S12700E 以太网交换配置指南",
+     "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+     "version": "V200R023C00",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "堆叠和集群"
+  }
+ ],
+ "chapter_sequence": [
+  "ICT-004",
+  "ICT-005",
+  "ICT-007",
+  "ICT-008",
+  "ICT-006"
+ ],
+ "neighbors": {
+  "before": "ICT-003",
+  "after": "ICT-009"
+ }
+}

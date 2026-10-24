@@ -1,0 +1,348 @@
+[
+ {
+  "batch": "batch-00",
+  "stage": "stage-1",
+  "chapters": [
+   "ICT-001",
+   "ICT-003"
+  ],
+  "units": 4
+ },
+ {
+  "batch": "batch-01",
+  "stage": "stage-1",
+  "chapters": [
+   "ICT-002"
+  ],
+  "units": 9
+ },
+ {
+  "batch": "batch-02",
+  "stage": "stage-2",
+  "chapters": [
+   "ICT-004",
+   "ICT-005",
+   "ICT-007",
+   "ICT-008",
+   "ICT-006"
+  ],
+  "units": 12
+ },
+ {
+  "batch": "batch-03",
+  "stage": "stage-3",
+  "chapters": [
+   "ICT-009",
+   "ICT-010",
+   "ICT-017",
+   "ICT-018"
+  ],
+  "units": 10
+ },
+ {
+  "batch": "batch-04",
+  "stage": "stage-3",
+  "chapters": [
+   "ICT-011",
+   "ICT-012",
+   "ICT-013",
+   "ICT-014"
+  ],
+  "units": 9
+ },
+ {
+  "batch": "batch-05",
+  "stage": "stage-3",
+  "chapters": [
+   "ICT-015",
+   "ICT-016"
+  ],
+  "units": 4
+ },
+ {
+  "batch": "batch-06",
+  "stage": "stage-4",
+  "chapters": [
+   "ICT-034",
+   "ICT-035"
+  ],
+  "units": 12
+ },
+ {
+  "batch": "batch-07",
+  "stage": "stage-4",
+  "chapters": [
+   "ICT-036",
+   "ICT-037"
+  ],
+  "units": 6
+ },
+ {
+  "batch": "batch-08",
+  "stage": "stage-4",
+  "chapters": [
+   "ICT-038",
+   "ICT-039",
+   "ICT-040",
+   "ICT-041"
+  ],
+  "units": 12
+ },
+ {
+  "batch": "batch-09",
+  "stage": "stage-5",
+  "chapters": [
+   "ICT-024",
+   "ICT-027",
+   "ICT-028",
+   "ICT-026"
+  ],
+  "units": 10
+ },
+ {
+  "batch": "batch-10",
+  "stage": "stage-5",
+  "chapters": [
+   "ICT-025",
+   "ICT-029",
+   "ICT-019",
+   "ICT-030"
+  ],
+  "units": 10
+ },
+ {
+  "batch": "batch-11",
+  "stage": "stage-5",
+  "chapters": [
+   "ICT-031",
+   "ICT-020",
+   "ICT-021",
+   "ICT-022"
+  ],
+  "units": 11
+ },
+ {
+  "batch": "batch-12",
+  "stage": "stage-5",
+  "chapters": [
+   "ICT-023",
+   "ICT-032",
+   "ICT-033"
+  ],
+  "units": 7
+ },
+ {
+  "batch": "batch-13",
+  "stage": "stage-6",
+  "chapters": [
+   "ICT-056",
+   "ICT-057",
+   "ICT-061"
+  ],
+  "units": 10
+ },
+ {
+  "batch": "batch-14",
+  "stage": "stage-6",
+  "chapters": [
+   "ICT-058",
+   "ICT-059"
+  ],
+  "units": 11
+ },
+ {
+  "batch": "batch-15",
+  "stage": "stage-6",
+  "chapters": [
+   "ICT-062",
+   "ICT-063",
+   "ICT-064"
+  ],
+  "units": 8
+ },
+ {
+  "batch": "batch-16",
+  "stage": "stage-6",
+  "chapters": [
+   "ICT-065",
+   "ICT-068",
+   "ICT-069"
+  ],
+  "units": 10
+ },
+ {
+  "batch": "batch-17",
+  "stage": "stage-6",
+  "chapters": [
+   "ICT-070",
+   "ICT-060"
+  ],
+  "units": 7
+ },
+ {
+  "batch": "batch-18",
+  "stage": "stage-7",
+  "chapters": [
+   "ICT-074",
+   "ICT-075",
+   "ICT-086"
+  ],
+  "units": 12
+ },
+ {
+  "batch": "batch-19",
+  "stage": "stage-7",
+  "chapters": [
+   "ICT-078",
+   "ICT-077",
+   "ICT-080"
+  ],
+  "units": 13
+ },
+ {
+  "batch": "batch-20",
+  "stage": "stage-7",
+  "chapters": [
+   "ICT-079",
+   "ICT-076",
+   "ICT-081"
+  ],
+  "units": 12
+ },
+ {
+  "batch": "batch-21",
+  "stage": "stage-7",
+  "chapters": [
+   "ICT-082"
+  ],
+  "units": 9
+ },
+ {
+  "batch": "batch-22",
+  "stage": "stage-7",
+  "chapters": [
+   "ICT-083",
+   "ICT-084"
+  ],
+  "units": 6
+ },
+ {
+  "batch": "batch-23",
+  "stage": "stage-7",
+  "chapters": [
+   "ICT-085",
+   "ICT-087"
+  ],
+  "units": 7
+ },
+ {
+  "batch": "batch-24",
+  "stage": "stage-7",
+  "chapters": [
+   "ICT-088",
+   "ICT-089"
+  ],
+  "units": 7
+ },
+ {
+  "batch": "batch-25",
+  "stage": "stage-7",
+  "chapters": [
+   "ICT-090",
+   "ICT-091",
+   "ICT-092",
+   "ICT-093"
+  ],
+  "units": 11
+ },
+ {
+  "batch": "batch-26",
+  "stage": "stage-7",
+  "chapters": [
+   "ICT-094"
+  ],
+  "units": 6
+ },
+ {
+  "batch": "batch-27",
+  "stage": "stage-8",
+  "chapters": [
+   "ICT-046",
+   "ICT-047"
+  ],
+  "units": 8
+ },
+ {
+  "batch": "batch-28",
+  "stage": "stage-8",
+  "chapters": [
+   "ICT-045"
+  ],
+  "units": 7
+ },
+ {
+  "batch": "batch-29",
+  "stage": "stage-8",
+  "chapters": [
+   "ICT-048",
+   "ICT-054"
+  ],
+  "units": 12
+ },
+ {
+  "batch": "batch-30",
+  "stage": "stage-8",
+  "chapters": [
+   "ICT-049",
+   "ICT-050"
+  ],
+  "units": 9
+ },
+ {
+  "batch": "batch-31",
+  "stage": "stage-8",
+  "chapters": [
+   "ICT-051",
+   "ICT-052",
+   "ICT-055",
+   "ICT-053"
+  ],
+  "units": 10
+ },
+ {
+  "batch": "batch-32",
+  "stage": "stage-9",
+  "chapters": [
+   "ICT-042",
+   "ICT-043"
+  ],
+  "units": 11
+ },
+ {
+  "batch": "batch-33",
+  "stage": "stage-9",
+  "chapters": [
+   "ICT-044",
+   "ICT-066"
+  ],
+  "units": 7
+ },
+ {
+  "batch": "batch-34",
+  "stage": "stage-9",
+  "chapters": [
+   "ICT-067",
+   "ICT-071",
+   "ICT-072"
+  ],
+  "units": 9
+ },
+ {
+  "batch": "batch-35",
+  "stage": "stage-9",
+  "chapters": [
+   "ICT-073"
+  ],
+  "units": 4
+ }
+]

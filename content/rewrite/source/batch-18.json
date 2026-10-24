@@ -1,0 +1,610 @@
+{
+ "batch": "batch-18",
+ "stage": {
+  "id": "stage-7",
+  "title": "把有线网络扩展到无线",
+  "description": "先弄清AP与终端如何上线，再理解认证、漫游、射频和规划运维。",
+  "chapters": [
+   "ICT-074",
+   "ICT-075",
+   "ICT-086",
+   "ICT-078",
+   "ICT-077",
+   "ICT-080",
+   "ICT-079",
+   "ICT-076",
+   "ICT-081",
+   "ICT-082",
+   "ICT-083",
+   "ICT-084",
+   "ICT-085",
+   "ICT-087",
+   "ICT-088",
+   "ICT-089",
+   "ICT-090",
+   "ICT-091",
+   "ICT-092",
+   "ICT-093",
+   "ICT-094"
+  ]
+ },
+ "chapters": [
+  {
+   "id": "ICT-074",
+   "group": "WLAN",
+   "category": "WLAN基础业务",
+   "title": "WLAN工作原理",
+   "detail": "CAPWAP隧道、WLAN关键报文、STA上线流程等",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-002",
+    "ICT-004",
+    "ICT-009"
+   ],
+   "old_intro": "手机看到Wi-Fi名称后，为什么仍要经过认证、关联和地址获取才能访问网络？先区分手机、AP与无线控制器，再追踪上线消息。",
+   "old_outcome": "区分AP上线与STA上线，解释CAPWAP和业务转发路径。",
+   "old_readingNote": "",
+   "old_explanation": "AP获取管理IP并发现AC，建立CAPWAP控制关系，再下发业务。STA经扫描、认证、关联及相应密钥/准入流程上线，之后获取IP；AP上线与用户上线是两条不同的链。",
+   "old_deep": "AP先获得管理地址和AC发现信息，随后建立CAPWAP控制隧道并完成配置；数据可直接转发或经隧道转发。STA先扫描与关联，按安全方式完成认证及密钥协商，再经业务VLAN获得IP。两套流程依赖不同VLAN和路径。",
+   "previous_chapter": "ICT-060",
+   "next_chapter": "ICT-075",
+   "previous_title": "安全组网规划部署",
+   "next_title": "WLAN组网架构",
+   "chapter_title": "WLAN工作原理",
+   "stage": {
+    "id": "stage-7",
+    "title": "把有线网络扩展到无线",
+    "description": "先弄清AP与终端如何上线，再理解认证、漫游、射频和规划运维。"
+   }
+  },
+  {
+   "id": "ICT-075",
+   "group": "WLAN",
+   "category": "WLAN基础业务",
+   "title": "WLAN组网架构",
+   "detail": "FAT AP、Leader AP、WAC+FIT AP、敏捷分布式、Navi AC、Mesh等",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-074"
+   ],
+   "old_intro": "一间小办公室与一座大型校园应该采用同一种AP管理方式吗？从谁管理AP、谁控制终端、业务从哪里转发比较不同架构。",
+   "old_outcome": "区分FAT、Leader、FIT/WAC、分布式、Navi AC和Mesh的职责。",
+   "old_readingNote": "",
+   "old_explanation": "FAT AP独立管理，FIT AP通常由WAC管理，Leader AP承载特定协调角色；云管理把配置运维集中到平台，Mesh用于无线回传。管理方式不直接决定数据一定经过云端。",
+   "old_deep": "FAT AP、FIT AP配WAC、Leader AP、敏捷分布式、云管理与Mesh满足不同规模与安装条件。云管理可只承担管理面，Mesh无线回传会占用射频资源；不能仅凭架构名称推断业务路径。 Navi AC在相应方案中承担导航/接入控制相关角色，部署位置与数据路径需依据指定产品版本设计，不能直接用云管理代替其概念。",
+   "previous_chapter": "ICT-074",
+   "next_chapter": "ICT-086",
+   "previous_title": "WLAN工作原理",
+   "next_title": "WLAN网络规划基础",
+   "chapter_title": "WLAN组网架构",
+   "stage": {
+    "id": "stage-7",
+    "title": "把有线网络扩展到无线",
+    "description": "先弄清AP与终端如何上线，再理解认证、漫游、射频和规划运维。"
+   }
+  },
+  {
+   "id": "ICT-086",
+   "group": "WLAN",
+   "category": "WLAN网络规划",
+   "title": "WLAN网络规划基础",
+   "detail": "WLAN网络规划概述、WLAN覆盖设计、WLAN容量设计等",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-075"
+   ],
+   "old_intro": "会议室里“每个角落都有信号”为什么仍可能开不了会？把覆盖和容量分开规划，再考虑现场墙体与终端能力。",
+   "old_outcome": "理解业务需求、覆盖边界、空口容量和AP数量的计算前提。",
+   "old_readingNote": "",
+   "old_explanation": "覆盖设计满足信号与SNR，容量设计满足并发用户和业务吞吐。按有效空口能力而非物理协商速率估算AP数量，再通过现场勘测和验收修正。",
+   "old_deep": "信号强度不等于信噪比，物理速率不等于应用吞吐。AP数量由覆盖、并发、业务与可复用频谱共同决定，回传、PoE与出口也需计算；密集部署还会增加同频竞争。",
+   "previous_chapter": "ICT-075",
+   "next_chapter": "ICT-078",
+   "previous_title": "WLAN组网架构",
+   "next_title": "WLAN数据安全",
+   "chapter_title": "WLAN网络规划基础",
+   "stage": {
+    "id": "stage-7",
+    "title": "把有线网络扩展到无线",
+    "description": "先弄清AP与终端如何上线，再理解认证、漫游、射频和规划运维。"
+   }
+  }
+ ],
+ "units": [
+  {
+   "id": "ICT-074.01",
+   "parent": "ICT-074",
+   "term": "CAPWAP",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "手机通过无线接入点AP上网，为什么还需要无线控制器WAC？当一个园区有几十台AP时，逐台配置很容易不一致。CAPWAP是AP与控制器之间的管理协议，把发现控制器、加入、配置下发和状态保活组织成一套流程。AP先从有线网络获得管理地址，再找到WAC，建立控制通道；需要集中转发时，还会建立承载用户报文的数据通道。\n控制和数据职责不同，不能因为AP在线就推断用户业务已经打通。常见CAPWAP控制与数据使用UDP 5246和5247，路径上的路由、策略与分片条件都可能影响隧道。直接转发模式中，用户数据从AP进入本地业务VLAN，不必随控制流量经过WAC。\nDTLS等安全设置必须匹配目标版本，不应为了上线而长期关闭认证。",
+   "process": [
+    "AP1获得10.10.100.11及网关后发现WAC1；管理地址可达是建立隧道的前提。",
+    "AP1向10.10.100.2发起CAPWAP协商并完成合法性检查，WAC下发名为Office的SSID配置。",
+    "手机接入Office后，直接转发的数据进入VLAN 20；若VLAN 20未在交换机放行，AP依旧在线但手机不能获取业务地址。"
+   ],
+   "walkthrough": {
+    "title": "CAPWAP：把过程走一遍",
+    "setup": "AP1管理地址10.10.100.11，WAC1为10.10.100.2，用户业务使用VLAN 20。",
+    "steps": [
+     "AP1获得10.10.100.11及网关后发现WAC1；管理地址可达是建立隧道的前提。",
+     "AP1向10.10.100.2发起CAPWAP协商并完成合法性检查，WAC下发名为Office的SSID配置。",
+     "手机接入Office后，直接转发的数据进入VLAN 20；若VLAN 20未在交换机放行，AP依旧在线但手机不能获取业务地址。"
+    ],
+    "conclusion": "AP在线证明管理链路完成了相应步骤；用户上网还要验证业务VLAN、地址和网关。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "AP在线但手机拿不到业务地址",
+    "cause": "控制通道正常而业务VLAN未贯通",
+    "check": "分别查看CAPWAP状态和业务VLAN路径",
+    "fix": "恢复实际转发路径上的VLAN及DHCP条件"
+   },
+   "sources": [
+    {
+     "title": "RFC 5415 · CAPWAP协议规范",
+     "url": "https://www.rfc-editor.org/rfc/rfc5415",
+     "version": "RFC 5415，控制与数据隧道",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "WLAN工作原理"
+  },
+  {
+   "id": "ICT-074.02",
+   "parent": "ICT-074",
+   "term": "WLAN关键报文",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "无线列表里出现一个Wi-Fi名称，到真正打开网页之间并非只有一次“连接”。SSID是网络名称，BSSID通常标识一个具体无线基本服务集。AP周期发送Beacon公告自身；终端也可发Probe Request探测，AP用Probe Response回应。\n随后是802.11认证与关联，若采用WPA2，还要进行相应身份认证和密钥协商。接下来终端才通过DHCP取得地址，并使用ARP或IPv6邻居发现找到下一跳。管理帧负责发现与建立关系，控制帧辅助争用、确认等链路操作，数据帧才承载上层业务。\n这里的802.11认证不等于用户名验证，也不意味着已经获得IP地址。分析抓包时应按时间先后定位最后成功的一步，不能看到DHCP没成功就直接把问题归到无线信号。",
+   "process": [
+    "STA1收到AP1的Beacon，发现Office以及AP支持的安全能力；此时还未关联。",
+    "STA1完成认证、关联和WPA2密钥协商，AP1允许其交换受保护的数据帧。",
+    "STA1发送DHCP Discover并收到192.168.20.10租约；随后ARP解析网关192.168.20.1，才可向外网发送业务。"
+   ],
+   "walkthrough": {
+    "title": "WLAN关键报文：把过程走一遍",
+    "setup": "手机STA1连接AP1广播的Office，业务地址池为192.168.20.0/24。",
+    "steps": [
+     "STA1收到AP1的Beacon，发现Office以及AP支持的安全能力；此时还未关联。",
+     "STA1完成认证、关联和WPA2密钥协商，AP1允许其交换受保护的数据帧。",
+     "STA1发送DHCP Discover并收到192.168.20.10租约；随后ARP解析网关192.168.20.1，才可向外网发送业务。"
+    ],
+    "conclusion": "发现SSID、关联成功、认证成功、获得地址是不同阶段；报文序列能把故障定位到阶段。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "能看到SSID却未完成上线",
+    "cause": "扫描成功被误当成认证及地址成功",
+    "check": "按Probe、认证、关联、密钥和DHCP顺序核对事件",
+    "fix": "修正最后成功阶段之后的失败条件"
+   },
+   "sources": [
+    {
+     "title": "华为 · 什么是Wi-Fi？",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/WiFi.html",
+     "version": "通用原理页；产品能力依版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "WLAN工作原理"
+  },
+  {
+   "id": "ICT-074.03",
+   "parent": "ICT-074",
+   "term": "STA上线",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "STA是无线终端，例如笔记本或手机。理解上线流程最直观的方法，是把“找到门、取得入场资格、领到地址、找到出口”分开。终端先扫描并选择AP，再进行802.11认证和关联；安全方案决定接下来是共享密码协商、802.1X用户认证，还是关联后再做Portal准入。\n关联表示终端与AP建立无线关系，不保证终端已被允许访问所有网络。获得地址通常依靠DHCP或IPv6自动配置，随后还要有正确网关、DNS和访问策略。不同安全方式的事件顺序可能不同，例如Portal需要先有受限的IP连通，才能访问认证页面。\nWAC上的用户状态、AP关联表、DHCP租约和认证服务器日志分别提供不同证据，应将同一终端MAC及时间对应起来。只有实际应用成功，才说明整个业务路径成立。",
+   "process": [
+    "STA1关联AP1后取得192.168.50.20；认证前策略只允许DHCP、DNS及Portal所需流量。",
+    "STA1打开认证页面并提交账号，服务器验证后给该会话下发访客访问权限。",
+    "STA1访问互联网成功，但访问办公网10.20.0.0/16仍被访客隔离策略拒绝。"
+   ],
+   "walkthrough": {
+    "title": "STA上线：把过程走一遍",
+    "setup": "STA1接入访客SSID Guest，Portal服务器为192.168.50.5。",
+    "steps": [
+     "STA1关联AP1后取得192.168.50.20；认证前策略只允许DHCP、DNS及Portal所需流量。",
+     "STA1打开认证页面并提交账号，服务器验证后给该会话下发访客访问权限。",
+     "STA1访问互联网成功，但访问办公网10.20.0.0/16仍被访客隔离策略拒绝。"
+    ],
+    "conclusion": "上线应按关联、身份、地址、授权和应用逐层理解；拿到IP不等于具有办公网权限。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "已获取IP却不能访问业务",
+    "cause": "终端仍处于认证前受限状态",
+    "check": "对照用户授权状态及Portal记录",
+    "fix": "完成可信准入并确认授权真正生效"
+   },
+   "sources": [
+    {
+     "title": "华为 · 配置WLAN安全策略",
+     "url": "https://info.support.huawei.com/hedex/api/pages/EDOC1100210440/AZK0901G/09/resources/dc/dc_cfg_wlan_sec_1020.html",
+     "version": "WLAN安全策略原理与配置入口",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "WLAN工作原理"
+  },
+  {
+   "id": "ICT-075.01",
+   "parent": "ICT-075",
+   "term": "FAT AP",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "家中一台无线路由器可以独立提供无线服务，企业中的FAT AP也采用独立管理思路：AP自身保存SSID、安全和转发等配置，不必由专门WAC集中控制。这里的FAT表示功能较完整的独立工作模式，并不描述设备外形。它适合规模小、站点独立且策略简单的场景，管理者直接登录每台AP完成变更。\n扩展到很多台后，同样的SSID、安全参数和升级操作需要反复维护，一台遗漏就可能形成体验差异。多个FAT AP采用相同SSID，并不自动获得集中用户状态同步或所有快速漫游能力。AP的工作模式和切换支持由型号、版本决定，不能假定所有FIT AP都能随意切成FAT。\n理解它的重点是“控制配置在哪里”，而非把独立管理误认为无需有线网关、地址服务和安全策略。",
+   "process": [
+    "管理员在AP1配置Staff及WPA2安全参数，再独立为AP2配置相同业务。",
+    "AP1接入交换机VLAN 20，AP2也接入VLAN 20；终端因此可使用同一业务网段。",
+    "以后修改密码时需同时更新两台；只修改AP1会让连接AP2的用户仍使用旧参数。"
+   ],
+   "walkthrough": {
+    "title": "FAT AP：把过程走一遍",
+    "setup": "一家两层小店用AP1与AP2提供Staff无线网络，每层一台独立FAT AP。",
+    "steps": [
+     "管理员在AP1配置Staff及WPA2安全参数，再独立为AP2配置相同业务。",
+     "AP1接入交换机VLAN 20，AP2也接入VLAN 20；终端因此可使用同一业务网段。",
+     "以后修改密码时需同时更新两台；只修改AP1会让连接AP2的用户仍使用旧参数。"
+    ],
+    "conclusion": "FAT AP能独立提供无线业务，但配置一致性和集中管理需要额外维护。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "两台独立AP行为不一致",
+    "cause": "各自保存的SSID或安全配置不同",
+    "check": "逐台比较实际配置与版本",
+    "fix": "统一已确认的参数并逐台验证"
+   },
+   "sources": [
+    {
+     "title": "华为 · 什么是Wi-Fi？",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/WiFi.html",
+     "version": "通用原理页；产品能力依版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "WLAN组网架构"
+  },
+  {
+   "id": "ICT-075.02",
+   "parent": "ICT-075",
+   "term": "Leader AP",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "小办公室需要统一管理几台AP，却不一定需要独立控制器，这时可以理解Leader AP的用途。Leader AP是在支持该功能的AP上承担轻量控制角色，由它统一管理组内其他AP、下发无线配置。业务无线覆盖仍由各AP完成，不能把“Leader”理解为全部终端的数据必然绕行这台设备。\n与完全独立的FAT模式相比，它减少逐台维护；与专用WAC相比，管理规模、可靠性、支持特性和转发方式可能受到更多限制。规划时应分别核对可管理AP数量、型号组合、软件版本及Leader失效后的业务行为。相同SSID只是用户看到的名称，统一配置和状态协同才是架构差异。\n先弄清哪个设备保存控制配置、成员如何发现加入、数据在哪退出，再比较方案，比背产品名称更容易迁移到实际组网。",
+   "process": [
+    "AP-L担任Leader，AP2与AP3通过管理网络加入其管理范围。",
+    "管理员在AP-L创建Office及员工策略，由Leader向两台成员统一下发。",
+    "员工分别连接AP2和AP3，业务按所选转发模式进入业务网；Leader故障影响需按该型号的备份能力验证。"
+   ],
+   "walkthrough": {
+    "title": "Leader AP：把过程走一遍",
+    "setup": "小办公室有支持Leader架构的AP-L、AP2与AP3，三台都连接同一接入交换机。",
+    "steps": [
+     "AP-L担任Leader，AP2与AP3通过管理网络加入其管理范围。",
+     "管理员在AP-L创建Office及员工策略，由Leader向两台成员统一下发。",
+     "员工分别连接AP2和AP3，业务按所选转发模式进入业务网；Leader故障影响需按该型号的备份能力验证。"
+    ],
+    "conclusion": "Leader AP将小规模集中管理能力放进AP，容量和故障行为仍需产品依据。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "成员AP没有广播统一SSID",
+    "cause": "未加入Leader管理或配置未应用",
+    "check": "检查成员关系、支持组合及任务结果",
+    "fix": "恢复成员管理并应用业务配置"
+   },
+   "sources": [
+    {
+     "title": "华为 · 什么是Wi-Fi？",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/WiFi.html",
+     "version": "通用原理页；产品能力依版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "WLAN组网架构"
+  },
+  {
+   "id": "ICT-075.03",
+   "parent": "ICT-075",
+   "term": "WAC+FIT AP",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "当校园有上百台AP时，通常希望一次修改即可覆盖全网。WAC+FIT AP把控制和无线接入职责分开：WAC负责集中管理、认证协同和策略，FIT AP负责射频收发并按配置处理终端流量。AP先通过有线管理网络建立CAPWAP关系，WAC再把SSID、安全、射频等模板下发到指定AP组。\nAP组相当于批量应用配置的对象集合，模板则是可重复引用的参数集。集中管理并不等于集中转发：直接转发在AP附近进入业务网络，隧道转发则先把流量送到WAC处理。二者会影响交换机VLAN、链路容量和故障范围。实施时先明确AP管理地址与用户业务地址，再定义转发模式，最后绑定模板；如果只在WAC创建SSID而没有应用到AP组，终端可能根本搜不到。",
+   "process": [
+    "WAC1把AP1至AP50加入Campus组，先确认各AP的管理通道正常。",
+    "管理员创建Office和Guest两套安全及业务模板，并绑定到Campus组的相应射频。",
+    "直接转发场景下，交换机AP端口放行业务VLAN 20、30，终端才可获得各自地址与权限。"
+   ],
+   "walkthrough": {
+    "title": "WAC+FIT AP：把过程走一遍",
+    "setup": "学校有WAC1和AP1至AP50，办公SSID使用VLAN 20，访客SSID使用VLAN 30。",
+    "steps": [
+     "WAC1把AP1至AP50加入Campus组，先确认各AP的管理通道正常。",
+     "管理员创建Office和Guest两套安全及业务模板，并绑定到Campus组的相应射频。",
+     "直接转发场景下，交换机AP端口放行业务VLAN 20、30，终端才可获得各自地址与权限。"
+    ],
+    "conclusion": "控制集中与数据转发位置是两个独立设计选择。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "WAC上建了SSID但终端搜不到",
+    "cause": "模板未关联到目标AP组或射频",
+    "check": "核对AP在线状态、模板引用及射频",
+    "fix": "完成实际绑定并验证VAP状态"
+   },
+   "sources": [
+    {
+     "title": "华为 · 什么是WAC？",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=WAC",
+     "version": "通用原理页；产品能力依版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "WLAN组网架构"
+  },
+  {
+   "id": "ICT-075.04",
+   "parent": "ICT-075",
+   "term": "敏捷分布式",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "酒店房间或宿舍需要很多细小覆盖点，若每个点都安装完整控制与射频系统，布线、供电和管理成本可能过高。敏捷分布式架构把中心AP与远端射频单元分工，远端单元常称RU，中心设备承担汇聚及部分管理处理，多个RU分散到靠近用户的位置。它与普通“多台AP接交换机”的区别在于设备间存在专门的中心与远端协作关系，端口、级联和供电方式都受产品能力约束。\n先看控制信令如何到达远端，再看用户数据如何上送，才能判断中心设备、上联链路和RU哪个会形成瓶颈。房间多不表示能无限增加RU，距离、端口预算、并发容量及中心设备故障范围都应计算。该名称对应华为特定架构系列，不能将任何支持Mesh的AP视为敏捷分布式，也不能跨产品照搬配置。",
+   "process": [
+    "AP-C完成与控制系统的管理对接，再识别并管理RU1至RU8。",
+    "管理员将Hotel业务应用到这组远端覆盖点，客房手机连接就近RU。",
+    "若AP-C上联只有1 Gbit/s，8个RU同时上传时会共同争用该上联；增加RU不能突破上联总容量。"
+   ],
+   "walkthrough": {
+    "title": "敏捷分布式：把过程走一遍",
+    "setup": "某层酒店有中心AP-C及连接到它的RU1至RU8，每个RU覆盖相邻客房。",
+    "steps": [
+     "AP-C完成与控制系统的管理对接，再识别并管理RU1至RU8。",
+     "管理员将Hotel业务应用到这组远端覆盖点，客房手机连接就近RU。",
+     "若AP-C上联只有1 Gbit/s，8个RU同时上传时会共同争用该上联；增加RU不能突破上联总容量。"
+    ],
+    "conclusion": "分布覆盖点改善部署位置，但中心设备与汇聚链路仍有共享容量和故障边界。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "多个RU业务同时下降",
+    "cause": "中心AP或共享上联成为共同瓶颈",
+    "check": "查看中心设备、上联和远端单元状态",
+    "fix": "按瓶颈扩容或修正中心与远端连接"
+   },
+   "sources": [
+    {
+     "title": "华为 · 零漫游分布式与敏捷分布式AP的区别",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/零漫游分布式AP.html",
+     "version": "敏捷分布式中心AP与RU职责说明",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "WLAN组网架构"
+  },
+  {
+   "id": "ICT-075.05",
+   "parent": "ICT-075",
+   "term": "Navi AC",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "大型多园区无线网络可能需要把AP接入管理与用户业务控制进一步分工。Navi AC是华为WLAN架构中的一种集中业务控制角色，常与负责本地AP接入的控制设备协同，让认证、策略或特定业务处理集中部署。它并不是把一台普通路由器更名，也不表示所有现有WAC版本都支持相同功能。\n理解该方案应先画出AP到本地控制设备的关系，再标出用户流量经过哪些隧道、在哪终结和执行策略。这样才能解释本地AP在线而集中业务节点不可达时，为什么用户仍可能无法认证或转发。与普通WAC+FIT AP相比，多了一层协作也增加地址、隧道、容量和可靠性规划的要求。\n具体支持的接入架构、漫游、安全组合以及License必须按配套产品文档确认，本节把它作为架构角色学习，不给出跨版本通用命令。",
+   "process": [
+    "分支A的AP先完成本地接入管理，管理状态正常并不能证明集中业务路径正常。",
+    "员工流量按方案要求进入到总部业务控制节点的通道，统一执行认证与授权。",
+    "总部通道异常时，先分别测试AP管理状态、通道状态和认证可达性，避免把全部问题归为无线信号。"
+   ],
+   "walkthrough": {
+    "title": "Navi AC：把过程走一遍",
+    "setup": "总部集中部署Navi业务控制节点，两处分支各有AP与本地控制设备。",
+    "steps": [
+     "分支A的AP先完成本地接入管理，管理状态正常并不能证明集中业务路径正常。",
+     "员工流量按方案要求进入到总部业务控制节点的通道，统一执行认证与授权。",
+     "总部通道异常时，先分别测试AP管理状态、通道状态和认证可达性，避免把全部问题归为无线信号。"
+    ],
+    "conclusion": "多级控制架构应沿管理路径与业务路径分别核对。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "AP管理正常但集中业务失败",
+    "cause": "接入管理与Navi业务通道依赖不同",
+    "check": "分别检查本地AP管理、集中通道与认证",
+    "fix": "恢复对应业务通道及匹配参数"
+   },
+   "sources": [
+    {
+     "title": "华为 · WAC选型设计",
+     "url": "https://info.support.huawei.com/hedex/api/pages/EDOC1100331207/FZM1012J/06/resources/zh-cn_topic_0000001464754737.html",
+     "version": "WAC容量及Navi等关键能力选型",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "华为 · 用户上线失败日志：Navi配置一致性检查",
+     "url": "https://info.support.huawei.com/hedex/api/pages/EDOC1100210440/AZK0901G/09/resources/dc/WSTA_WLAN_LOG_USER.html",
+     "version": "WLAN用户上线日志参考",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "WLAN组网架构"
+  },
+  {
+   "id": "ICT-075.06",
+   "parent": "ICT-075",
+   "term": "Mesh",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "如果两栋建筑之间暂时无法铺设网线，可以用无线链路承载AP的回传，这就是学习Mesh时最有用的场景。Mesh把部分AP之间的无线连接作为网络基础设施，而终端接入链路是另一类职责。通常连接有线网络的根节点为其他节点提供到有线出口的路径；节点发现邻居并依据支持的协议选择回传路径。\n无线回传同样消耗频谱与空口时间，若接入与回传共享同一射频，转发同一份数据可能占用多次发送机会，因此跳数增加不等于带宽增加。设计时需要看视距、天线、干扰、供电及根节点上联容量。Mesh的自组织也不表示无须安全认证或可以无限级联。实际回传频段、允许跳数、根节点数和环路控制受设备限制，室外部署还要符合当地频谱及安装规范。",
+   "process": [
+    "AP-M完成与AP-R的回传认证并建立无线桥接关系，先验证这条链路本身。",
+    "手机连接AP-M后，用户数据先从手机到AP-M，再经回传到AP-R，最后进入有线网关。",
+    "若AP-M再转接AP-N，同一业务需要更多无线发送；检查回传空口占用和吞吐后再决定是否增加节点。"
+   ],
+   "walkthrough": {
+    "title": "Mesh：把过程走一遍",
+    "setup": "AP-R通过网线连接核心交换机，AP-M位于隔壁建筑，使用无线回传到AP-R。",
+    "steps": [
+     "AP-M完成与AP-R的回传认证并建立无线桥接关系，先验证这条链路本身。",
+     "手机连接AP-M后，用户数据先从手机到AP-M，再经回传到AP-R，最后进入有线网关。",
+     "若AP-M再转接AP-N，同一业务需要更多无线发送；检查回传空口占用和吞吐后再决定是否增加节点。"
+    ],
+    "conclusion": "Mesh解决回传布线问题，代价可能是共享空口与多跳容量下降。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "增加Mesh节点后吞吐下降",
+    "cause": "多跳回传重复占用共享空口",
+    "check": "核对跳数、回传频段和利用率",
+    "fix": "减少不必要跳数并改善回传资源"
+   },
+   "sources": [
+    {
+     "title": "华为 · 什么是Wi-Fi？",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/WiFi.html",
+     "version": "通用原理页；产品能力依版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "WLAN组网架构"
+  },
+  {
+   "id": "ICT-086.01",
+   "parent": "ICT-086",
+   "term": "规划概述",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "WLAN规划的起点是业务需求，而不是先在图纸上平均撒AP。覆盖回答用户能否稳定接入，容量回答同时使用时能否满足业务，漫游、安全和可靠性则决定移动与故障场景下的体验。应收集区域用途、人数、终端类型、应用流量、并发比例和验收指标，再检查建筑材料、安装位置、有线回传及PoE供电。\n一个面积相同的仓库与视频教室可能需要完全不同的AP数量和布点。预测结果来自传播和容量模型，不能代替现场工勘与上线验收。规划文档应写明假设，尤其是并发率和单用户需求，便于人数变化时重新计算。先确定可测目标，再选择设备、信道、功率和位置，能避免最终只以信号格数验收。\n室外和特殊场所还需考虑频谱、安装、防雷及环境条件。",
+   "process": [
+    "先得到教学估算需求60×3=180 Mbit/s，并为协议开销与波动保留设计空间。",
+    "依据现场墙体、终端能力及可用频谱选择AP位置和容量方案，而非只按面积放一台。",
+    "现场同时运行目标业务，验证覆盖、吞吐、时延和有线回传，修正原先模型。"
+   ],
+   "walkthrough": {
+    "title": "规划概述：把过程走一遍",
+    "setup": "一间100人的教室计划支持60人同时观看每人3 Mbit/s的教学视频。",
+    "steps": [
+     "先得到教学估算需求60×3=180 Mbit/s，并为协议开销与波动保留设计空间。",
+     "依据现场墙体、终端能力及可用频谱选择AP位置和容量方案，而非只按面积放一台。",
+     "现场同时运行目标业务，验证覆盖、吞吐、时延和有线回传，修正原先模型。"
+    ],
+    "conclusion": "规划把业务目标转换为可验证的覆盖、容量与架构设计。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "AP数量达到计划仍无法满足业务",
+    "cause": "原需求或并发假设不足",
+    "check": "复核人数、应用和验收指标",
+    "fix": "按真实业务重新计算覆盖与容量"
+   },
+   "sources": [
+    {
+     "title": "华为 · 什么是Wi-Fi？",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/WiFi.html",
+     "version": "通用原理页；产品能力依版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "WLAN网络规划基础"
+  },
+  {
+   "id": "ICT-086.02",
+   "parent": "ICT-086",
+   "term": "覆盖设计",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "覆盖设计关注目标区域内的终端是否有足够可靠的双向无线链路。AP发射功率、天线方向、安装高度、墙体衰减和终端回传能力共同决定覆盖，不能只看AP标称半径。信号强度满足要求也未必代表质量足够，噪声和干扰会影响SNR与可用速率。设计漫游区域时需要适当重叠，让终端在离开旧AP前已有可用目标；重叠过多又可能增加同频竞争。\n图纸预测应使用正确比例、材料和安装方式，现场用目标终端在真实使用高度验证，不能拿高性能测试电脑代替全部手机。示例中的RSSI门限只是解释方法，具体合格值应由业务与终端要求确定。门、家具和人群可能改变传播，因此验收应覆盖关键位置及典型使用状态，而非只测AP正下方。",
+   "process": [
+    "在会议室常用座位及关门状态测量STA1的RSSI、SNR和业务体验。",
+    "若墙体衰减造成双向链路不足，调整AP位置或增加合理覆盖点，避免只提高远处AP功率。",
+    "复测会议室及走廊漫游区，确认新布点没有引入过度同频竞争。"
+   ],
+   "walkthrough": {
+    "title": "覆盖设计：把过程走一遍",
+    "setup": "走廊AP1覆盖两侧房间，某会议室门关闭后手机STA1信号明显下降。",
+    "steps": [
+     "在会议室常用座位及关门状态测量STA1的RSSI、SNR和业务体验。",
+     "若墙体衰减造成双向链路不足，调整AP位置或增加合理覆盖点，避免只提高远处AP功率。",
+     "复测会议室及走廊漫游区，确认新布点没有引入过度同频竞争。"
+    ],
+    "conclusion": "覆盖以目标终端的双向体验为准，传播预测必须经现场条件验证。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "AP能被手机听见但上传不稳定",
+    "cause": "终端回传能力弱于AP发射能力",
+    "check": "在真实位置测双向业务和SNR",
+    "fix": "调整点位与覆盖而非只提高AP功率"
+   },
+   "sources": [
+    {
+     "title": "华为 · 什么是Wi-Fi？",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/WiFi.html",
+     "version": "通用原理页；产品能力依版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "WLAN网络规划基础"
+  },
+  {
+   "id": "ICT-086.03",
+   "parent": "ICT-086",
+   "term": "容量设计",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "容量设计估算高峰时多少终端同时产生多少业务，并判断每个无线资源和上联能否承载。先用并发人数乘以单用户需求得到业务量，再考虑空口争用、协议开销、重传、终端能力及容量余量。AP的最大关联数是能登记多少终端，不是这些终端都能同时获得优质视频体验。\n增加AP只有在带来可复用的有效信道资源并合理控制干扰时才可能增加容量；多台AP挤在同信道不等于带宽线性叠加。还应计算交换机端口、PoE预算、WAC吞吐、DHCP及认证峰值。容量模型要写明假设，业务从网页改为视频或同时上线比例升高时必须重算。\n验收应模拟关键并发和业务混合，单台终端靠近AP测速不能说明全场高峰可用。",
+   "process": [
+    "先算活跃人数120，再得到240 Mbit/s的业务需求基线，随后考虑开销及余量。",
+    "结合现场可复用信道和单射频实测能力分配用户，不按AP关联上限简单相除。",
+    "在高峰模拟中同时检查空口利用率、用户时延和交换机/WAC链路，找出真正瓶颈。"
+   ],
+   "walkthrough": {
+    "title": "容量设计：把过程走一遍",
+    "setup": "会场300人，预计40%同时用网，每名活跃用户平均需求2 Mbit/s。",
+    "steps": [
+     "先算活跃人数120，再得到240 Mbit/s的业务需求基线，随后考虑开销及余量。",
+     "结合现场可复用信道和单射频实测能力分配用户，不按AP关联上限简单相除。",
+     "在高峰模拟中同时检查空口利用率、用户时延和交换机/WAC链路，找出真正瓶颈。"
+    ],
+    "conclusion": "容量来自并发业务和有效频谱资源，关联数量与单用户测速都不能独立证明容量。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "单用户测速正常而会场高峰拥塞",
+    "cause": "共享容量与并发需求不匹配",
+    "check": "模拟关键业务并查空口及上联",
+    "fix": "增加有效资源或控制需求并重新验收"
+   },
+   "sources": [
+    {
+     "title": "华为 · 什么是Wi-Fi？",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/WiFi.html",
+     "version": "通用原理页；产品能力依版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "WLAN网络规划基础"
+  }
+ ],
+ "chapter_sequence": [
+  "ICT-074",
+  "ICT-075",
+  "ICT-086"
+ ],
+ "neighbors": {
+  "before": "ICT-060",
+  "after": "ICT-078"
+ }
+}

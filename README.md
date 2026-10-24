@@ -1,6 +1,6 @@
-# 网络探索站 · 从零开始的考纲教程
+# 网络探索站 · 从零开始的 ICT 教程
 
-以阅读和查阅为中心的本地静态网站。保留四个方向、94条考纲条目与322个子知识点目录；全部322项均有独立讲解、具体已解案例、配置或实施关系、易错点与参考资料。
+以阅读和自主学习为中心的本地静态网站。保留四个方向、94 条考纲条目与 322 个子知识点；每个知识点按“为什么需要 → 直观理解 → 工作过程 → 技术原理 → 实践应用”的认知顺序重写，并标注基础必学、进阶理解与技术细节。
 
 - 在线阅读：[GitHub Pages](https://amoxilinn.github.io/ict-learning/)
 - 源代码：[Amoxilinn/ict-learning](https://github.com/Amoxilinn/ict-learning)
@@ -9,39 +9,69 @@
 
 双击 `启动网站.command`，或在本目录执行 `python3 serve.py`。默认地址为 `http://127.0.0.1:8765`；端口占用时以终端输出为准。
 
-## 当前结构
+## 学习结构
 
-- 首页为从零开始的推荐学习顺序；左侧九阶段目录串起全部94章，并突出当前章节。
-- 原考纲目录保留专业、比赛阶段、考纲要求筛选和正文/命令/案例检索。
-- 章节由情境导语、阅读目标、细则讲解、已解过程与总结组成；先修链接与上一章/下一章遵循推荐顺序，保留字号和打印。
-- 子网、ARP/交换、VLAN、路由选择四种演示折叠嵌入对应章节，按需展开。
-- 参考资料页提供原始考纲、文档标准与离线阅读手册。
-- 已移除题库、自测、错题、考试、学习记录、笔记、收藏、进度、复习计划及记录导入导出。网站不读写学习记录；历史浏览器数据未清除。
+- 首页给出九个阶段的推荐顺序，左侧常驻目录串起全部 94 章，并显示每阶段完成数。
+- 每章有场景导入、为什么现在学、2–4 条学习目标、能力目标、知识点目录与本章小结；章末交代下一章要解决的新问题。
+- 每个知识点有本节目标、自然分节讲解、已解案例、一句话结论和折叠的理解检查。基础必学全部配检查；进阶与技术细节按需深入。
+- 配置命令、命令说明、常见误区和技术边界收进折叠区，不打断基础原理阅读。
+- 术语首次出现时给出简短提示，可点开查看通俗解释与折叠的专业定义；统一术语库共 135 条。
+- 子网、交换转发、VLAN 标签与路由查表四个可操作演示，以及路径、VRP、封装、TCP、ARP 等步骤/时序/报文组件嵌入对应知识点。**这些可视化目前集中在基础章节；全站图文讲解尚未完成，详见 [TASKS](TASKS.md) V01。**
+- 每章可手动标记“已学完”，只保存在本机浏览器，不统计时长、不记录答题，也不上传。
 
-## 维护
+## 内容与构建
 
-ICT-001—ICT-003 已接入数据驱动的拓扑、报文结构、协议时序与状态表，以及首次术语解释。ICT-002 进一步支持嵌套封装、明确的发送/接收阶段、ACK 丢失对比、嵌入式预测反馈和按需展开的专业定义；这些新增交互仅在本课启用。组件接口、技术边界和分批推广顺序见 [教学可视化组件体系](docs/教学可视化组件体系.md)。场景与词库分别维护在 `content/visualizations.json`、`content/glossary.json`；无新增运行时依赖。
+| 文件 | 作用 |
+| --- | --- |
+| `content/teaching-chapters.json` | 94 章的导语、目标、小结与章间衔接 |
+| `content/teaching-units.json` | 322 个知识点的教学叙事、层次、检查与案例 |
+| `content/units-*.json` | 技术元数据：术语、深度、来源、配置、命令说明、故障边界 |
+| `content/glossary.json` | 双层术语库（通俗解释 + 专业定义） |
+| `content/visualizations.json` | 步进式交互场景 |
+| `content/curriculum.json` | 九阶段推荐顺序 |
+| `docs/教学标准.md` | 全站统一教学质量标准与合格线 |
+| `content/rewrite/` | 分批改写源材料、批次输出与合并记录 |
 
-原始内容保留在 `content/`，其中旧版训练字段仅用于保留维护源资料，不向网站输出。`curriculum.json`维护九阶段顺序，`pedagogy.json`维护94章导语。`build.py`输出六组阅读数据及按推荐顺序编排的离线手册。页面代码在 `dist/index.html`、`dist/app.js`、`dist/diagrams.js`、`dist/style.css`。
+`build.py` 合并教学数据与技术元数据，输出六组阅读数据、离线手册，并为静态资源附加内容哈希。`dist/` 是生成产物，不要手改。
 
 ```sh
 python3 build.py
 node --check dist/app.js
-node --check dist/diagrams.js
 node --check dist/teaching.js
 node test-models.cjs
 node test-teaching.cjs
+node scripts/render_check.cjs
+python3 scripts/audit_content.py
 ```
 
-原197项缺失细则已补齐，当前322/322项都有独立讲解与具体过程示例。文本覆盖不等于全部内容已通过实机或型号兼容性验证；命令仍需按赛事指定版本核对。维护进度见 `docs/PROGRESS.md`。
+批量重写时：
 
-## 发布与开源
+```sh
+python3 scripts/make_batches_final.py       # 生成 36 个批次源材料
+python3 scripts/validate_rewrite.py batch-02
+python3 scripts/merge_rewrite.py            # 全部批次完成后合并
+python3 scripts/audit_content.py            # 全局去重、层次与结构审查
+```
 
-GitHub Pages 使用 `.github/workflows/pages.yml` 自动构建和部署 `dist/`。
-推送到 `main` 后会运行构建、JavaScript 语法检查和现有模型/章节测试，通过后更新网站。
-首次启用时，在仓库 Settings → Pages → Source 选择 GitHub Actions。
-全部页面资源使用相对路径，章节使用哈希路由，支持项目子目录地址。
+## 教学与技术边界
 
-原创代码和原创教程文字采用 [MIT 许可证](LICENSE)。第三方考纲图片、赛事截图、
-商标和引用资料不在此授权范围内，详见 [第三方资料说明](THIRD_PARTY_NOTICES.md)。
-这是独立学习项目，不代表华为官方。
+- 内容覆盖 94 章、322 个考纲细则，构建强制校验章节、细则、知识点的一一对应。
+- 技术结论尽量保留原始来源与适用条件；配置为学习示例，尚未在赛事指定设备上逐条执行。具体命令、版本和型号兼容性仍需按目标环境核对。
+- 交互模型只模拟正常流程或明确列出的对照分支，边界写在每个演示的“模型条件与技术边界”中。当前只有 9/322 个知识点带可视化，且全部为原有资源；VLAN/STP/OSPF/BGP/MPLS/IPsec/WLAN/DCN 等关键机制的图尚未补。浏览器实际布局仍有用户反馈问题，尚未修复，见 [TASKS](TASKS.md) U01 与 [布局问题记录](docs/reviews/layout-issues.md)。
+- 离线手册保留教学正文、案例、配置和检查，不包含交互演示。
+
+## 维护与交接
+
+- 统一教学质量标准与合格线：[教学标准](docs/教学标准.md)
+- 剩余/后续任务拆分：[TASKS](TASKS.md)
+- 无原始对话上下文的接续说明、文件矩阵与已知问题：[HANDOFF](HANDOFF.md)
+- 批次源材料与冻结副本：`content/rewrite/source/`、`content/rewrite/frozen/`
+- 全量验收：`python3 build.py`（322/322、94/94）、`python3 scripts/audit_content.py`（0 error）、`node test-models.cjs`（4734）、`node test-teaching.cjs`（674）、`node scripts/render_check.cjs`。
+
+配置与命令仍未在赛事指定设备上实测；交互模型只覆盖各场景 `boundary` 写明的条件。
+
+## 发布
+
+GitHub Pages 使用 `.github/workflows/pages.yml` 自动构建和部署 `dist/`。推送到 `main` 后会运行构建、JavaScript 语法检查和现有测试，通过后更新网站。
+
+原创代码和原创教程文字采用 [MIT 许可证](LICENSE)。第三方考纲图片、赛事截图、商标和引用资料不在此授权范围内，详见 [第三方资料说明](THIRD_PARTY_NOTICES.md)。这是独立学习项目，不代表华为官方。

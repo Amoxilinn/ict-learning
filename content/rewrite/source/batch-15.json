@@ -1,0 +1,462 @@
+{
+ "batch": "batch-15",
+ "stage": {
+  "id": "stage-6",
+  "title": "建立安全边界",
+  "description": "从资产和加密出发，理解防火墙、VPN、检测及故障定位。",
+  "chapters": [
+   "ICT-056",
+   "ICT-057",
+   "ICT-061",
+   "ICT-058",
+   "ICT-059",
+   "ICT-062",
+   "ICT-063",
+   "ICT-064",
+   "ICT-065",
+   "ICT-068",
+   "ICT-069",
+   "ICT-070",
+   "ICT-060"
+  ]
+ },
+ "chapters": [
+  {
+   "id": "ICT-062",
+   "group": "安全",
+   "category": "VPN技术",
+   "title": "VPN应用",
+   "detail": "熟悉IPSec VPN技术与应用、SSL VPN技术与应用",
+   "depth": "熟悉",
+   "prerequisites": [
+    "ICT-028",
+    "ICT-061",
+    "ICT-058"
+   ],
+   "old_intro": "分公司整段网络互联，与出差人员访问一个内部应用，需要同一种VPN吗？比较站点到站点IPsec与远程接入SSL VPN的路径。",
+   "old_outcome": "跟踪认证、协商、内层业务与权限，说明隧道成功不等于应用已通。",
+   "old_readingNote": "",
+   "old_explanation": "IPsec在网络层保护匹配业务，IKE协商身份与密钥；SSL VPN通常依TLS提供远程接入。检查隧道时分开观察协商、流量选择器、路由和数据计数，隧道up并不等于应用通。",
+   "old_deep": "IKE建立身份信任并协商IPsec SA，之后ESP等承载受保护流量。两端算法、身份、密钥与流量选择器需匹配；NAT穿越和路径MTU影响真实数据。SSL VPN/TLS还需证书、账号权限和客户端路由验证。",
+   "previous_chapter": "ICT-059",
+   "next_chapter": "ICT-063",
+   "previous_title": "防火墙高级特性",
+   "next_title": "VPN高可用技术",
+   "chapter_title": "VPN应用",
+   "stage": {
+    "id": "stage-6",
+    "title": "建立安全边界",
+    "description": "从资产和加密出发，理解防火墙、VPN、检测及故障定位。"
+   }
+  },
+  {
+   "id": "ICT-063",
+   "group": "安全",
+   "category": "VPN技术",
+   "title": "VPN高可用技术",
+   "detail": "掌握VPN高可靠技术（双机场景应用）",
+   "depth": "掌握",
+   "prerequisites": [
+    "ICT-059",
+    "ICT-062"
+   ],
+   "old_intro": "主防火墙故障后，新连接恢复而原VPN连接中断，为什么？把设备接管、隧道身份、SA和路由状态放在一起观察。",
+   "old_outcome": "解释双机VPN高可用的同步范围、对端收敛与大小包恢复测试。",
+   "old_readingNote": "",
+   "old_explanation": "双机VPN需同步或重建安全关联，并确保虚拟地址、外部邻居和回程路由及时收敛。不同版本对SA同步的支持不同，应以切换期间业务丢包和重协商时间实测验收。",
+   "old_deep": "双机可通过同步或重建SA恢复VPN，具体支持依版本。外部虚拟IP、ARP、路由、NAT与对端状态都可能影响切换，重放窗口和序列号也需正确处理。",
+   "previous_chapter": "ICT-062",
+   "next_chapter": "ICT-064",
+   "previous_title": "VPN应用",
+   "next_title": "基础威胁防御",
+   "chapter_title": "VPN高可用技术",
+   "stage": {
+    "id": "stage-6",
+    "title": "建立安全边界",
+    "description": "从资产和加密出发，理解防火墙、VPN、检测及故障定位。"
+   }
+  },
+  {
+   "id": "ICT-064",
+   "group": "安全",
+   "category": "攻击与防御",
+   "title": "基础威胁防御",
+   "detail": "熟悉网络攻击与防御、DDoS攻击与防御、Web安全防御、内容安全过滤、渗透测试基础等",
+   "depth": "熟悉",
+   "prerequisites": [
+    "ICT-056",
+    "ICT-058"
+   ],
+   "old_intro": "网络攻击、Web攻击和恶意内容为什么需要不同的防护？先确定受影响的是带宽、协议、应用还是终端，再匹配防御点。",
+   "old_outcome": "解释DDoS、Web防御与内容过滤，理解授权测试的范围与证据。",
+   "old_readingNote": "",
+   "old_explanation": "攻击防御先识别入口与攻击面，再布置检测、限速和阻断。DDoS可能耗尽上游带宽，单机防护不一定足够；Web防护需结合应用修复，内容过滤依业务与隐私规则。渗透测试只在授权隔离环境开展。",
+   "old_deep": "DDoS可耗尽带宽、连接或应用资源，不同层次要在合适位置处理。Web防护不能替代代码修复，内容过滤需明确类别与例外，渗透测试需授权范围与保全记录。",
+   "previous_chapter": "ICT-063",
+   "next_chapter": "ICT-065",
+   "previous_title": "VPN高可用技术",
+   "next_title": "APT威胁防御",
+   "chapter_title": "基础威胁防御",
+   "stage": {
+    "id": "stage-6",
+    "title": "建立安全边界",
+    "description": "从资产和加密出发，理解防火墙、VPN、检测及故障定位。"
+   }
+  }
+ ],
+ "units": [
+  {
+   "id": "ICT-062.01",
+   "parent": "ICT-062",
+   "term": "IPsec VPN",
+   "depth": "熟悉",
+   "explain": "IPsec用单向SA描述保护参数，IKE协商身份密钥，ESP等承载保护后的业务。两端算法、身份、认证、选择器和生命周期要兼容，NAT穿越与MTU影响数据阶段。先看协商，再看载荷计数和应用；有SA不代表业务已选中该隧道，也不保证对端回程。",
+   "process": [
+    "确认外层端点可达",
+    "匹配IKE与IPsec对象",
+    "触发内层流观察双端计数"
+   ],
+   "walkthrough": {
+    "title": "有IPsec SA还要有业务匹配",
+    "setup": "分支10.10.0.0/24通过G1与总部10.20.0.0/24的G2互联。",
+    "steps": [
+     "外层可达后双方按身份与算法等参数协商，形成相应IKE与IPsec安全关联。",
+     "A到10.20.0.10的流还需匹配受保护范围并被路由引入，错误NAT或选择器可能使它绕过隧道。",
+     "两端同时观察封装/解封装计数与返回路径，确认真正业务双向通过；单侧有SA不代表应用已通。"
+    ],
+    "conclusion": "查流量是否命中选择器、是否被NAT改变、路由是否选走及安全许可；没有受保护流进入时协商仍可存在。"
+   },
+   "config": {
+    "code": "# 配置对象及实施顺序（参数化示例，非直接执行CLI）\n1. 外层203.0.113.1/198.51.100.1\n2. 内层10.10/24与10.20/24\n3. 身份算法兼容\n4. 选择器镜像\n5. 必要NAT豁免\n6. 许可协商与业务",
+    "platform": "USG12000/USG6000E ISAKMP互通；参数另设",
+    "notes": "明确的对象/参数实施清单；不捏造版本菜单。教学隔离环境，未实机执行，不代表赛事指定设备。配置后须回读并执行所列正反测试。"
+   },
+   "commandNotes": [
+    "这是配置对象与实施关系，编号行不是设备CLI。请先按所用产品版本把对象映射到相应配置，再验证规则与实际业务。"
+   ],
+   "fault": {
+    "symptom": "单向加密无解密",
+    "cause": "选择器NAT或回程异常",
+    "check": "比两端元组计数",
+    "fix": "修正匹配后新建流"
+   },
+   "sources": [
+    {
+     "title": "华为防火墙VPN互通指导",
+     "url": "https://support.huawei.cn/enterprise/en/doc/EDOC1000154805/10ae789f/establishing-an-ipsec-tunnel-between-usg12000-and-usg6000e-series-firewalls-using-isakmp",
+     "version": "USG12000/USG6000E ISAKMP互通；参数另设",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "VPN应用"
+  },
+  {
+   "id": "ICT-062.02",
+   "parent": "ICT-062",
+   "term": "SSL VPN",
+   "depth": "熟悉",
+   "explain": "SSL VPN依TLS提供远程接入，可能采用Web代理、端口转发或网络扩展等方式，具体能力依产品。网关可信证书、用户认证和资源授权是独立环节；客户端地址池、DNS、分流/全隧道和返回路由共同影响业务，不能让登录成功的用户自然获得全部内部网段。",
+   "process": [
+    "配置网关证书和认证",
+    "定义用户组资源池路由DNS",
+    "测试允许拒绝及退出"
+   ],
+   "walkthrough": {
+    "title": "远程登录后只开放批准资源",
+    "setup": "出差用户A连接SSL VPN入口，需要访问内部工单系统，不需要数据库管理。",
+    "steps": [
+     "客户端先验证服务端身份，再按组织要求完成用户认证，建立受保护接入。",
+     "认证结果映射到只允许工单系统的资源与网络权限，而非整个内网。",
+     "分别测试工单访问成功、数据库管理失败、退出后权限失效；HTTPS隧道成功并不等于授权范围正确。"
+    ],
+    "conclusion": "检查下发DNS、搜索域、DNS可达及分流路由；认证仅证明VPN会话建立，名称解析仍是独立依赖。"
+   },
+   "config": {
+    "code": "# 配置对象及实施顺序（参数化示例，非直接执行CLI）\n1. 网关=证书域名\n2. 组=remote-staff\n3. 地址池10.250.0/24\n4. 只授权应用资源\n5. 下发DNS和路由",
+    "platform": "通用协议原理；设备命令依版本",
+    "notes": "明确的对象/参数实施清单；不捏造版本菜单。教学隔离环境，未实机执行，不代表赛事指定设备。配置后须回读并执行所列正反测试。"
+   },
+   "commandNotes": [
+    "这是配置对象与实施关系，编号行不是设备CLI。请先按所用产品版本把对象映射到相应配置，再验证规则与实际业务。"
+   ],
+   "fault": {
+    "symptom": "登录成功无内网访问",
+    "cause": "资源路由DNS缺失",
+    "check": "查地址池和下发配置",
+    "fix": "补最小资源与回程"
+   },
+   "sources": [
+    {
+     "title": "华为：什么是SSL VPN及资源授权",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=SSL+VPN",
+     "version": "SSL VPN原理；具体TLS版本、客户端与设备能力另核对",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "VPN应用"
+  },
+  {
+   "id": "ICT-063.01",
+   "parent": "ICT-063",
+   "term": "双机VPN高可靠",
+   "depth": "掌握",
+   "explain": "双机VPN需要外层地址接管、SA同步或重建、路由和策略协同，具体SA支持取决于产品模式。对端缓存旧路径、序列不同步或NAT身份变化都可影响业务。必须持续测试穿越隧道的双向流，并测故障和恢复两个阶段；ping虚拟公网IP不足以证明VPN高可靠达标。",
+   "process": [
+    "核对双机身份与VPN对象",
+    "故障时持续内层业务",
+    "记录SA重协商及最大丢包"
+   ],
+   "walkthrough": {
+    "title": "VPN接管后的三种状态",
+    "setup": "FW1/FW2互备，一条分支IPsec业务正在传文件，FW1故障。",
+    "steps": [
+     "先观察FW2是否接管外层地址与路由，使对端仍能找到有效网关。",
+     "再检查IKE/IPsec SA和必要会话是否按支持范围同步，或是否需要重协商；这决定恢复方式。",
+     "比较持续文件流、新连接及大小包的恢复，记录实际中断；不要只按主备角色切换时间推断业务无损。"
+    ],
+    "conclusion": "地址接管只是一个环节；继续核对对端路径、SA同步/重建、载荷计数、路由和策略，不能只看本地Master角色。"
+   },
+   "config": {
+    "code": "# 配置对象及实施顺序（参数化示例，非直接执行CLI）\n1. 共享正确外层身份\n2. 核对SA同步支持范围\n3. 持续内层流\n4. 测试主机上联恢复\n5. 记录双方计数",
+    "platform": "通用协议原理；设备命令依版本",
+    "notes": "明确的对象/参数实施清单；不捏造版本菜单。教学隔离环境，未实机执行，不代表赛事指定设备。配置后须回读并执行所列正反测试。"
+   },
+   "commandNotes": [
+    "这是配置对象与实施关系，编号行不是设备CLI。请先按所用产品版本把对象映射到相应配置，再验证规则与实际业务。"
+   ],
+   "fault": {
+    "symptom": "公网通载荷不通",
+    "cause": "SA或对端状态未收敛",
+    "check": "查双端SA和外层路径",
+    "fix": "按支持模式同步重建并校准回程"
+   },
+   "sources": [
+    {
+     "title": "华为IPsec原理",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/IPsec.html",
+     "version": "通用协议原理；设备命令依版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "VPN高可用技术"
+  },
+  {
+   "id": "ICT-064.01",
+   "parent": "ICT-064",
+   "term": "网络攻击与防御",
+   "depth": "熟悉",
+   "explain": "攻击可能消耗资源、破坏协议状态、利用应用漏洞或滥用身份，防御先要知道资产与入口。扫描属于发现表面，不自动代表利用成功；告警也只是线索，需要用端点与应用事实确认影响。实验限于授权靶场和低影响请求，记录范围、时间和证据，不对未知公网目标尝试。",
+   "process": [
+    "确定授权资产与停测条件",
+    "无害测试匹配控制",
+    "区分发现与利用证据"
+   ],
+   "walkthrough": {
+    "title": "按被攻击的层次选防线",
+    "setup": "实验场景出现口令猜测、恶意附件和大量连接耗尽三种告警。",
+    "steps": [
+     "口令猜测首先涉及身份与登录保护，异常附件涉及内容分析及终端执行。",
+     "连接耗尽还要判断本机容量和上游链路是否饱和，决定限速、清洗或扩容等措施。",
+     "对每种威胁记录入口、目标和证据，组合相应控制；一个“拒绝某端口”规则无法覆盖三种不同问题。"
+    ],
+    "conclusion": "不能，需查连接、应用执行、端点行为和数据影响；扫描提示探测风险，不能直接写成已有入侵损害。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "告警多无根因",
+    "cause": "缺少资产与端点上下文",
+    "check": "关联日志与进程",
+    "fix": "按真实影响分级"
+   },
+   "sources": [
+    {
+     "title": "华为HiSec组件与方案",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec",
+     "version": "方案概念，设备与许可依版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "基础威胁防御"
+  },
+  {
+   "id": "ICT-064.02",
+   "parent": "ICT-064",
+   "term": "DDoS",
+   "depth": "熟悉",
+   "explain": "DDoS可耗尽带宽、连接表或应用能力，防护位置需对应瓶颈。上游链路塞满后，本机丢弃仍占用该段带宽，应更早清洗或运营商协同；连接表耗尽则需要连接保护与合理资源策略。误伤、降级和容量应提前规划，不能用一刀切封所有用户代替业务恢复。",
+   "process": [
+    "识别带宽连接应用瓶颈",
+    "选择上游或本机保护",
+    "授权压测比较正常流"
+   ],
+   "walkthrough": {
+    "title": "带宽在上游耗尽时怎么办",
+    "setup": "企业互联网出口100Mb/s，攻击流在到达企业边界前已占满该链路。",
+    "steps": [
+     "本地防火墙即使把恶意流全部丢弃，已经消耗的上游带宽也不会因此释放给合法流。",
+     "需要与适当上游防护或清洗机制配合，并区分带宽、连接和应用资源的瓶颈。",
+     "用合法业务可用性、清洗效果与误杀比例验证，而不是只看本地丢弃计数增大；未经授权不生成攻击流。"
+    ],
+    "conclusion": "拥塞早于防火墙发生，攻击仍占满100M承载；需上游清洗或限流，并验证正常业务未被误伤。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "丢弃多业务仍坏",
+    "cause": "防护晚于拥塞点",
+    "check": "测上游利用率队列",
+    "fix": "协调更早过滤与容量"
+   },
+   "sources": [
+    {
+     "title": "华为HiSec组件与方案",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec",
+     "version": "方案概念，设备与许可依版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "基础威胁防御"
+  },
+  {
+   "id": "ICT-064.03",
+   "parent": "ICT-064",
+   "term": "Web防御",
+   "depth": "熟悉",
+   "explain": "Web防御理解HTTP参数、会话与资源权限，WAF可检测部分注入/XSS等模式，却不能替代业务鉴权和代码修复。HTTPS影响中间可见性，需确定TLS终结和回源位置。调整时同时测试合法特殊字符请求与无害攻击样例，避免仅因更严格就认为更安全。",
+   "process": [
+    "确定TLS终结及回源",
+    "配置Web规则和最小例外",
+    "回归正常及无害测试"
+   ],
+   "walkthrough": {
+    "title": "网络许可不等于Web输入可信",
+    "setup": "网站公开HTTPS，用户提交一个格式合法但包含不当输入的请求。",
+    "steps": [
+     "边界规则允许443只解决连接入口，WAF可检查已配置范围内的Web攻击特征。",
+     "应用仍需进行输入处理、参数化查询和资源级授权，无法把全部业务安全外包给网络设备。",
+     "用授权测试样本对比正常与异常请求结果，核对请求ID与日志，避免只看到WAF启用就宣称网站安全。"
+    ],
+    "conclusion": "订单接口缺少每次对象授权时，已登录身份仍可能越权；应用必须校验资源归属，边界模式检测不等同业务权限控制。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "加密流未检出参数",
+    "cause": "检测点不可见",
+    "check": "查TLS终结和链路",
+    "fix": "在合法可见点检测并修代码"
+   },
+   "sources": [
+    {
+     "title": "华为HiSec组件与方案",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec",
+     "version": "方案概念，设备与许可依版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "基础威胁防御"
+  },
+  {
+   "id": "ICT-064.04",
+   "parent": "ICT-064",
+   "term": "内容过滤",
+   "depth": "熟悉",
+   "explain": "内容过滤依据URL类别、文件真实类型、关键字或数据模式约束传播，和允许建立TCP连接是不同层次。用户组、分类库、HTTPS可见性和白名单会改变效果，文件扩展名不等于类型。策略要有业务目的与隐私边界，命中原因应可解释，例外需所有者和到期条件。",
+   "process": [
+    "列禁止类别和业务例外",
+    "绑定过滤文件到策略",
+    "比较类别类型及TLS样例"
+   ],
+   "walkthrough": {
+    "title": "同一网站也有不同过滤条件",
+    "setup": "员工A允许访问某站点的业务页面，但不允许下载指定危险文件类型。",
+    "steps": [
+     "过滤策略需要识别用户、URL类别或文件内容，并与对应业务规则关联。",
+     "若传输受TLS保护，还要按实际部署判断设备可见哪些内容，不能假设加密载荷自动可检查。",
+     "用批准的无害样本比较允许页面与被控下载，查看准确命中原因；不把整个站点加入白名单掩盖具体问题。"
+    ],
+    "conclusion": "可能仅按扩展名而未识别内容；检查产品文件识别、压缩/加密限制和规则引用，不能只不断添加文件名。"
+   },
+   "config": {
+    "code": "# 配置对象及实施顺序（参数化示例，非直接执行CLI）\n1. 组=lab\n2. 类别/文件类型具体化\n3. 绑定内容配置\n4. 例外有所有者期限\n5. 先日志观察后阻断",
+    "platform": "方案概念，设备与许可依版本",
+    "notes": "明确的对象/参数实施清单；不捏造版本菜单。教学隔离环境，未实机执行，不代表赛事指定设备。配置后须回读并执行所列正反测试。"
+   },
+   "commandNotes": [
+    "这是配置对象与实施关系，编号行不是设备CLI。请先按所用产品版本把对象映射到相应配置，再验证规则与实际业务。"
+   ],
+   "fault": {
+    "symptom": "同网址不同人结果不同",
+    "cause": "身份或策略引用不同",
+    "check": "比命中规则和分类",
+    "fix": "统一精确引用并收敛例外"
+   },
+   "sources": [
+    {
+     "title": "华为HiSec组件与方案",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec",
+     "version": "方案概念，设备与许可依版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "基础威胁防御"
+  },
+  {
+   "id": "ICT-064.05",
+   "parent": "ICT-064",
+   "term": "渗透测试基础",
+   "depth": "熟悉",
+   "explain": "渗透测试是在明确授权范围内验证弱点可利用程度，不是把扫描器输出直接当结论。准备要确认资产、手段、时间、停测条件和数据处理；尽量低影响验证，报告区分已证实、可能和误报。修复后用同样条件复测，并清理测试账号和临时权限，形成完整闭环。",
+   "process": [
+    "明确授权与停测范围",
+    "低影响验证保存证据",
+    "修复复测清理"
+   ],
+   "walkthrough": {
+    "title": "一次有边界的授权安全检查",
+    "setup": "测试方被授权在测试时间内检查测试网站，范围不含生产数据库和第三方服务。",
+    "steps": [
+     "先记录范围、允许方法、停止条件和联系人，确认测试账号及隔离数据。",
+     "用约定的低影响方法收集证据，发现范围外资产时停止扩展，不把“可到达”理解为已获授权。",
+     "按风险与复现证据提交问题，修复后在同一范围复核；安全测试最终要帮助验证修复而非追求破坏。"
+    ],
+    "conclusion": "注明工具、条件、证据和未证实状态，核对版本前提；不能把评级写成已成功利用，应进一步复核并给出不确定性。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "报告与事实不符",
+    "cause": "工具结果未经人工确认",
+    "check": "复核版本条件和可复现证据",
+    "fix": "修正结论并明确待证项"
+   },
+   "sources": [
+    {
+     "title": "NIST网络安全框架",
+     "url": "https://www.nist.gov/cyberframework",
+     "version": "CSF2.0管理框架，不替代地区法规",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "基础威胁防御"
+  }
+ ],
+ "chapter_sequence": [
+  "ICT-062",
+  "ICT-063",
+  "ICT-064"
+ ],
+ "neighbors": {
+  "before": "ICT-059",
+  "after": "ICT-065"
+ }
+}

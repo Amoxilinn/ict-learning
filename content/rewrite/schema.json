@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ICT 教程章节与知识点重写批次",
+  "type": "object",
+  "required": ["batch", "chapters", "units"],
+  "properties": {
+    "batch": {"type": "string"},
+    "chapters": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["intro", "why", "objectives", "outcome", "recap", "bridge"],
+        "properties": {
+          "intro": {"type": "string", "minLength": 60, "maxLength": 240},
+          "why": {"type": "string", "minLength": 40, "maxLength": 220},
+          "objectives": {
+            "type": "array", "minItems": 2, "maxItems": 4,
+            "items": {"type": "string", "minLength": 8, "maxLength": 60}
+          },
+          "outcome": {"type": "string", "minLength": 20, "maxLength": 100},
+          "recap": {"type": "string", "minLength": 60, "maxLength": 280},
+          "bridge": {"type": "string", "minLength": 20, "maxLength": 130}
+        },
+        "additionalProperties": false
+      }
+    },
+    "units": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["level", "order", "goal", "lead", "sections", "example", "takeaway"],
+        "properties": {
+          "level": {"enum": ["core", "advanced", "detail"]},
+          "order": {"type": "integer", "minimum": 1, "maximum": 99},
+          "goal": {"type": "string", "minLength": 8, "maxLength": 50},
+          "lead": {"type": "string", "minLength": 40, "maxLength": 240},
+          "sections": {
+            "type": "array", "minItems": 2, "maxItems": 5,
+            "items": {
+              "type": "object",
+              "required": ["title", "text"],
+              "properties": {
+                "title": {"type": "string", "minLength": 4, "maxLength": 34},
+                "text": {"type": "string", "minLength": 40, "maxLength": 700},
+                "steps": {
+                  "type": "array", "minItems": 2, "maxItems": 7,
+                  "items": {"type": "string", "minLength": 8, "maxLength": 150}
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "check": {
+            "type": "object",
+            "required": ["question", "answer", "why"],
+            "properties": {
+              "question": {"type": "string", "minLength": 8, "maxLength": 140},
+              "answer": {"type": "string", "minLength": 10, "maxLength": 220},
+              "why": {"type": "string", "minLength": 10, "maxLength": 220}
+            },
+            "additionalProperties": false
+          },
+          "example": {
+            "type": "object",
+            "required": ["title", "setup", "steps", "conclusion"],
+            "properties": {
+              "title": {"type": "string", "minLength": 4, "maxLength": 44},
+              "setup": {"type": "string", "minLength": 15, "maxLength": 180},
+              "steps": {
+                "type": "array", "minItems": 3, "maxItems": 6,
+                "items": {"type": "string", "minLength": 12, "maxLength": 180}
+              },
+              "conclusion": {"type": "string", "minLength": 15, "maxLength": 180}
+            },
+            "additionalProperties": false
+          },
+          "takeaway": {"type": "string", "minLength": 10, "maxLength": 90},
+          "boundary": {"type": "string", "minLength": 20, "maxLength": 300},
+          "visualCue": {"type": "string", "minLength": 10, "maxLength": 160}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

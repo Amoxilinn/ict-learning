@@ -1,0 +1,282 @@
+{
+ "batch": "batch-05",
+ "stage": {
+  "id": "stage-3",
+  "title": "连接不同网段",
+  "description": "从手写路由到自动学习，再补IPv6和控制路由的规则。",
+  "chapters": [
+   "ICT-009",
+   "ICT-010",
+   "ICT-017",
+   "ICT-018",
+   "ICT-011",
+   "ICT-012",
+   "ICT-013",
+   "ICT-014",
+   "ICT-015",
+   "ICT-016"
+  ]
+ },
+ "chapters": [
+  {
+   "id": "ICT-015",
+   "group": "数通",
+   "category": "路由技术",
+   "title": "IP Prefix List",
+   "detail": "IP Prefix List的原理及配置",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-009",
+    "ICT-013"
+   ],
+   "old_intro": "只接收10.0.0.0/8内部的/16到/24路由，为什么不能简单用一个主机地址过滤条件？把前缀的地址范围与长度范围分开计算。",
+   "old_outcome": "逐项判断前缀是否匹配，理解greater-equal与less-equal的边界。",
+   "old_readingNote": "",
+   "old_explanation": "前缀列表匹配路由前缀与掩码长度。10.0.0.0/8配合greater-equal 16 less-equal 24匹配该范围内/16到/24子网，不是只匹配主机地址。",
+   "old_deep": "基础前缀限制地址位范围，greater-equal与less-equal限定候选路由掩码长度。不带长度扩展时通常精确匹配前缀及长度。前缀列表不直接检查TCP端口，也不是接口数据包过滤器。",
+   "previous_chapter": "ICT-014",
+   "next_chapter": "ICT-016",
+   "previous_title": "ACL",
+   "next_title": "路由策略、策略路由",
+   "chapter_title": "IP Prefix List",
+   "stage": {
+    "id": "stage-3",
+    "title": "连接不同网段",
+    "description": "从手写路由到自动学习，再补IPv6和控制路由的规则。"
+   }
+  },
+  {
+   "id": "ICT-016",
+   "group": "数通",
+   "category": "路由技术",
+   "title": "路由策略、策略路由",
+   "detail": "路由策略和策略路由等路由控制技术原理及配置",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-014",
+    "ICT-015"
+   ],
+   "old_intro": "“不向邻居通告某条路由”和“让某类用户从另一个出口走”看起来相似，改变的对象却不同。分别观察路由信息与真实报文被处理的位置。",
+   "old_outcome": "区分路由策略与策略路由，解释匹配、动作、应用方向及回退。",
+   "old_readingNote": "",
+   "old_explanation": "路由策略作用于路由通告、引入或属性；策略路由作用于数据包转发，可按源地址等决定下一跳。二者处理对象不同，需分别观察路由表、策略命中和转发结果。",
+   "old_deep": "Route-policy按节点与条件筛选路由并应用属性；节点之间顺序与permit/deny结果共同影响通告。策略路由在数据包进入时依据源、目的等条件重定向，需明确本地产生报文是否适用及下一跳失效行为。",
+   "previous_chapter": "ICT-015",
+   "next_chapter": "ICT-034",
+   "previous_title": "IP Prefix List",
+   "next_title": "AAA",
+   "chapter_title": "路由策略、策略路由",
+   "stage": {
+    "id": "stage-3",
+    "title": "连接不同网段",
+    "description": "从手写路由到自动学习，再补IPv6和控制路由的规则。"
+   }
+  }
+ ],
+ "units": [
+  {
+   "id": "ICT-015.01",
+   "parent": "ICT-015",
+   "term": "IP Prefix List原理",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "IP Prefix List筛选的是路由前缀及长度，不直接筛选TCP端口或单个数据包。基础前缀限定地址位范围，greater-equal和less-equal进一步约束候选掩码长度；在常见精确前缀条目中，不加长度扩展只匹配指定长度。\n必须同时满足地址范围和长度范围，不能只看到地址以10开头就认定匹配。条目顺序和未命中的处理也应按相应命令/调用业务核对。用它作为route-policy条件时，还要检查名字存在与引用正确，避免空引用产生非预期结果。",
+   "process": [
+    "读取候选路由网络地址/长度",
+    "匹配基础地址位范围",
+    "检查长度上下界",
+    "按条目顺序得匹配结果",
+    "由路由策略决定导入/导出"
+   ],
+   "walkthrough": {
+    "title": "同时检查地址范围和长度",
+    "setup": "前缀列表条目为10.0.0.0/8，长度范围16到24。",
+    "steps": [
+     "10.1.0.0/16在10/8内且长度16达下限，因此匹配。",
+     "10.1.1.0/25地址范围正确，但长度25超过24，因此不匹配。",
+     "11.0.0.0/16长度正确，但地址不在10/8内，也不匹配；两个条件必须同时满足。"
+    ],
+    "conclusion": "都不匹配。前者地址范围对但长度25超界；后者长度符合但地址不在10/8。10.1.0.0/16与10.1.1.0/24可匹配。"
+   },
+   "config": {
+    "code": "system-view\nip ip-prefix LAB index 10 permit 10.0.0.0 8 greater-equal 16 less-equal 24\ndisplay ip ip-prefix LAB",
+    "platform": "VRP传统ip ip-prefix语法",
+    "notes": "匹配地址落在10/8且长度16—24的路由；创建后需在filter-policy、route-policy或邻居过滤等正确位置调用。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "误收/误拒路由",
+    "cause": "把地址匹配与掩码长度混淆",
+    "check": "逐条展开前缀范围和ge/le",
+    "fix": "改正确基础前缀及上下界"
+   },
+   "sources": [
+    {
+     "title": "华为 S9300 / S9300E IP单播路由配置指南",
+     "url": "https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",
+     "version": "V200R008 C00/C10",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "IP Prefix List"
+  },
+  {
+   "id": "ICT-015.02",
+   "parent": "ICT-015",
+   "term": "IP Prefix List配置",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "配置前缀列表应给清晰索引与语义名称，明确精确匹配还是允许更具体前缀。创建列表仅产生可复用条件，需在协议过滤或Route-Policy中引用后才影响路由。先用少量已知前缀验证接收集合，再应用到更大范围，能防止因漏掉permit项导致路由突然消失。\n修改时特别核对列表是否已被多个业务复用，以及同名列表是否为空或不存在；不同平台对于不存在的匹配对象可能有意外行为，不能依赖猜测。",
+   "process": [
+    "创建基础前缀与长度界",
+    "给各条目规划索引",
+    "在指定协议方向引用",
+    "比较路由前后集合",
+    "验证未命中与边界长度"
+   ],
+   "walkthrough": {
+    "title": "一个精确前缀与一组前缀",
+    "setup": "目标只允许192.168.1.0/24这一条路由。",
+    "steps": [
+     "精确写192.168.1.0长度24，不扩大基础前缀范围，表达的是这一条网络。",
+     "若改成192.168.0.0/16 ge24 le24，表达的是整个192.168/16中的所有/24，不再只含192.168.1/24。",
+     "例如192.168.2.0/24也会匹配后者，因此需先列出允许与不允许的样本，再检查实际导入结果。"
+    ],
+    "conclusion": "不等价，后者允许192.168.0.0/16内所有/24。应写精确192.168.1.0 24，不加扩大地址范围。"
+   },
+   "config": {
+    "code": "system-view\nip ip-prefix LAB index 10 permit 192.168.1.0 24\ndisplay ip ip-prefix LAB",
+    "platform": "VRP传统ip ip-prefix语法",
+    "notes": "匹配地址落在10/8且长度16—24的路由；创建后需在filter-policy、route-policy或邻居过滤等正确位置调用。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "列表正确但无效果",
+    "cause": "未引用或引用错方向/名称",
+    "check": "查协议与route-policy调用",
+    "fix": "绑定正确import/export并刷新验证"
+   },
+   "sources": [
+    {
+     "title": "华为 S9300 / S9300E IP单播路由配置指南",
+     "url": "https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",
+     "version": "V200R008 C00/C10",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "IP Prefix List"
+  },
+  {
+   "id": "ICT-016.01",
+   "parent": "ICT-016",
+   "term": "路由策略",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "路由策略作用于控制面的路由信息，可以在引入、发布或接收时筛选前缀与修改属性。Route-Policy由有序节点组成，各节点的permit/deny与if-match决定该路由是否接受及应用哪些apply动作；无条件permit节点可成为兜底，但白名单不应无意添加放行所有项。\n改变BGP出口策略影响发给邻居的通告，不一定直接改本机数据报转发。策略引用前必须创建正确匹配对象，修改后核对接收表、优选结果与业务，避免只看配置文本。",
+   "process": [
+    "协议产生候选路由",
+    "调用Route-Policy入口",
+    "按节点/匹配条件检查",
+    "permit后执行属性动作或deny拒绝",
+    "协议继续通告/安装相应结果"
+   ],
+   "walkthrough": {
+    "title": "白名单后加兜底会发生什么",
+    "setup": "出口策略只希望向邻居通告192.168.1.0/24，路由表还有192.168.2.0/24。",
+    "steps": [
+     "前面的permit节点引用精确前缀列表，192.168.1/24匹配并获准。",
+     "若随后增加一个无条件permit节点，192.168.2/24会在这里通过，白名单就失去限制其余路由的作用。",
+     "按实际平台的未匹配处理设计明确结果，查看邻居真正收到的前缀；路由策略改变路由信息，不直接逐包选择出口。"
+    ],
+    "conclusion": "未命中前面白名单的路由仍可能在100被允许，白名单变成“允许更多”。应按期望策略省去兜底或明确拒绝其他项。"
+   },
+   "config": {
+    "code": "system-view\nip ip-prefix LAN index 10 permit 192.168.1.0 24\nroute-policy ONLY-LAN permit node 10\n if-match ip-prefix LAN\n quit\nbgp 65001\n ipv4-family unicast\n  peer 10.0.12.2 route-policy ONLY-LAN export\n  quit\n quit\ndisplay route-policy",
+    "platform": "支持BGP route-policy的VRP设备；华为Route-Policy配置原理",
+    "notes": "这是白名单导出策略，不设无条件permit兜底，未匹配路由不导出。前缀列表必须预先存在且名称一致。使用现有隔离BGP会话。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "预期拒绝却仍收到",
+    "cause": "兜底permit或匹配对象不存在",
+    "check": "检查节点、对象名称及方向",
+    "fix": "修正白名单与引用后重新比对路由"
+   },
+   "sources": [
+    {
+     "title": "华为 S9300 / S9300E IP单播路由配置指南",
+     "url": "https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",
+     "version": "V200R008 C00/C10",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "路由策略、策略路由"
+  },
+  {
+   "id": "ICT-016.02",
+   "parent": "ICT-016",
+   "term": "策略路由",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "策略路由PBR作用于数据包转发，常按源网段、协议等选择指定下一跳，用来表达普通目的路由表难以直接表达的业务意图。MQC方式通常把分类器、流行为和流策略组合，再应用到实际入接口。重定向下一跳是邻接设备地址而非本机地址，必须具备可达性；下一跳失效时丢弃还是退回普通查表取决于平台与配置，应实测而非假定。\nPBR可能不覆盖设备本地产生的流量，故用路由器自己ping不能替代从用户侧发包。",
+   "process": [
+    "报文进入配置入口",
+    "分类器匹配源/协议",
+    "流行为给出重定向下一跳",
+    "解析该下一跳并转发",
+    "未匹配/失效时按平台规定处理"
+   ],
+   "walkthrough": {
+    "title": "同一目的不同用户走不同出口",
+    "setup": "路由表默认走ISP1，设计让办公组10.10.10.0/24的指定业务走ISP2。",
+    "steps": [
+     "入口策略匹配源用户组与业务条件，命中后按平台支持的重定向动作选ISP2下一跳。",
+     "未命中的其他流仍按普通路由查表走ISP1，所以控制面默认路由可能完全没有改变。",
+     "ISP2失效时还需明确探测和回退语义，并验证NAT与回程；不能只因策略配置存在就断言每条流已引流。"
+    ],
+    "conclusion": "不一定，入口PBR可能先匹配并重定向。需查策略命中与实际出接口；控制面路由表未变化也可出现不同转发路径。"
+   },
+   "config": {
+    "code": "system-view\nacl number 3001\n rule 5 permit ip source 10.10.10.0 0.0.0.255\n quit\ntraffic classifier C-LAB operator and\n if-match acl 3001\n quit\ntraffic behavior B-LAB\n redirect ip-nexthop 10.0.2.2\n quit\ntraffic policy P-LAB\n classifier C-LAB behavior B-LAB\n quit\ninterface GigabitEthernet 0/0/0\n traffic-policy P-LAB inbound\n quit\ndisplay traffic policy user-defined",
+    "platform": "支持MQC重定向的VRP平台；华为PBR排障指南/AC V200R020C10命令语法",
+    "notes": "下一跳为对端地址而非本机接口地址，需真实可达；本地产生报文不一定经过接口入方向策略。具体平台是否支持VLANIF/物理口、失效回退及NQA联动需单独核对。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "自己ping不走PBR",
+    "cause": "本地产生报文未经过入接口策略",
+    "check": "从用户侧重测并查实际入口",
+    "fix": "按业务发起位置设计策略，不凭本机ping否定配置"
+   },
+   "sources": [
+    {
+     "title": "华为 S9300 / S9300E IP单播路由配置指南",
+     "url": "https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",
+     "version": "V200R008 C00/C10",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "路由策略、策略路由"
+  }
+ ],
+ "chapter_sequence": [
+  "ICT-015",
+  "ICT-016"
+ ],
+ "neighbors": {
+  "before": "ICT-014",
+  "after": "ICT-034"
+ }
+}

@@ -1,0 +1,393 @@
+{
+ "batch": "batch-28",
+ "stage": {
+  "id": "stage-8",
+  "title": "进入数据中心",
+  "description": "先认识虚拟机和容器，再建立Overlay、存储、设计与编排的联系。",
+  "chapters": [
+   "ICT-046",
+   "ICT-047",
+   "ICT-045",
+   "ICT-048",
+   "ICT-054",
+   "ICT-049",
+   "ICT-050",
+   "ICT-051",
+   "ICT-052",
+   "ICT-055",
+   "ICT-053"
+  ]
+ },
+ "chapters": [
+  {
+   "id": "ICT-045",
+   "group": "DCN",
+   "category": "数据中心网络基础知识",
+   "title": "M-LAG、VXLAN、EVPN、微分段、业务链",
+   "detail": "掌握M-LAG协议的技术原理和配置、集中式与分布式VXLAN的技术原理和配置、跨域VXLAN场景的技术原理和配置、掌握EVPN技术原理、了解微分段业务链技术的原理和配置",
+   "depth": "掌握",
+   "prerequisites": [
+    "ICT-006",
+    "ICT-030",
+    "ICT-031",
+    "ICT-046"
+   ],
+   "old_intro": "服务器双接入、虚拟网络隔离与安全检查为什么会同时出现在DCN架构中？先跟踪虚拟机跨机架访问，再补控制与安全路径。",
+   "old_outcome": "区分M-LAG、VXLAN/EVPN、微分段与业务链的职责及组合。",
+   "old_readingNote": "",
+   "old_explanation": "Leaf双归接入与M-LAG保护接入，VXLAN提供租户网络，EVPN提供控制面。集中网关可能引入绕行，分布式网关把三层能力放在接入侧；微分段按细粒度对象实施策略，业务链按顺序引流安全服务。",
+   "old_deep": "M-LAG双归提供接入冗余，peer-link与双主检测有不同职责。VXLAN可集中或分布式部署网关；跨域需明确边界网关与路由交换。微分段按工作负载身份控制访问，业务链要求依次经过服务节点，同时保证回程与状态设备一致。",
+   "previous_chapter": "ICT-047",
+   "next_chapter": "ICT-048",
+   "previous_title": "OpenStack云平台技术、容器技术",
+   "next_title": "智能无损技术、高性能与智能计算技术",
+   "chapter_title": "M-LAG、VXLAN、EVPN、微分段、业务链",
+   "stage": {
+    "id": "stage-8",
+    "title": "进入数据中心",
+    "description": "先认识虚拟机和容器，再建立Overlay、存储、设计与编排的联系。"
+   }
+  }
+ ],
+ "units": [
+  {
+   "id": "ICT-045.01",
+   "parent": "ICT-045",
+   "term": "M-LAG",
+   "depth": "掌握",
+   "explain": "一台服务器接两台交换机时，希望坏一台仍然连网，又希望两条链路平时都能工作。普通链路聚合通常要求对端是同一个逻辑设备；M-LAG即跨设备链路聚合，让两台独立管理的交换机协同对外提供聚合接入。服务器看到一个聚合组，两台交换机仍各有控制面。\npeer-link承担状态同步及部分特殊转发，双主检测链路用来辅助区分对端故障与互联故障。学习配置时先分清配对关系、同步互联、接入聚合和上联四部分，再检查两端VLAN、聚合参数和业务身份的一致性。\nM-LAG不能等同于堆叠：两台设备不自动共享一份配置。peer-link和检测链路同时失效是不同故障条件，不能用单链路故障结论代替。\n配置按三组关系理解：先建立DFS配对，设置独立可达的双主检测源/对端地址及两端一致的认证；再把Leaf之间的物理成员加入peer-link聚合；最后把服务器侧聚合绑定到相同M-LAG编号，并核对VLAN和LACP。查看DFS成员、心跳、一致性及聚合Selected状态，才能把配置对象与结果对应起来。",
+   "process": [
+    "S发出多条业务流，聚合哈希将各条流分配到不同成员；单条流通常仍走一个成员。",
+    "Leaf1与Leaf2同步必要状态，S不需要把双归链路当作两个互不相关的网络。",
+    "关闭S到Leaf1的链路，聚合剩余成员承载业务，容量随可用成员减少。",
+    "若peer-link故障但Leaf2仍存活，双主检测和保护策略决定哪些接口退出转发，避免两台失去协同后重复转发。"
+   ],
+   "walkthrough": {
+    "title": "M-LAG：一步步看结果",
+    "setup": "服务器S的两张网卡分别接Leaf1、Leaf2，服务器做LACP聚合；Leaf之间有peer-link和独立检测路径。",
+    "steps": [
+     "S发出多条业务流，聚合哈希将各条流分配到不同成员；单条流通常仍走一个成员。",
+     "Leaf1与Leaf2同步必要状态，S不需要把双归链路当作两个互不相关的网络。",
+     "关闭S到Leaf1的链路，聚合剩余成员承载业务，容量随可用成员减少。",
+     "若peer-link故障但Leaf2仍存活，双主检测和保护策略决定哪些接口退出转发，避免两台失去协同后重复转发。"
+    ],
+    "conclusion": "M-LAG解决的是跨设备双归协作；接入冗余、同步路径和双主保护必须一起设计。"
+   },
+   "config": {
+    "code": "display dfs-group 1 m-lag\ndisplay dfs-group 1 node 1 m-lag brief",
+    "platform": "CloudEngine V300典型M-LAG案例中的状态查询；编号1应替换为本机实际DFS组",
+    "notes": "核对Heart beat state、主备成员、端口Up与Consistency-check；这里只给查询片段，完整配置还需要DFS认证、peer-link、接入成员和对端配置。"
+   },
+   "commandNotes": [],
+   "fault": {
+    "symptom": "结果与预期不符",
+    "cause": "M-LAG不能等同于堆叠：两台设备不自动共享一份配置。peer-link和检测链路同时失效是不同故障条件，不能用单链路故障结论代替。",
+    "check": "沿本节示例逐步核对输入、表项与实际转发路径",
+    "fix": "先修正最早不一致的环节，再验证完整业务和回程"
+   },
+   "sources": [
+    {
+     "title": "华为：M-LAG原理、故障处理与应用",
+     "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/M-LAG.html",
+     "version": "原理资料；具体实现按产品版本核对",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "华为：M-LAG典型配置案例",
+     "url": "https://support.huawei.com/enterprise/zh/doc/EDOC1100312649/be148309",
+     "version": "CloudEngine V300典型案例；产品支持情况按文档核对",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "M-LAG、VXLAN、EVPN、微分段、业务链"
+  },
+  {
+   "id": "ICT-045.02",
+   "parent": "ICT-045",
+   "term": "集中式VXLAN",
+   "depth": "掌握",
+   "explain": "在传统VLAN中，两台虚机要跨三层网络仍处于同一个二层广播域，可以把原以太网帧装进IP网络运输。VXLAN负责这层封装，隧道两端称VTEP，VNI表示所属虚拟网络。集中式方案把租户三层网关集中放在少数节点，接入Leaf主要完成二层接入和隧道封装。\n同一子网业务可以直接在相应VTEP之间转发，不同子网业务则要先送到集中网关，由它查租户路由表后转发。初学时要分别画出物理IP可达路径与租户逻辑路径，避免把外层VTEP地址误当成虚机地址。\n集中式并不表示所有同子网数据都必须绕网关。VNI、二层成员、网关地址、Underlay路由和封装后MTU缺一不可。\n配置关系从接入口向外搭建：把终端VLAN映射到桥域BD，把BD关联二层VNI，再为VTEP设置NVE源地址及远端复制成员；网关节点为相应BD建立三层接口并绑定正确租户。每一段都要可回读：接入口属于哪个BD、BD属于哪个VNI、VNI通向哪些VTEP、网关使用哪张路由表。\n先验证同子网再验证跨子网，可以避免一次混入所有故障。",
+   "process": [
+    "A发现B不在自己的/24内，先把以太网帧交给10.10.10.1网关的MAC。",
+    "Leaf1依据接入网络映射选择VNI，把帧封装为去往G的VXLAN报文；外层目的IP是G的VTEP。",
+    "G解封装并在租户路由表中查10.10.20.12，把流量交给B所在的二层网络。",
+    "G再次封装发给Leaf2，Leaf2解封装后交给B；B回复也经过相应网关路径。"
+   ],
+   "walkthrough": {
+    "title": "集中式VXLAN：一步步看结果",
+    "setup": "VM-A=10.10.10.11/24在Leaf1，VM-B=10.10.20.12/24在Leaf2；集中网关G承载两个子网。",
+    "steps": [
+     "A发现B不在自己的/24内，先把以太网帧交给10.10.10.1网关的MAC。",
+     "Leaf1依据接入网络映射选择VNI，把帧封装为去往G的VXLAN报文；外层目的IP是G的VTEP。",
+     "G解封装并在租户路由表中查10.10.20.12，把流量交给B所在的二层网络。",
+     "G再次封装发给Leaf2，Leaf2解封装后交给B；B回复也经过相应网关路径。"
+    ],
+    "conclusion": "跨子网流量经过G，因此集中网关容量和位置会影响路径长度。"
+   },
+   "config": {
+    "code": "display vxlan vni\ndisplay vxlan tunnel",
+    "platform": "华为NE40E V800R024C00SPC500 VXLAN案例中的查询片段；非CloudEngine通用配置脚本",
+    "notes": "VNI状态、BD映射、隧道源/目的地址与预期一致后，再测试租户数据。Up状态不证明集中网关地址、VRF和返回路由正确。"
+   },
+   "commandNotes": [],
+   "fault": {
+    "symptom": "结果与预期不符",
+    "cause": "集中式并不表示所有同子网数据都必须绕网关。VNI、二层成员、网关地址、Underlay路由和封装后MTU缺一不可。",
+    "check": "沿本节示例逐步核对输入、表项与实际转发路径",
+    "fix": "先修正最早不一致的环节，再验证完整业务和回程"
+   },
+   "sources": [
+    {
+     "title": "RFC 7348：VXLAN封装框架",
+     "url": "https://www.rfc-editor.org/rfc/rfc7348",
+     "version": "RFC 7348，2014",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "华为：VXLAN配置举例",
+     "url": "https://support.huawei.com/enterprise/zh/doc/EDOC1100419270/4158326e",
+     "version": "NE40E V800R024C00SPC500；用作对象关系与查询参考，勿混用设备语法",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "M-LAG、VXLAN、EVPN、微分段、业务链"
+  },
+  {
+   "id": "ICT-045.03",
+   "parent": "ICT-045",
+   "term": "分布式VXLAN",
+   "depth": "掌握",
+   "explain": "如果大量虚机跨子网通信都要去一台远处网关，容易增加绕行与集中负载。分布式VXLAN把三层网关能力下沉到接入侧Leaf，终端可以在靠近自己的节点完成第一次路由。常见任播网关在多个Leaf上使用一致的网关IP和MAC，使虚机迁移后仍可使用相同默认网关。\nEVPN集成路由与桥接把二层接入与租户三层转发关联起来；二层VNI标识广播域，三层VNI可用于标识租户路由实例。理解时先区分对方是否同子网，再判断入口和出口各做几次路由。\nIRB有对称与非对称模型，VNI、路由和网关配置不能混抄。任播网关的相同IP来自明确的协同设计，不适用于任意两台普通网关。\n配置时为租户建立独立路由实例，并将各本地子网的BD、二层VNI和网关接口关联进去；采用对称IRB时，还要建立租户三层VNI及相应EVPN导入导出关系。在需要提供同一个子网网关的Leaf上统一网关IP/MAC，接入位置不同则保持设备VTEP地址独立。\n验证时先看本地网关邻居解析，再看远端主机或前缀路由，最后观察跨子网实际转发。",
+   "process": [
+    "A把跨子网报文交给本地任播网关10.10.10.1，Leaf1在租户T中查目的路由。",
+    "在对称IRB示意中，Leaf1把跨子网数据封装到租户三层VNI，外层发往Leaf2的VTEP。",
+    "Leaf2解封装后在同一租户路由实例中完成出口转发，再发给子网20中的B。",
+    "把A迁到另一个提供相同网关身份的Leaf后，网关配置不变，但网络仍需更新A的位置。"
+   ],
+   "walkthrough": {
+    "title": "分布式VXLAN：一步步看结果",
+    "setup": "A=10.10.10.11接Leaf1，B=10.10.20.12接Leaf2，租户T拥有两个子网。",
+    "steps": [
+     "A把跨子网报文交给本地任播网关10.10.10.1，Leaf1在租户T中查目的路由。",
+     "在对称IRB示意中，Leaf1把跨子网数据封装到租户三层VNI，外层发往Leaf2的VTEP。",
+     "Leaf2解封装后在同一租户路由实例中完成出口转发，再发给子网20中的B。",
+     "把A迁到另一个提供相同网关身份的Leaf后，网关配置不变，但网络仍需更新A的位置。"
+    ],
+    "conclusion": "分布式网关把路由能力靠近终端；任播网关一致性与租户表项同步决定迁移后是否仍可通信。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "结果与预期不符",
+    "cause": "IRB有对称与非对称模型，VNI、路由和网关配置不能混抄。任播网关的相同IP来自明确的协同设计，不适用于任意两台普通网关。",
+    "check": "沿本节示例逐步核对输入、表项与实际转发路径",
+    "fix": "先修正最早不一致的环节，再验证完整业务和回程"
+   },
+   "sources": [
+    {
+     "title": "RFC 9135：EVPN集成路由与桥接",
+     "url": "https://www.rfc-editor.org/rfc/rfc9135",
+     "version": "RFC 9135，2021",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "华为：VXLAN配置举例",
+     "url": "https://support.huawei.com/enterprise/zh/doc/EDOC1100419270/4158326e",
+     "version": "NE40E V800R024C00SPC500；用作对象关系与查询参考，勿混用设备语法",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "M-LAG、VXLAN、EVPN、微分段、业务链"
+  },
+  {
+   "id": "ICT-045.04",
+   "parent": "ICT-045",
+   "term": "跨域VXLAN",
+   "depth": "掌握",
+   "explain": "一个数据中心可以看作一个具有自己的控制与故障边界的网络域。跨域VXLAN要让选定租户网络跨越这些边界，同时避免把每个内部细节都无条件扩散出去。域间通常由边界设备承担互联、路由交换和必要的隧道终结或重新封装，具体是否重起隧道依方案而定。\n先确定业务要延伸同一子网，还是只需要两个子网三层互通，再决定传播哪些MAC、IP和前缀。相比单域，跨域还要统一租户身份映射、MTU、环路防止和出口选择，并量化跨域链路的时延与容量。\n跨域二层延伸会放大广播和MAC迁移影响范围。跨域配置必须匹配所选Multi-Pod或Multi-Site等架构，不能将所有场景视为同一模型。\n配置顺序是先完成每个域内部的Underlay与Overlay，再准备Border之间的DCI可达性；然后映射跨域租户、导入导出规则和所需服务，按所选架构决定是否在Border终结并重新发布隧道与路由。跨域过滤只放行业务需要的路由，控制广播域延伸范围。\n把两域的本地、跨域、出口三类路径分别验证，能发现路由泄漏、错误出口和非对称回程。",
+   "process": [
+    "先确认业务只需要A的应用访问B的数据库，因此选择跨域三层互通而非延伸广播域。",
+    "两侧Border按租户映射导入需要的前缀，T的路由表可见对端/24，其他租户仍隔离。",
+    "10.1.0.10访问10.2.0.20，经本域Leaf、Border和DCI链路到达对端；逐段核对封装与MTU。",
+    "切断一条DCI链路，检查备用路径、返回路由和实际业务恢复，避免只检查控制会话。"
+   ],
+   "walkthrough": {
+    "title": "跨域VXLAN：一步步看结果",
+    "setup": "DC-A租户T用10.1.0.0/24，DC-B用10.2.0.0/24，两域各有Border。",
+    "steps": [
+     "先确认业务只需要A的应用访问B的数据库，因此选择跨域三层互通而非延伸广播域。",
+     "两侧Border按租户映射导入需要的前缀，T的路由表可见对端/24，其他租户仍隔离。",
+     "10.1.0.10访问10.2.0.20，经本域Leaf、Border和DCI链路到达对端；逐段核对封装与MTU。",
+     "切断一条DCI链路，检查备用路径、返回路由和实际业务恢复，避免只检查控制会话。"
+    ],
+    "conclusion": "跨域互联的第一步是确定互通边界；同一VNI数字本身不保证两个域已经互通。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "结果与预期不符",
+    "cause": "跨域二层延伸会放大广播和MAC迁移影响范围。跨域配置必须匹配所选Multi-Pod或Multi-Site等架构，不能将所有场景视为同一模型。",
+    "check": "沿本节示例逐步核对输入、表项与实际转发路径",
+    "fix": "先修正最早不一致的环节，再验证完整业务和回程"
+   },
+   "sources": [
+    {
+     "title": "RFC 8365：EVPN网络虚拟化Overlay",
+     "url": "https://www.rfc-editor.org/rfc/rfc8365",
+     "version": "RFC 8365，2018；后续更新见RFC页面",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "华为：VXLAN配置举例",
+     "url": "https://support.huawei.com/enterprise/zh/doc/EDOC1100419270/4158326e",
+     "version": "NE40E V800R024C00SPC500；用作对象关系与查询参考，勿混用设备语法",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "M-LAG、VXLAN、EVPN、微分段、业务链"
+  },
+  {
+   "id": "ICT-045.05",
+   "parent": "ICT-045",
+   "term": "EVPN",
+   "depth": "掌握",
+   "explain": "VXLAN回答数据如何被封装运输，EVPN则帮助网络知道终端在哪里。EVPN使用BGP发布以太网VPN相关信息，接入设备学到本地终端后，把可供其他设备使用的MAC或IP可达信息通告出去。远端不必每次都靠未知目的泛洪来寻找终端。学习时把本地学习、控制面发布、远端导入、数据面封装四件事分开：收到BGP更新不代表相关租户一定导入，也不代表外层隧道可达。\n常见Type 2用于MAC/IP通告，Type 3参与广播、未知单播和组播的复制成员发现；不同扩展还定义其他路由类型。\nEVPN基础RFC最初以MPLS封装为背景，VXLAN应用还需参考Overlay扩展。RT决定导入策略，RD主要用于区分路由，二者不能互换。\n配置EVPN时，先让BGP邻居的会话地址可达，再在EVPN地址族启用邻居与合适的封装通告；本地BD关联EVPN实例，实例设置RD与导入导出RT，NVE使用正确VTEP源地址并按所选机制建立复制成员。收到路由后要核对其是否被目标租户导入、下一跳是否可解析，以及数据面是否安装表项。\nBGP会话、EVPN路由和业务转发是三个分别验证的层次。",
+   "process": [
+    "Leaf1从接入帧或相应机制获知A的位置，在本地建立终端表项。",
+    "Leaf1通过EVPN通告A的MAC及可选IP信息，远端根据RT等租户导入规则接收。",
+    "Leaf2给A发送已知单播时，查到A关联Leaf1的VTEP，封装后定向发送。",
+    "若BGP路由存在但通信失败，再查Underlay可达、VNI映射和实际MAC/IP转发表，不能只看邻居Established。"
+   ],
+   "walkthrough": {
+    "title": "EVPN：一步步看结果",
+    "setup": "A的MAC为00:11:22:33:44:55，接Leaf1，Leaf2上有同租户的B。",
+    "steps": [
+     "Leaf1从接入帧或相应机制获知A的位置，在本地建立终端表项。",
+     "Leaf1通过EVPN通告A的MAC及可选IP信息，远端根据RT等租户导入规则接收。",
+     "Leaf2给A发送已知单播时，查到A关联Leaf1的VTEP，封装后定向发送。",
+     "若BGP路由存在但通信失败，再查Underlay可达、VNI映射和实际MAC/IP转发表，不能只看邻居Established。"
+    ],
+    "conclusion": "EVPN负责分发可达性，VXLAN负责承载数据，两者共同工作但故障检查点不同。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "结果与预期不符",
+    "cause": "EVPN基础RFC最初以MPLS封装为背景，VXLAN应用还需参考Overlay扩展。RT决定导入策略，RD主要用于区分路由，二者不能互换。",
+    "check": "沿本节示例逐步核对输入、表项与实际转发路径",
+    "fix": "先修正最早不一致的环节，再验证完整业务和回程"
+   },
+   "sources": [
+    {
+     "title": "RFC 8365：EVPN网络虚拟化Overlay",
+     "url": "https://www.rfc-editor.org/rfc/rfc8365",
+     "version": "RFC 8365，2018；后续更新见RFC页面",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "华为：VXLAN配置举例",
+     "url": "https://support.huawei.com/enterprise/zh/doc/EDOC1100419270/4158326e",
+     "version": "NE40E V800R024C00SPC500；用作对象关系与查询参考，勿混用设备语法",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "M-LAG、VXLAN、EVPN、微分段、业务链"
+  },
+  {
+   "id": "ICT-045.06",
+   "parent": "ICT-045",
+   "term": "微分段",
+   "depth": "了解",
+   "explain": "同一个VLAN或子网内的服务器通常能直接相互访问，但业务可能只允许Web访问应用服务，禁止Web直接访问数据库。微分段把访问控制粒度缩小到工作负载或端点组，端点组可以依据地址、标签或虚机属性划分。策略描述哪个组可以访问哪个组的哪些服务，并由支持的主机或网络设备执行。\n配置的关键不是多建几个组，而是明确对象如何归组、策略在哪里执行以及默认行为是什么。这样即使服务器换位置，策略仍可跟随稳定的业务身份，而不必完全依赖物理端口。\n端点组标识的传递和执行方式取决于产品与芯片支持，不能假定所有VXLAN设备都识别厂商的组策略扩展。",
+   "process": [
+    "列出业务依赖：Web只需访问App的TCP 8443，App只需访问DB的TCP 5432。",
+    "创建三个端点组并核对服务器的实际成员身份，避免一台DB错误进入App组。",
+    "下发组间许可与默认隔离，再看Web到App连接成功，而Web到DB的新连接被拒绝。",
+    "迁移Web虚机到另一Leaf，检查归组属性同步与新位置的策略命中，确认访问边界仍然成立。"
+   ],
+   "walkthrough": {
+    "title": "微分段：一步步看结果",
+    "setup": "Web组10.0.1.0/24，App组10.0.2.0/24，DB组10.0.3.0/24。",
+    "steps": [
+     "列出业务依赖：Web只需访问App的TCP 8443，App只需访问DB的TCP 5432。",
+     "创建三个端点组并核对服务器的实际成员身份，避免一台DB错误进入App组。",
+     "下发组间许可与默认隔离，再看Web到App连接成功，而Web到DB的新连接被拒绝。",
+     "迁移Web虚机到另一Leaf，检查归组属性同步与新位置的策略命中，确认访问边界仍然成立。"
+    ],
+    "conclusion": "微分段把业务依赖变成明确的访问边界；同租户或同网段不等于相互信任。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "结果与预期不符",
+    "cause": "端点组标识的传递和执行方式取决于产品与芯片支持，不能假定所有VXLAN设备都识别厂商的组策略扩展。",
+    "check": "沿本节示例逐步核对输入、表项与实际转发路径",
+    "fix": "先修正最早不一致的环节，再验证完整业务和回程"
+   },
+   "sources": [
+    {
+     "title": "华为NetTech TV：CloudFabric业务部署课程",
+     "url": "https://info.support.huawei.com/network/ptmngsys/Web/OnlineCourse_CloudFabric/zh/mooc/CloudFabric/cloudfabric_poc_zh.html",
+     "version": "公开课程目录；平台菜单和功能依版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "M-LAG、VXLAN、EVPN、微分段、业务链"
+  },
+  {
+   "id": "ICT-045.07",
+   "parent": "ICT-045",
+   "term": "业务链",
+   "depth": "了解",
+   "explain": "普通路由只决定下一跳，业务却可能要求请求必须先经过防火墙，再经过负载均衡器，最后到服务器。业务链把这些处理节点按顺序接入转发路径，节点可以是物理设备或虚拟服务。初学时先把每个节点当作一个有输入、输出和状态的处理环节，再思考网络怎样把匹配的流量送到它。\n常见实现可使用策略引流与虚拟网络拼接，具体封装和编排方式并不唯一。有状态防火墙还要求返回流量经过正确节点，否则正向路由正常也可能因会话不匹配而失败。\n流量经过某个设备不等于它已经完成安全检查。引流规则、路由、地址转换和故障旁路行为必须保持一致，避免形成回路或绕过必经服务。",
+   "process": [
+    "请求进入Border，匹配该业务的引流规则，先送到FW的外侧接口。",
+    "FW检查访问策略并建立会话，许可流量才到LB；LB选择10.0.1.11作为后端。",
+    "Web响应经LB恢复面向用户的服务地址，再经过持有会话的FW返回。",
+    "若FW故障，检查预定行为是阻断、切换到备用，还是允许旁路；三者必须由业务要求明确选择。"
+   ],
+   "walkthrough": {
+    "title": "业务链：一步步看结果",
+    "setup": "外部用户访问VIP 203.0.113.10，链路顺序为Border→FW→LB→Web。",
+    "steps": [
+     "请求进入Border，匹配该业务的引流规则，先送到FW的外侧接口。",
+     "FW检查访问策略并建立会话，许可流量才到LB；LB选择10.0.1.11作为后端。",
+     "Web响应经LB恢复面向用户的服务地址，再经过持有会话的FW返回。",
+     "若FW故障，检查预定行为是阻断、切换到备用，还是允许旁路；三者必须由业务要求明确选择。"
+    ],
+    "conclusion": "业务链的验收对象是完整双向路径和每个服务的处理结果，不能只验证终点能ping通。"
+   },
+   "config": null,
+   "commandNotes": [],
+   "fault": {
+    "symptom": "结果与预期不符",
+    "cause": "流量经过某个设备不等于它已经完成安全检查。引流规则、路由、地址转换和故障旁路行为必须保持一致，避免形成回路或绕过必经服务。",
+    "check": "沿本节示例逐步核对输入、表项与实际转发路径",
+    "fix": "先修正最早不一致的环节，再验证完整业务和回程"
+   },
+   "sources": [
+    {
+     "title": "华为NetTech TV：CloudFabric业务部署课程",
+     "url": "https://info.support.huawei.com/network/ptmngsys/Web/OnlineCourse_CloudFabric/zh/mooc/CloudFabric/cloudfabric_poc_zh.html",
+     "version": "公开课程目录；平台菜单和功能依版本",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "M-LAG、VXLAN、EVPN、微分段、业务链"
+  }
+ ],
+ "chapter_sequence": [
+  "ICT-045"
+ ],
+ "neighbors": {
+  "before": "ICT-047",
+  "after": "ICT-048"
+ }
+}

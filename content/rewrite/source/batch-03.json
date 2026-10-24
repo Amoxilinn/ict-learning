@@ -1,0 +1,658 @@
+{
+ "batch": "batch-03",
+ "stage": {
+  "id": "stage-3",
+  "title": "连接不同网段",
+  "description": "从手写路由到自动学习，再补IPv6和控制路由的规则。",
+  "chapters": [
+   "ICT-009",
+   "ICT-010",
+   "ICT-017",
+   "ICT-018",
+   "ICT-011",
+   "ICT-012",
+   "ICT-013",
+   "ICT-014",
+   "ICT-015",
+   "ICT-016"
+  ]
+ },
+ "chapters": [
+  {
+   "id": "ICT-009",
+   "group": "数通",
+   "category": "路由技术",
+   "title": "静态路由",
+   "detail": "掌握基本IP路由基础知识、IPv4和IPv6静态路由配置方式",
+   "depth": "掌握",
+   "prerequisites": [
+    "ICT-002",
+    "ICT-004"
+   ],
+   "old_intro": "A在192.168.10.0/24，B在192.168.20.0/24，仅连一台二层交换机为什么不够？先弄清路由器怎样查表，再手工告诉它远端网段在哪。",
+   "old_outcome": "用最长前缀选择出口，配置去程与回程；IPv6写法在学完IPv6后回看。",
+   "old_readingNote": "第一次先读IP路由基础和IPv4静态路由。IPv6静态路由是同一原则的另一种地址写法，可在“IPv6基础知识”和“IPv6地址配置”之后回看。",
+   "old_explanation": "路由先按目的地址最长前缀匹配；同一前缀候选路由再比较协议优先级等。静态路由下一跳要可递归解析；默认路由是最后兜底。IPv6静态路由使用前缀长度而不是IPv4掩码。",
+   "old_deep": "对一个目的地址，先找匹配前缀中最长的，再在同前缀的候选来源中按协议优先级与各协议规则选路。不能直接拿不同协议的cost比较。默认路由只在无更具体匹配时使用；浮动静态用于主路由失效后的备份，若下一跳仍被判为可达可能无法及时切换。",
+   "previous_chapter": "ICT-006",
+   "next_chapter": "ICT-010",
+   "previous_title": "堆叠和集群",
+   "next_title": "OSPF",
+   "chapter_title": "静态路由",
+   "stage": {
+    "id": "stage-3",
+    "title": "连接不同网段",
+    "description": "从手写路由到自动学习，再补IPv6和控制路由的规则。"
+   }
+  },
+  {
+   "id": "ICT-010",
+   "group": "数通",
+   "category": "路由技术",
+   "title": "OSPF",
+   "detail": "掌握OSPF的基本原理及配置",
+   "depth": "掌握",
+   "prerequisites": [
+    "ICT-009"
+   ],
+   "old_intro": "办公室从两个网段增长到二十个网段，每台路由器都手工维护路由会怎样？让路由器交换链路信息，再各自计算到目的地的路径。",
+   "old_outcome": "解释OSPF邻居、链路状态数据库、区域与代价，并把配置与邻接状态对应。",
+   "old_readingNote": "",
+   "old_explanation": "邻居发现后通过数据库描述、请求、更新和确认同步LSDB，再以自己为根计算SPF。区域0是骨干；广播网络使用DR/BDR减少邻接数量。邻居Full不等于所有业务路由已正确发布。",
+   "old_deep": "Hello先建立双向邻居关系；决定形成邻接后，ExStart/Exchange协商并交换数据库摘要，Loading请求缺失LSA，Full表示数据库同步完成。广播网DR/BDR选举通常不抢占；区域、认证、定时器、网络类型、MTU及Router ID冲突都应纳入排查。区分LSDB包含的信息、计算结果与最终路由表。",
+   "previous_chapter": "ICT-009",
+   "next_chapter": "ICT-017",
+   "previous_title": "静态路由",
+   "next_title": "IPv6基础知识",
+   "chapter_title": "OSPF",
+   "stage": {
+    "id": "stage-3",
+    "title": "连接不同网段",
+    "description": "从手写路由到自动学习，再补IPv6和控制路由的规则。"
+   }
+  },
+  {
+   "id": "ICT-017",
+   "group": "数通",
+   "category": "IPv6技术",
+   "title": "IPv6基础知识",
+   "detail": "IPv6协议及地址相关概念",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-002",
+    "ICT-009"
+   ],
+   "old_intro": "IPv4地址不够用时，IPv6为什么使用更长的地址？先学会读写地址，再观察它与IPv4在报文和邻居发现上的差异。",
+   "old_outcome": "读懂128位、前缀、压缩写法与地址作用域，为自动配置建立基础。",
+   "old_readingNote": "",
+   "old_explanation": "IPv6地址为128位，分单播、组播和任播，不使用广播。链路本地地址只在链路范围有效；邻居发现取代IPv4 ARP的部分功能。压缩表示不能改变前缀边界。",
+   "old_deep": "一个双冒号最多出现一次，可压缩连续0字段；链路本地通常使用fe80::/10范围，文档示例用2001:db8::/32。IPv6基本头无IPv4式首部校验和，中间路由器不分片；路径MTU发现依赖ICMPv6消息。",
+   "previous_chapter": "ICT-010",
+   "next_chapter": "ICT-018",
+   "previous_title": "OSPF",
+   "next_title": "IPv6地址配置",
+   "chapter_title": "IPv6基础知识",
+   "stage": {
+    "id": "stage-3",
+    "title": "连接不同网段",
+    "description": "从手写路由到自动学习，再补IPv6和控制路由的规则。"
+   }
+  },
+  {
+   "id": "ICT-018",
+   "group": "数通",
+   "category": "IPv6技术",
+   "title": "IPv6地址配置",
+   "detail": "ICMPv6和IPv6无状态自动配置、DHCPv6",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-017"
+   ],
+   "old_intro": "手机连上IPv6网络后，没有手工输入地址，它怎样得到地址、网关和DNS？分别追踪RA、邻居发现、SLAAC与DHCPv6。",
+   "old_outcome": "把地址生成、默认路由和DNS来源分开，不把一种成功当成全部配置完成。",
+   "old_readingNote": "",
+   "old_explanation": "主机通过RS/RA发现路由器与前缀，可用SLAAC生成地址，并以DAD检查重复。DHCPv6分有状态与无状态配置；IPv6默认网关通常来自RA，不能以取得DHCPv6地址证明网关正确。",
+   "old_deep": "RA提供默认路由和前缀，前缀A标志影响SLAAC，M/O标志提示有状态地址或其他信息获取方式。DAD通过邻居发现检测重复。不要假设所有操作系统对DHCPv6支持完全相同。",
+   "previous_chapter": "ICT-017",
+   "next_chapter": "ICT-011",
+   "previous_title": "IPv6基础知识",
+   "next_title": "OSPFv3",
+   "chapter_title": "IPv6地址配置",
+   "stage": {
+    "id": "stage-3",
+    "title": "连接不同网段",
+    "description": "从手写路由到自动学习，再补IPv6和控制路由的规则。"
+   }
+  }
+ ],
+ "units": [
+  {
+   "id": "ICT-009.01",
+   "parent": "ICT-009",
+   "term": "IP路由基础",
+   "depth": "掌握",
+   "explain": "把路由表想成“目的网络—下一站—出口”的指路表。直连路由来自有效的三层接口，静态路由由管理员填写，动态路由由协议学习。默认路由0.0.0.0/0是没有更具体条目时的兜底。前缀越长，描述的范围越小；所以/24覆盖256个地址，比/16覆盖65536个地址更具体。\n路由表保存目的前缀、下一跳、出接口、来源协议、优先级与开销等信息。查一个报文目的地址时先挑最长的匹配前缀；不同前缀不能先拿优先级相互淘汰。同一前缀的候选路径才按协议优先级和该协议的选路规则比较，并可能形成等价路径。下一跳还需递归解析为实际出接口与链路邻居。\n已收集的协议路由、安装进IP路由表的路由和硬件转发表不是完全相同的观察层次，排障要确认最终用于转发的结果。",
+   "process": [
+    "获取候选路由",
+    "按同前缀规则选安装路径",
+    "对报文进行最长前缀匹配",
+    "递归解析下一跳与出口",
+    "二层封装转发"
+   ],
+   "walkthrough": {
+    "title": "最长前缀优先于协议优先级",
+    "setup": "路由表同时存在10.1.0.0/16与10.1.2.0/24，目的为10.1.2.99。",
+    "steps": [
+     "目的地址同时落在两个前缀范围中，先比较前缀长度，24比16更具体。",
+     "即使/24的协议优先级数值200，而/16为10，转发仍匹配已安装的/24；不能跨前缀直接比较优先级。",
+     "仅在同一目的前缀的候选路由之间，才按平台的优先级、协议选路等规则决定安装哪些路由。"
+    ],
+    "conclusion": "选/24。优先级数值小并不能跨越最长前缀原则；只有同一前缀候选之间才比较协议优先级等。"
+   },
+   "config": {
+    "code": "display ip routing-table\ndisplay ip routing-table 10.1.2.99",
+    "platform": "支持相关功能的VRP V200设备；命令据相应华为配置指南，目标型号另核对",
+    "notes": "隔离实验学习片段，未执行实机验收。接口地址与对端需同步配置；不能把示例当作赛事指定环境。"
+   },
+   "commandNotes": [
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "路由可见业务黑洞",
+    "cause": "下一跳递归或硬件转发未成立",
+    "check": "核对有效路由、下一跳和ARP",
+    "fix": "恢复底层可达与正确出口"
+   },
+   "sources": [
+    {
+     "title": "华为 S9300 / S9300E IP单播路由配置指南",
+     "url": "https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",
+     "version": "V200R008 C00/C10",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "静态路由"
+  },
+  {
+   "id": "ICT-009.02",
+   "parent": "ICT-009",
+   "term": "IPv4静态路由",
+   "depth": "掌握",
+   "explain": "IPv4静态路由由管理员显式指定目的网段与下一跳，适合小规模、默认出口与精确控制。配置语法中的目的掩码决定匹配范围，下一跳应是可直接或递归到达的对端，而非随意填本机地址。下一跳不可解析时静态可能不安装；下一跳仍被判断可达但远端业务已断时，路由又可能继续存在，所以浮动静态的优先级并不能代替故障检测。\n实验需要双向配置，每次测试还要确认源地址，因为设备以不同源发ping会需要不同回程。",
+   "process": [
+    "规划目的前缀与对端下一跳",
+    "检查下一跳路由可解析",
+    "配置静态并观察是否入表",
+    "补齐中间及回程路由",
+    "指定源地址验证业务"
+   ],
+   "walkthrough": {
+    "title": "去程与回程都需要路由",
+    "setup": "R1连接192.168.10.0/24，R2连接192.168.20.0/24，两者互联10.0.12.0/30。",
+    "steps": [
+     "R1配置到192.168.20.0/24经R2互联地址的静态路由，使A的请求有去程。",
+     "R2同时需要到192.168.10.0/24经R1的回程路由，否则B的响应找不到A。",
+     "核对两端主机默认网关及路由表，再从A访问B；只在R1出现一条远端路由不构成双向连通证据。"
+    ],
+    "conclusion": "Echo Request可能到达R3，但Echo Reply无法返回，测试失败。应补R3和中间节点回程，不把有去程表项误当双向通。"
+   },
+   "config": {
+    "code": "system-view\nip route-static 192.168.20.0 255.255.255.0 10.0.12.2\nquit\ndisplay ip routing-table 192.168.20.20\nping -a 192.168.10.1 192.168.20.1",
+    "platform": "支持相关功能的VRP V200设备；命令据相应华为配置指南，目标型号另核对",
+    "notes": "R1侧示例。R1—R2为10.0.12.0/30，R2—R3为10.0.23.0/30，R2与R3需配置到两端LAN的正确去/回程。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。",
+    "静态路由依次表达目的网络、掩码或长度、下一跳等条件；它告诉当前设备怎样走，不能代替远端的回程路由。"
+   ],
+   "fault": {
+    "symptom": "配置后不入表",
+    "cause": "下一跳不可达或同前缀更优来源",
+    "check": "查下一跳递归和精确前缀候选",
+    "fix": "修正下一跳/优先级，不直接放宽默认路由"
+   },
+   "sources": [
+    {
+     "title": "华为 S9300 / S9300E IP单播路由配置指南",
+     "url": "https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",
+     "version": "V200R008 C00/C10",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "静态路由"
+  },
+  {
+   "id": "ICT-009.03",
+   "parent": "ICT-009",
+   "term": "IPv6静态路由",
+   "depth": "掌握",
+   "explain": "IPv6静态路由使用128位地址与前缀长度，原理仍是目的最长前缀与下一跳解析，但邻居发现代替IPv4 ARP。全局下一跳可以依IPv6路由解析，链路本地下一跳只在一条链路内有意义，因此通常还必须给出出接口，防止相同fe80::地址在不同接口上歧义。\n默认路由是::/0，不是0.0.0.0。学习时应分别验证链路本地、全局与远端前缀，保留ICMPv6必要消息；小包能通不能排除路径MTU问题。",
+   "process": [
+    "启用接口IPv6并规划地址",
+    "确定远端前缀与下一跳作用域",
+    "配置IPv6静态路由",
+    "通过ND解析本链路下一跳",
+    "验证双向IPv6与大包"
+   ],
+   "walkthrough": {
+    "title": "链路本地下一跳为什么要指定接口",
+    "setup": "R1有两条IPv6链路，每条链路对端都可能使用fe80::2。",
+    "steps": [
+     "fe80::2仅在链路范围内有意义，仅写这个地址不能确定它属于哪一条接口。",
+     "指向远端前缀的静态路由若使用链路本地下一跳，要按设备语法同时明确出口接口和fe80::2。",
+     "检查该接口上的邻居发现和对端回程；地址族变了，下一跳可解析与双向路径的原则仍然保留。"
+    ],
+    "conclusion": "链路本地地址只能在指定链路解释，不同接口可能都有fe80::2。应按平台语法同时指定出接口与链路本地下一跳，或使用可解析全局地址。"
+   },
+   "config": {
+    "code": "system-view\nipv6 route-static 2001:db8:2:: 64 2001:db8:12::2\nquit\ndisplay ipv6 routing-table\ndisplay ipv6 neighbors",
+    "platform": "支持IPv6静态路由的VRP设备",
+    "notes": "接口IPv6和对端回程先配置；若用链路本地下一跳，按相应命令帮助补出接口。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "全局地址有但无回包",
+    "cause": "缺回程或ND被过滤",
+    "check": "查IPv6路由、neighbors与ICMPv6",
+    "fix": "恢复双向路由及必要ND/错误消息"
+   },
+   "sources": [
+    {
+     "title": "RFC 8200 · IPv6",
+     "url": "https://www.rfc-editor.org/rfc/rfc8200",
+     "version": "2017 / RFC 8200",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "IPv6邻居发现",
+     "url": "https://www.rfc-editor.org/rfc/rfc4861",
+     "version": "RFC 4861",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "静态路由"
+  },
+  {
+   "id": "ICT-010.01",
+   "parent": "ICT-010",
+   "term": "OSPF原理",
+   "depth": "掌握",
+   "explain": "OSPF是开放式最短路径优先协议。邻居是能交换协议信息的相邻路由器；邻接是进一步同步拓扑数据库的关系；LSA是链路状态通告，LSDB是这些信息组成的数据库。Area把协议划为区域，Cost表示链路开销；先认识这些对象，再看它们如何让路由器自行算出路径。\nOSPF把区域内的链路状态通过LSA传播，使路由器基于相应LSDB计算最短路径。Hello发现并确认双向邻居，只有需要交换完整数据库的邻居才形成邻接。数据库描述、链路状态请求/更新/确认分别承担摘要、补齐和可靠传播。广播多路访问网络选DR/BDR减少全互联邻接；两个DROther通常停2-Way不必视为故障。\n区域0承担骨干角色，多区域必须考虑连续性与ABR。Full只说明邻接数据库同步，不保证目标LAN已发布或最终路由已优选。",
+   "process": [
+    "Hello发现并双向确认",
+    "按网络类型决定邻接",
+    "DD摘要协商与交换",
+    "LSR/LSU/LSAck补齐确认",
+    "SPF计算并参与路由优选"
+   ],
+   "walkthrough": {
+    "title": "从相邻到获得远端路由",
+    "setup": "R1—R2—R3在Area0互联，R3连接业务网192.168.30.0/24。",
+    "steps": [
+     "相邻接口发送Hello并核对区域、计时及网络类型等条件，形成邻居关系。",
+     "需要建立邻接的设备同步链路状态信息，得到区域拓扑数据库，再各自运行最短路径计算。",
+     "R1最终安装到192.168.30.0/24的路由。广播网中两个DROther之间可能保持2-Way，不能要求任意邻居对都Full。"
+    ],
+    "conclusion": "通常正常。广播网DROther之间不一定建Full邻接；应结合角色、网络类型与业务路由判断，而不是把所有2-Way都当故障。"
+   },
+   "config": {
+    "code": "system-view\nospf 1 router-id 1.1.1.1\n area 0.0.0.0\n  network 10.0.12.0 0.0.0.3\n  network 192.168.1.0 0.0.0.255\n  quit\n quit\ndisplay ospf peer brief\ndisplay ospf lsdb\ndisplay ip routing-table protocol ospf",
+    "platform": "支持相关功能的VRP V200设备；命令据相应华为配置指南，目标型号另核对",
+    "notes": "隔离实验学习片段，未执行实机验收。接口地址与对端需同步配置；不能把示例当作赛事指定环境。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "邻居Full缺LAN路由",
+    "cause": "LAN未进OSPF或被策略过滤",
+    "check": "对照接口使能、LSA和路由表",
+    "fix": "修正网段发布/策略而非重建所有邻居"
+   },
+   "sources": [
+    {
+     "title": "RFC 2328 · OSPFv2",
+     "url": "https://www.rfc-editor.org/rfc/rfc2328",
+     "version": "1998 / RFC 2328",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "OSPF"
+  },
+  {
+   "id": "ICT-010.02",
+   "parent": "ICT-010",
+   "term": "OSPF配置",
+   "depth": "掌握",
+   "explain": "在常见VRP OSPF配置中，进程号是本地标识，Router ID用于协议唯一身份；network语句按接口IPv4地址与通配符匹配，让符合条件的接口加入指定区域，不是凭空产生一条不存在接口的路由。两端互联需区域、认证、定时器与网络类型兼容，广播网还应核对掩码与选举条件。\n验证顺序是接口启用、邻居、LSDB、OSPF计算路由、IP安装路由及业务。配置示例只能作为局部节点，其他路由器仍需唯一ID和自己的LAN发布。",
+   "process": [
+    "为进程规划唯一Router ID",
+    "area内匹配互联与LAN接口",
+    "确认邻居角色/状态",
+    "检查LSDB和路由安装",
+    "注入错网段或MTU故障定位"
+   ],
+   "walkthrough": {
+    "title": "network通配符实际匹配什么",
+    "setup": "R1接口地址10.0.12.1/30，目标是在Area0使该接口参与OSPF。",
+    "steps": [
+     "VRP示例network 10.0.12.0 0.0.0.3中，通配符的零位要求对应地址位一致，1位允许变化。",
+     "因此该条件覆盖10.0.12.0到3，接口10.0.12.1被选中参与对应区域。",
+     "若误填子网掩码255.255.255.252，含义不再相同。用接口协议状态、邻居和业务前缀验证，而非仅回读这一行文字。"
+    ],
+    "conclusion": "前者匹配该/30地址范围；后者把掩码误作通配符，0/1位意义相反，可能匹配错误接口或没有期望效果。"
+   },
+   "config": {
+    "code": "system-view\nospf 1 router-id 1.1.1.1\n area 0.0.0.0\n  network 10.0.12.0 0.0.0.3\n  network 192.168.1.0 0.0.0.255\n  quit\n quit\ndisplay ospf peer brief\ndisplay ospf lsdb\ndisplay ip routing-table protocol ospf",
+    "platform": "支持相关功能的VRP V200设备；命令据相应华为配置指南，目标型号另核对",
+    "notes": "隔离实验学习片段，未执行实机验收。接口地址与对端需同步配置；不能把示例当作赛事指定环境。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "ExStart/Exchange反复",
+    "cause": "MTU/Router ID/链路问题",
+    "check": "对照接口MTU、ID与抓包",
+    "fix": "按原因修正，不能跳过数据库问题只加静态掩盖"
+   },
+   "sources": [
+    {
+     "title": "RFC 2328 · OSPFv2",
+     "url": "https://www.rfc-editor.org/rfc/rfc2328",
+     "version": "1998 / RFC 2328",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "华为 S9300 / S9300E IP单播路由配置指南",
+     "url": "https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",
+     "version": "V200R008 C00/C10",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "OSPF"
+  },
+  {
+   "id": "ICT-017.01",
+   "parent": "ICT-017",
+   "term": "IPv6协议",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "IPv6基础头固定40字节，包含版本、流量类、流标签、载荷长度、下一首部、跳数限制及源/目的地址。扩展头通过Next Header串联，传输层不一定紧跟基础头，分析抓包要沿链找到TCP、UDP或ICMPv6。路由器转发时递减Hop Limit，但不替经过的IPv6数据报做路由器分片，过大包依靠Packet Too Big反馈让源端调整。\n基础头没有IPv4式首部校验和不等于没有差错检测，链路层与上层仍有相应机制。过滤策略还要考虑合法扩展头及ICMPv6，不能只凭普通小包测试就认定应用全部可达。",
+   "process": [
+    "识别固定基础头",
+    "按Next Header遍历扩展链",
+    "转发递减Hop Limit",
+    "过MTU产生Packet Too Big",
+    "源端调整大小"
+   ],
+   "walkthrough": {
+    "title": "大IPv6包遇到更小MTU",
+    "setup": "源A发送1500字节IPv6包，路径下一段MTU只有1280字节，假设没有隧道等额外变体。",
+    "steps": [
+     "中间路由器不能像IPv4某些场景那样替源端分片，包无法直接通过该链路。",
+     "它丢弃并返回ICMPv6 Packet Too Big，指明MTU，源端据此调整包大小或在源端进行适当处理。",
+     "若错误过滤这类控制消息，可能小包正常而大文件卡住；这与“能不能ping”并不是同一个判断。"
+    ],
+    "conclusion": "通常丢弃并回ICMPv6 Packet Too Big指示MTU，不直接代源端分片。若PTB被挡，可能出现小包通而大包失败。"
+   },
+   "config": {
+    "code": "system-view\ninterface GigabitEthernet 0/0/0\n ipv6 enable\n ipv6 address 2001:db8:12::1/64\n quit\ndisplay ipv6 interface brief\ndisplay ipv6 neighbors",
+    "platform": "支持IPv6的VRP V200路由接口",
+    "notes": "部分V200设备需全局ipv6使能；二层物理口须使用正确三层接口/VLANIF。学习片段未在实机执行，不作为赛事指定版本。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "小包通大包丢",
+    "cause": "MTU不足且PTB被过滤",
+    "check": "查各段MTU及ICMPv6类型2",
+    "fix": "允许必要错误反馈并校准MTU"
+   },
+   "sources": [
+    {
+     "title": "RFC 8200 · IPv6",
+     "url": "https://www.rfc-editor.org/rfc/rfc8200",
+     "version": "2017 / RFC 8200",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "ICMPv6",
+     "url": "https://www.rfc-editor.org/rfc/rfc4443",
+     "version": "RFC 4443",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "IPv6基础知识"
+  },
+  {
+   "id": "ICT-017.02",
+   "parent": "ICT-017",
+   "term": "IPv6地址概念",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "十六进制用0到9和a到f表示十六种值，每位对应4个二进制位。IPv6的八组地址，每组最多4个十六进制位，合计128位。例如0001可写为1，连续全零组可以用一次::代替；展开时必须补足八组。/64仍表示前64位是网络前缀，和IPv4的斜杠写法采用同一原则。\nIPv6地址为128位，常写成八组十六进制，每组可省前导零，连续零组最多用一次双冒号压缩。地址分单播、组播与任播，没有IPv4式广播；任播使用单播形式但可在多个节点表达同一服务身份。链路本地地址通常在fe80::/10，只在当前链路有效；全局单播和唯一本地地址具有不同范围和规划用途。\n前缀长度决定网络位，不能根据双冒号位置猜子网。使用链路本地下一跳时要带出接口上下文，不同链路可能出现相同文本地址。教程使用2001:db8::/32是文档示例，不能作为真实互联网业务地址分配。",
+   "process": [
+    "展开压缩地址",
+    "识别类别与作用域",
+    "按/长度确定网络部分",
+    "link-local补接口上下文",
+    "按实际作用域测试"
+   ],
+   "walkthrough": {
+    "title": "读懂压缩地址和作用域",
+    "setup": "接口地址为2001:db8:1::abcd/64，另一条链路还有fe80::1。",
+    "steps": [
+     "把压缩地址展开可见前64位对应2001:db8:1:0，网络前缀为2001:db8:1::/64。",
+     "双冒号代替连续全零组，同一地址只能用一次，不能因省略零而改变前缀长度。",
+     "fe80::1是链路本地地址，不能作为普通跨路由目的；同一写法在不同链路可出现，需要结合接口理解。"
+    ],
+    "conclusion": "前缀2001:db8:1:0::/64；fe80::1只在链路范围有效，不能作为普通跨网可路由目的。"
+   },
+   "config": {
+    "code": "system-view\ninterface GigabitEthernet 0/0/0\n ipv6 enable\n ipv6 address 2001:db8:12::1/64\n quit\ndisplay ipv6 interface brief\ndisplay ipv6 neighbors",
+    "platform": "支持IPv6的VRP V200路由接口",
+    "notes": "部分V200设备需全局ipv6使能；二层物理口须使用正确三层接口/VLANIF。学习片段未在实机执行，不作为赛事指定版本。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "误判同子网",
+    "cause": "忽略前缀长度",
+    "check": "展开地址逐位比较网络位",
+    "fix": "按实际前缀修正地址规划"
+   },
+   "sources": [
+    {
+     "title": "IPv6地址架构",
+     "url": "https://www.rfc-editor.org/rfc/rfc4291",
+     "version": "RFC 4291",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "IPv6基础知识"
+  },
+  {
+   "id": "ICT-018.01",
+   "parent": "ICT-018",
+   "term": "ICMPv6",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "ICMPv6承载差错、诊断及邻居发现，是IPv6运行的重要组成。Destination Unreachable、Packet Too Big、Time Exceeded和Parameter Problem帮助源端理解转发失败，Echo只用于部分连通性测试。\nRS/RA、NS/NA等邻居发现消息实现路由器发现、地址解析和邻居可达性维护，使用相应IPv6组播而非IPv4广播。防护应按必要类型、接口、来源与速率控制，不能把所有ICMPv6一刀切丢弃。排障还应查看错误消息引用的原报文，分清该错误针对哪条业务，而不是把一条报错直接推广为全网故障。",
+   "process": [
+    "主机产生路由/邻居发现消息",
+    "路由器或目标按条件响应",
+    "建立网关/邻居状态",
+    "转发异常产生差错",
+    "源端依据反馈调整"
+   ],
+   "walkthrough": {
+    "title": "IPv6先找到邻居再发送",
+    "setup": "A和路由器R同处一个IPv6链路，A需要把流量交给R。",
+    "steps": [
+     "A可通过RS/RA发现路由器与前缀信息，这些消息由ICMPv6承载。",
+     "当需要下一跳链路地址时，使用NS/NA进行邻居发现；DAD还用相关机制检查候选地址冲突。",
+     "全部屏蔽ICMPv6会影响远不止ping的功能；按类型和信任边界控制，才能同时保留合法ND与路径MTU发现。"
+    ],
+    "conclusion": "可能破坏RS/RA、NS/NA、DAD和路径MTU发现；应按类型与信任边界精细控制。"
+   },
+   "config": {
+    "code": "display ipv6 neighbors\ndisplay ipv6 interface\ndisplay ipv6 routing-table",
+    "platform": "VRP IPv6查询命令",
+    "notes": "过滤配置需按ACL6类型支持设计；查询不是关闭安全策略。未执行实机验收。"
+   },
+   "commandNotes": [
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "有地址无邻居",
+    "cause": "ND消息被过滤",
+    "check": "核对NS/NA与策略",
+    "fix": "恢复必要ND和差错反馈的精确规则"
+   },
+   "sources": [
+    {
+     "title": "IPv6邻居发现",
+     "url": "https://www.rfc-editor.org/rfc/rfc4861",
+     "version": "RFC 4861",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "ICMPv6",
+     "url": "https://www.rfc-editor.org/rfc/rfc4443",
+     "version": "RFC 4443",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "IPv6地址配置"
+  },
+  {
+   "id": "ICT-018.02",
+   "parent": "ICT-018",
+   "term": "SLAAC",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "SLAAC让主机根据路由器通告的前缀自主形成IPv6地址。RA前缀信息的A标志影响是否用于自动配置，L标志影响是否认为该前缀在本链路；默认网关来自路由器寿命，不应把前缀有效期当作网关寿命。主机通常需进行DAD，地址可经历Tentative状态。\n接口标识有多种生成方法，不应假设全部来自MAC或EUI-64。常见LAN用/64前缀，DNS可以由RA扩展或DHCPv6等提供，拿到SLAAC地址不说明DNS与应用已经就绪。地址首选寿命和有效寿命也不同，老地址可能进入弃用状态但尚未立即删除。",
+   "process": [
+    "形成链路本地并DAD",
+    "发RS或等待RA",
+    "检查前缀A/L与寿命",
+    "生成地址并检查重复",
+    "分别维护地址与默认路由"
+   ],
+   "walkthrough": {
+    "title": "有地址却没有默认网关",
+    "setup": "R发送2001:db8:10::/64前缀，A标志允许自动配置，但该RA的路由器寿命为0。",
+    "steps": [
+     "主机可依据有效前缀生成自己的IPv6地址，并执行重复地址检测。",
+     "路由器寿命为0表示不把该通告者作为默认路由器，和前缀是否允许SLAAC是不同信息。",
+     "因此主机有2001:db8:10::开头的地址，却可能没有可用默认路由；排查要分别看地址和路由表。"
+    ],
+    "conclusion": "可以。自动地址配置与默认路由器有效期是独立信息，寿命0不应把此路由器当默认网关。"
+   },
+   "config": {
+    "code": "system-view\ninterface GigabitEthernet 0/0/0\n ipv6 enable\n ipv6 address 2001:db8:10::1/64\n undo ipv6 nd ra halt\n quit\ndisplay ipv6 interface GigabitEthernet 0/0/0",
+    "platform": "支持RA的VRP V200路由接口",
+    "notes": "确认该版本前缀A/L标志与RA缺省行为。DNS另通过适配终端的RDNSS或DHCPv6；仅在隔离LAN测试。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "地址重复失败",
+    "cause": "同链路已有相同地址",
+    "check": "查DAD NS/NA与终端状态",
+    "fix": "消除冲突，保留DAD机制"
+   },
+   "sources": [
+    {
+     "title": "IPv6无状态自动配置",
+     "url": "https://www.rfc-editor.org/rfc/rfc4862",
+     "version": "RFC 4862",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "IPv6邻居发现",
+     "url": "https://www.rfc-editor.org/rfc/rfc4861",
+     "version": "RFC 4861",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "IPv6地址配置"
+  },
+  {
+   "id": "ICT-018.03",
+   "parent": "ICT-018",
+   "term": "DHCPv6",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "DHCPv6可以有状态分配地址，也可以只提供DNS等参数；前缀委派把一段前缀分给下游路由器，与给主机分配单地址不同，不能把IA_NA和IA_PD混淆。常见协商为Solicit、Advertise、Request、Reply，Rapid Commit等能力可改变报文数量。\n客户端身份通常使用DUID等标识，不等同于只按MAC。RA的M/O标志与客户端实现共同影响行为，默认网关一般仍来自RA而非DHCPv6租约。实验要分别记录地址、DNS、委派前缀及默认路由的来源；续租与重新绑定还应观察服务器可达性及租期边界，不能照搬DHCPv4的每一个细节。",
+   "process": [
+    "终端按RA/本机策略启动",
+    "Solicit寻找服务",
+    "Advertise给候选",
+    "Request/Reply确认地址或参数",
+    "续租或重新绑定"
+   ],
+   "walkthrough": {
+    "title": "DHCPv6租约不包含全部依赖",
+    "setup": "主机通过DHCPv6获得2001:db8:10::100和DNS参数，但没有默认路由。",
+    "steps": [
+     "DHCPv6交换解决相应地址/参数分配问题，成功租约只是其中一部分。",
+     "主机通常仍通过RA学习默认路由器，所以继续核对RA是否到达、路由器寿命及终端接收行为。",
+     "修正合法RA后再检查外网访问；不应把“有地址和DNS”直接推断为“网关也自动正确”。"
+    ],
+    "conclusion": "查RA、路由器寿命和终端接收行为。DHCPv6取得租约不替代默认路由器发现。"
+   },
+   "config": {
+    "code": "display dhcpv6 pool\ndisplay dhcpv6 server statistics\ndisplay ipv6 interface",
+    "platform": "支持DHCPv6的VRP产品，具体子命令依版本",
+    "notes": "本片段为核验命令；池、IA_NA/IA_PD及中继配置见所选型号DHCPv6指南，不将租约成功等同默认网关正确。"
+   },
+   "commandNotes": [
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "DNS缺失",
+    "cause": "其他信息选项或终端支持不符",
+    "check": "核对Reply与客户端能力",
+    "fix": "按终端提供正确DNS机制"
+   },
+   "sources": [
+    {
+     "title": "DHCPv6",
+     "url": "https://www.rfc-editor.org/rfc/rfc8415",
+     "version": "RFC 8415",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "IPv6地址配置"
+  }
+ ],
+ "chapter_sequence": [
+  "ICT-009",
+  "ICT-010",
+  "ICT-017",
+  "ICT-018"
+ ],
+ "neighbors": {
+  "before": "ICT-006",
+  "after": "ICT-011"
+ }
+}

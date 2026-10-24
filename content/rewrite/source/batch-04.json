@@ -1,0 +1,619 @@
+{
+ "batch": "batch-04",
+ "stage": {
+  "id": "stage-3",
+  "title": "连接不同网段",
+  "description": "从手写路由到自动学习，再补IPv6和控制路由的规则。",
+  "chapters": [
+   "ICT-009",
+   "ICT-010",
+   "ICT-017",
+   "ICT-018",
+   "ICT-011",
+   "ICT-012",
+   "ICT-013",
+   "ICT-014",
+   "ICT-015",
+   "ICT-016"
+  ]
+ },
+ "chapters": [
+  {
+   "id": "ICT-011",
+   "group": "数通",
+   "category": "路由技术",
+   "title": "OSPFv3",
+   "detail": "掌握OSPFv3的基本原理及配置",
+   "depth": "掌握",
+   "prerequisites": [
+    "ICT-010",
+    "ICT-018"
+   ],
+   "old_intro": "网络改用IPv6后，OSPF如何建立邻居并发布前缀？带着已经学会的OSPF流程，观察OSPFv3在地址与接口启用上的变化。",
+   "old_outcome": "区分Router ID与IPv6接口地址，理解链路本地通信及接口加入区域。",
+   "old_readingNote": "",
+   "old_explanation": "OSPFv3面向IPv6时通常以链路本地地址作为邻接通信地址，Router ID仍为32位。按接口启用并检查区域、实例和网络类型；与OSPFv2不能仅通过替换地址完成迁移。",
+   "old_deep": "OSPFv3的Router ID仍为32位，即使没有IPv4地址也要保证唯一。邻接以链路本地地址工作，前缀信息与拓扑信息在LSA中分离；实例ID允许同链路区分实例。IPv6转发与接口协议使能都需核对。",
+   "previous_chapter": "ICT-018",
+   "next_chapter": "ICT-012",
+   "previous_title": "IPv6地址配置",
+   "next_title": "IS-IS（IPv4）（IPv6）",
+   "chapter_title": "OSPFv3",
+   "stage": {
+    "id": "stage-3",
+    "title": "连接不同网段",
+    "description": "从手写路由到自动学习，再补IPv6和控制路由的规则。"
+   }
+  },
+  {
+   "id": "ICT-012",
+   "group": "数通",
+   "category": "路由技术",
+   "title": "IS-IS（IPv4）（IPv6）",
+   "detail": "掌握IS-IS在IPv4和IPv6场景的基本原理及配置",
+   "depth": "掌握",
+   "prerequisites": [
+    "ICT-010",
+    "ICT-018"
+   ],
+   "old_intro": "大型网络为什么会采用IS-IS来发布路由？先把它看成另一种交换拓扑、计算路径的协议，再理解NET、层级与地址族。",
+   "old_outcome": "区分L1/L2区域条件，解释同一邻接下IPv4和IPv6前缀如何分别生效。",
+   "old_readingNote": "",
+   "old_explanation": "IS-IS以NET标识路由器，L1负责区域内，L2连接区域。用TLV承载不同地址族可达性，邻接建立不依赖IPv4单播可达。需区分邻接、LSDB和IPv4/IPv6路由安装。",
+   "old_deep": "NET由区域地址、系统ID与NSEL构成，系统ID需唯一。L1邻接需满足区域条件，L2可跨区域；双层路由器连接层级。IPv4/IPv6可达性以不同TLV承载，单拓扑与多拓扑选择影响链路可用性。",
+   "previous_chapter": "ICT-011",
+   "next_chapter": "ICT-013",
+   "previous_title": "OSPFv3",
+   "next_title": "BGP、BGP4+",
+   "chapter_title": "IS-IS（IPv4）（IPv6）",
+   "stage": {
+    "id": "stage-3",
+    "title": "连接不同网段",
+    "description": "从手写路由到自动学习，再补IPv6和控制路由的规则。"
+   }
+  },
+  {
+   "id": "ICT-013",
+   "group": "数通",
+   "category": "路由技术",
+   "title": "BGP、BGP4+",
+   "detail": "掌握BGP在IPv4、IPv6、VPN等场景的基本原理及配置",
+   "depth": "掌握",
+   "prerequisites": [
+    "ICT-009",
+    "ICT-010",
+    "ICT-018"
+   ],
+   "old_intro": "公司同时连接两个运营商，如何表达“哪些网段愿意通告、优先使用哪个出口”？从两个自治系统交换一条前缀开始学习BGP。",
+   "old_outcome": "区分邻居会话、路由发布、选路属性及下一跳可达；VPN地址族在VPN章后回看。",
+   "old_readingNote": "先学IPv4、IPv6单播BGP。“BGP VPN场景”涉及后面的VRF、RD与RT，第一次认识它们的职责，学完“VPN基础知识”和“BGP/MPLS IP VPN”后再回读细节。",
+   "old_explanation": "BGP以TCP建立会话，通告路径属性并依策略选择路径。MP-BGP用地址族扩展承载IPv6与VPN路由；会话Established不表示某地址族已交换路由。下一跳不可达会使路由不能用于转发。",
+   "old_deep": "邻居会话承载Update，路由先经过接收策略与有效性判断，再参与最佳路径选择，满足发布规则后发给其他邻居。IBGP全互联、路由反射与EBGP的传播规则不同。Local Preference、AS_PATH、MED等不是可任意互换的数值；下一跳不可达常使路由可见但不可用。",
+   "previous_chapter": "ICT-012",
+   "next_chapter": "ICT-014",
+   "previous_title": "IS-IS（IPv4）（IPv6）",
+   "next_title": "ACL",
+   "chapter_title": "BGP、BGP4+",
+   "stage": {
+    "id": "stage-3",
+    "title": "连接不同网段",
+    "description": "从手写路由到自动学习，再补IPv6和控制路由的规则。"
+   }
+  },
+  {
+   "id": "ICT-014",
+   "group": "数通",
+   "category": "路由技术",
+   "title": "ACL",
+   "detail": "ACL的原理及配置",
+   "depth": "原理/配置（原文未标级）",
+   "prerequisites": [
+    "ICT-002",
+    "ICT-009"
+   ],
+   "old_intro": "只允许办公电脑访问服务器的HTTPS，其他服务禁止，该把条件写在哪里？先把一条真实流拆成地址、协议和端口，再理解ACL的有序匹配。",
+   "old_outcome": "读懂规则顺序、匹配条件与应用位置，分清匹配结果和最终执行动作。",
+   "old_readingNote": "",
+   "old_explanation": "ACL是一组匹配规则，被流量过滤、NAT或路由策略引用才产生具体作用。高级ACL可匹配协议、源/目的IP与端口；通配符0位精确匹配，1位忽略。末尾行为由引用场景决定。",
+   "old_deep": "基本ACL通常匹配源IPv4，高级ACL扩展协议、源/目的地址与端口等。规则编号影响匹配顺序；permit/deny表示匹配结果，被不同业务调用时语义与未命中行为可能不同。排障需同时核对ACL规则、引用对象、接口方向和计数。",
+   "previous_chapter": "ICT-013",
+   "next_chapter": "ICT-015",
+   "previous_title": "BGP、BGP4+",
+   "next_title": "IP Prefix List",
+   "chapter_title": "ACL",
+   "stage": {
+    "id": "stage-3",
+    "title": "连接不同网段",
+    "description": "从手写路由到自动学习，再补IPv6和控制路由的规则。"
+   }
+  }
+ ],
+ "units": [
+  {
+   "id": "ICT-011.01",
+   "parent": "ICT-011",
+   "term": "OSPFv3原理",
+   "depth": "掌握",
+   "explain": "OSPFv3用于IPv6时通常以链路本地地址进行邻接通信，Router ID仍然是32位标识，与接口是否有IPv4地址无关。拓扑与IPv6前缀信息在LSA中分离，接口通过进程、区域和实例信息加入协议。同一链路的实例ID有助区分不同OSPFv3实例，不能只看全局IPv6地址互通。\n协议使用IPv6组播与IP协议号89，认证方式与OSPFv2不宜机械照抄。路由安装仍需观察下一跳链路本地地址所对应的接口。",
+   "process": [
+    "接口获得链路本地地址",
+    "Hello携带区域/实例等参数",
+    "形成邻接并同步LSDB",
+    "根据拓扑及前缀计算路径",
+    "安装带出接口的IPv6下一跳"
+   ],
+   "walkthrough": {
+    "title": "没有IPv4地址也能建立OSPFv3",
+    "setup": "R1/R2互联接口只有IPv6地址，分别规划唯一Router ID 1.1.1.1和2.2.2.2。",
+    "steps": [
+     "Router ID虽然写成点分形式，但它是32位协议标识，不要求配置一个同值IPv4接口。",
+     "接口通过IPv6链路本地地址交换OSPFv3控制报文，满足区域等条件后建立邻居和邻接。",
+     "邻接正常后还要看业务IPv6前缀是否被发布；不能把邻居出现理解为所有接口地址都会自动通告。"
+    ],
+    "conclusion": "可以。需要IPv6接口、链路本地地址和唯一32位Router ID等条件；Router ID的点分表示不代表必须配置同值IPv4接口。"
+   },
+   "config": {
+    "code": "system-view\nospfv3 1\n router-id 1.1.1.1\n quit\ninterface GigabitEthernet 1/0/0\n ipv6 enable\n ipv6 address 2001:db8:12::1/64\n ospfv3 1 area 0.0.0.0\n quit\ncommit\ndisplay ospfv3 peer\ndisplay ipv6 routing-table",
+    "platform": "ME60 V800R023C00SPC500，Basic IP Routing配置指南的OSPFv3语法",
+    "notes": "R2用::2、Router ID2.2.2.2，LAN/Loopback还需在相应接口启用；该VRP8示例需要commit。不要把接口号照抄到其他设备。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。",
+    "commit用于相应两阶段配置平台使候选配置生效；其他平台的提交与保存机制可能不同，提交也不能替代业务验证或持久化检查。"
+   ],
+   "fault": {
+    "symptom": "IPv6能ping但无邻居",
+    "cause": "接口未启用进程或实例/区域不一致",
+    "check": "查看OSPFv3接口与Hello参数",
+    "fix": "统一协议使能与参数"
+   },
+   "sources": [
+    {
+     "title": "OSPFv3",
+     "url": "https://www.rfc-editor.org/rfc/rfc5340",
+     "version": "RFC 5340",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "RFC 8200 · IPv6",
+     "url": "https://www.rfc-editor.org/rfc/rfc8200",
+     "version": "2017 / RFC 8200",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "OSPFv3"
+  },
+  {
+   "id": "ICT-011.02",
+   "parent": "ICT-011",
+   "term": "OSPFv3配置",
+   "depth": "掌握",
+   "explain": "OSPFv3的使能常在接口下完成，不能只创建进程就等待所有IPv6网络自动被发布。先配置接口IPv6与全局前缀，再把互联和业务接口加入正确进程/区域，并为每台设备设置不同Router ID。VRP代际不同会影响全局IPv6开关、提交方式与命令细节，示例明确采用ME60的VRP8格式并要求commit。\n验收不仅看Full，还要验证业务/128或/64前缀进入IPv6路由表，下一跳邻居可解析并有回程。",
+   "process": [
+    "创建OSPFv3并指定Router ID",
+    "在互联与业务接口启用IPv6",
+    "接口加入进程和area",
+    "提交并检查邻接",
+    "核对业务路由与回程"
+   ],
+   "walkthrough": {
+    "title": "业务接口也要进入发布范围",
+    "setup": "R1/R2邻接已Full，R2另有Loopback地址2001:db8:2::1/128。",
+    "steps": [
+     "互联口使能OSPFv3仅证明互联口参加协议，Loopback没有因此自动加入。",
+     "按设计把业务Loopback加入适当进程与区域，或使用明确的路由引入方式。",
+     "R1查看IPv6路由是否出现2001:db8:2::1/128，再验证下一跳及回程；只观察Full会漏掉发布范围。"
+    ],
+    "conclusion": "不能据此认定会发布。接口未加入时通常没有预期前缀通告；须在业务接口按设计使能，或使用明确的路由引入机制。"
+   },
+   "config": {
+    "code": "system-view\nospfv3 1\n router-id 1.1.1.1\n quit\ninterface GigabitEthernet 1/0/0\n ipv6 enable\n ipv6 address 2001:db8:12::1/64\n ospfv3 1 area 0.0.0.0\n quit\ncommit\ndisplay ospfv3 peer\ndisplay ipv6 routing-table",
+    "platform": "ME60 V800R023C00SPC500，Basic IP Routing配置指南的OSPFv3语法",
+    "notes": "R2用::2、Router ID2.2.2.2，LAN/Loopback还需在相应接口启用；该VRP8示例需要commit。不要把接口号照抄到其他设备。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。",
+    "commit用于相应两阶段配置平台使候选配置生效；其他平台的提交与保存机制可能不同，提交也不能替代业务验证或持久化检查。"
+   ],
+   "fault": {
+    "symptom": "命令配置但运行未变",
+    "cause": "VRP8候选配置未commit",
+    "check": "检查提示符和当前运行状态",
+    "fix": "提交后回读并验证，不把下发文本当生效"
+   },
+   "sources": [
+    {
+     "title": "华为 S9300 / S9300E IP单播路由配置指南",
+     "url": "https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",
+     "version": "V200R008 C00/C10",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "OSPFv3",
+     "url": "https://www.rfc-editor.org/rfc/rfc5340",
+     "version": "RFC 5340",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "OSPFv3"
+  },
+  {
+   "id": "ICT-012.01",
+   "parent": "ICT-012",
+   "term": "IS-IS IPv4",
+   "depth": "掌握",
+   "explain": "IS-IS直接运行在相应链路层之上，通过NET标识路由器并区分区域。NET中的系统ID应唯一，NSEL通常为00；L1主要服务区域内，L2连接不同区域，L1/L2设备承担层间连接。IIH建立邻接，LSP发布拓扑/可达性，SNP帮助数据库同步；IPv4前缀由TLV承载。\n邻接不以IPv4单播可达为唯一前提，因此IP地址测试和IS-IS邻居需分别检查。宽度量及level规划也要一致，不能只配置一个NET就认为全部接口已加入。",
+   "process": [
+    "规划区域NET和唯一System ID",
+    "接口使能相应进程与level",
+    "IIH发现相容邻居",
+    "LSP/SNP同步拓扑与IPv4信息",
+    "SPF计算并安装路由"
+   ],
+   "walkthrough": {
+    "title": "区域不同的L1设备为何不邻接",
+    "setup": "R1和R2直连且IP互通，但都设为L1-only，NET中区域部分不同。",
+    "steps": [
+     "IS-IS用NET表达区域和系统身份，L1邻接要求匹配相应区域条件，IP能ping不代替协议参数。",
+     "本例两端区域不同，L1邻接可能不能建立；先定位区域条件，避免反复改无关IP地址。",
+     "按网络层级设计统一L1区域，或在适当位置使用L2/L1-L2。建立邻接后还要确认前缀和层级传播。"
+    ],
+    "conclusion": "L1邻接需要相同区域条件；应按设计连接L2或使用L1/L2层级，而不是只改IPv4地址。"
+   },
+   "config": {
+    "code": "system-view\nisis 1\n network-entity 49.0001.0000.0000.0001.00\n is-level level-2\n cost-style wide\n quit\ninterface GigabitEthernet 0/0/0\n ip address 10.0.12.1 255.255.255.252\n isis enable 1\n quit\ndisplay isis peer\ndisplay isis lsdb\ndisplay isis route",
+    "platform": "支持相关功能的VRP V200设备；命令据相应华为配置指南，目标型号另核对",
+    "notes": "隔离实验学习片段，未执行实机验收。接口地址与对端需同步配置；不能把示例当作赛事指定环境。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。",
+    "ip address给当前三层接口配置地址和掩码；终端的默认网关应指向所在网段的真实网关接口。对端地址、返回路由和必要许可仍需单独准备。"
+   ],
+   "fault": {
+    "symptom": "地址可ping但IS-IS无邻居",
+    "cause": "level/区域/接口使能不匹配",
+    "check": "查IIH、NET与接口协议状态",
+    "fix": "修正对应协议参数而非只重配IP"
+   },
+   "sources": [
+    {
+     "title": "华为 S9300 / S9300E IP单播路由配置指南",
+     "url": "https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",
+     "version": "V200R008 C00/C10",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "IS-IS（IPv4）（IPv6）"
+  },
+  {
+   "id": "ICT-012.02",
+   "parent": "ICT-012",
+   "term": "IS-IS IPv6",
+   "depth": "掌握",
+   "explain": "IS-IS可通过扩展TLV承载IPv6可达性，不需要为每个地址族建立完全独立的物理拓扑。单拓扑场景要求共享的路径具备相应地址族能力，多拓扑则可分别计算IPv4/IPv6路径；拓扑模式不一致可能导致邻接存在但某地址族路径缺失或业务中断。\n进程启用IPv6与接口启用IS-IS IPv6是两个层次，都需检查。已有IPv4 IS-IS路由成功不能证明IPv6通告、邻居发现和回程也完整。",
+   "process": [
+    "进程配置NET并启用IPv6拓扑",
+    "各相关接口启用IPv6与IS-IS IPv6",
+    "发布IPv6拓扑/前缀TLV",
+    "执行对应拓扑SPF",
+    "安装IPv6路由并解析下一跳"
+   ],
+   "walkthrough": {
+    "title": "IPv4正常不代表IPv6已发布",
+    "setup": "R1/R2的IS-IS IPv4路由已正常，计划增加2001:db8:2::/64业务。",
+    "steps": [
+     "先在进程和接口层核对IPv6能力与适当拓扑模式；已有IPv4邻接不能替代IPv6配置。",
+     "R2需要将IPv6业务前缀放入协议通告，查看LSP中的IPv6可达信息是否出现。",
+     "R1再检查IPv6路由与下一跳。若控制信息未带目标前缀，首先修正使能和发布范围，而不是仅测试物理链路。"
+    ],
+    "conclusion": "核对进程IPv6能力/拓扑模式、接口isis ipv6 enable、IPv6地址、LSP是否带前缀及相关路由策略。不能把邻居up当作IPv6已启用。"
+   },
+   "config": {
+    "code": "system-view\nisis 1\n network-entity 49.0001.0000.0000.0001.00\n is-level level-2\n cost-style wide\n ipv6 enable topology ipv6\n quit\ninterface GigabitEthernet 1/0/0\n ipv6 enable\n ipv6 address 2001:db8:12::1/64\n isis ipv6 enable 1\n quit\ncommit\ndisplay isis peer\ndisplay ipv6 routing-table",
+    "platform": "ME60 V800R023C00SPC500 IS-IS IPv6多拓扑语法",
+    "notes": "对端NET系统ID必须唯一；对端接口地址::2/64，并使用相容level与拓扑模式。IPv4业务如需同时运行须额外配置IPv4与isis enable。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。",
+    "commit用于相应两阶段配置平台使候选配置生效；其他平台的提交与保存机制可能不同，提交也不能替代业务验证或持久化检查。"
+   ],
+   "fault": {
+    "symptom": "某路径IPv4好IPv6坏",
+    "cause": "拓扑能力或IPv6接口启用缺失",
+    "check": "逐链路查多拓扑TLV与IPv6表",
+    "fix": "统一拓扑模式并启用所需接口"
+   },
+   "sources": [
+    {
+     "title": "华为 S9300 / S9300E IP单播路由配置指南",
+     "url": "https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",
+     "version": "V200R008 C00/C10",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "IPv6",
+     "url": "https://www.rfc-editor.org/rfc/rfc8200",
+     "version": "RFC 8200",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "IS-IS（IPv4）（IPv6）"
+  },
+  {
+   "id": "ICT-013.01",
+   "parent": "ICT-013",
+   "term": "BGP IPv4",
+   "depth": "掌握",
+   "explain": "BGP在自治系统之间或系统内部传递带属性的可达性信息，通过TCP179维护会话。Established只表示会话建立，路由还要满足注入条件、入出策略、下一跳有效性和选路规则。network在常见VRP中通常要求本地有精确匹配前缀；写一个更大的聚合不会自动把零散网段变成该前缀。\nLocal Preference、AS_PATH、MED等按规则依次比较，不能与OSPF cost直接作数值竞赛。IBGP传播限制与RR设计还需避免路由环路。",
+   "process": [
+    "先使会话端点底层可达",
+    "建立TCP并交换Open/Keepalive",
+    "注入本地有效前缀",
+    "策略与属性决定接收/优选",
+    "符合传播规则后更新邻居"
+   ],
+   "walkthrough": {
+    "title": "Established后还需要发布前缀",
+    "setup": "R1属于AS65001，R2属于AS65002，R1想通告192.168.10.0/24。",
+    "steps": [
+     "两端配置匹配的邻居与AS并建立TCP会话，Established说明会话成立。",
+     "R1还需要满足目标平台network的精确路由存在等发布条件，或按设计引入该前缀；会话本身不创造业务路由。",
+     "R2检查接收策略、最优路由和下一跳，再测试业务。若R1只有更具体子网，不能认为写一个聚合network就必然已发布。"
+    ],
+    "conclusion": "通常不会，精确前缀条件不满足。要根据设计形成有效聚合/精确路由，再由BGP通告，不能仅凭network文字推断已经发布。"
+   },
+   "config": {
+    "code": "system-view\nbgp 65001\n router-id 1.1.1.1\n peer 10.0.12.2 as-number 65002\n ipv4-family unicast\n  peer 10.0.12.2 enable\n  network 192.168.10.0 255.255.255.0\n  quit\n quit\ndisplay bgp peer\ndisplay bgp routing-table",
+    "platform": "S系列/AR支持BGP的VRP V200常见语法",
+    "notes": "R1已有192.168.1.0/24精确有效路由、互联10.0.12.1/30；对端AS65002设peer10.0.12.1 as-number65001并通告自己的LAN。只用于隔离私有AS实验。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "邻居Active",
+    "cause": "TCP/AS号/源地址不可达",
+    "check": "对照两端peer、TCP179、路由与ACL",
+    "fix": "恢复会话端点连通和正确AS配置"
+   },
+   "sources": [
+    {
+     "title": "RFC 4271 · BGP-4",
+     "url": "https://www.rfc-editor.org/rfc/rfc4271",
+     "version": "2006 / RFC 4271",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "华为 S9300 / S9300E IP单播路由配置指南",
+     "url": "https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",
+     "version": "V200R008 C00/C10",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "BGP、BGP4+"
+  },
+  {
+   "id": "ICT-013.02",
+   "parent": "ICT-013",
+   "term": "BGP IPv6",
+   "depth": "掌握",
+   "explain": "BGP4+通常指BGP对IPv6可达性的扩展，MP-BGP使用地址族与相应携带可达信息的属性扩展，而不是把IPv4地址字段直接加长。对等体的传输地址族和它交换的路由地址族需要区分；一个会话可有多个能力，但目标地址族必须按平台配置使能。\nIPv6下一跳仍需可达，链路本地下一跳的接口上下文也要正确。排障时必须读取IPv6对等体与IPv6路由表，不用IPv4会话成功替代验证。",
+   "process": [
+    "配置对等体AS与传输端点",
+    "协商多协议能力",
+    "在IPv6单播地址族使能邻居",
+    "注入/发布IPv6前缀",
+    "检查IPv6下一跳与实际转发"
+   ],
+   "walkthrough": {
+    "title": "一个BGP连接承载另一种地址族",
+    "setup": "R1/R2已经有BGP会话，计划交换IPv6单播前缀2001:db8:10::/64。",
+    "steps": [
+     "核对双方协商IPv6地址族能力，并按平台要求在IPv6单播地址族中使能邻居。",
+     "将2001:db8:10::/64按设计注入该地址族，检查出入方向策略，而不是仅查看IPv4路由。",
+     "接收端还需解析IPv6下一跳。会话up、前缀接收和前缀可转发是三个需要分别核对的状态。"
+    ],
+    "conclusion": "IPv6单播地址族的peer enable及IPv6前缀注入/导出。也应检查对端能力、进出策略与IPv6下一跳可达性。"
+   },
+   "config": {
+    "code": "system-view\nbgp 65001\n router-id 1.1.1.1\n peer 2001:db8:12::2 as-number 65002\n ipv6-family unicast\n  peer 2001:db8:12::2 enable\n  network 2001:db8:10:: 64\n  quit\n quit\ndisplay bgp ipv6 peer\ndisplay bgp ipv6 routing-table",
+    "platform": "S7700 V200R021C00/C01等支持BGP4+的VRP设备",
+    "notes": "IPv6接口与到对端的路由先就绪；2001:db8:1::/64必须在本机IPv6路由表存在，R2使用不同AS/Router ID和自己的前缀。VRP8产品需commit。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "有路由却不优选",
+    "cause": "IPv6下一跳不可达",
+    "check": "查下一跳递归与ND/IGP",
+    "fix": "恢复IPv6底层路由而非只增加IPv4可达"
+   },
+   "sources": [
+    {
+     "title": "RFC 4271 · BGP-4",
+     "url": "https://www.rfc-editor.org/rfc/rfc4271",
+     "version": "2006 / RFC 4271",
+     "accessed": "2026-10-24"
+    },
+    {
+     "title": "RFC 8200 · IPv6",
+     "url": "https://www.rfc-editor.org/rfc/rfc8200",
+     "version": "2017 / RFC 8200",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "BGP、BGP4+"
+  },
+  {
+   "id": "ICT-013.03",
+   "parent": "ICT-013",
+   "term": "BGP VPN场景",
+   "depth": "掌握",
+   "explain": "VPN场景的MP-BGP需要在路由中携带租户上下文。VPNv4使用RD使重叠IPv4前缀唯一，RT作为扩展团体控制实例的路由导入/导出；两者职责不可互换。PE在VPN地址族之间传递带标签等信息，CE侧可以用单独的VPN实例地址族与PE建立邻居。\n必须同时验证实例路由、跨PE控制面、底层LSP或其他隧道和数据转发。仅看全局IPv4表找不到租户路由并不证明路由不存在。",
+   "process": [
+    "CE路由进入本地VRF",
+    "RD唯一化前缀并附加RT/标签",
+    "MP-BGP在PE间传播VPN路由",
+    "远端按RT导入VRF",
+    "底层隧道与VPN标签共同转发"
+   ],
+   "walkthrough": {
+    "title": "RD和RT分别解决什么",
+    "setup": "租户A与B都使用10.0.0.0/24，通过运营商PE承载。",
+    "steps": [
+     "PE将租户接口绑定到各自VRF，让同一个IPv4前缀属于不同查表上下文。",
+     "RD给VPN路由编码增加区分，使相同前缀可在控制平面并存；它不是访问许可。",
+     "RT控制哪些VPN路由导入哪些VRF。即使RD不同，错误互导RT仍可能破坏隔离，学完VRF和MPLS VPN后再回看此过程。"
+    ],
+    "conclusion": "RD保证编码唯一，访问/导入关系主要由RT、VRF接口与安全策略决定。若错误互导RT，仍可能产生非预期互访。"
+   },
+   "config": {
+    "code": "display ip vpn-instance\ndisplay bgp vpnv4 all peer\ndisplay bgp vpnv4 all routing-table\ndisplay ip routing-table vpn-instance LAB",
+    "platform": "支持BGP/MPLS L3VPN的VRP设备",
+    "notes": "本子项聚焦BGP VPN控制面；完整PE/CE/MPLS配置见BGP/MPLS IP VPN专章，LAB为已配置实验实例。"
+   },
+   "commandNotes": [
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。"
+   ],
+   "fault": {
+    "symptom": "VPN路由收到业务不通",
+    "cause": "RT未导入/下一跳或隧道无效",
+    "check": "查VPNv4、实例表和LSP/隧道",
+    "fix": "修正租户导入及底层转发"
+   },
+   "sources": [
+    {
+     "title": "RFC 4271 · BGP-4",
+     "url": "https://www.rfc-editor.org/rfc/rfc4271",
+     "version": "2006 / RFC 4271",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "BGP、BGP4+"
+  },
+  {
+   "id": "ICT-014.01",
+   "parent": "ICT-014",
+   "term": "ACL原理",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "ACL先定义“匹配哪些对象以及返回permit/deny结果”，被业务调用后才产生实际作用。高级IPv4 ACL可按协议、源/目的地址及TCP/UDP端口匹配，基本ACL主要围绕源地址等。通配符位0表示精确比较，位1表示忽略，不能当子网掩码直接使用。\n规则顺序会决定先匹配哪条；未匹配行为取决于调用场景，接口traffic-filter、路由筛选与NAT匹配不能一概而论。验证需要规则与引用位置、方向、命中计数一起看。",
+   "process": [
+    "报文或路由进入调用业务",
+    "按规则顺序检查条件",
+    "首个适用规则给出匹配结果",
+    "调用业务解释permit/deny及未命中",
+    "观察实际转发/通告"
+   ],
+   "walkthrough": {
+    "title": "ping通不能证明TCP规则无效",
+    "setup": "规则目标是拒绝A到192.0.2.80的TCP 80，仍允许其他指定业务。",
+    "steps": [
+     "A发ping时使用ICMP，不满足TCP协议和80端口条件，因此不能用它测试这条拒绝规则。",
+     "A新建HTTP TCP 80连接，观察对应应用位置的ACL匹配和最终拒绝计数，才与目标条件一致。",
+     "再用经允许的HTTPS作对照，区分规则条件、方向和应用动作。ACL作为分类器时，deny语义还取决于引用功能。"
+    ],
+    "conclusion": "不能。ping使用ICMP，不匹配TCP80条件。应以HTTP/TCP80流量观察命中，再比较HTTPS和ICMP作为允许对照。"
+   },
+   "config": {
+    "code": "system-view\nacl number 3000\n rule 5 deny tcp source 192.168.10.0 0.0.0.255 destination 192.168.20.10 0 destination-port eq 80\n rule 10 permit ip\n quit\ninterface Vlanif 10\n traffic-filter inbound acl 3000\n quit\ndisplay acl 3000",
+    "platform": "支持VLANIF traffic-filter的VRP平台；官方traffic-filter接口命令示例",
+    "notes": "VLANIF10是源网段进入三层的接口。只拒TCP80；明确permit规则避免把不同调用场景的默认行为混用。二层不经过VLANIF的帧不由此三层入口过滤。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。",
+    "先定义ACL，再用traffic-filter把它应用到指定接口方向。规则号决定相应排序模式下的先后；本例规则只表达指定流量范围，检查命中要使用条件一致的新流。"
+   ],
+   "fault": {
+    "symptom": "ACL存在流量未受影响",
+    "cause": "没绑定/方向错误",
+    "check": "查接口引用与真实流入方向",
+    "fix": "绑定正确入口并用匹配流量验证"
+   },
+   "sources": [
+    {
+     "title": "华为 S9300 / S9300E IP单播路由配置指南",
+     "url": "https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",
+     "version": "V200R008 C00/C10",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "ACL"
+  },
+  {
+   "id": "ICT-014.02",
+   "parent": "ICT-014",
+   "term": "ACL配置",
+   "depth": "原理/配置（原文未标级）",
+   "explain": "将ACL落地时应先明确流量从哪个接口进入、要限制哪个方向，以及例外业务顺序。示例只拒绝VLAN10主机访问服务器TCP80，后面的permit ip明确放行其余IPv4流量；如果把宽泛permit放前面，后续deny可能永远不命中。\n接口入口过滤作用于经过该入口的流量，终端同VLAN二层直发可能不经过VLANIF。改规则后还应针对状态设备/缓存等实际行为重新建测试连接，不能只凭一次旧会话作结论。",
+   "process": [
+    "定义源/目的/协议与例外",
+    "先建精确deny再建所需permit",
+    "绑定实际入口inbound",
+    "检查ACL命中和业务结果",
+    "测试边界地址与其他协议"
+   ],
+   "walkthrough": {
+    "title": "先允许全部会遮住后续规则",
+    "setup": "假设按配置顺序匹配，规则1 permit ip，规则5 deny tcp到192.0.2.80端口80。",
+    "steps": [
+     "A的HTTP流先命中规则1，因为permit ip覆盖其条件，匹配处理不会再落到后面更具体的拒绝。",
+     "规则5虽然存在，却没有机会影响这条流，统计可能一直不增长。",
+     "把具体条件放到正确位置并核对ACL排序模式，使用新建连接观察实际动作；仅搜索配置中是否有deny不够。"
+    ],
+    "conclusion": "若按该顺序匹配，所有IPv4流量先被permit，后续拒绝难以命中。应调整规则顺序并重新验证，不能只确认deny文字存在。"
+   },
+   "config": {
+    "code": "system-view\nacl number 3000\n rule 5 deny tcp source 192.168.10.0 0.0.0.255 destination 192.168.20.10 0 destination-port eq 80\n rule 10 permit ip\n quit\ninterface Vlanif 10\n traffic-filter inbound acl 3000\n quit\ndisplay acl 3000",
+    "platform": "支持VLANIF traffic-filter的VRP平台；官方traffic-filter接口命令示例",
+    "notes": "VLANIF10是源网段进入三层的接口。只拒TCP80；明确permit规则避免把不同调用场景的默认行为混用。二层不经过VLANIF的帧不由此三层入口过滤。"
+   },
+   "commandNotes": [
+    "system-view进入系统配置视图；interface进入某个接口视图；quit退回一级，return回用户视图。缩进用于看清层级，不是接口已经自动创建了整条通信路径。",
+    "display开头的行用于读取状态，不负责建立连通。请把所显示的接口、邻居、路由或命中项，与上面的预期过程逐项对应；配置存在与转发有效要分别检查。",
+    "先定义ACL，再用traffic-filter把它应用到指定接口方向。规则号决定相应排序模式下的先后；本例规则只表达指定流量范围，检查命中要使用条件一致的新流。"
+   ],
+   "fault": {
+    "symptom": "ACL绑定后误伤全部",
+    "cause": "规则范围或位置过宽",
+    "check": "逐规则检查源目的与通配符、方向",
+    "fix": "缩小规则并按允许/拒绝矩阵回归"
+   },
+   "sources": [
+    {
+     "title": "华为 S9300 / S9300E IP单播路由配置指南",
+     "url": "https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",
+     "version": "V200R008 C00/C10",
+     "accessed": "2026-10-24"
+    }
+   ],
+   "visuals": [],
+   "chapter_title": "ACL"
+  }
+ ],
+ "chapter_sequence": [
+  "ICT-011",
+  "ICT-012",
+  "ICT-013",
+  "ICT-014"
+ ],
+ "neighbors": {
+  "before": "ICT-018",
+  "after": "ICT-015"
+ }
+}
