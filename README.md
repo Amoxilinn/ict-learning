@@ -20,13 +20,17 @@
 
 ## 维护
 
+ICT-001—ICT-003 已接入数据驱动的拓扑、报文结构、协议时序与状态表，以及首次术语解释。组件接口、技术边界和分批推广顺序见 [教学可视化组件体系](docs/教学可视化组件体系.md)。场景与词库分别维护在 `content/visualizations.json`、`content/glossary.json`；无新增运行时依赖。
+
 原始内容保留在 `content/`，其中旧版训练字段仅用于保留维护源资料，不向网站输出。`curriculum.json`维护九阶段顺序，`pedagogy.json`维护94章导语。`build.py`输出六组阅读数据及按推荐顺序编排的离线手册。页面代码在 `dist/index.html`、`dist/app.js`、`dist/diagrams.js`、`dist/style.css`。
 
 ```sh
 python3 build.py
 node --check dist/app.js
 node --check dist/diagrams.js
+node --check dist/teaching.js
 node test-models.cjs
+node test-teaching.cjs
 ```
 
 原197项缺失细则已补齐，当前322/322项都有独立讲解与具体过程示例。文本覆盖不等于全部内容已通过实机或型号兼容性验证；命令仍需按赛事指定版本核对。维护进度见 `docs/PROGRESS.md`。

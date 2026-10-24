@@ -1,7 +1,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 let elements={};const element=()=>({textContent:'',innerHTML:'',value:'',classList:{add(){},remove(){},toggle(){}},addEventListener(){}});
 const context={document:{querySelector:s=>elements[s]??=element(),querySelectorAll:()=>[],addEventListener(){}},window:{addEventListener(){}},localStorage:{getItem:()=>null,setItem(){}},fetch:()=>new Promise(()=>{}),setTimeout,clearTimeout,setInterval,clearInterval,URL,console,location:{hash:''}};
-vm.createContext(context);vm.runInContext(fs.readFileSync(__dirname+'/dist/diagrams.js','utf8'),context);vm.runInContext(fs.readFileSync(__dirname+'/dist/app.js','utf8'),context);
+vm.createContext(context);for(const f of ['teaching-data.js','teaching.js'])vm.runInContext(fs.readFileSync(__dirname+'/dist/'+f,'utf8'),context);vm.runInContext(fs.readFileSync(__dirname+'/dist/diagrams.js','utf8'),context);vm.runInContext(fs.readFileSync(__dirname+'/dist/app.js','utf8'),context);
 const m=context.window.ICTModels;let checks=0;function ok(v,msg){assert.ok(v,msg);checks++}function fail(fn){assert.throws(fn);checks++}
 let r=m.calcSubnet('192.168.10.130',26);ok(m.numIP(r.net)==='192.168.10.128','/26 net');ok(m.numIP(r.last)==='192.168.10.191','broadcast');ok(r.usable===62,'hosts');
 for(let p=0;p<=32;p++){let x=m.calcSubnet('203.0.113.255',p);ok(x.net<=x.ip&&x.ip<=x.last,'prefix bound '+p);ok(x.size===2**(32-p),'prefix size '+p)}
@@ -36,6 +36,8 @@ for(const u of units){
  ok(u.walkthrough.steps.every(s=>s.length>15),'substantive steps '+u.id);
  ok(u.sources.length>0&&u.sources.every(s=>/^https:\/\//.test(s.url)),'reference supplied '+u.id);
 }
+for(const id of ['ICT-001','ICT-002','ICT-003'])ok(ev(`lessonPage('${id}')`).includes('data-teach='),'pilot contains teaching components '+id);
+ok(!ev("lessonPage('ICT-004')").includes('data-teach='),'rollout remains bounded to pilot');
 const basics=ev("lessonPage('ICT-002')");
 ok(basics.indexOf('id="ICT-002.05"')<basics.indexOf('id="ICT-002.04"')&&basics.indexOf('id="ICT-002.04"')<basics.indexOf('id="ICT-002.02"'),'IP and ARP precede TCP');
 ok(ev('learningPage()').includes('先认识一条通信路径'),'route includes zero prerequisite introduction');

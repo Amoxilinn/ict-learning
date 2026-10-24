@@ -29,6 +29,8 @@ jobs:
           node --check dist/app.js
           node --check dist/diagrams.js
           node test-models.cjs
+          node --check dist/teaching.js
+          node test-teaching.cjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

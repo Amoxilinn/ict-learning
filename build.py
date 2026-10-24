@@ -38,6 +38,13 @@ for u in units:
  assert u['parent'] in parents and any(s['id']==u['id'] and s['parent']==u['parent'] for s in subskills)
  assert u['explain'] and len(u['process'])>=3
  assert u.get('walkthrough',{}).get('setup') and len(u['walkthrough']['steps'])>=3 and u['walkthrough']['conclusion']
+teaching=read('visualizations');teaching['glossary']=read('glossary')
+for scene in teaching['scenarios']:
+ assert scene['unit'] in {u['id'] for u in units}, 'Unknown visual unit: '+scene['unit']
+ assert scene['steps'] and scene['boundary']
+ for step in scene['steps']:
+  assert step['text'] and all(len(row)==len(scene['columns']) for row in step['rows'])
+(P/'dist/teaching-data.js').write_text('window.ICT_TEACHING_DATA='+json.dumps(teaching,ensure_ascii=False,separators=(',',':'))+';\n',encoding='utf-8')
 payload=[rows,lessons,sources,subskills,units,curriculum]
 for name,data in zip(['content','lessons','sources','subskills','units','curriculum'],payload):
  (P/'dist'/f'{name}.json').write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8')
@@ -80,7 +87,7 @@ pieces.append('<p class="meta">配置以所注产品版本为参考，尚未在�
 # 内容与阅读器同时改版时，避免浏览器混用旧脚本、旧样式与新数据。
 index_path=P/'dist/index.html'
 index=index_path.read_text(encoding='utf-8')
-for asset in ['style.css','data.js','diagrams.js','app.js']:
+for asset in ['style.css','data.js','diagrams.js','teaching-data.js','teaching.js','app.js']:
  digest=hashlib.sha256((P/'dist'/asset).read_bytes()).hexdigest()[:12]
  index=re.sub(r'(["\'])'+re.escape(asset)+r'(?:\?v=[a-f0-9]+)?(["\'])',lambda m:m[1]+asset+'?v='+digest+m[2],index)
 index_path.write_text(index,encoding='utf-8')
