@@ -1,0 +1,3 @@
+# 本轮内容迁移脚本
+
+此目录保留2026-10-24初学者改写的编写来源，供追溯使用。enrich_beginner.py和finalize_beginner.py为本轮迁移脚本，会覆盖特定导语、顺序或案例字段，不作为日常构建入口。后续维护直接编辑content目录内JSON，再运行根目录build.py；避免迁移脚本覆盖后来的人工修订。existing_walkthroughs.txt是原125项已解案例的编写稿。

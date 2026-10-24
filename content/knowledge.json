@@ -1,0 +1,1801 @@
+[
+  {
+    "id": "ICT-001",
+    "group": "数通",
+    "category": "数通基础知识",
+    "title": "数通基础知识",
+    "hcia": true,
+    "hcip": true,
+    "detail": "了解VRP系统、基本网络常识等",
+    "explanation": "VRP用不同视图划分配置范围。用户视图用尖括号，系统和接口视图用方括号；运行配置与启动配置不同。链路、地址、路由、应用是排障的四层观察点。",
+    "question": "更改接口地址后重启丢失，首先检查什么？",
+    "answer": "运行配置是否保存到启动配置，并用display startup核对启动文件。",
+    "depth": "了解",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": []
+  },
+  {
+    "id": "ICT-002",
+    "group": "数通",
+    "category": "数通基础知识",
+    "title": "TCP/IP协议基础",
+    "hcia": true,
+    "hcip": true,
+    "detail": "了解TCP/IP协议架构，掌握基本协议技术，包括TCP、UDP、ARP、IP、NAT、Telnet、FTP、DHCP等技术原理与配置",
+    "explanation": "TCP通过序号、确认和重传提供有序字节流；UDP保留数据报边界但不保证交付。ARP解析本链路下一跳MAC。NAT改写地址或端口，DHCP租约配置终端地址。Telnet与传统FTP明文传输，实验需在隔离环境。",
+    "question": "访问外网时ARP查询网站IP还是网关IP？",
+    "answer": "先用掩码判断网站是否同网段；跨网段时解析网关的MAC。IP目的地址仍是网站。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-001"
+    ]
+  },
+  {
+    "id": "ICT-003",
+    "group": "数通",
+    "category": "交换技术",
+    "title": "以太网交换基础",
+    "hcia": true,
+    "hcip": true,
+    "detail": "了解基本以太网交换流程，了解MAC地址学习等流程",
+    "explanation": "交换机在收到帧时按源MAC与入端口学习，在同VLAN内查目的MAC。已知单播只出对应端口，未知单播及广播泛洪到同VLAN其他可转发端口；目的端口等于入端口时过滤。",
+    "question": "收到目的MAC尚未学习的帧，交换机直接丢弃吗？",
+    "answer": "通常在该VLAN内泛洪，排除入端口以及阻塞端口；安全策略可能改变行为。",
+    "depth": "了解",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-002"
+    ]
+  },
+  {
+    "id": "ICT-004",
+    "group": "数通",
+    "category": "交换技术",
+    "title": "VLAN",
+    "hcia": true,
+    "hcip": true,
+    "detail": "VLAN、VLANIF、MUX VLAN、VLAN聚合等技术原理及配置",
+    "explanation": "VLAN划分二层广播域；Access把无标签终端归入PVID，Trunk承载多个VLAN。VLANIF提供三层网关。MUX VLAN控制主从/从从访问；VLAN聚合用Super-VLAN集中三层地址，各Sub-VLAN仍隔离二层广播。",
+    "question": "两台PC同一IP网段但处于不同VLAN，能否仅靠交换互通？",
+    "answer": "不能；二层隔离仍存在。需合理网关、三层转发或特定代理ARP设计，不能把同网段当成同广播域。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-003"
+    ]
+  },
+  {
+    "id": "ICT-005",
+    "group": "数通",
+    "category": "交换技术",
+    "title": "链路聚合",
+    "hcia": true,
+    "hcip": true,
+    "detail": "Eth-Trunk技术原理及配置",
+    "explanation": "多个物理口合为逻辑口以增加总带宽与冗余。LACP协商成员状态；哈希通常按流选一条链路，单流不一定叠加所有成员带宽。两端模式、VLAN、速率和成员状态必须相容。",
+    "question": "两条1G链路聚合后单TCP流只有1G，必然是故障吗？",
+    "answer": "不是。逐流哈希使同一流固定在一个成员，多个流才能分担到不同成员。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-004"
+    ]
+  },
+  {
+    "id": "ICT-006",
+    "group": "数通",
+    "category": "交换技术",
+    "title": "堆叠和集群",
+    "hcia": true,
+    "hcip": true,
+    "detail": "iStack、CSS等技术原理及配置",
+    "explanation": "iStack/CSS把多机组合为逻辑设备，统一管理与控制；需考虑主备选举、堆叠链路、跨设备聚合及分裂检测。型号与版本决定支持方式，不能把所有交换机都按相同命令配置。",
+    "question": "堆叠分裂为何可能导致双主风险？",
+    "answer": "两部分可能同时使用逻辑设备的地址和身份，造成转发混乱；需双主检测及相应端口保护。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-005",
+      "ICT-008"
+    ]
+  },
+  {
+    "id": "ICT-007",
+    "group": "数通",
+    "category": "交换技术",
+    "title": "STP",
+    "hcia": true,
+    "hcip": true,
+    "detail": "生成树的防环原理及配置",
+    "explanation": "STP以桥ID选根，再按到根开销等比较规则选根端口和指定端口，阻塞冗余路径防止二层环路。广播帧没有三层TTL保护，环路会放大广播与MAC漂移。",
+    "question": "为什么不要依赖默认优先级决定核心根桥？",
+    "answer": "默认优先级相同后靠MAC决定，位置不可控；应规划根桥与备根，匹配业务路径。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-003",
+      "ICT-005"
+    ]
+  },
+  {
+    "id": "ICT-008",
+    "group": "数通",
+    "category": "交换技术",
+    "title": "RSTP、MSTP",
+    "hcia": false,
+    "hcip": true,
+    "detail": "RSTP和MSTP的原理及配置",
+    "explanation": "RSTP用端口角色与握手机制缩短收敛，边缘端口面向终端。MSTP把多个VLAN映射到实例实现不同树；区域名称、修订号和VLAN映射共同决定区域一致性。",
+    "question": "MSTP两端区域名相同却不在同一区域，继续查哪里？",
+    "answer": "检查修订号和VLAN到实例映射摘要；名称相同不足以确定同一区域。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-007"
+    ]
+  },
+  {
+    "id": "ICT-009",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "静态路由",
+    "hcia": true,
+    "hcip": true,
+    "detail": "掌握基本IP路由基础知识、IPv4和IPv6静态路由配置方式",
+    "explanation": "路由先按目的地址最长前缀匹配；同一前缀候选路由再比较协议优先级等。静态路由下一跳要可递归解析；默认路由是最后兜底。IPv6静态路由使用前缀长度而不是IPv4掩码。",
+    "question": "/24静态路由优先级60，/16路由优先级10，目的匹配两者走哪条？",
+    "answer": "走/24；最长前缀优先，不能跨不同前缀先比较优先级。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-002",
+      "ICT-004"
+    ]
+  },
+  {
+    "id": "ICT-010",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "OSPF",
+    "hcia": true,
+    "hcip": true,
+    "detail": "掌握OSPF的基本原理及配置",
+    "explanation": "邻居发现后通过数据库描述、请求、更新和确认同步LSDB，再以自己为根计算SPF。区域0是骨干；广播网络使用DR/BDR减少邻接数量。邻居Full不等于所有业务路由已正确发布。",
+    "question": "以太网两个DROther之间停在2-Way一定异常吗？",
+    "answer": "不一定，DROther之间通常不形成Full邻接；应结合DR角色、网络类型和业务路由判断。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-009"
+    ]
+  },
+  {
+    "id": "ICT-011",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "OSPFv3",
+    "hcia": false,
+    "hcip": true,
+    "detail": "掌握OSPFv3的基本原理及配置",
+    "explanation": "OSPFv3面向IPv6时通常以链路本地地址作为邻接通信地址，Router ID仍为32位。按接口启用并检查区域、实例和网络类型；与OSPFv2不能仅通过替换地址完成迁移。",
+    "question": "IPv6全局地址可达但OSPFv3邻居不起来，先核对什么？",
+    "answer": "接口是否启用OSPFv3、链路本地地址、区域/实例以及Hello参数和过滤策略。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-010",
+      "ICT-018"
+    ]
+  },
+  {
+    "id": "ICT-012",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "IS-IS（IPv4）（IPv6）",
+    "hcia": false,
+    "hcip": true,
+    "detail": "掌握IS-IS在IPv4和IPv6场景的基本原理及配置",
+    "explanation": "IS-IS以NET标识路由器，L1负责区域内，L2连接区域。用TLV承载不同地址族可达性，邻接建立不依赖IPv4单播可达。需区分邻接、LSDB和IPv4/IPv6路由安装。",
+    "question": "IPv4路由正常而IPv6缺失，能否据此断言IS-IS邻居故障？",
+    "answer": "不能；需查IPv6地址族启用、IPv6 TLV通告、接口地址和路由策略。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-010",
+      "ICT-018"
+    ]
+  },
+  {
+    "id": "ICT-013",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "BGP、BGP4+",
+    "hcia": false,
+    "hcip": true,
+    "detail": "掌握BGP在IPv4、IPv6、VPN等场景的基本原理及配置",
+    "explanation": "BGP以TCP建立会话，通告路径属性并依策略选择路径。MP-BGP用地址族扩展承载IPv6与VPN路由；会话Established不表示某地址族已交换路由。下一跳不可达会使路由不能用于转发。",
+    "question": "BGP邻居已建立却没有IPv6路由，下一步怎么查？",
+    "answer": "检查IPv6地址族是否使能对等体、路由是否注入、进出方向策略以及下一跳可达性。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-009",
+      "ICT-010",
+      "ICT-018"
+    ]
+  },
+  {
+    "id": "ICT-014",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "ACL",
+    "hcia": true,
+    "hcip": true,
+    "detail": "ACL的原理及配置",
+    "explanation": "ACL是一组匹配规则，被流量过滤、NAT或路由策略引用才产生具体作用。高级ACL可匹配协议、源/目的IP与端口；通配符0位精确匹配，1位忽略。末尾行为由引用场景决定。",
+    "question": "创建了deny规则却仍能通信，最常见的检查点是什么？",
+    "answer": "ACL是否被正确接口、方向和业务引用；同时核对命中计数和规则顺序。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-002",
+      "ICT-009"
+    ]
+  },
+  {
+    "id": "ICT-015",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "IP Prefix List",
+    "hcia": false,
+    "hcip": true,
+    "detail": "IP Prefix List的原理及配置",
+    "explanation": "前缀列表匹配路由前缀与掩码长度。10.0.0.0/8配合greater-equal 16 less-equal 24匹配该范围内/16到/24子网，不是只匹配主机地址。",
+    "question": "10.1.0.0/25能命中上述/16到/24规则吗？",
+    "answer": "不能，虽然地址落在10.0.0.0/8，前缀长度25超出上限。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-009",
+      "ICT-013"
+    ]
+  },
+  {
+    "id": "ICT-016",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "路由策略、策略路由",
+    "hcia": false,
+    "hcip": true,
+    "detail": "路由策略和策略路由等路由控制技术原理及配置",
+    "explanation": "路由策略作用于路由通告、引入或属性；策略路由作用于数据包转发，可按源地址等决定下一跳。二者处理对象不同，需分别观察路由表、策略命中和转发结果。",
+    "question": "按源地址将办公流量引向出口2应优先考虑哪种技术？",
+    "answer": "策略路由；同时确保下一跳可达并设计失效回退，不能仅靠修改路由通告策略。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-014",
+      "ICT-015"
+    ]
+  },
+  {
+    "id": "ICT-017",
+    "group": "数通",
+    "category": "IPv6技术",
+    "title": "IPv6基础知识",
+    "hcia": true,
+    "hcip": true,
+    "detail": "IPv6协议及地址相关概念",
+    "explanation": "IPv6地址为128位，分单播、组播和任播，不使用广播。链路本地地址只在链路范围有效；邻居发现取代IPv4 ARP的部分功能。压缩表示不能改变前缀边界。",
+    "question": "fe80::地址可否直接作为跨网全局通信目的？",
+    "answer": "不可以；它只在链路范围有效，跨链路需使用合适的全局/唯一本地地址和路由。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-002",
+      "ICT-009"
+    ]
+  },
+  {
+    "id": "ICT-018",
+    "group": "数通",
+    "category": "IPv6技术",
+    "title": "IPv6地址配置",
+    "hcia": true,
+    "hcip": true,
+    "detail": "ICMPv6和IPv6无状态自动配置、DHCPv6",
+    "explanation": "主机通过RS/RA发现路由器与前缀，可用SLAAC生成地址，并以DAD检查重复。DHCPv6分有状态与无状态配置；IPv6默认网关通常来自RA，不能以取得DHCPv6地址证明网关正确。",
+    "question": "终端有DHCPv6地址却无默认路由，应重点查什么？",
+    "answer": "路由器RA通告和终端是否接收RA；DHCPv6地址分配本身通常不下发默认网关。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-017"
+    ]
+  },
+  {
+    "id": "ICT-019",
+    "group": "数通",
+    "category": "IPv6技术",
+    "title": "IPv6过渡技术",
+    "hcia": false,
+    "hcip": false,
+    "detail": "双栈、6PE、6VPE、NAT64等过渡技术的原理及配置",
+    "explanation": "双栈让两种协议并行；6PE以MPLS骨干承载IPv6公网，6VPE扩展到IPv6 VPN；NAT64在协议间转换，常配合DNS64。隧道、标签承载和地址转换不能混为一谈。",
+    "question": "IPv6-only客户端访问只提供A记录的服务器可能缺少什么？",
+    "answer": "通常需要DNS64合成地址与NAT64转换，或应用自身支持其他访问机制；仅有双栈骨干不解决端点协议不一致。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-017",
+      "ICT-018",
+      "ICT-013",
+      "ICT-026",
+      "ICT-027",
+      "ICT-029"
+    ]
+  },
+  {
+    "id": "ICT-020",
+    "group": "数通",
+    "category": "IPv6+技术",
+    "title": "IPv6+",
+    "hcia": true,
+    "hcip": false,
+    "detail": "IPv6+（IPv6 Enhanced）的概念、内涵",
+    "explanation": "IPv6+是围绕IPv6的增强技术体系，包含SRv6、网络切片、随流检测等方向；不是一种新IP首部版本。应从可编程转发、业务保障和可观测性理解应用价值。",
+    "question": "把IPv6+理解为把地址从128位加长，错在哪里？",
+    "answer": "增强侧重路由编程、保障和运维能力，IPv6基本地址长度并未因此改变。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-019"
+    ]
+  },
+  {
+    "id": "ICT-021",
+    "group": "数通",
+    "category": "IPv6+技术",
+    "title": "SRv6分段路由",
+    "hcia": false,
+    "hcip": false,
+    "detail": "SRv6的基本概念、SRH报文格式、SRv6 BE及SRv6 TE Policy的工作原理及配置",
+    "explanation": "SRv6用IPv6 SID表达节点或功能，SRH保存段列表及Segments Left。BE依赖IGP可达性，TE Policy通过有序段约束路径；要检查SID可达、端点行为与封装MTU。",
+    "question": "Underlay可达而SRv6业务失败，为什么仍要检查MTU？",
+    "answer": "封装及SRH增加报文长度，路径MTU不足会导致大包丢弃；小包ping成功不能排除问题。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-017",
+      "ICT-025"
+    ]
+  },
+  {
+    "id": "ICT-022",
+    "group": "数通",
+    "category": "IPv6+技术",
+    "title": "FlexE网络切片",
+    "hcia": false,
+    "hcip": false,
+    "detail": "网络切片的应用场景、FlexE的基本概念",
+    "explanation": "FlexE将以太网PHY带宽以时隙方式分配给不同Client，可用于硬隔离承载。业务切片还涉及端到端资源、控制和运维，不是创建一个VLAN就自动获得带宽保障。",
+    "question": "FlexE时隙配置两端不一致会带来什么？",
+    "answer": "客户端带宽映射不一致导致业务异常；需核对Group、PHY、Calendar和Client映射。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-038",
+      "ICT-020"
+    ]
+  },
+  {
+    "id": "ICT-023",
+    "group": "数通",
+    "category": "IPv6+技术",
+    "title": "IFIT随流检测技术",
+    "hcia": false,
+    "hcip": false,
+    "detail": "IFIT统计模型、IFIT丢包检测机制、IFIT时延检测机制",
+    "explanation": "随流检测沿业务路径采集报文数或时间信息，通过入口与出口统计关联计算丢包和时延。区分真实业务检测与主动探测；精确单向时延依赖时钟及时间戳能力。",
+    "question": "入口计数1000、出口990是否立即能认定丢10包？",
+    "answer": "还需确保同一流、同一统计周期且报文已到达；窗口错位、重复和计数口径会影响结论。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-039",
+      "ICT-020"
+    ]
+  },
+  {
+    "id": "ICT-024",
+    "group": "数通",
+    "category": "广域网技术",
+    "title": "广域网基础知识和技术",
+    "hcia": true,
+    "hcip": true,
+    "detail": "广域网基本概念，PPP、PPPoE的原理及配置",
+    "explanation": "PPP通过LCP协商链路，再进行可选认证和NCP网络层协商。PPPoE先发现接入集中器并建立会话，之后承载PPP；以太网1500MTU下常见PPP载荷MTU为1492。",
+    "question": "PPPoE会话已建立却拿不到IP，应优先查哪阶段？",
+    "answer": "检查PPP认证与IPCP等NCP协商，发现阶段成功不代表网络层参数已完成。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-002",
+      "ICT-009"
+    ]
+  },
+  {
+    "id": "ICT-025",
+    "group": "数通",
+    "category": "广域网技术",
+    "title": "Segment Routing技术",
+    "hcia": false,
+    "hcip": false,
+    "detail": "SR-MPLS的原理及配置",
+    "explanation": "SR-MPLS用标签栈编码一串Segment，节点SID可表示到节点的路径，邻接SID表示特定链路。控制面发布SID，入口压入栈，中间按MPLS转发。",
+    "question": "SR-MPLS和SRv6的主要数据面区别是什么？",
+    "answer": "前者使用MPLS标签，后者用IPv6 SID和相关IPv6处理；二者都可表达Segment列表。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-026",
+      "ICT-012"
+    ]
+  },
+  {
+    "id": "ICT-026",
+    "group": "数通",
+    "category": "MPLS技术",
+    "title": "MPLS相关技术",
+    "hcia": false,
+    "hcip": true,
+    "detail": "MPLS、MPLS LDP等技术基本原理及配置",
+    "explanation": "MPLS按标签而非每跳完整IP查表转发；入节点push，中间swap，出节点pop。LDP分发与FEC关联的标签，依赖IGP下一跳形成LSP；仅LDP邻居正常不保证全部FEC可转发。",
+    "question": "IGP改路后LSP故障应该同时观察什么？",
+    "answer": "路由下一跳、LDP邻接、FEC标签绑定和实际LFIB出接口，确认控制面与数据面一致。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-009",
+      "ICT-010"
+    ]
+  },
+  {
+    "id": "ICT-027",
+    "group": "数通",
+    "category": "VPN技术",
+    "title": "VPN基础知识",
+    "hcia": false,
+    "hcip": true,
+    "detail": "VPN和VRF基本原理及配置",
+    "explanation": "VPN提供逻辑隔离，VRF维护独立路由与转发表，允许不同租户地址重叠。VPN不一定加密；隔离、认证、完整性和保密性需分开验证。",
+    "question": "两租户都用10.0.0.0/24，为什么VRF仍可隔离？",
+    "answer": "查表时带有租户上下文，各自有独立路由表；跨VRF需明确互访设计。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-009"
+    ]
+  },
+  {
+    "id": "ICT-028",
+    "group": "数通",
+    "category": "VPN技术",
+    "title": "基本VPN技术",
+    "hcia": false,
+    "hcip": true,
+    "detail": "GRE、L2TP、IPsec等VPN技术基本原理及配置",
+    "explanation": "GRE封装多种协议但自身不提供加密；L2TP承载二层会话也不默认提供保密；IPsec用安全关联提供选择的保护。规划隧道时要同时核对底层路由、封装开销和安全策略。",
+    "question": "GRE隧道up能证明业务已加密吗？",
+    "answer": "不能，GRE本身不加密；需要单独验证IPsec等安全封装和加密计数。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-024",
+      "ICT-027"
+    ]
+  },
+  {
+    "id": "ICT-029",
+    "group": "数通",
+    "category": "VPN技术",
+    "title": "BGP/MPLS IP VPN",
+    "hcia": false,
+    "hcip": true,
+    "detail": "BGP/MPLS IP VPN基本原理及配置",
+    "explanation": "CE接入PE的VRF，MP-BGP传VPN路由，骨干以标签转发。RD使重叠前缀唯一；RT控制导入/导出。外层标签到PE，内层标签标识业务上下文。",
+    "question": "两个VRF的RD相同或不同决定互访吗？",
+    "answer": "不是；互访主要受RT导入导出及路由/策略影响，RD解决唯一性而非访问权限。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-026",
+      "ICT-027",
+      "ICT-013"
+    ]
+  },
+  {
+    "id": "ICT-030",
+    "group": "数通",
+    "category": "VPN技术",
+    "title": "VXLAN",
+    "hcia": false,
+    "hcip": true,
+    "detail": "VXLAN基本原理及配置（通过VXLAN构建虚拟网络）",
+    "explanation": "VXLAN把租户以太网帧封装在UDP/IP之内，VTEP是隧道端点，24位VNI标识逻辑网络。Underlay必须提供VTEP IP可达与足够MTU；Overlay负责租户业务。",
+    "question": "VTEP之间可ping但租户不通，下一步查哪些映射？",
+    "answer": "VLAN到BD/VNI映射、远端VTEP与MAC学习、网关和BUM处理，同时用大包测试MTU。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-004",
+      "ICT-009",
+      "ICT-027"
+    ]
+  },
+  {
+    "id": "ICT-031",
+    "group": "数通",
+    "category": "VPN技术",
+    "title": "EVPN",
+    "hcia": false,
+    "hcip": false,
+    "detail": "EVPN基本原理及配置（EVPN在园区和SD-WAN的应用）",
+    "explanation": "EVPN以BGP分发以太网相关可达信息，可承载于MPLS或VXLAN。常见MAC/IP路由用于端点学习，前缀路由用于三层业务；业务RT不匹配会使路由不能进入目标实例。",
+    "question": "有EVPN BGP邻居却没有远端MAC，可能原因是什么？",
+    "answer": "检查对应地址族、MAC/IP路由发布与RT导入、BD/VNI绑定及本端是否学到源MAC。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-013",
+      "ICT-030"
+    ]
+  },
+  {
+    "id": "ICT-032",
+    "group": "数通",
+    "category": "组播技术",
+    "title": "组播基础知识",
+    "hcia": false,
+    "hcip": true,
+    "detail": "组播基本概念，及IGMP原理及配置",
+    "explanation": "组播按组地址把一份内容分发给多个接收者。主机通过IGMP表达成员关系，IGMP Snooping在二层约束组播泛洪；需保留查询器使成员关系可维护。",
+    "question": "开启Snooping后过一段时间视频断流应查什么？",
+    "answer": "查询器是否存在、成员表是否老化以及组播路由状态；静态短期成功不能证明控制面完整。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-002",
+      "ICT-009"
+    ]
+  },
+  {
+    "id": "ICT-033",
+    "group": "数通",
+    "category": "组播技术",
+    "title": "PIM",
+    "hcia": false,
+    "hcip": false,
+    "detail": "PIM协议原理及配置",
+    "explanation": "PIM依赖单播路由做RPF检查。稀疏模式可经RP形成共享树，满足条件后切向最短路径树；路由不对称时RPF失败可能丢弃正确到达但入接口不符的流。",
+    "question": "收到组播数据却被RPF丢弃，改组地址一定有用吗？",
+    "answer": "无关；应检查源/RP的单播路由与期望入接口，必要时调整组播RPF路由设计。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-032",
+      "ICT-010"
+    ]
+  },
+  {
+    "id": "ICT-034",
+    "group": "数通",
+    "category": "网络安全技术",
+    "title": "AAA",
+    "hcia": true,
+    "hcip": true,
+    "detail": "AAA原理及配置",
+    "explanation": "认证回答是谁，授权回答能做什么，计费/审计记录做了什么。远端RADIUS或HWTACACS不可达时的本地回退需要明确设计，避免把认证成功误当成已获得正确权限。",
+    "question": "用户登录成功但不能进入系统视图，可能属于哪个环节？",
+    "answer": "授权权限不足；检查用户级别、命令授权和服务器下发属性。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-014"
+    ]
+  },
+  {
+    "id": "ICT-035",
+    "group": "数通",
+    "category": "网络安全技术",
+    "title": "以太网交换安全",
+    "hcia": false,
+    "hcip": true,
+    "detail": "端口隔离、MAC地址表安全、端口安全、MAC地址漂移防止与检测、MACSec、交换机流量控制、DHCP Snooping、IP Source Guard等",
+    "explanation": "DHCP Snooping建立合法租约绑定，信任口只面向合法服务器；IP Source Guard据绑定校验源。端口隔离限制二层互访，MACsec保护链路帧；流控不能替代安全访问策略。",
+    "question": "启用IPSG后静态IP主机断网，优先检查什么？",
+    "answer": "是否存在匹配该IP、MAC、VLAN和接口的静态绑定或其他允许机制，而不是盲目信任所有端口。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-003",
+      "ICT-004",
+      "ICT-014"
+    ]
+  },
+  {
+    "id": "ICT-036",
+    "group": "数通",
+    "category": "网络安全技术",
+    "title": "网络准入控制",
+    "hcia": false,
+    "hcip": false,
+    "detail": "802.1X认证、MAC地址认证、Portal认证及策略联动的原理及配置",
+    "explanation": "802.1X有客户端、认证设备和认证服务器；MAC认证以终端MAC识别身份，抗冒充能力有限；Portal通过Web认证交互。认证后仍需验证动态VLAN、ACL和失效行为。",
+    "question": "打印机不支持802.1X，可否直接当作匿名可信终端？",
+    "answer": "不应；可采用MAC认证配合受限权限、资产绑定和隔离策略，明确MAC可被伪造的边界。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-034",
+      "ICT-035"
+    ]
+  },
+  {
+    "id": "ICT-037",
+    "group": "数通",
+    "category": "网络可靠性与网络优化技术",
+    "title": "网络可靠性技术",
+    "hcia": false,
+    "hcip": true,
+    "detail": "VRRP、BFD等可靠性技术基本原理及配置",
+    "explanation": "VRRP提供虚拟网关身份，主备以优先级等决定角色；BFD快速探测路径活性，可联动路由或VRRP。探测up不是业务质量承诺，抢占与延迟需避免震荡。",
+    "question": "主网关上联断开但仍是Master会怎样？",
+    "answer": "终端继续发往虚拟网关却无法出网；应通过上联跟踪或BFD联动降低优先级等机制切换。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-009",
+      "ICT-010"
+    ]
+  },
+  {
+    "id": "ICT-038",
+    "group": "数通",
+    "category": "网络可靠性与网络优化技术",
+    "title": "网络优化技术",
+    "hcia": false,
+    "hcip": false,
+    "detail": "QoS基本原理及配置",
+    "explanation": "QoS按分类、标记、监管/整形、排队和拥塞避免处理流量。监管超额通常丢弃或重标记，整形缓存平滑输出；优先队列应限额，避免普通业务饥饿。",
+    "question": "为什么加大出口队列不能永久解决带宽不足？",
+    "answer": "队列只缓冲突发，持续输入大于输出仍会积压并丢包，且增加时延；需容量、限速和调度共同设计。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-002",
+      "ICT-014"
+    ]
+  },
+  {
+    "id": "ICT-039",
+    "group": "数通",
+    "category": "网络管理与网络编程自动化技术",
+    "title": "网络管理与监控技术",
+    "hcia": true,
+    "hcip": false,
+    "detail": "SNMP、LLDP、NQA等技术的基本原理及配置",
+    "explanation": "SNMP采集设备对象与告警，LLDP发现直连邻居，NQA主动模拟业务检测质量。管理面应隔离并使用安全认证；LLDP看见邻居不能证明端到端业务可达。",
+    "question": "接口up且LLDP正常，但业务慢，应该补充什么证据？",
+    "answer": "收集丢包、队列、时延抖动及NQA结果，并确认测试协议和路径与真实业务一致。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-009",
+      "ICT-037"
+    ]
+  },
+  {
+    "id": "ICT-040",
+    "group": "数通",
+    "category": "网络管理与网络编程自动化技术",
+    "title": "网络编程自动化基础知识",
+    "hcia": false,
+    "hcip": false,
+    "detail": "基础知识，及NETCONF、Python原理和实践",
+    "explanation": "NETCONF以结构化RPC管理配置，常运行在SSH上；Python负责连接、解析、校验和编排。先获取能力集与数据模型，再进行幂等变更；失败要可回滚，不能只检查脚本退出码。",
+    "question": "脚本返回成功能否直接视为配置目标达成？",
+    "answer": "不能；还要读取设备状态，校验期望与实际，并确认业务验证与失败回滚。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-001",
+      "ICT-039"
+    ]
+  },
+  {
+    "id": "ICT-041",
+    "group": "数通",
+    "category": "网络管理与网络编程自动化技术",
+    "title": "网络编程自动化高阶技术",
+    "hcia": false,
+    "hcip": false,
+    "detail": "SSH、YANG、Telemetry、RESTful基本原理和实践",
+    "explanation": "SSH提供安全传输，YANG定义数据模型，Telemetry推送订阅数据，RESTful通过资源和HTTP方法构建接口。模型、编码和传输是不同层次；采样周期会影响可观测精度与开销。",
+    "question": "YANG是否是一种直接传输设备日志的网络协议？",
+    "answer": "不是，它是数据建模语言；模型数据可由NETCONF等协议读写，Telemetry可流式采集。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-040"
+    ]
+  },
+  {
+    "id": "ICT-042",
+    "group": "数通",
+    "category": "华为各场景相关方案",
+    "title": "园区网络CloudCampus解决方案",
+    "hcia": false,
+    "hcip": false,
+    "detail": "华为CloudCampus解决方案，包括中小型（公有云/MSP自建云管理）及大中型园区（VXLAN虚拟化园区）的发展及挑战，解决方案技术原理、解决方案规划设计与部署",
+    "explanation": "先把访客、办公、IoT分成业务域，再设计接入认证、虚拟网络、出口与运维。小型云管理重视快速纳管，大型VXLAN园区重视Fabric、VN隔离与跨域策略；自动化上线仍依赖底层可达。",
+    "question": "设计园区时为什么先确定业务分区再分VLAN？",
+    "answer": "分区决定身份、隔离和访问矩阵，VLAN/VN只是实现手段；先配编号可能造成策略无法表达。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-031",
+      "ICT-036",
+      "ICT-090",
+      "ICT-091"
+    ]
+  },
+  {
+    "id": "ICT-043",
+    "group": "数通",
+    "category": "华为各场景相关方案",
+    "title": "分支互联SD-WAN解决方案",
+    "hcia": false,
+    "hcip": false,
+    "detail": "华为SD-WAN解决方案，包括广域互联网络的发展及挑战，解决方案技术原理、解决方案规划设计与部署",
+    "explanation": "SD-WAN在多种广域链路之上构建受控Overlay，依据应用和SLA选路。控制器、边缘CPE和承载网络职责不同；规划需含加密、路由、站点拓扑和控制器失联行为。",
+    "question": "链路ping不丢包但语音质量差，选路还应观察什么？",
+    "answer": "时延、抖动、丢包窗口和应用SLA；只判断连通性无法满足实时业务。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-024",
+      "ICT-028",
+      "ICT-038",
+      "ICT-041"
+    ]
+  },
+  {
+    "id": "ICT-044",
+    "group": "数通",
+    "category": "华为各场景相关方案",
+    "title": "广域网络CloudWAN解决方案",
+    "hcia": false,
+    "hcip": false,
+    "detail": "华为云广域解决方案，包括广域网络的发展及挑战，解决方案技术原理、解决方案规划设计与部署",
+    "explanation": "云广域承载企业、分支与云之间的连接，需统一规划Underlay、SR/隧道、流量工程、切片与可视化。把带宽、隔离、收敛、时延约束映射到可验证的路径和服务指标。",
+    "question": "设计专线业务时，承诺低时延还需什么验收条件？",
+    "answer": "明确端点、方向、报文大小、负载、测量周期与分位数，并在保护切换后重新测量。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-021",
+      "ICT-022",
+      "ICT-023",
+      "ICT-043"
+    ]
+  },
+  {
+    "id": "ICT-045",
+    "group": "DCN",
+    "category": "数据中心网络基础知识",
+    "title": "M-LAG、VXLAN、EVPN、微分段、业务链",
+    "hcia": true,
+    "hcip": true,
+    "detail": "掌握M-LAG协议的技术原理和配置、集中式与分布式VXLAN的技术原理和配置、跨域VXLAN场景的技术原理和配置、掌握EVPN技术原理、了解微分段业务链技术的原理和配置",
+    "explanation": "Leaf双归接入与M-LAG保护接入，VXLAN提供租户网络，EVPN提供控制面。集中网关可能引入绕行，分布式网关把三层能力放在接入侧；微分段按细粒度对象实施策略，业务链按顺序引流安全服务。",
+    "question": "同子网迁移正常但跨子网访问绕行，优先分析什么？",
+    "answer": "网关位置与集中/分布式设计，再查三层VNI、EVPN路由及服务链引流，不要只查MAC表。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-006",
+      "ICT-030",
+      "ICT-031",
+      "ICT-046"
+    ]
+  },
+  {
+    "id": "ICT-046",
+    "group": "DCN",
+    "category": "数据中心网络高阶技术与应用",
+    "title": "虚拟化技术、存储技术",
+    "hcia": true,
+    "hcip": true,
+    "detail": "掌握服务器虚拟化及网络虚拟化技术，掌握存储技术原理及技术在数据中心中的应用",
+    "explanation": "Hypervisor把算力分配给虚机，vSwitch提供虚拟端口；块、文件与对象存储接口不同。存储网络要看吞吐、IOPS、时延和故障域；无损以太网需端到端支持，不能只开启一个PFC开关。",
+    "question": "存储应用要求低时延，为什么只看链路带宽不够？",
+    "answer": "小块随机IO受IOPS、排队和尾时延影响，还需检查主机、存储介质与网络拥塞。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-004",
+      "ICT-009",
+      "ICT-027"
+    ]
+  },
+  {
+    "id": "ICT-047",
+    "group": "DCN",
+    "category": "数据中心网络高阶技术与应用",
+    "title": "OpenStack云平台技术、容器技术",
+    "hcia": false,
+    "hcip": true,
+    "detail": "掌握OpenStack关键组件及应用，掌握容器基础技术和容器管理平台",
+    "explanation": "Nova管理计算，Neutron管理网络，Cinder提供块存储，Glance管理镜像，Keystone管理身份。容器共享宿主机内核，编排负责调度、服务发现和故障恢复；云平台网络与业务Pod网络要分层排查。",
+    "question": "虚机启动成功却没有租户网络，应先聚焦哪些组件？",
+    "answer": "检查Neutron端口、网络/子网、DHCP与安全组，再查宿主机vSwitch和物理映射。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-046",
+      "ICT-041"
+    ]
+  },
+  {
+    "id": "ICT-048",
+    "group": "DCN",
+    "category": "数据中心网络高阶技术与应用",
+    "title": "智能无损技术、高性能与智能计算技术",
+    "hcia": false,
+    "hcip": true,
+    "detail": "掌握智能无损关键技术的原理及典型应用场景，了解高性能计算、人工智能、深度学习的定义",
+    "explanation": "RoCE等业务对丢包和尾时延敏感，PFC按优先级暂停，ECN标记拥塞以驱动端到端减速。PFC也可能引发拥塞扩散与死锁，应结合流控域、缓冲和拥塞控制调优；HPC/AI训练重视集群通信效率。",
+    "question": "PFC暂停帧很多，是否代表网络性能一定很好？",
+    "answer": "不，可能说明持续拥塞或暂停扩散；需结合ECN、吞吐、尾时延和队列水位判断。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-038",
+      "ICT-046"
+    ]
+  },
+  {
+    "id": "ICT-049",
+    "group": "DCN",
+    "category": "华为CloudFabric解决方案",
+    "title": "机架出租、计算联动",
+    "hcia": false,
+    "hcip": true,
+    "detail": "掌握数据中心网络解决方案基础场景的业务部署流程，并进一步掌握各基础场景下的业务编排原理、流量模型",
+    "explanation": "机架出租先划分租户与资源边界，计算联动把虚机生命周期与网络绑定自动同步。业务编排应包含网络创建、端口绑定、策略下发、验证和回收；东西向与南北向流量决定容量与服务位置。",
+    "question": "虚机删除后为何仍需审查网络资源？",
+    "answer": "防止残留端口、地址、策略和租户映射被误复用，回收过程也应有状态验证。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-054"
+    ]
+  },
+  {
+    "id": "ICT-050",
+    "group": "DCN",
+    "category": "华为CloudFabric解决方案",
+    "title": "云网一体化、容器网络",
+    "hcia": true,
+    "hcip": true,
+    "detail": "掌握云网一体化场景的业务部署流程、业务编排原理和流量模型，了解容器网络场景的基本内容",
+    "explanation": "云网一体化让计算平台事件驱动网络资源编排，容器网络通过CNI把Pod接入网络。关注Pod到Pod、Pod到Service及出集群三类路径，区分Overlay封装、服务转发与物理Underlay问题。",
+    "question": "Pod间可达但Service不可达说明物理链路一定坏了吗？",
+    "answer": "不，先查Service端点、代理或数据面规则和网络策略，再用逐跳证据定位。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-047",
+      "ICT-049"
+    ]
+  },
+  {
+    "id": "ICT-051",
+    "group": "DCN",
+    "category": "华为CloudFabric解决方案",
+    "title": "多云多DC解决方案",
+    "hcia": false,
+    "hcip": true,
+    "detail": "了解多云多DC方案的基本内容，掌握使用MDC部署多云多DC场景下的网络业务",
+    "explanation": "多DC互联需统一规划租户身份、路由边界、互联带宽与故障隔离。MDC用于相应方案的管理编排，具体功能与步骤依产品版本；跨DC延伸二层需考虑广播、MAC迁移与故障域扩大。",
+    "question": "为什么跨DC大二层不能无限扩展？",
+    "answer": "会扩大广播与故障影响范围，并引入时延、MAC漂移和一致性问题，需按业务必要性控制边界。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-050",
+      "ICT-029"
+    ]
+  },
+  {
+    "id": "ICT-052",
+    "group": "DCN",
+    "category": "华为CloudFabric解决方案",
+    "title": "超简网络解决方案、存储网络解决方案",
+    "hcia": false,
+    "hcip": true,
+    "detail": "了解超简网络和存储网络解决方案的内容",
+    "explanation": "超简网络减少管理与连接复杂度，但必须保留容量和故障域设计；存储网络围绕业务SLA选择拓扑、无损机制和隔离。验收要覆盖正常和失效场景的吞吐、尾时延与恢复时间。",
+    "question": "减少设备数量为何可能增加风险？",
+    "answer": "共享设备承载更多业务，单点故障和容量竞争可能更严重；需量化冗余与隔离。",
+    "depth": "了解",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-048",
+      "ICT-054"
+    ]
+  },
+  {
+    "id": "ICT-053",
+    "group": "DCN",
+    "category": "华为CloudFabric解决方案",
+    "title": "数据中心网络安全解决方案",
+    "hcia": false,
+    "hcip": true,
+    "detail": "了解数据中心网络安全解决方案的内容，掌握数据中心网络安全设计和安全业务编排",
+    "explanation": "按租户、应用层和管理面建立安全域；东西向流量也需控制。业务编排把防火墙/检测等服务接入路径，确保对称转发、策略命中和失效行为符合业务要求。",
+    "question": "仅保护互联网出口能否阻止同租户横向移动？",
+    "answer": "通常不能；还需东西向隔离、身份授权、主机保护与检测，并审计服务间访问。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-045",
+      "ICT-058",
+      "ICT-055"
+    ]
+  },
+  {
+    "id": "ICT-054",
+    "group": "DCN",
+    "category": "数据中心网络规划与设计",
+    "title": "数据中心网络规划与设计",
+    "hcia": true,
+    "hcip": true,
+    "detail": "了解数据中心网络解决方案及数据中心网络的规划设计，包括网络架构设计、数据规划、Underlay网络设计、Overlay网络设计、多云多DC网络设计、网络安全设计和智能运维设计",
+    "explanation": "先收集服务器数量、端口速率、业务流向与增长，再计算Leaf上联收敛比。地址、Loopback、ASN、VNI与RT要形成统一台账；Underlay可达性与Overlay租户策略应分别验收。",
+    "question": "48个25G下联配6个100G上联，理论收敛比多少？",
+    "answer": "下联总计1200G，上联600G，理论为2:1；还要考虑端口利用率、ECMP及单上联故障后的容量。",
+    "depth": "了解",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-045",
+      "ICT-047",
+      "ICT-048"
+    ]
+  },
+  {
+    "id": "ICT-055",
+    "group": "DCN",
+    "category": "数据中心网络运维",
+    "title": "数据中心网络运维解决方案",
+    "hcia": false,
+    "hcip": true,
+    "detail": "了解智能运维解决方案、数据中心网络典型网络运维和数据中心网络自动化运维",
+    "explanation": "运维从资产与基线出发，关联告警、路径和变更记录。自动化操作应有预检查、小批量实施、事后验证及回滚；故障定位先确认影响范围再比较控制面与数据面。",
+    "question": "全网统一下发配置为什么需要分批？",
+    "answer": "分批能限制错误影响范围，在扩大变更前验证兼容性、业务结果和回滚路径。",
+    "depth": "了解",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-041",
+      "ICT-054"
+    ]
+  },
+  {
+    "id": "ICT-056",
+    "group": "安全",
+    "category": "信息安全",
+    "title": "信息安全基础",
+    "hcia": true,
+    "hcip": true,
+    "detail": "熟悉网络常见网络安全威胁防范，熟悉网络安全常见设备",
+    "explanation": "安全目标包括机密性、完整性、可用性；威胁利用漏洞造成风险。防火墙控制边界，IPS检测并阻断攻击，日志平台关联事件；工具需要正确部署和策略才能发挥作用。",
+    "question": "数据被悄悄修改但仍可读取，主要破坏哪个目标？",
+    "answer": "完整性；读取与服务可用不代表内容未被篡改。",
+    "depth": "熟悉",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-014",
+      "ICT-036"
+    ]
+  },
+  {
+    "id": "ICT-057",
+    "group": "安全",
+    "category": "信息安全",
+    "title": "信息安全管理技术",
+    "hcia": true,
+    "hcip": true,
+    "detail": "掌握信息安全防范与趋势、信息安全管理与标准、隐私保护以及隐私保护的法律手段、信息安全保障机制和手段",
+    "explanation": "管理控制把资产、分类、最小权限、审计、培训和应急串起来。隐私保护应遵循适用法规与组织制度；本课不把某一地区规则直接推广为所有场景，正式条款需查当前官方文本。",
+    "question": "为什么备份成功还需要恢复演练？",
+    "answer": "备份文件存在不证明能在业务要求时间内恢复；需验证完整性、依赖和恢复目标。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-056"
+    ]
+  },
+  {
+    "id": "ICT-058",
+    "group": "安全",
+    "category": "基础网络安全",
+    "title": "网络安全基础",
+    "hcia": true,
+    "hcip": true,
+    "detail": "了解防火墙安全策略、防火墙网络地址转换技术、防火墙双机热备技术、防火墙用户管理技术、防火墙入侵防御、IPv6安全、终端接入安全等",
+    "explanation": "状态防火墙按首包策略建会话，回包通常依会话处理；NAT解决地址转换，安全策略决定访问许可。双机热备还需会话同步与路径切换；IPv6必须配置对应安全控制。",
+    "question": "只添加源NAT规则为什么不一定能上网？",
+    "answer": "还需要安全策略允许、路由与DNS正确、回程可达及NAT规则命中。",
+    "depth": "了解",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-014",
+      "ICT-027",
+      "ICT-056"
+    ]
+  },
+  {
+    "id": "ICT-059",
+    "group": "安全",
+    "category": "基础网络安全",
+    "title": "防火墙高级特性",
+    "hcia": false,
+    "hcip": true,
+    "detail": "熟悉防火墙高可靠技术、防火墙流量管理、防火墙虚拟系统、防火墙智能选路",
+    "explanation": "虚拟系统隔离管理与策略上下文；流量管理按业务分配资源，智能选路结合链路质量。高可靠设计要覆盖设备、链路、会话和路由，不应只观察主备角色标签。",
+    "question": "主备切换后已有TCP连接中断，检查哪些同步？",
+    "answer": "检查会话/NAT状态同步、对称路径、心跳链路与策略一致性，以及具体版本支持范围。",
+    "depth": "熟悉",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-037",
+      "ICT-038",
+      "ICT-058"
+    ]
+  },
+  {
+    "id": "ICT-060",
+    "group": "安全",
+    "category": "基础网络安全",
+    "title": "安全组网规划部署",
+    "hcia": true,
+    "hcip": true,
+    "detail": "掌握不同场景下，网络安全组网规划部署",
+    "explanation": "从资产与访问矩阵确定安全域、出口和管理通道，再部署路由、NAT、策略及日志。测试应包含允许与拒绝用例，以及故障切换；默认放行并不能证明规划正确。",
+    "question": "验收只测允许访问有哪些缺陷？",
+    "answer": "无法证明隔离有效，还应测试未经授权的横向/外向访问被拒绝且留下可追踪日志。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-058",
+      "ICT-059",
+      "ICT-070"
+    ]
+  },
+  {
+    "id": "ICT-061",
+    "group": "安全",
+    "category": "VPN技术",
+    "title": "VPN基础（加解密）",
+    "hcia": true,
+    "hcip": true,
+    "detail": "了解加解密技术原理、PKI证书体系、VPN技术基础应用",
+    "explanation": "对称加密适合大数据，非对称技术用于身份与密钥协商等；哈希不同于加密，数字签名提供来源和完整性证明。PKI验证证书链、有效期、用途与撤销状态。",
+    "question": "证书未过期就一定可信么？",
+    "answer": "不；还需验证受信链、身份名称、用途及撤销状态，并保证设备时间准确。",
+    "depth": "了解",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-056"
+    ]
+  },
+  {
+    "id": "ICT-062",
+    "group": "安全",
+    "category": "VPN技术",
+    "title": "VPN应用",
+    "hcia": true,
+    "hcip": true,
+    "detail": "熟悉IPSec VPN技术与应用、SSL VPN技术与应用",
+    "explanation": "IPsec在网络层保护匹配业务，IKE协商身份与密钥；SSL VPN通常依TLS提供远程接入。检查隧道时分开观察协商、流量选择器、路由和数据计数，隧道up并不等于应用通。",
+    "question": "IPsec协商成功但加密计数不增，先查什么？",
+    "answer": "测试流量是否命中感兴趣流/流量选择器、是否被NAT或路由改道，以及策略是否允许。",
+    "depth": "熟悉",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-028",
+      "ICT-061",
+      "ICT-058"
+    ]
+  },
+  {
+    "id": "ICT-063",
+    "group": "安全",
+    "category": "VPN技术",
+    "title": "VPN高可用技术",
+    "hcia": false,
+    "hcip": false,
+    "detail": "掌握VPN高可靠技术（双机场景应用）",
+    "explanation": "双机VPN需同步或重建安全关联，并确保虚拟地址、外部邻居和回程路由及时收敛。不同版本对SA同步的支持不同，应以切换期间业务丢包和重协商时间实测验收。",
+    "question": "VPN双机切换只测ping虚拟地址够吗？",
+    "answer": "不够，必须对穿越隧道的业务流持续测量，并检查SA、序列号与对端状态。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-059",
+      "ICT-062"
+    ]
+  },
+  {
+    "id": "ICT-064",
+    "group": "安全",
+    "category": "攻击与防御",
+    "title": "基础威胁防御",
+    "hcia": true,
+    "hcip": true,
+    "detail": "熟悉网络攻击与防御、DDoS攻击与防御、Web安全防御、内容安全过滤、渗透测试基础等",
+    "explanation": "攻击防御先识别入口与攻击面，再布置检测、限速和阻断。DDoS可能耗尽上游带宽，单机防护不一定足够；Web防护需结合应用修复，内容过滤依业务与隐私规则。渗透测试只在授权隔离环境开展。",
+    "question": "入口带宽已被打满，为什么只加本机ACL效果有限？",
+    "answer": "丢弃发生在拥塞点之后，仍占用上游链路；需运营商/清洗侧在更靠近源头缓解。",
+    "depth": "熟悉",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-056",
+      "ICT-058"
+    ]
+  },
+  {
+    "id": "ICT-065",
+    "group": "安全",
+    "category": "攻击与防御",
+    "title": "APT威胁防御",
+    "hcia": false,
+    "hcip": false,
+    "detail": "掌握APT攻击防御、安全态势感知、安全乾坤云等",
+    "explanation": "APT常跨越初始入侵、驻留、横向移动和外传等阶段。关联端点、网络、身份与日志，比单一特征检测更有价值；检测结果需验证并形成隔离、取证和恢复闭环。",
+    "question": "为何单条低风险DNS告警也可能值得关联？",
+    "answer": "与异常登录、进程启动和外传时序结合后，可能形成持续攻击链证据。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-064"
+    ]
+  },
+  {
+    "id": "ICT-066",
+    "group": "安全",
+    "category": "云安全",
+    "title": "云数据中心网络安全技术",
+    "hcia": false,
+    "hcip": false,
+    "detail": "掌握云数据中心网络安全业务需求、云数据中心网络安全部署方案、云数据中心网络安全配置案例",
+    "explanation": "云数据中心需隔离租户、管理面与东西向业务；安全组、分布式防火墙和边界网关承担不同位置的控制。以源身份、目的服务和最小权限构建策略并检查虚拟化迁移后的持续有效性。",
+    "question": "虚机更换宿主机后安全策略失效，设计应改进什么？",
+    "answer": "将策略与工作负载身份/标签关联，并确保编排同步，而非只绑定某物理端口。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-047",
+      "ICT-053",
+      "ICT-058"
+    ]
+  },
+  {
+    "id": "ICT-067",
+    "group": "安全",
+    "category": "云安全",
+    "title": "华为云安全架构设计",
+    "hcia": false,
+    "hcip": false,
+    "detail": "掌握公有云安全、租户云上安全诉求及方案、租户业务安全设计",
+    "explanation": "云安全遵循责任分工：提供方保护基础设施，租户仍需管理身份、配置、数据和应用安全，具体边界依服务类型变化。规划含IAM最小权限、网络隔离、加密、日志与备份。",
+    "question": "使用托管数据库后租户是否无需管理账号权限？",
+    "answer": "仍需管理身份、授权与数据访问，托管基础设施不等于转移全部业务安全责任。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-050",
+      "ICT-053",
+      "ICT-061"
+    ]
+  },
+  {
+    "id": "ICT-068",
+    "group": "安全",
+    "category": "安全运维",
+    "title": "安全管理中心",
+    "hcia": false,
+    "hcip": true,
+    "detail": "熟悉应急响应、网络接入控制",
+    "explanation": "安全管理中心汇集资产、事件与响应流程。应急响应先界定影响并保留证据，再按授权隔离、清除和恢复；准入控制可配合隔离受感染终端，但要保留必要处置通道。",
+    "question": "怀疑主机入侵后为什么不应立即删除全部日志？",
+    "answer": "日志是溯源和范围判断的重要证据，应按取证要求保全，避免破坏时间线。",
+    "depth": "熟悉",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-036",
+      "ICT-065"
+    ]
+  },
+  {
+    "id": "ICT-069",
+    "group": "安全",
+    "category": "安全运维",
+    "title": "安全运维与分析",
+    "hcia": false,
+    "hcip": false,
+    "detail": "掌握安全运维操作、日志管理、安全审计技术、态势感知技术（HiSec Insight）、华为HiSec解决方案",
+    "explanation": "先统一时间、资产标识和日志字段，再按攻击链关联事件。HiSec Insight等平台用于态势与分析，具体功能依版本；告警数量不能直接等于真实风险，必须复核误报与影响。",
+    "question": "多设备日志时间不一致会影响什么？",
+    "answer": "事件排序和关联会失真，可能无法还原攻击路径；需可靠时间同步并保留时区信息。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-039",
+      "ICT-068"
+    ]
+  },
+  {
+    "id": "ICT-070",
+    "group": "安全",
+    "category": "安全运维",
+    "title": "安全故障排查",
+    "hcia": false,
+    "hcip": false,
+    "detail": "防火墙故障排查、VPN故障排查、IPS故障排查、内容过滤故障排查等",
+    "explanation": "按接口、路由、会话、NAT、安全策略、内容检测逐层取证。VPN另查IKE/SA与流量选择器，IPS查特征库、配置文件及策略引用；每次只改变一个可验证变量。",
+    "question": "关闭全部安全功能后业务恢复，是否算完成定位？",
+    "answer": "不是，只证明相关路径存在影响；应逐项复现与检查命中证据，找到具体规则或检测项。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-058",
+      "ICT-062",
+      "ICT-064"
+    ]
+  },
+  {
+    "id": "ICT-071",
+    "group": "安全",
+    "category": "安全场景化解决方案",
+    "title": "园区网络安全解决方案",
+    "hcia": false,
+    "hcip": false,
+    "detail": "掌握园区网络安全需求、安全设计、安全业务部署",
+    "explanation": "把员工、访客、IoT与管理网络分域，依据身份动态授权；边界策略、终端防护与日志联动。部署顺序为身份与资产、访问矩阵、准入与策略、负向测试、运维接管。",
+    "question": "访客能访问打印机管理页说明哪类设计缺失？",
+    "answer": "访客域到内部管理域的访问限制不足，应落实隔离与最小权限，并验证例外清单。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-036",
+      "ICT-042",
+      "ICT-060"
+    ]
+  },
+  {
+    "id": "ICT-072",
+    "group": "安全",
+    "category": "安全场景化解决方案",
+    "title": "数据中心网络安全解决方案",
+    "hcia": false,
+    "hcip": false,
+    "detail": "了解传统数据中心网络架构、传统数据中心网络安全需求、掌握华为数据中心网络安全解决方案",
+    "explanation": "传统三层与Leaf-Spine拓扑都需关注东西向业务，服务区、数据库区与管理区应有不同信任边界。安全设备插入路径时检查吞吐、会话容量、对称性和故障旁路风险。",
+    "question": "防火墙吞吐足够但新连接建立慢，可能忽略哪个指标？",
+    "answer": "每秒新建连接数、并发会话与启用安全检测后的实际性能，而非只看理想大包吞吐。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-053",
+      "ICT-060"
+    ]
+  },
+  {
+    "id": "ICT-073",
+    "group": "安全",
+    "category": "安全场景化解决方案",
+    "title": "云网络安全解决方案",
+    "hcia": false,
+    "hcip": false,
+    "detail": "了解云端网络架构、云端业务安全需求，掌握公有云网络安全解决方案和混合云网络安全解决方案",
+    "explanation": "云上与本地互联需规划重叠地址、路由传播、身份与数据边界。安全组常约束资源，网络ACL约束子网路径，云防火墙提供集中检测；具体状态性和优先级依服务文档。",
+    "question": "混合云两侧CIDR重叠会产生什么问题？",
+    "answer": "路由和访问目标不唯一，需重规划地址或设计NAT等方案，不能只靠放宽安全策略。",
+    "depth": "掌握",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-051",
+      "ICT-062",
+      "ICT-067"
+    ]
+  },
+  {
+    "id": "ICT-074",
+    "group": "WLAN",
+    "category": "WLAN基础业务",
+    "title": "WLAN工作原理",
+    "hcia": true,
+    "hcip": true,
+    "detail": "CAPWAP隧道、WLAN关键报文、STA上线流程等",
+    "explanation": "AP获取管理IP并发现AC，建立CAPWAP控制关系，再下发业务。STA经扫描、认证、关联及相应密钥/准入流程上线，之后获取IP；AP上线与用户上线是两条不同的链。",
+    "question": "AP在线但用户拿不到IP，先把问题分到哪段？",
+    "answer": "检查SSID/VAP、业务VLAN、认证和DHCP路径；CAPWAP在线不证明终端数据路径正常。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-002",
+      "ICT-004",
+      "ICT-009"
+    ]
+  },
+  {
+    "id": "ICT-075",
+    "group": "WLAN",
+    "category": "WLAN基础业务",
+    "title": "WLAN组网架构",
+    "hcia": true,
+    "hcip": true,
+    "detail": "FAT AP、Leader AP、WAC+FIT AP、敏捷分布式、Navi AC、Mesh等",
+    "explanation": "FAT AP独立管理，FIT AP通常由WAC管理，Leader AP承载特定协调角色；云管理把配置运维集中到平台，Mesh用于无线回传。管理方式不直接决定数据一定经过云端。",
+    "question": "云管理AP的业务流量一定要绕行云平台吗？",
+    "answer": "不一定，数据转发取决于架构与配置，云可只承担管理控制。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-074"
+    ]
+  },
+  {
+    "id": "ICT-076",
+    "group": "WLAN",
+    "category": "WLAN基础业务",
+    "title": "WLAN可靠性",
+    "hcia": false,
+    "hcip": true,
+    "detail": "VRRP热备份、双链路热备份、双链路冷备份、N+1备份等",
+    "explanation": "热备力求提前维持备份状态以缩短切换，冷备通常需要重新建立部分状态；N+1以一台备机保护多台主机，需核算容量。切换测试要覆盖AP状态、用户会话与业务路径。",
+    "question": "N+1中的备AC为何不能只按平时负载选型？",
+    "answer": "故障时要接管被保护设备的AP/用户资源，需按设计的并发故障模型核算。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-037",
+      "ICT-075"
+    ]
+  },
+  {
+    "id": "ICT-077",
+    "group": "WLAN",
+    "category": "WLAN安全",
+    "title": "WLAN接入安全",
+    "hcia": true,
+    "hcip": true,
+    "detail": "链路认证、用户接入安全、终端黑白名单、安全策略等",
+    "explanation": "关联认证、密钥协商与用户准入承担不同功能。黑白名单按MAC筛选可辅助管理但容易仿冒；安全策略还需约束认证后的访问范围。应区分空口加密与端到端应用加密。",
+    "question": "加入MAC白名单后是否不再需要WPA类保护？",
+    "answer": "仍需要适当加密与认证；MAC可观察与伪造，白名单不能提供通信保密。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-034",
+      "ICT-078"
+    ]
+  },
+  {
+    "id": "ICT-078",
+    "group": "WLAN",
+    "category": "WLAN安全",
+    "title": "WLAN数据安全",
+    "hcia": true,
+    "hcip": true,
+    "detail": "Open、WEP-Open、WEP-share-key、WPA/WPA2-PSK、WPA/WPA2-802.1X等",
+    "explanation": "Open无链路加密；WEP存在已知缺陷，保留用于理解历史机制。PSK依共享密钥，企业802.1X通过认证服务器实现每用户身份，随后派生会话密钥；版本与密码套件要共同确认。",
+    "question": "企业要求每人可独立撤销访问，统一PSK有什么不足？",
+    "answer": "共享凭据难以单人撤销与追踪，通常需802.1X等独立身份方案并正确验证服务器证书。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-061",
+      "ICT-074"
+    ]
+  },
+  {
+    "id": "ICT-079",
+    "group": "WLAN",
+    "category": "WLAN安全",
+    "title": "WLAN安全与防御",
+    "hcia": true,
+    "hcip": true,
+    "detail": "WLAN网络安全威胁及安全方案概述、WLAN管理平面安全、WLAN控制平面安全、WLAN转发平面安全等",
+    "explanation": "管理平面保护运维入口，控制平面保护AP/AC关系，转发平面保护业务。伪造AP、弱凭据、管理暴露和非法接入分别需要发现、身份验证、分域与策略控制。",
+    "question": "仅启用业务SSID加密能否保护AC的管理口？",
+    "answer": "不能；管理口需要独立访问控制、安全管理协议、身份权限与日志审计。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-058",
+      "ICT-077"
+    ]
+  },
+  {
+    "id": "ICT-080",
+    "group": "WLAN",
+    "category": "WLAN安全",
+    "title": "WLAN网络准入控制",
+    "hcia": true,
+    "hcip": true,
+    "detail": "802.1X认证、Portal认证、MAC认证、MAC优先Portal认证等",
+    "explanation": "MAC优先Portal先尝试依据终端记录快速接入，未满足条件时进入Portal流程；Portal重定向依赖地址、DNS与HTTP交互，HTTPS行为需按终端与方案验证。认证后权限可动态下发。",
+    "question": "Portal页打不开时为什么先查DHCP与DNS？",
+    "answer": "终端需要基本IP连接和解析才能到达认证服务；认证失败可能是前置网络故障。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-036",
+      "ICT-077"
+    ]
+  },
+  {
+    "id": "ICT-081",
+    "group": "WLAN",
+    "category": "WLAN高阶特性",
+    "title": "WLAN漫游",
+    "hcia": true,
+    "hcip": true,
+    "detail": "WLAN漫游概述、漫游流量转发过程、漫游优化技术、智能漫游等",
+    "explanation": "STA决定何时漫游，网络通过邻居信息和快速密钥机制等辅助。二层/三层漫游的地址与流量处理不同，锚点/家乡代理等机制依方案；同SSID不保证无缝。",
+    "question": "两AP使用同SSID但切换掉线，至少核对哪些因素？",
+    "answer": "安全配置、移动域/密钥机制、信号覆盖、漫游组及地址保持与回程路径。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-074",
+      "ICT-075",
+      "ICT-077"
+    ]
+  },
+  {
+    "id": "ICT-082",
+    "group": "WLAN",
+    "category": "WLAN高阶特性",
+    "title": "WLAN射频资源管理",
+    "hcia": false,
+    "hcip": true,
+    "detail": "WLAN空口性能、射频调优、终端迁移、频谱导航、基于AP的负载均衡、用户CAC、WLAN抗干扰、WLAN QoS、VIP用户体验保障等",
+    "explanation": "空口是共享介质，低速终端和重传消耗更多时隙。信道、带宽、功率应协同设计；负载均衡与频谱导航影响终端选择，但终端行为也受能力限制。CAC限制新业务以保护现有质量。",
+    "question": "把所有AP功率调到最大为何可能降低体验？",
+    "answer": "扩大同频竞争和粘滞覆盖，且终端上行功率不足形成不对称；需按覆盖与容量联合调优。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-038",
+      "ICT-081",
+      "ICT-086"
+    ]
+  },
+  {
+    "id": "ICT-083",
+    "group": "WLAN",
+    "category": "WLAN高阶特性",
+    "title": "WLAN与IoT融合",
+    "hcia": false,
+    "hcip": false,
+    "detail": "物联网概要与发展趋势、物联网短距无线技术概述、华为智简园区物联网方案",
+    "explanation": "物联网终端在功耗、速率、距离与移动性上需求各异，Wi-Fi、BLE等短距技术各有取舍。融合需考虑网关、身份、数据平台与隔离，不能把所有低功耗设备都按普通办公STA设计。",
+    "question": "低速传感器部署为何不必盲目选最大信道带宽？",
+    "answer": "其数据量小，更应考虑覆盖、功耗、并发和干扰；大带宽可能减少可复用信道。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-075",
+      "ICT-080"
+    ]
+  },
+  {
+    "id": "ICT-084",
+    "group": "WLAN",
+    "category": "WLAN高阶特性",
+    "title": "WLAN无线定位",
+    "hcia": false,
+    "hcip": false,
+    "detail": "无线定位简介、无线定位原理、华为智简园区无线定位方案",
+    "explanation": "基于信号强度、到达时间或到达角的方法依赖不同能力与校准；室内多径、遮挡和终端差异影响精度。定位方案要定义测量密度、坐标基准与误差统计。",
+    "question": "单次定位误差1米能否作为全场景精度承诺？",
+    "answer": "不能，需覆盖多个位置和时段，给出误差分布与环境条件。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-082"
+    ]
+  },
+  {
+    "id": "ICT-085",
+    "group": "WLAN",
+    "category": "WLAN高阶特性",
+    "title": "构建IPv6 WLAN网络",
+    "hcia": false,
+    "hcip": false,
+    "detail": "IPv6基本概述、基于IPv6的WLAN组网及应用、基于IPv6的WLAN网络准入控制、基于IPv6的WLAN网络安全、WLAN网络的IPv6演进等",
+    "explanation": "IPv6 WLAN仍需保证RA、ND、DHCPv6与组播处理，同时设计IPv6准入和安全策略。管理面、用户面可按不同阶段演进；不能只给网关配IPv6就认为全部应用已兼容。",
+    "question": "IPv4准入正常却出现IPv6绕过，原因可能是什么？",
+    "answer": "策略只覆盖IPv4，IPv6 RA/ND和访问控制未纳入同等安全设计。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-018",
+      "ICT-074",
+      "ICT-080"
+    ]
+  },
+  {
+    "id": "ICT-086",
+    "group": "WLAN",
+    "category": "WLAN网络规划",
+    "title": "WLAN网络规划基础",
+    "hcia": true,
+    "hcip": true,
+    "detail": "WLAN网络规划概述、WLAN覆盖设计、WLAN容量设计等",
+    "explanation": "覆盖设计满足信号与SNR，容量设计满足并发用户和业务吞吐。按有效空口能力而非物理协商速率估算AP数量，再通过现场勘测和验收修正。",
+    "question": "信号满格却视频卡顿说明覆盖设计一定失败吗？",
+    "answer": "不一定；可能是空口竞争、干扰、回传或出口拥塞，应同时检查容量与SNR。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-075"
+    ]
+  },
+  {
+    "id": "ICT-087",
+    "group": "WLAN",
+    "category": "WLAN网络规划",
+    "title": "WLAN网络规划工具",
+    "hcia": false,
+    "hcip": true,
+    "detail": "WLAN Planner、CloudCampus APP等",
+    "explanation": "规划工具用于导入平面图、设置比例、墙体材质与AP型号并模拟覆盖。工具结果依赖输入假设，必须用现场测量校准；移动勘测还需记录终端与测试高度。",
+    "question": "图纸比例设置错误会如何影响规划？",
+    "answer": "距离与衰减估算失真，AP数量和位置建议随之失准，需先校准比例。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-086"
+    ]
+  },
+  {
+    "id": "ICT-088",
+    "group": "WLAN",
+    "category": "WLAN网络规划",
+    "title": "WLAN网络规划流程",
+    "hcia": true,
+    "hcip": true,
+    "detail": "网络规划概述、网络规划流程、网络规划案例等",
+    "explanation": "需求调查→现场勘测→覆盖/容量方案→干扰与信道规划→安装部署→验收优化。方案记录目标RSSI/SNR、并发、吞吐、漫游与供电回传约束，并保留测点。",
+    "question": "为什么验收路线要覆盖走廊与楼梯？",
+    "answer": "移动路径可能是覆盖断点和漫游边界，只测固定工位会遗漏移动业务质量。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-086",
+      "ICT-087"
+    ]
+  },
+  {
+    "id": "ICT-089",
+    "group": "WLAN",
+    "category": "WLAN网络规划",
+    "title": "WLAN网络优化",
+    "hcia": false,
+    "hcip": true,
+    "detail": "WLAN网络优化概述、WLAN网络优化工具、WLAN网络优化方案、WLAN网络优化案例等",
+    "explanation": "优化从测量与基线开始，分覆盖、干扰、容量、漫游与有线承载定位。一次改变一个主要变量，比较同条件下重传、时延和吞吐，避免只凭信号条评价。",
+    "question": "改变信道后吞吐提高，为什么还需检查邻区？",
+    "answer": "局部改善可能把干扰转移到其他AP，需全区域复测与回归。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-082",
+      "ICT-088"
+    ]
+  },
+  {
+    "id": "ICT-090",
+    "group": "WLAN",
+    "category": "大型WLAN组网实践",
+    "title": "大型WLAN组网实践",
+    "hcia": false,
+    "hcip": false,
+    "detail": "WLAN项目生命周期介绍、WLAN项目交付件详解、WLAN项目案例等",
+    "explanation": "大型项目包括需求、设计、实施、测试与移交。交付件应含图纸、地址/VLAN表、配置基线、验收记录、故障预案和运维手册；变更需更新实际竣工资料。",
+    "question": "缺少竣工图会怎样影响后续故障处理？",
+    "answer": "端口、AP位置与业务映射无法快速对应，延长定位与恢复时间。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-088",
+      "ICT-089"
+    ]
+  },
+  {
+    "id": "ICT-091",
+    "group": "WLAN",
+    "category": "WLAN网络运维",
+    "title": "云管理",
+    "hcia": false,
+    "hcip": true,
+    "detail": "iMaster NCE-Campus、WAC云化管理、AP云化管理等",
+    "explanation": "云管理流程包括设备发现/注册、认证纳管、模板下发、状态回读和告警闭环。设备到平台的DNS、时间、证书与出口连通均需核对，平台显示已下发不代表终端业务已生效。",
+    "question": "设备不能注册但可ping公网，仍需查什么？",
+    "answer": "DNS解析、服务端口、证书/时间、激活信息及云平台设备归属。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-041",
+      "ICT-075"
+    ]
+  },
+  {
+    "id": "ICT-092",
+    "group": "WLAN",
+    "category": "WLAN网络运维",
+    "title": "传统运维",
+    "hcia": false,
+    "hcip": true,
+    "detail": "传统WLAN网络运维",
+    "explanation": "传统运维通过WAC/AP状态、接口计数、用户表、日志和抓包取证。先区分单用户、单AP、单区域还是全网，再对比正常对象；维护前后记录配置与用户影响。",
+    "question": "只有一个AP下用户异常，为什么先不重启全网？",
+    "answer": "影响范围提示局部供电、射频、配置或回传问题；全网重启扩大中断且丢失证据。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-039",
+      "ICT-074",
+      "ICT-075"
+    ]
+  },
+  {
+    "id": "ICT-093",
+    "group": "WLAN",
+    "category": "WLAN网络运维",
+    "title": "智能运维",
+    "hcia": false,
+    "hcip": true,
+    "detail": "智能运维概述、实时体验可视、分钟级故障定界、智能网络优化等",
+    "explanation": "智能运维把用户体验、设备指标与路径关联，辅助发现根因。算法结论需结合原始证据和时间线验证；自动优化要有边界、变更记录和回退策略。",
+    "question": "平台给出干扰根因后，运维人员还应做什么？",
+    "answer": "复核频谱、重传与时间关联，验证调整效果并检查是否产生其他区域退化。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-091",
+      "ICT-092"
+    ]
+  },
+  {
+    "id": "ICT-094",
+    "group": "WLAN",
+    "category": "WLAN网络运维",
+    "title": "故障排查",
+    "hcia": true,
+    "hcip": true,
+    "detail": "WLAN故障排查概述、可靠性类故障、云管理类故障、无线网桥业务故障、射频管理业务故障、漫游业务故障等",
+    "explanation": "按AP上线、STA关联认证、地址获取、DNS、网关与应用分段排查；可靠性看切换链路，网桥看回传与环路，射频看信道/功率/干扰，漫游看密钥与地址保持。",
+    "question": "终端已关联但访问域名失败，最快的分层验证是什么？",
+    "answer": "先看地址与网关，再测目标IP和DNS解析，最后查应用端口，避免直接判定射频故障。",
+    "depth": "原理/配置（原文未标级）",
+    "status": "教学稿已编写；待版本与实机验收",
+    "sourceStatus": "已索引相关主题官方资料；本条细则与命令尚未逐项交叉核验",
+    "prerequisites": [
+      "ICT-076",
+      "ICT-081",
+      "ICT-089",
+      "ICT-093"
+    ]
+  }
+]

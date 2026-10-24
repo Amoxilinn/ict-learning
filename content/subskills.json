@@ -1,0 +1,2256 @@
+[
+  {
+    "id": "ICT-001.01",
+    "parent": "ICT-001",
+    "term": "VRP系统",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-001.02",
+    "parent": "ICT-001",
+    "term": "基本网络常识",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-002.01",
+    "parent": "ICT-002",
+    "term": "TCP/IP架构",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-002.02",
+    "parent": "ICT-002",
+    "term": "TCP",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-002.03",
+    "parent": "ICT-002",
+    "term": "UDP",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-002.04",
+    "parent": "ICT-002",
+    "term": "ARP",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-002.05",
+    "parent": "ICT-002",
+    "term": "IP",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-002.06",
+    "parent": "ICT-002",
+    "term": "NAT",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-002.07",
+    "parent": "ICT-002",
+    "term": "Telnet",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-002.08",
+    "parent": "ICT-002",
+    "term": "FTP",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-002.09",
+    "parent": "ICT-002",
+    "term": "DHCP",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-003.01",
+    "parent": "ICT-003",
+    "term": "以太网交换流程",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-003.02",
+    "parent": "ICT-003",
+    "term": "MAC地址学习",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-004.01",
+    "parent": "ICT-004",
+    "term": "VLAN",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-004.02",
+    "parent": "ICT-004",
+    "term": "VLANIF",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-004.03",
+    "parent": "ICT-004",
+    "term": "MUX VLAN",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-004.04",
+    "parent": "ICT-004",
+    "term": "VLAN聚合",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-005.01",
+    "parent": "ICT-005",
+    "term": "Eth-Trunk原理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-005.02",
+    "parent": "ICT-005",
+    "term": "Eth-Trunk配置",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-006.01",
+    "parent": "ICT-006",
+    "term": "iStack",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-006.02",
+    "parent": "ICT-006",
+    "term": "CSS",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-007.01",
+    "parent": "ICT-007",
+    "term": "防环原理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-007.02",
+    "parent": "ICT-007",
+    "term": "STP配置",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-008.01",
+    "parent": "ICT-008",
+    "term": "RSTP",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-008.02",
+    "parent": "ICT-008",
+    "term": "MSTP",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-009.01",
+    "parent": "ICT-009",
+    "term": "IP路由基础",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-009.02",
+    "parent": "ICT-009",
+    "term": "IPv4静态路由",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-009.03",
+    "parent": "ICT-009",
+    "term": "IPv6静态路由",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-010.01",
+    "parent": "ICT-010",
+    "term": "OSPF原理",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-010.02",
+    "parent": "ICT-010",
+    "term": "OSPF配置",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-011.01",
+    "parent": "ICT-011",
+    "term": "OSPFv3原理",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-011.02",
+    "parent": "ICT-011",
+    "term": "OSPFv3配置",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-012.01",
+    "parent": "ICT-012",
+    "term": "IS-IS IPv4",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-012.02",
+    "parent": "ICT-012",
+    "term": "IS-IS IPv6",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-013.01",
+    "parent": "ICT-013",
+    "term": "BGP IPv4",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-013.02",
+    "parent": "ICT-013",
+    "term": "BGP IPv6",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-013.03",
+    "parent": "ICT-013",
+    "term": "BGP VPN场景",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-014.01",
+    "parent": "ICT-014",
+    "term": "ACL原理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-014.02",
+    "parent": "ICT-014",
+    "term": "ACL配置",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-015.01",
+    "parent": "ICT-015",
+    "term": "IP Prefix List原理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-015.02",
+    "parent": "ICT-015",
+    "term": "IP Prefix List配置",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-016.01",
+    "parent": "ICT-016",
+    "term": "路由策略",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-016.02",
+    "parent": "ICT-016",
+    "term": "策略路由",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-017.01",
+    "parent": "ICT-017",
+    "term": "IPv6协议",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-017.02",
+    "parent": "ICT-017",
+    "term": "IPv6地址概念",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-018.01",
+    "parent": "ICT-018",
+    "term": "ICMPv6",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-018.02",
+    "parent": "ICT-018",
+    "term": "SLAAC",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-018.03",
+    "parent": "ICT-018",
+    "term": "DHCPv6",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-019.01",
+    "parent": "ICT-019",
+    "term": "双栈",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-019.02",
+    "parent": "ICT-019",
+    "term": "6PE",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-019.03",
+    "parent": "ICT-019",
+    "term": "6VPE",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-019.04",
+    "parent": "ICT-019",
+    "term": "NAT64",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-020.01",
+    "parent": "ICT-020",
+    "term": "IPv6+概念",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-020.02",
+    "parent": "ICT-020",
+    "term": "IPv6+内涵",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-021.01",
+    "parent": "ICT-021",
+    "term": "SRv6概念",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-021.02",
+    "parent": "ICT-021",
+    "term": "SRH报文格式",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-021.03",
+    "parent": "ICT-021",
+    "term": "SRv6 BE",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-021.04",
+    "parent": "ICT-021",
+    "term": "SRv6 TE Policy",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-022.01",
+    "parent": "ICT-022",
+    "term": "切片应用场景",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-022.02",
+    "parent": "ICT-022",
+    "term": "FlexE概念",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-023.01",
+    "parent": "ICT-023",
+    "term": "IFIT统计模型",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-023.02",
+    "parent": "ICT-023",
+    "term": "丢包检测",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-023.03",
+    "parent": "ICT-023",
+    "term": "时延检测",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-024.01",
+    "parent": "ICT-024",
+    "term": "广域网概念",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-024.02",
+    "parent": "ICT-024",
+    "term": "PPP",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-024.03",
+    "parent": "ICT-024",
+    "term": "PPPoE",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-025.01",
+    "parent": "ICT-025",
+    "term": "SR-MPLS原理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-025.02",
+    "parent": "ICT-025",
+    "term": "SR-MPLS配置",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-026.01",
+    "parent": "ICT-026",
+    "term": "MPLS",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-026.02",
+    "parent": "ICT-026",
+    "term": "LDP",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-027.01",
+    "parent": "ICT-027",
+    "term": "VPN概念",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-027.02",
+    "parent": "ICT-027",
+    "term": "VRF原理与配置",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-028.01",
+    "parent": "ICT-028",
+    "term": "GRE",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-028.02",
+    "parent": "ICT-028",
+    "term": "L2TP",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-028.03",
+    "parent": "ICT-028",
+    "term": "IPsec",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-029.01",
+    "parent": "ICT-029",
+    "term": "BGP/MPLS IP VPN原理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-029.02",
+    "parent": "ICT-029",
+    "term": "BGP/MPLS IP VPN配置",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-030.01",
+    "parent": "ICT-030",
+    "term": "VXLAN原理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-030.02",
+    "parent": "ICT-030",
+    "term": "VXLAN构建虚拟网络",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-031.01",
+    "parent": "ICT-031",
+    "term": "EVPN原理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-031.02",
+    "parent": "ICT-031",
+    "term": "园区应用",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-031.03",
+    "parent": "ICT-031",
+    "term": "SD-WAN应用",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-032.01",
+    "parent": "ICT-032",
+    "term": "组播概念",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-032.02",
+    "parent": "ICT-032",
+    "term": "IGMP原理与配置",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-033.01",
+    "parent": "ICT-033",
+    "term": "PIM原理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-033.02",
+    "parent": "ICT-033",
+    "term": "PIM配置",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-034.01",
+    "parent": "ICT-034",
+    "term": "认证",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-034.02",
+    "parent": "ICT-034",
+    "term": "授权",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-034.03",
+    "parent": "ICT-034",
+    "term": "计费",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-034.04",
+    "parent": "ICT-034",
+    "term": "AAA配置",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-035.01",
+    "parent": "ICT-035",
+    "term": "端口隔离",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-035.02",
+    "parent": "ICT-035",
+    "term": "MAC地址表安全",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-035.03",
+    "parent": "ICT-035",
+    "term": "端口安全",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-035.04",
+    "parent": "ICT-035",
+    "term": "MAC漂移防止与检测",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-035.05",
+    "parent": "ICT-035",
+    "term": "MACsec",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-035.06",
+    "parent": "ICT-035",
+    "term": "流量控制",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-035.07",
+    "parent": "ICT-035",
+    "term": "DHCP Snooping",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-035.08",
+    "parent": "ICT-035",
+    "term": "IP Source Guard",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-036.01",
+    "parent": "ICT-036",
+    "term": "802.1X",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-036.02",
+    "parent": "ICT-036",
+    "term": "MAC认证",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-036.03",
+    "parent": "ICT-036",
+    "term": "Portal",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-036.04",
+    "parent": "ICT-036",
+    "term": "策略联动",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-037.01",
+    "parent": "ICT-037",
+    "term": "VRRP",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-037.02",
+    "parent": "ICT-037",
+    "term": "BFD",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-038.01",
+    "parent": "ICT-038",
+    "term": "QoS原理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-038.02",
+    "parent": "ICT-038",
+    "term": "QoS配置",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-039.01",
+    "parent": "ICT-039",
+    "term": "SNMP",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-039.02",
+    "parent": "ICT-039",
+    "term": "LLDP",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-039.03",
+    "parent": "ICT-039",
+    "term": "NQA",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-040.01",
+    "parent": "ICT-040",
+    "term": "自动化基础",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-040.02",
+    "parent": "ICT-040",
+    "term": "NETCONF",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-040.03",
+    "parent": "ICT-040",
+    "term": "Python实践",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-041.01",
+    "parent": "ICT-041",
+    "term": "SSH",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-041.02",
+    "parent": "ICT-041",
+    "term": "YANG",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-041.03",
+    "parent": "ICT-041",
+    "term": "Telemetry",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-041.04",
+    "parent": "ICT-041",
+    "term": "RESTful实践",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-042.01",
+    "parent": "ICT-042",
+    "term": "中小型公有云管理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-042.02",
+    "parent": "ICT-042",
+    "term": "MSP自建云管理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-042.03",
+    "parent": "ICT-042",
+    "term": "大中型VXLAN园区",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-042.04",
+    "parent": "ICT-042",
+    "term": "挑战",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-042.05",
+    "parent": "ICT-042",
+    "term": "技术原理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-042.06",
+    "parent": "ICT-042",
+    "term": "规划设计",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-042.07",
+    "parent": "ICT-042",
+    "term": "部署",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-043.01",
+    "parent": "ICT-043",
+    "term": "广域互联挑战",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-043.02",
+    "parent": "ICT-043",
+    "term": "SD-WAN原理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-043.03",
+    "parent": "ICT-043",
+    "term": "规划设计",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-043.04",
+    "parent": "ICT-043",
+    "term": "部署",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-044.01",
+    "parent": "ICT-044",
+    "term": "广域网络挑战",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-044.02",
+    "parent": "ICT-044",
+    "term": "CloudWAN原理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-044.03",
+    "parent": "ICT-044",
+    "term": "规划设计",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-044.04",
+    "parent": "ICT-044",
+    "term": "部署",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-045.01",
+    "parent": "ICT-045",
+    "term": "M-LAG",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-045.02",
+    "parent": "ICT-045",
+    "term": "集中式VXLAN",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-045.03",
+    "parent": "ICT-045",
+    "term": "分布式VXLAN",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-045.04",
+    "parent": "ICT-045",
+    "term": "跨域VXLAN",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-045.05",
+    "parent": "ICT-045",
+    "term": "EVPN",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-045.06",
+    "parent": "ICT-045",
+    "term": "微分段",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-045.07",
+    "parent": "ICT-045",
+    "term": "业务链",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-046.01",
+    "parent": "ICT-046",
+    "term": "服务器虚拟化",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-046.02",
+    "parent": "ICT-046",
+    "term": "网络虚拟化",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-046.03",
+    "parent": "ICT-046",
+    "term": "存储原理",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-046.04",
+    "parent": "ICT-046",
+    "term": "存储应用",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-047.01",
+    "parent": "ICT-047",
+    "term": "OpenStack关键组件",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-047.02",
+    "parent": "ICT-047",
+    "term": "OpenStack应用",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-047.03",
+    "parent": "ICT-047",
+    "term": "容器基础",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-047.04",
+    "parent": "ICT-047",
+    "term": "容器管理平台",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-048.01",
+    "parent": "ICT-048",
+    "term": "智能无损原理",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-048.02",
+    "parent": "ICT-048",
+    "term": "智能无损应用",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-048.03",
+    "parent": "ICT-048",
+    "term": "高性能计算",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-048.04",
+    "parent": "ICT-048",
+    "term": "人工智能",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-048.05",
+    "parent": "ICT-048",
+    "term": "深度学习",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-049.01",
+    "parent": "ICT-049",
+    "term": "机架出租",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-049.02",
+    "parent": "ICT-049",
+    "term": "计算联动",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-049.03",
+    "parent": "ICT-049",
+    "term": "部署流程",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-049.04",
+    "parent": "ICT-049",
+    "term": "编排原理",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-049.05",
+    "parent": "ICT-049",
+    "term": "流量模型",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-050.01",
+    "parent": "ICT-050",
+    "term": "云网一体化部署",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-050.02",
+    "parent": "ICT-050",
+    "term": "业务编排",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-050.03",
+    "parent": "ICT-050",
+    "term": "流量模型",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-050.04",
+    "parent": "ICT-050",
+    "term": "容器网络",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-051.01",
+    "parent": "ICT-051",
+    "term": "多云多DC内容",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-051.02",
+    "parent": "ICT-051",
+    "term": "MDC业务部署",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-052.01",
+    "parent": "ICT-052",
+    "term": "超简网络",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-052.02",
+    "parent": "ICT-052",
+    "term": "存储网络",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-053.01",
+    "parent": "ICT-053",
+    "term": "安全方案内容",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-053.02",
+    "parent": "ICT-053",
+    "term": "安全设计",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-053.03",
+    "parent": "ICT-053",
+    "term": "安全业务编排",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-054.01",
+    "parent": "ICT-054",
+    "term": "架构",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-054.02",
+    "parent": "ICT-054",
+    "term": "数据规划",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-054.03",
+    "parent": "ICT-054",
+    "term": "Underlay",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-054.04",
+    "parent": "ICT-054",
+    "term": "Overlay",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-054.05",
+    "parent": "ICT-054",
+    "term": "多云多DC",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-054.06",
+    "parent": "ICT-054",
+    "term": "安全设计",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-054.07",
+    "parent": "ICT-054",
+    "term": "智能运维设计",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-055.01",
+    "parent": "ICT-055",
+    "term": "智能运维方案",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-055.02",
+    "parent": "ICT-055",
+    "term": "典型运维",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-055.03",
+    "parent": "ICT-055",
+    "term": "自动化运维",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-056.01",
+    "parent": "ICT-056",
+    "term": "常见威胁与防范",
+    "depth": "熟悉",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-056.02",
+    "parent": "ICT-056",
+    "term": "常见安全设备",
+    "depth": "熟悉",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-057.01",
+    "parent": "ICT-057",
+    "term": "防范与趋势",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-057.02",
+    "parent": "ICT-057",
+    "term": "安全管理与标准",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-057.03",
+    "parent": "ICT-057",
+    "term": "隐私保护",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-057.04",
+    "parent": "ICT-057",
+    "term": "隐私法律手段",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-057.05",
+    "parent": "ICT-057",
+    "term": "保障机制",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-058.01",
+    "parent": "ICT-058",
+    "term": "安全策略",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-058.02",
+    "parent": "ICT-058",
+    "term": "NAT",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-058.03",
+    "parent": "ICT-058",
+    "term": "双机热备",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-058.04",
+    "parent": "ICT-058",
+    "term": "用户管理",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-058.05",
+    "parent": "ICT-058",
+    "term": "入侵防御",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-058.06",
+    "parent": "ICT-058",
+    "term": "IPv6安全",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-058.07",
+    "parent": "ICT-058",
+    "term": "终端接入安全",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-059.01",
+    "parent": "ICT-059",
+    "term": "高可靠",
+    "depth": "熟悉",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-059.02",
+    "parent": "ICT-059",
+    "term": "流量管理",
+    "depth": "熟悉",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-059.03",
+    "parent": "ICT-059",
+    "term": "虚拟系统",
+    "depth": "熟悉",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-059.04",
+    "parent": "ICT-059",
+    "term": "智能选路",
+    "depth": "熟悉",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-060.01",
+    "parent": "ICT-060",
+    "term": "场景需求",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-060.02",
+    "parent": "ICT-060",
+    "term": "安全规划",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-060.03",
+    "parent": "ICT-060",
+    "term": "部署",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-061.01",
+    "parent": "ICT-061",
+    "term": "加解密原理",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-061.02",
+    "parent": "ICT-061",
+    "term": "PKI",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-061.03",
+    "parent": "ICT-061",
+    "term": "VPN基础应用",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-062.01",
+    "parent": "ICT-062",
+    "term": "IPsec VPN",
+    "depth": "熟悉",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-062.02",
+    "parent": "ICT-062",
+    "term": "SSL VPN",
+    "depth": "熟悉",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-063.01",
+    "parent": "ICT-063",
+    "term": "双机VPN高可靠",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-064.01",
+    "parent": "ICT-064",
+    "term": "网络攻击与防御",
+    "depth": "熟悉",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-064.02",
+    "parent": "ICT-064",
+    "term": "DDoS",
+    "depth": "熟悉",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-064.03",
+    "parent": "ICT-064",
+    "term": "Web防御",
+    "depth": "熟悉",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-064.04",
+    "parent": "ICT-064",
+    "term": "内容过滤",
+    "depth": "熟悉",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-064.05",
+    "parent": "ICT-064",
+    "term": "渗透测试基础",
+    "depth": "熟悉",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-065.01",
+    "parent": "ICT-065",
+    "term": "APT防御",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-065.02",
+    "parent": "ICT-065",
+    "term": "态势感知",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-065.03",
+    "parent": "ICT-065",
+    "term": "安全乾坤云",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-066.01",
+    "parent": "ICT-066",
+    "term": "云DC安全需求",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-066.02",
+    "parent": "ICT-066",
+    "term": "部署方案",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-066.03",
+    "parent": "ICT-066",
+    "term": "配置案例",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-067.01",
+    "parent": "ICT-067",
+    "term": "公有云安全",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-067.02",
+    "parent": "ICT-067",
+    "term": "租户安全诉求",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-067.03",
+    "parent": "ICT-067",
+    "term": "租户业务安全设计",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-068.01",
+    "parent": "ICT-068",
+    "term": "应急响应",
+    "depth": "熟悉",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-068.02",
+    "parent": "ICT-068",
+    "term": "网络接入控制",
+    "depth": "熟悉",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-069.01",
+    "parent": "ICT-069",
+    "term": "安全运维",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-069.02",
+    "parent": "ICT-069",
+    "term": "日志管理",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-069.03",
+    "parent": "ICT-069",
+    "term": "安全审计",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-069.04",
+    "parent": "ICT-069",
+    "term": "HiSec Insight",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-069.05",
+    "parent": "ICT-069",
+    "term": "HiSec方案",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-070.01",
+    "parent": "ICT-070",
+    "term": "防火墙排障",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-070.02",
+    "parent": "ICT-070",
+    "term": "VPN排障",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-070.03",
+    "parent": "ICT-070",
+    "term": "IPS排障",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-070.04",
+    "parent": "ICT-070",
+    "term": "内容过滤排障",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-071.01",
+    "parent": "ICT-071",
+    "term": "园区安全需求",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-071.02",
+    "parent": "ICT-071",
+    "term": "园区安全设计",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-071.03",
+    "parent": "ICT-071",
+    "term": "业务部署",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-072.01",
+    "parent": "ICT-072",
+    "term": "传统DC架构",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-072.02",
+    "parent": "ICT-072",
+    "term": "传统DC安全需求",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-072.03",
+    "parent": "ICT-072",
+    "term": "华为DC安全方案",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-073.01",
+    "parent": "ICT-073",
+    "term": "云端架构",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-073.02",
+    "parent": "ICT-073",
+    "term": "云端安全需求",
+    "depth": "了解",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-073.03",
+    "parent": "ICT-073",
+    "term": "公有云方案",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-073.04",
+    "parent": "ICT-073",
+    "term": "混合云方案",
+    "depth": "掌握",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-074.01",
+    "parent": "ICT-074",
+    "term": "CAPWAP",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-074.02",
+    "parent": "ICT-074",
+    "term": "WLAN关键报文",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-074.03",
+    "parent": "ICT-074",
+    "term": "STA上线",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-075.01",
+    "parent": "ICT-075",
+    "term": "FAT AP",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-075.02",
+    "parent": "ICT-075",
+    "term": "Leader AP",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-075.03",
+    "parent": "ICT-075",
+    "term": "WAC+FIT AP",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-075.04",
+    "parent": "ICT-075",
+    "term": "敏捷分布式",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-075.05",
+    "parent": "ICT-075",
+    "term": "Navi AC",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-075.06",
+    "parent": "ICT-075",
+    "term": "Mesh",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-076.01",
+    "parent": "ICT-076",
+    "term": "VRRP热备",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-076.02",
+    "parent": "ICT-076",
+    "term": "双链路热备",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-076.03",
+    "parent": "ICT-076",
+    "term": "双链路冷备",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-076.04",
+    "parent": "ICT-076",
+    "term": "N+1",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-077.01",
+    "parent": "ICT-077",
+    "term": "链路认证",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-077.02",
+    "parent": "ICT-077",
+    "term": "用户安全",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-077.03",
+    "parent": "ICT-077",
+    "term": "黑白名单",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-077.04",
+    "parent": "ICT-077",
+    "term": "安全策略",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-078.01",
+    "parent": "ICT-078",
+    "term": "Open",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-078.02",
+    "parent": "ICT-078",
+    "term": "WEP-Open",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-078.03",
+    "parent": "ICT-078",
+    "term": "WEP-shared-key",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-078.04",
+    "parent": "ICT-078",
+    "term": "WPA/WPA2-PSK",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-078.05",
+    "parent": "ICT-078",
+    "term": "WPA/WPA2-802.1X",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-079.01",
+    "parent": "ICT-079",
+    "term": "威胁与方案",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-079.02",
+    "parent": "ICT-079",
+    "term": "管理平面",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-079.03",
+    "parent": "ICT-079",
+    "term": "控制平面",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-079.04",
+    "parent": "ICT-079",
+    "term": "转发平面",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-080.01",
+    "parent": "ICT-080",
+    "term": "802.1X",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-080.02",
+    "parent": "ICT-080",
+    "term": "Portal",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-080.03",
+    "parent": "ICT-080",
+    "term": "MAC",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-080.04",
+    "parent": "ICT-080",
+    "term": "MAC优先Portal",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-081.01",
+    "parent": "ICT-081",
+    "term": "漫游概述",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-081.02",
+    "parent": "ICT-081",
+    "term": "转发过程",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-081.03",
+    "parent": "ICT-081",
+    "term": "漫游优化",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-081.04",
+    "parent": "ICT-081",
+    "term": "智能漫游",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-082.01",
+    "parent": "ICT-082",
+    "term": "空口性能",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-082.02",
+    "parent": "ICT-082",
+    "term": "射频调优",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-082.03",
+    "parent": "ICT-082",
+    "term": "终端迁移",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-082.04",
+    "parent": "ICT-082",
+    "term": "频谱导航",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-082.05",
+    "parent": "ICT-082",
+    "term": "AP负载均衡",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-082.06",
+    "parent": "ICT-082",
+    "term": "用户CAC",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-082.07",
+    "parent": "ICT-082",
+    "term": "抗干扰",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-082.08",
+    "parent": "ICT-082",
+    "term": "WLAN QoS",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-082.09",
+    "parent": "ICT-082",
+    "term": "VIP保障",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-083.01",
+    "parent": "ICT-083",
+    "term": "IoT概述",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-083.02",
+    "parent": "ICT-083",
+    "term": "短距无线技术",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-083.03",
+    "parent": "ICT-083",
+    "term": "智简园区物联网",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-084.01",
+    "parent": "ICT-084",
+    "term": "定位简介",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-084.02",
+    "parent": "ICT-084",
+    "term": "定位原理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-084.03",
+    "parent": "ICT-084",
+    "term": "智简园区定位",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-085.01",
+    "parent": "ICT-085",
+    "term": "IPv6概述",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-085.02",
+    "parent": "ICT-085",
+    "term": "组网与应用",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-085.03",
+    "parent": "ICT-085",
+    "term": "准入",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-085.04",
+    "parent": "ICT-085",
+    "term": "安全",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-085.05",
+    "parent": "ICT-085",
+    "term": "IPv6演进",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-086.01",
+    "parent": "ICT-086",
+    "term": "规划概述",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-086.02",
+    "parent": "ICT-086",
+    "term": "覆盖设计",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-086.03",
+    "parent": "ICT-086",
+    "term": "容量设计",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-087.01",
+    "parent": "ICT-087",
+    "term": "WLAN Planner",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-087.02",
+    "parent": "ICT-087",
+    "term": "CloudCampus APP",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-088.01",
+    "parent": "ICT-088",
+    "term": "规划概述",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-088.02",
+    "parent": "ICT-088",
+    "term": "规划流程",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-088.03",
+    "parent": "ICT-088",
+    "term": "案例",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-089.01",
+    "parent": "ICT-089",
+    "term": "优化概述",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-089.02",
+    "parent": "ICT-089",
+    "term": "优化工具",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-089.03",
+    "parent": "ICT-089",
+    "term": "优化方案",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-089.04",
+    "parent": "ICT-089",
+    "term": "优化案例",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-090.01",
+    "parent": "ICT-090",
+    "term": "项目生命周期",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-090.02",
+    "parent": "ICT-090",
+    "term": "交付件",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-090.03",
+    "parent": "ICT-090",
+    "term": "项目案例",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-091.01",
+    "parent": "ICT-091",
+    "term": "iMaster NCE-Campus",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-091.02",
+    "parent": "ICT-091",
+    "term": "WAC云化管理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-091.03",
+    "parent": "ICT-091",
+    "term": "AP云化管理",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-092.01",
+    "parent": "ICT-092",
+    "term": "传统WLAN运维",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-093.01",
+    "parent": "ICT-093",
+    "term": "智能运维概述",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-093.02",
+    "parent": "ICT-093",
+    "term": "实时体验可视",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-093.03",
+    "parent": "ICT-093",
+    "term": "分钟级定界",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-093.04",
+    "parent": "ICT-093",
+    "term": "智能优化",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-094.01",
+    "parent": "ICT-094",
+    "term": "排障概述",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-094.02",
+    "parent": "ICT-094",
+    "term": "可靠性故障",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-094.03",
+    "parent": "ICT-094",
+    "term": "云管理故障",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-094.04",
+    "parent": "ICT-094",
+    "term": "无线网桥故障",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-094.05",
+    "parent": "ICT-094",
+    "term": "射频管理故障",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  },
+  {
+    "id": "ICT-094.06",
+    "parent": "ICT-094",
+    "term": "漫游故障",
+    "depth": "原理/配置（原文未标级）",
+    "status": "待逐项验收"
+  }
+]

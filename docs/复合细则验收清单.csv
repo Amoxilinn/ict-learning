@@ -1,0 +1,332 @@
+﻿子项编号,父条目,子知识点,原文深度,讲解,流程,例题解析,任务与结果,故障案例,配置/操作,文档平台,来源URL,设备执行,教材状态
+ICT-001.01,ICT-001,VRP系统,了解,有,有,有,有,有,有示例,常见VRP V200学习语法；具体功能与接口按目标型号核对,https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp,未执行,教材已编写；设备实验未执行
+ICT-001.02,ICT-001,基本网络常识,了解,有,有,有,有,有,概念/设计任务,,https://www.rfc-editor.org/rfc/rfc826,未执行,教材已编写；设备实验未执行
+ICT-002.01,ICT-002,TCP/IP架构,了解,有,有,有,有,有,概念/设计任务,,"https://www.rfc-editor.org/rfc/rfc826
+https://www.rfc-editor.org/rfc/rfc8200",未执行,教材已编写；设备实验未执行
+ICT-002.02,ICT-002,TCP,掌握,有,有,有,有,有,概念/设计任务,,https://www.rfc-editor.org/rfc/rfc9293,未执行,教材已编写；设备实验未执行
+ICT-002.03,ICT-002,UDP,掌握,有,有,有,有,有,概念/设计任务,,https://www.rfc-editor.org/rfc/rfc768,未执行,教材已编写；设备实验未执行
+ICT-002.04,ICT-002,ARP,掌握,有,有,有,有,有,有示例,常见VRP V200学习语法；具体功能与接口按目标型号核对,https://www.rfc-editor.org/rfc/rfc826,未执行,教材已编写；设备实验未执行
+ICT-002.05,ICT-002,IP,掌握,有,有,有,有,有,概念/设计任务,,https://www.rfc-editor.org/rfc/rfc3021,未执行,教材已编写；设备实验未执行
+ICT-002.06,ICT-002,NAT,掌握,有,有,有,有,有,有示例,AR系列支持Easy IP的VRP V200设备,https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr,未执行,教材已编写；设备实验未执行
+ICT-002.07,ICT-002,Telnet,掌握,有,有,有,有,有,有示例,VRP V200远程管理查询,https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr,未执行,教材已编写；设备实验未执行
+ICT-002.08,ICT-002,FTP,掌握,有,有,有,有,有,概念/设计任务,,https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr,未执行,教材已编写；设备实验未执行
+ICT-002.09,ICT-002,DHCP,掌握,有,有,有,有,有,有示例,AR系列VRP V200全局地址池DHCP学习示例,https://www.rfc-editor.org/rfc/rfc2131,未执行,教材已编写；设备实验未执行
+ICT-003.01,ICT-003,以太网交换流程,了解,有,有,有,有,有,有示例,常见VRP V200学习语法；具体功能与接口按目标型号核对,"https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp
+https://www.rfc-editor.org/rfc/rfc826",未执行,教材已编写；设备实验未执行
+ICT-003.02,ICT-003,MAC地址学习,了解,有,有,有,有,有,有示例,常见VRP V200学习语法；具体功能与接口按目标型号核对,https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp,未执行,教材已编写；设备实验未执行
+ICT-004.01,ICT-004,VLAN,原理/配置（原文未标级）,有,有,有,有,有,有示例,常见VRP V200学习语法；具体功能与接口按目标型号核对,https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp,未执行,教材已编写；设备实验未执行
+ICT-004.02,ICT-004,VLANIF,原理/配置（原文未标级）,有,有,有,有,有,有示例,支持三层VLANIF的S系列VRP V200设备,https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp,未执行,教材已编写；设备实验未执行
+ICT-004.03,ICT-004,MUX VLAN,原理/配置（原文未标级）,有,有,有,有,有,有示例,S5700/S6700 V200R024C10支持MUX VLAN的型号,https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp,未执行,教材已编写；设备实验未执行
+ICT-004.04,ICT-004,VLAN聚合,原理/配置（原文未标级）,有,有,有,有,有,有示例,支持VLAN Aggregation的VRP设备；例见NE40E-M2 V800R024C00SPC500,https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp,未执行,教材已编写；设备实验未执行
+ICT-005.01,ICT-005,Eth-Trunk原理,原理/配置（原文未标级）,有,有,有,有,有,有示例,常见VRP V200学习语法；具体功能与接口按目标型号核对,https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp,未执行,教材已编写；设备实验未执行
+ICT-005.02,ICT-005,Eth-Trunk配置,原理/配置（原文未标级）,有,有,有,有,有,有示例,常见VRP V200学习语法；具体功能与接口按目标型号核对,https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp,未执行,教材已编写；设备实验未执行
+ICT-006.01,ICT-006,iStack,原理/配置（原文未标级）,有,有,有,有,有,有示例,S系列iStack V200命令族,https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp,未执行,教材已编写；设备实验未执行
+ICT-006.02,ICT-006,CSS,原理/配置（原文未标级）,有,有,有,有,有,有示例,S12700/S12700E V200R025C00，官方Configuring CSS Software,https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp,未执行,教材已编写；设备实验未执行
+ICT-007.01,ICT-007,防环原理,原理/配置（原文未标级）,有,有,有,有,有,有示例,S系列VRP V200 STP学习示例,https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp,未执行,教材已编写；设备实验未执行
+ICT-007.02,ICT-007,STP配置,原理/配置（原文未标级）,有,有,有,有,有,有示例,S系列VRP V200 STP学习示例,https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp,未执行,教材已编写；设备实验未执行
+ICT-008.01,ICT-008,RSTP,原理/配置（原文未标级）,有,有,有,有,有,有示例,S系列VRP V200支持RSTP及BPDU保护的设备,https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp,未执行,教材已编写；设备实验未执行
+ICT-008.02,ICT-008,MSTP,原理/配置（原文未标级）,有,有,有,有,有,有示例,S12700/S12700E V200R023C00等支持MSTP的VRP设备,https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp,未执行,教材已编写；设备实验未执行
+ICT-009.01,ICT-009,IP路由基础,掌握,有,有,有,有,有,有示例,支持相关功能的VRP V200设备；命令据相应华为配置指南，目标型号另核对,https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr,未执行,教材已编写；设备实验未执行
+ICT-009.02,ICT-009,IPv4静态路由,掌握,有,有,有,有,有,有示例,支持相关功能的VRP V200设备；命令据相应华为配置指南，目标型号另核对,https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr,未执行,教材已编写；设备实验未执行
+ICT-009.03,ICT-009,IPv6静态路由,掌握,有,有,有,有,有,有示例,支持IPv6静态路由的VRP设备,"https://www.rfc-editor.org/rfc/rfc8200
+https://www.rfc-editor.org/rfc/rfc4861",未执行,教材已编写；设备实验未执行
+ICT-010.01,ICT-010,OSPF原理,掌握,有,有,有,有,有,有示例,支持相关功能的VRP V200设备；命令据相应华为配置指南，目标型号另核对,https://www.rfc-editor.org/rfc/rfc2328,未执行,教材已编写；设备实验未执行
+ICT-010.02,ICT-010,OSPF配置,掌握,有,有,有,有,有,有示例,支持相关功能的VRP V200设备；命令据相应华为配置指南，目标型号另核对,"https://www.rfc-editor.org/rfc/rfc2328
+https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",未执行,教材已编写；设备实验未执行
+ICT-011.01,ICT-011,OSPFv3原理,掌握,有,有,有,有,有,有示例,ME60 V800R023C00SPC500，Basic IP Routing配置指南的OSPFv3语法,"https://www.rfc-editor.org/rfc/rfc5340
+https://www.rfc-editor.org/rfc/rfc8200",未执行,教材已编写；设备实验未执行
+ICT-011.02,ICT-011,OSPFv3配置,掌握,有,有,有,有,有,有示例,ME60 V800R023C00SPC500，Basic IP Routing配置指南的OSPFv3语法,"https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr
+https://www.rfc-editor.org/rfc/rfc5340",未执行,教材已编写；设备实验未执行
+ICT-012.01,ICT-012,IS-IS IPv4,掌握,有,有,有,有,有,有示例,支持相关功能的VRP V200设备；命令据相应华为配置指南，目标型号另核对,https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr,未执行,教材已编写；设备实验未执行
+ICT-012.02,ICT-012,IS-IS IPv6,掌握,有,有,有,有,有,有示例,ME60 V800R023C00SPC500 IS-IS IPv6多拓扑语法,"https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr
+https://www.rfc-editor.org/rfc/rfc8200",未执行,教材已编写；设备实验未执行
+ICT-013.01,ICT-013,BGP IPv4,掌握,有,有,有,有,有,有示例,S系列/AR支持BGP的VRP V200常见语法,"https://www.rfc-editor.org/rfc/rfc4271
+https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",未执行,教材已编写；设备实验未执行
+ICT-013.02,ICT-013,BGP IPv6,掌握,有,有,有,有,有,有示例,S7700 V200R021C00/C01等支持BGP4+的VRP设备,"https://www.rfc-editor.org/rfc/rfc4271
+https://www.rfc-editor.org/rfc/rfc8200",未执行,教材已编写；设备实验未执行
+ICT-013.03,ICT-013,BGP VPN场景,掌握,有,有,有,有,有,有示例,支持BGP/MPLS L3VPN的VRP设备,https://www.rfc-editor.org/rfc/rfc4271,未执行,教材已编写；设备实验未执行
+ICT-014.01,ICT-014,ACL原理,原理/配置（原文未标级）,有,有,有,有,有,有示例,支持VLANIF traffic-filter的VRP平台；官方traffic-filter接口命令示例,https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr,未执行,教材已编写；设备实验未执行
+ICT-014.02,ICT-014,ACL配置,原理/配置（原文未标级）,有,有,有,有,有,有示例,支持VLANIF traffic-filter的VRP平台；官方traffic-filter接口命令示例,https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr,未执行,教材已编写；设备实验未执行
+ICT-015.01,ICT-015,IP Prefix List原理,原理/配置（原文未标级）,有,有,有,有,有,有示例,VRP传统ip ip-prefix语法,https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr,未执行,教材已编写；设备实验未执行
+ICT-015.02,ICT-015,IP Prefix List配置,原理/配置（原文未标级）,有,有,有,有,有,有示例,VRP传统ip ip-prefix语法,https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr,未执行,教材已编写；设备实验未执行
+ICT-016.01,ICT-016,路由策略,原理/配置（原文未标级）,有,有,有,有,有,有示例,支持BGP route-policy的VRP设备；华为Route-Policy配置原理,https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr,未执行,教材已编写；设备实验未执行
+ICT-016.02,ICT-016,策略路由,原理/配置（原文未标级）,有,有,有,有,有,有示例,支持MQC重定向的VRP平台；华为PBR排障指南/AC V200R020C10命令语法,https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr,未执行,教材已编写；设备实验未执行
+ICT-017.01,ICT-017,IPv6协议,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-017.02,ICT-017,IPv6地址概念,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-018.01,ICT-018,ICMPv6,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-018.02,ICT-018,SLAAC,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-018.03,ICT-018,DHCPv6,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-019.01,ICT-019,双栈,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-019.02,ICT-019,6PE,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-019.03,ICT-019,6VPE,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-019.04,ICT-019,NAT64,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-020.01,ICT-020,IPv6+概念,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-020.02,ICT-020,IPv6+内涵,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-021.01,ICT-021,SRv6概念,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-021.02,ICT-021,SRH报文格式,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-021.03,ICT-021,SRv6 BE,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-021.04,ICT-021,SRv6 TE Policy,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-022.01,ICT-022,切片应用场景,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-022.02,ICT-022,FlexE概念,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-023.01,ICT-023,IFIT统计模型,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-023.02,ICT-023,丢包检测,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-023.03,ICT-023,时延检测,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-024.01,ICT-024,广域网概念,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-024.02,ICT-024,PPP,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-024.03,ICT-024,PPPoE,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-025.01,ICT-025,SR-MPLS原理,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-025.02,ICT-025,SR-MPLS配置,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-026.01,ICT-026,MPLS,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-026.02,ICT-026,LDP,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-027.01,ICT-027,VPN概念,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-027.02,ICT-027,VRF原理与配置,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-028.01,ICT-028,GRE,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-028.02,ICT-028,L2TP,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-028.03,ICT-028,IPsec,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-029.01,ICT-029,BGP/MPLS IP VPN原理,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-029.02,ICT-029,BGP/MPLS IP VPN配置,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-030.01,ICT-030,VXLAN原理,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-030.02,ICT-030,VXLAN构建虚拟网络,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-031.01,ICT-031,EVPN原理,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-031.02,ICT-031,园区应用,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-031.03,ICT-031,SD-WAN应用,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-032.01,ICT-032,组播概念,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-032.02,ICT-032,IGMP原理与配置,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-033.01,ICT-033,PIM原理,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-033.02,ICT-033,PIM配置,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-034.01,ICT-034,认证,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-034.02,ICT-034,授权,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-034.03,ICT-034,计费,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-034.04,ICT-034,AAA配置,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-035.01,ICT-035,端口隔离,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-035.02,ICT-035,MAC地址表安全,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-035.03,ICT-035,端口安全,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-035.04,ICT-035,MAC漂移防止与检测,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-035.05,ICT-035,MACsec,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-035.06,ICT-035,流量控制,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-035.07,ICT-035,DHCP Snooping,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-035.08,ICT-035,IP Source Guard,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-036.01,ICT-036,802.1X,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-036.02,ICT-036,MAC认证,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-036.03,ICT-036,Portal,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-036.04,ICT-036,策略联动,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-037.01,ICT-037,VRRP,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-037.02,ICT-037,BFD,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-038.01,ICT-038,QoS原理,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-038.02,ICT-038,QoS配置,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-039.01,ICT-039,SNMP,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-039.02,ICT-039,LLDP,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-039.03,ICT-039,NQA,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-040.01,ICT-040,自动化基础,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-040.02,ICT-040,NETCONF,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-040.03,ICT-040,Python实践,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-041.01,ICT-041,SSH,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-041.02,ICT-041,YANG,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-041.03,ICT-041,Telemetry,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-041.04,ICT-041,RESTful实践,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-042.01,ICT-042,中小型公有云管理,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-042.02,ICT-042,MSP自建云管理,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-042.03,ICT-042,大中型VXLAN园区,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-042.04,ICT-042,挑战,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-042.05,ICT-042,技术原理,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-042.06,ICT-042,规划设计,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-042.07,ICT-042,部署,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-043.01,ICT-043,广域互联挑战,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-043.02,ICT-043,SD-WAN原理,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-043.03,ICT-043,规划设计,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-043.04,ICT-043,部署,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-044.01,ICT-044,广域网络挑战,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-044.02,ICT-044,CloudWAN原理,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-044.03,ICT-044,规划设计,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-044.04,ICT-044,部署,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-045.01,ICT-045,M-LAG,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-045.02,ICT-045,集中式VXLAN,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-045.03,ICT-045,分布式VXLAN,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-045.04,ICT-045,跨域VXLAN,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-045.05,ICT-045,EVPN,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-045.06,ICT-045,微分段,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-045.07,ICT-045,业务链,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-046.01,ICT-046,服务器虚拟化,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-046.02,ICT-046,网络虚拟化,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-046.03,ICT-046,存储原理,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-046.04,ICT-046,存储应用,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-047.01,ICT-047,OpenStack关键组件,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-047.02,ICT-047,OpenStack应用,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-047.03,ICT-047,容器基础,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-047.04,ICT-047,容器管理平台,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-048.01,ICT-048,智能无损原理,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-048.02,ICT-048,智能无损应用,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-048.03,ICT-048,高性能计算,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-048.04,ICT-048,人工智能,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-048.05,ICT-048,深度学习,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-049.01,ICT-049,机架出租,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-049.02,ICT-049,计算联动,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-049.03,ICT-049,部署流程,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-049.04,ICT-049,编排原理,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-049.05,ICT-049,流量模型,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-050.01,ICT-050,云网一体化部署,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-050.02,ICT-050,业务编排,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-050.03,ICT-050,流量模型,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-050.04,ICT-050,容器网络,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-051.01,ICT-051,多云多DC内容,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-051.02,ICT-051,MDC业务部署,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-052.01,ICT-052,超简网络,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-052.02,ICT-052,存储网络,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-053.01,ICT-053,安全方案内容,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-053.02,ICT-053,安全设计,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-053.03,ICT-053,安全业务编排,掌握,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-054.01,ICT-054,架构,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-054.02,ICT-054,数据规划,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-054.03,ICT-054,Underlay,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-054.04,ICT-054,Overlay,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-054.05,ICT-054,多云多DC,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-054.06,ICT-054,安全设计,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-054.07,ICT-054,智能运维设计,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-055.01,ICT-055,智能运维方案,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-055.02,ICT-055,典型运维,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-055.03,ICT-055,自动化运维,了解,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-056.01,ICT-056,常见威胁与防范,熟悉,有,有,有,有,有,概念/设计任务,,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-056.02,ICT-056,常见安全设备,熟悉,有,有,有,有,有,概念/设计任务,,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-057.01,ICT-057,防范与趋势,掌握,有,有,有,有,有,概念/设计任务,,https://www.nist.gov/cyberframework,未执行,教材已编写；设备实验未执行
+ICT-057.02,ICT-057,安全管理与标准,掌握,有,有,有,有,有,概念/设计任务,,https://www.nist.gov/cyberframework,未执行,教材已编写；设备实验未执行
+ICT-057.03,ICT-057,隐私保护,掌握,有,有,有,有,有,概念/设计任务,,https://www.nist.gov/privacy-framework,未执行,教材已编写；设备实验未执行
+ICT-057.04,ICT-057,隐私法律手段,掌握,有,有,有,有,有,概念/设计任务,,https://www.nist.gov/privacy-framework,未执行,教材已编写；设备实验未执行
+ICT-057.05,ICT-057,保障机制,掌握,有,有,有,有,有,概念/设计任务,,https://www.nist.gov/cyberframework,未执行,教材已编写；设备实验未执行
+ICT-058.01,ICT-058,安全策略,了解,有,有,有,有,有,有示例,通用技术原理；USG配置需匹配软件版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5.html,未执行,教材已编写；设备实验未执行
+ICT-058.02,ICT-058,NAT,了解,有,有,有,有,有,有示例,USG6000E 文档集EDOC1100149308；具体软件版本需核对,https://info.support.huawei.com/hedex/api/pages/EDOC1100149308/AEJ0713J/18/resources/admin/sec_eudemon_ag_start_0011.html,未执行,教材已编写；设备实验未执行
+ICT-058.03,ICT-058,双机热备,了解,有,有,有,有,有,有示例,乾坤安全云服务案例，适配USG机型以页面为准,https://support.huaweicloud.com/qiankunbpr-qiankuncs/qiankuncs_tce_ess_0055.html,未执行,教材已编写；设备实验未执行
+ICT-058.04,ICT-058,用户管理,了解,有,有,有,有,有,有示例,通用技术原理；USG配置需匹配软件版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5.html,未执行,教材已编写；设备实验未执行
+ICT-058.05,ICT-058,入侵防御,了解,有,有,有,有,有,有示例,方案概念，设备与许可依版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-058.06,ICT-058,IPv6安全,了解,有,有,有,有,有,有示例,RFC8200，2017；ND另参RFC4861,https://www.rfc-editor.org/rfc/rfc8200,未执行,教材已编写；设备实验未执行
+ICT-058.07,ICT-058,终端接入安全,了解,有,有,有,有,有,有示例,华为AC V200R020C00及以后，NAC对接参考,https://support.huawei.com/enterprise/zh/doc/EDOC1000113778/7f22b6c8,未执行,教材已编写；设备实验未执行
+ICT-059.01,ICT-059,高可靠,熟悉,有,有,有,有,有,有示例,乾坤安全云服务案例，适配USG机型以页面为准,https://support.huaweicloud.com/qiankunbpr-qiankuncs/qiankuncs_tce_ess_0055.html,未执行,教材已编写；设备实验未执行
+ICT-059.02,ICT-059,流量管理,熟悉,有,有,有,有,有,有示例,USG6000E 文档集EDOC1100149308；具体软件版本需核对,https://info.support.huawei.com/hedex/api/pages/EDOC1100149308/AEJ0713J/18/resources/admin/sec_eudemon_ag_start_0011.html,未执行,教材已编写；设备实验未执行
+ICT-059.03,ICT-059,虚拟系统,熟悉,有,有,有,有,有,有示例,USG文档集EDOC1100149311，型号/许可有限制,https://info.support.huawei.com/hedex/api/pages/EDOC1100149311/AZJ0713J/17/resources/limit/sec_admin_vsys_0008.html,未执行,教材已编写；设备实验未执行
+ICT-059.04,ICT-059,智能选路,熟悉,有,有,有,有,有,有示例,USG6000E 文档集EDOC1100149308；具体软件版本需核对,https://info.support.huawei.com/hedex/api/pages/EDOC1100149308/AEJ0713J/18/resources/admin/sec_eudemon_ag_start_0011.html,未执行,教材已编写；设备实验未执行
+ICT-060.01,ICT-060,场景需求,掌握,有,有,有,有,有,有示例,CSF2.0管理框架，不替代地区法规,https://www.nist.gov/cyberframework,未执行,教材已编写；设备实验未执行
+ICT-060.02,ICT-060,安全规划,掌握,有,有,有,有,有,有示例,通用技术原理；USG配置需匹配软件版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5.html,未执行,教材已编写；设备实验未执行
+ICT-060.03,ICT-060,部署,掌握,有,有,有,有,有,有示例,USG6000E 文档集EDOC1100149308；具体软件版本需核对,https://info.support.huawei.com/hedex/api/pages/EDOC1100149308/AEJ0713J/18/resources/admin/sec_eudemon_ag_start_0011.html,未执行,教材已编写；设备实验未执行
+ICT-061.01,ICT-061,加解密原理,了解,有,有,有,有,有,概念/设计任务,,https://www.rfc-editor.org/rfc/rfc5280,未执行,教材已编写；设备实验未执行
+ICT-061.02,ICT-061,PKI,了解,有,有,有,有,有,有示例,RFC5280，2008；注意后续更新,https://www.rfc-editor.org/rfc/rfc5280,未执行,教材已编写；设备实验未执行
+ICT-061.03,ICT-061,VPN基础应用,了解,有,有,有,有,有,有示例,通用协议原理；设备命令依版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/IPsec.html,未执行,教材已编写；设备实验未执行
+ICT-062.01,ICT-062,IPsec VPN,熟悉,有,有,有,有,有,有示例,USG12000/USG6000E ISAKMP互通；参数另设,https://support.huawei.cn/enterprise/en/doc/EDOC1000154805/10ae789f/establishing-an-ipsec-tunnel-between-usg12000-and-usg6000e-series-firewalls-using-isakmp,未执行,教材已编写；设备实验未执行
+ICT-062.02,ICT-062,SSL VPN,熟悉,有,有,有,有,有,有示例,通用协议原理；设备命令依版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/IPsec.html,未执行,教材已编写；设备实验未执行
+ICT-063.01,ICT-063,双机VPN高可靠,掌握,有,有,有,有,有,有示例,通用协议原理；设备命令依版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/IPsec.html,未执行,教材已编写；设备实验未执行
+ICT-064.01,ICT-064,网络攻击与防御,熟悉,有,有,有,有,有,概念/设计任务,,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-064.02,ICT-064,DDoS,熟悉,有,有,有,有,有,概念/设计任务,,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-064.03,ICT-064,Web防御,熟悉,有,有,有,有,有,概念/设计任务,,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-064.04,ICT-064,内容过滤,熟悉,有,有,有,有,有,有示例,方案概念，设备与许可依版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-064.05,ICT-064,渗透测试基础,熟悉,有,有,有,有,有,概念/设计任务,,https://www.nist.gov/cyberframework,未执行,教材已编写；设备实验未执行
+ICT-065.01,ICT-065,APT防御,掌握,有,有,有,有,有,概念/设计任务,,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-065.02,ICT-065,态势感知,掌握,有,有,有,有,有,概念/设计任务,,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-065.03,ICT-065,安全乾坤云,掌握,有,有,有,有,有,有示例,乾坤安全云服务案例，适配USG机型以页面为准,https://support.huaweicloud.com/qiankunbpr-qiankuncs/qiankuncs_tce_ess_0055.html,未执行,教材已编写；设备实验未执行
+ICT-066.01,ICT-066,云DC安全需求,掌握,有,有,有,有,有,有示例,方案概念，设备与许可依版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-066.02,ICT-066,部署方案,掌握,有,有,有,有,有,有示例,云服务文档2026-09-14，能力依地域/规格,https://support.huaweicloud.com/intl/zh-cn/usermanual-cfw/cfw_01_0297.html,未执行,教材已编写；设备实验未执行
+ICT-066.03,ICT-066,配置案例,掌握,有,有,有,有,有,有示例,云服务文档2026-09-14，能力依地域/规格,https://support.huaweicloud.com/intl/zh-cn/usermanual-cfw/cfw_01_0297.html,未执行,教材已编写；设备实验未执行
+ICT-067.01,ICT-067,公有云安全,掌握,有,有,有,有,有,概念/设计任务,,https://support.huaweicloud.com/intl/zh-cn/ally-visitor-1-usermanual-vpc/zh-cn_topic_0052003963.html,未执行,教材已编写；设备实验未执行
+ICT-067.02,ICT-067,租户安全诉求,掌握,有,有,有,有,有,有示例,联盟区域用户指南2026-01-06；其他区域另核对,https://support.huaweicloud.com/intl/zh-cn/ally-visitor-1-usermanual-vpc/zh-cn_topic_0052003963.html,未执行,教材已编写；设备实验未执行
+ICT-067.03,ICT-067,租户业务安全设计,掌握,有,有,有,有,有,有示例,联盟区域用户指南2026-01-06；其他区域另核对,https://support.huaweicloud.com/intl/zh-cn/ally-visitor-1-usermanual-vpc/zh-cn_topic_0052003963.html,未执行,教材已编写；设备实验未执行
+ICT-068.01,ICT-068,应急响应,熟悉,有,有,有,有,有,概念/设计任务,,https://www.nist.gov/cyberframework,未执行,教材已编写；设备实验未执行
+ICT-068.02,ICT-068,网络接入控制,熟悉,有,有,有,有,有,有示例,华为AC V200R020C00及以后，NAC对接参考,https://support.huawei.com/enterprise/zh/doc/EDOC1000113778/7f22b6c8,未执行,教材已编写；设备实验未执行
+ICT-069.01,ICT-069,安全运维,掌握,有,有,有,有,有,概念/设计任务,,https://www.nist.gov/cyberframework,未执行,教材已编写；设备实验未执行
+ICT-069.02,ICT-069,日志管理,掌握,有,有,有,有,有,有示例,方案概念，设备与许可依版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-069.03,ICT-069,安全审计,掌握,有,有,有,有,有,概念/设计任务,,https://www.nist.gov/cyberframework,未执行,教材已编写；设备实验未执行
+ICT-069.04,ICT-069,HiSec Insight,掌握,有,有,有,有,有,有示例,方案概念，设备与许可依版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-069.05,ICT-069,HiSec方案,掌握,有,有,有,有,有,有示例,方案概念，设备与许可依版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-070.01,ICT-070,防火墙排障,原理/配置（原文未标级）,有,有,有,有,有,有示例,USG6000E 文档集EDOC1100149308；具体软件版本需核对,https://info.support.huawei.com/hedex/api/pages/EDOC1100149308/AEJ0713J/18/resources/admin/sec_eudemon_ag_start_0011.html,未执行,教材已编写；设备实验未执行
+ICT-070.02,ICT-070,VPN排障,原理/配置（原文未标级）,有,有,有,有,有,有示例,通用协议原理；设备命令依版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/IPsec.html,未执行,教材已编写；设备实验未执行
+ICT-070.03,ICT-070,IPS排障,原理/配置（原文未标级）,有,有,有,有,有,有示例,方案概念，设备与许可依版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-070.04,ICT-070,内容过滤排障,原理/配置（原文未标级）,有,有,有,有,有,有示例,方案概念，设备与许可依版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-071.01,ICT-071,园区安全需求,掌握,有,有,有,有,有,有示例,华为AC V200R020C00及以后，NAC对接参考,https://support.huawei.com/enterprise/zh/doc/EDOC1000113778/7f22b6c8,未执行,教材已编写；设备实验未执行
+ICT-071.02,ICT-071,园区安全设计,掌握,有,有,有,有,有,有示例,华为AC V200R020C00及以后，NAC对接参考,https://support.huawei.com/enterprise/zh/doc/EDOC1000113778/7f22b6c8,未执行,教材已编写；设备实验未执行
+ICT-071.03,ICT-071,业务部署,掌握,有,有,有,有,有,有示例,华为AC V200R020C00及以后，NAC对接参考,https://support.huawei.com/enterprise/zh/doc/EDOC1000113778/7f22b6c8,未执行,教材已编写；设备实验未执行
+ICT-072.01,ICT-072,传统DC架构,了解,有,有,有,有,有,概念/设计任务,,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-072.02,ICT-072,传统DC安全需求,了解,有,有,有,有,有,有示例,方案概念，设备与许可依版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-072.03,ICT-072,华为DC安全方案,掌握,有,有,有,有,有,有示例,方案概念，设备与许可依版本,https://info.support.huawei.com/info-finder/encyclopedia/zh/detail?action=queryEntityDetail&keyword=HiSec,未执行,教材已编写；设备实验未执行
+ICT-073.01,ICT-073,云端架构,了解,有,有,有,有,有,有示例,联盟区域用户指南2026-01-06；其他区域另核对,https://support.huaweicloud.com/intl/zh-cn/ally-visitor-1-usermanual-vpc/zh-cn_topic_0052003963.html,未执行,教材已编写；设备实验未执行
+ICT-073.02,ICT-073,云端安全需求,了解,有,有,有,有,有,有示例,联盟区域用户指南2026-01-06；其他区域另核对,https://support.huaweicloud.com/intl/zh-cn/ally-visitor-1-usermanual-vpc/zh-cn_topic_0052003963.html,未执行,教材已编写；设备实验未执行
+ICT-073.03,ICT-073,公有云方案,掌握,有,有,有,有,有,有示例,云服务文档2026-09-14，能力依地域/规格,https://support.huaweicloud.com/intl/zh-cn/usermanual-cfw/cfw_01_0297.html,未执行,教材已编写；设备实验未执行
+ICT-073.04,ICT-073,混合云方案,掌握,有,有,有,有,有,有示例,联盟区域用户指南2026-01-06；其他区域另核对,https://support.huaweicloud.com/intl/zh-cn/ally-visitor-1-usermanual-vpc/zh-cn_topic_0052003963.html,未执行,教材已编写；设备实验未执行
+ICT-074.01,ICT-074,CAPWAP,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-074.02,ICT-074,WLAN关键报文,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-074.03,ICT-074,STA上线,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-075.01,ICT-075,FAT AP,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-075.02,ICT-075,Leader AP,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-075.03,ICT-075,WAC+FIT AP,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-075.04,ICT-075,敏捷分布式,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-075.05,ICT-075,Navi AC,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-075.06,ICT-075,Mesh,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-076.01,ICT-076,VRRP热备,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-076.02,ICT-076,双链路热备,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-076.03,ICT-076,双链路冷备,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-076.04,ICT-076,N+1,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-077.01,ICT-077,链路认证,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-077.02,ICT-077,用户安全,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-077.03,ICT-077,黑白名单,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-077.04,ICT-077,安全策略,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-078.01,ICT-078,Open,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-078.02,ICT-078,WEP-Open,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-078.03,ICT-078,WEP-shared-key,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-078.04,ICT-078,WPA/WPA2-PSK,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-078.05,ICT-078,WPA/WPA2-802.1X,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-079.01,ICT-079,威胁与方案,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-079.02,ICT-079,管理平面,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-079.03,ICT-079,控制平面,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-079.04,ICT-079,转发平面,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-080.01,ICT-080,802.1X,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-080.02,ICT-080,Portal,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-080.03,ICT-080,MAC,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-080.04,ICT-080,MAC优先Portal,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-081.01,ICT-081,漫游概述,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-081.02,ICT-081,转发过程,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-081.03,ICT-081,漫游优化,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-081.04,ICT-081,智能漫游,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-082.01,ICT-082,空口性能,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-082.02,ICT-082,射频调优,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-082.03,ICT-082,终端迁移,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-082.04,ICT-082,频谱导航,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-082.05,ICT-082,AP负载均衡,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-082.06,ICT-082,用户CAC,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-082.07,ICT-082,抗干扰,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-082.08,ICT-082,WLAN QoS,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-082.09,ICT-082,VIP保障,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-083.01,ICT-083,IoT概述,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-083.02,ICT-083,短距无线技术,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-083.03,ICT-083,智简园区物联网,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-084.01,ICT-084,定位简介,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-084.02,ICT-084,定位原理,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-084.03,ICT-084,智简园区定位,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-085.01,ICT-085,IPv6概述,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-085.02,ICT-085,组网与应用,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-085.03,ICT-085,准入,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-085.04,ICT-085,安全,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-085.05,ICT-085,IPv6演进,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-086.01,ICT-086,规划概述,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-086.02,ICT-086,覆盖设计,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-086.03,ICT-086,容量设计,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-087.01,ICT-087,WLAN Planner,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-087.02,ICT-087,CloudCampus APP,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-088.01,ICT-088,规划概述,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-088.02,ICT-088,规划流程,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-088.03,ICT-088,案例,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-089.01,ICT-089,优化概述,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-089.02,ICT-089,优化工具,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-089.03,ICT-089,优化方案,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-089.04,ICT-089,优化案例,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-090.01,ICT-090,项目生命周期,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-090.02,ICT-090,交付件,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-090.03,ICT-090,项目案例,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-091.01,ICT-091,iMaster NCE-Campus,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-091.02,ICT-091,WAC云化管理,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-091.03,ICT-091,AP云化管理,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-092.01,ICT-092,传统WLAN运维,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-093.01,ICT-093,智能运维概述,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-093.02,ICT-093,实时体验可视,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-093.03,ICT-093,分钟级定界,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-093.04,ICT-093,智能优化,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-094.01,ICT-094,排障概述,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-094.02,ICT-094,可靠性故障,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-094.03,ICT-094,云管理故障,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-094.04,ICT-094,无线网桥故障,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-094.05,ICT-094,射频管理故障,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐
+ICT-094.06,ICT-094,漫游故障,原理/配置（原文未标级）,缺,缺,缺,缺,缺,缺,,,未执行,教材待补齐

@@ -1,0 +1,162 @@
+[
+  {
+    "id": "switch",
+    "title": "华为 S12700 / S12700E 以太网交换配置指南",
+    "url": "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp",
+    "version": "V200R023C00",
+    "scope": "VLAN、链路聚合、生成树；此链接定位MSTP示例",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "routing",
+    "title": "华为 S9300 / S9300E IP单播路由配置指南",
+    "url": "https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",
+    "version": "V200R008 C00/C10",
+    "scope": "路由协议配置参考；此链接定位OSPF GR示例，不代表本课程已覆盖GR",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "arp",
+    "title": "RFC 826 · ARP",
+    "url": "https://www.rfc-editor.org/rfc/rfc826",
+    "version": "1982 / RFC 826",
+    "scope": "以太网地址解析机制",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "ospf",
+    "title": "RFC 2328 · OSPFv2",
+    "url": "https://www.rfc-editor.org/rfc/rfc2328",
+    "version": "1998 / RFC 2328",
+    "scope": "OSPFv2协议原理，需结合后续更新与勘误",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "bgp",
+    "title": "RFC 4271 · BGP-4",
+    "url": "https://www.rfc-editor.org/rfc/rfc4271",
+    "version": "2006 / RFC 4271",
+    "scope": "BGP基础协议，不是所有厂商的完整选路规则",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "ipv6",
+    "title": "RFC 8200 · IPv6",
+    "url": "https://www.rfc-editor.org/rfc/rfc8200",
+    "version": "2017 / RFC 8200",
+    "scope": "IPv6基本规范，地址配置另有相关规范",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "vxlan",
+    "title": "RFC 7348 · VXLAN",
+    "url": "https://www.rfc-editor.org/rfc/rfc7348",
+    "version": "2014 / RFC 7348",
+    "scope": "VXLAN封装框架",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "evpn",
+    "title": "RFC 7432 · BGP MPLS-based EVPN",
+    "url": "https://www.rfc-editor.org/rfc/rfc7432",
+    "version": "2015 / RFC 7432",
+    "scope": "EVPN基础；VXLAN与Type5等扩展需其他规范",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "mlag",
+    "title": "华为 IP知识百科 · M-LAG",
+    "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/M-LAG.html",
+    "version": "通用原理页 / 设备实现依版本",
+    "scope": "M-LAG概念、配对、同步与双主检测",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "ipsec",
+    "title": "华为 IP知识百科 · IPsec",
+    "url": "https://info.support.huawei.com/info-finder/encyclopedia/zh/IPsec.html",
+    "version": "通用原理页 / USG或AR配置依版本",
+    "scope": "IPsec协议组成、保护与VPN场景",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "security",
+    "title": "华为 NetTech TV · USG6000配置课程",
+    "url": "https://info.support.huawei.com/network/ptmngsys/Web/OnlineCourse_Security/zh/mooc/mooc_zh_usg_conf.html",
+    "version": "USG6000系列，课程页面未声明统一软件版本",
+    "scope": "安全策略、双机热备、NAT；非所有安全章节的完整来源",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "capwap",
+    "title": "华为无线接入控制器 · 配置CAPWAP协商参数",
+    "url": "https://support.huawei.com/enterprise/zh/doc/EDOC1100457375/f9d80d43",
+    "version": "AC和FIT AP V200R024C10",
+    "scope": "CAPWAP控制/数据隧道、安全及心跳",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "roaming",
+    "title": "华为 · 不同业务VLAN的AP间快速漫游示例",
+    "url": "https://support.huawei.com/enterprise/zh/doc/EDOC1100457611/604fb80e",
+    "version": "S12700 / S12700E V200R024C10 随板AC",
+    "scope": "漫游配置流程及版本安全前置条件",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "wlansecurity",
+    "title": "华为 · WLAN安全概述",
+    "url": "https://support.huawei.com/enterprise/en/doc/EDOC1100212409/c21df650/overview-of-wlan-security",
+    "version": "S5700 / S6700 V200R021C00/C01",
+    "scope": "WLAN安全原理及配置指南入口",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "openstack",
+    "title": "OpenStack Nova 官方文档",
+    "url": "https://docs.openstack.org/nova/latest/",
+    "version": "latest动态版本，访问时34.1.0.dev106",
+    "scope": "Nova与Keystone、Glance、Neutron、Placement依赖",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "k8s",
+    "title": "Kubernetes 官方概念总览",
+    "url": "https://kubernetes.io/docs/concepts/overview/",
+    "version": "动态概念文档，具体命令需匹配集群版本",
+    "scope": "容器编排平台概念",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "subnet",
+    "title": "RFC 3021 · IPv4 点到点 /31",
+    "url": "https://www.rfc-editor.org/rfc/rfc3021",
+    "version": "2000 / RFC 3021",
+    "scope": "31位前缀在点到点链路的两个端点用法",
+    "status": "官方来源已检索/访问；仅在所述范围内参考。逐条教学资料映射仍待复核。"
+  },
+  {
+    "id": "event-huawei",
+    "title": "华为ICT大赛 · 本届中国区公开页面",
+    "url": "https://e.huawei.com/cn/talent/ict-academy/#/ict-contest?compId=85132018",
+    "version": "2026—2027 / 第十一届；2026-10-24浏览器核查",
+    "scope": "中国区网络赛道资格赛/省赛理论考试安排；通过中国区详情查看图表",
+    "status": "已读取动态页面及图表。未找到可确认的统一设备型号/软件版本表；不等于确认未公布。"
+  },
+  {
+    "id": "event-lnut",
+    "title": "辽宁工业大学 · 2026年ICT省赛选拔通知",
+    "url": "https://cxcy.lnut.edu.cn/info/14428/186216.htm",
+    "version": "2026-10-08发布；2026-10-24检索",
+    "scope": "辽宁该通知范围：网络省初赛/省决赛列为理论；不能推广为其他省份最终安排",
+    "status": "组织单位原始通知，作为赛制交叉核对；不作为设备命令参考。"
+  },
+  {
+    "id": "event-dlut",
+    "title": "大连理工大学 · 第十一届华为ICT大赛报名通知",
+    "url": "https://chuangxin.dlut.edu.cn/info/1020/16867.htm",
+    "version": "2026—2027届；2026-10-24检索",
+    "scope": "本届资格赛与省赛计划，明确省级具体安排依组委会通知",
+    "status": "组织单位原始通知；不提供本课程所需逐设备软件版本确认。"
+  }
+]

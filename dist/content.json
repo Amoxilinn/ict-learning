@@ -1,0 +1,1618 @@
+[
+  {
+    "id": "ICT-001",
+    "group": "数通",
+    "category": "数通基础知识",
+    "title": "数通基础知识",
+    "hcia": true,
+    "hcip": true,
+    "detail": "了解VRP系统、基本网络常识等",
+    "explanation": "VRP用不同视图划分配置范围。用户视图用尖括号，系统和接口视图用方括号；运行配置与启动配置不同。链路、地址、路由、应用是排障的四层观察点。",
+    "depth": "了解",
+    "prerequisites": [],
+    "intro": "电脑插上网线后，数据要经过哪些设备才能到达另一台电脑？先分清终端、交换机、路由器，再认识管理这些设备的VRP命令界面。",
+    "outcome": "画出终端—交换机—路由器的路径，区分链路、地址与应用；看懂命令所在视图。"
+  },
+  {
+    "id": "ICT-002",
+    "group": "数通",
+    "category": "数通基础知识",
+    "title": "TCP/IP协议基础",
+    "hcia": true,
+    "hcip": true,
+    "detail": "了解TCP/IP协议架构，掌握基本协议技术，包括TCP、UDP、ARP、IP、NAT、Telnet、FTP、DHCP等技术原理与配置",
+    "explanation": "TCP通过序号、确认和重传提供有序字节流；UDP保留数据报边界但不保证交付。ARP解析本链路下一跳MAC。NAT改写地址或端口，DHCP租约配置终端地址。Telnet与传统FTP明文传输，实验需在隔离环境。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-001"
+    ],
+    "intro": "你在浏览器输入一个网址，电脑如何知道发给谁、怎样发送、收到的数据交给哪个程序？用同一条访问过程串起地址、分层和常见协议。",
+    "outcome": "从IP与掩码判断下一跳，解释ARP、DHCP、TCP/UDP各自承担的任务。",
+    "readingNote": "先读分层、IP、ARP与DHCP，再读TCP/UDP和应用协议。NAT先认识地址转换，学过静态路由后再回看双向路径。DNS把域名转换成地址，HTTPS是使用TLS保护的HTTP；两者在本章访问案例中只介绍职责。"
+  },
+  {
+    "id": "ICT-003",
+    "group": "数通",
+    "category": "交换技术",
+    "title": "以太网交换基础",
+    "hcia": true,
+    "hcip": true,
+    "detail": "了解基本以太网交换流程，了解MAC地址学习等流程",
+    "explanation": "交换机在收到帧时按源MAC与入端口学习，在同VLAN内查目的MAC。已知单播只出对应端口，未知单播及广播泛洪到同VLAN其他可转发端口；目的端口等于入端口时过滤。",
+    "depth": "了解",
+    "prerequisites": [
+      "ICT-002"
+    ],
+    "intro": "三台电脑接在同一台交换机上，交换机怎样把一份数据交给正确的人？从一张空的MAC地址表开始，跟着三次发送观察它如何学习。",
+    "outcome": "逐帧解释源地址学习、目的地址查表以及泛洪与过滤。"
+  },
+  {
+    "id": "ICT-004",
+    "group": "数通",
+    "category": "交换技术",
+    "title": "VLAN",
+    "hcia": true,
+    "hcip": true,
+    "detail": "VLAN、VLANIF、MUX VLAN、VLAN聚合等技术原理及配置",
+    "explanation": "VLAN划分二层广播域；Access把无标签终端归入PVID，Trunk承载多个VLAN。VLANIF提供三层网关。MUX VLAN控制主从/从从访问；VLAN聚合用Super-VLAN集中三层地址，各Sub-VLAN仍隔离二层广播。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-003"
+    ],
+    "intro": "办公室和访客使用同一套交换机，怎样让两组电脑的广播彼此隔离？先建立VLAN，再讨论不同VLAN之间为什么需要网关。",
+    "outcome": "分清VLAN、端口归属、Trunk标签和VLANIF，再比较MUX与VLAN聚合。"
+  },
+  {
+    "id": "ICT-005",
+    "group": "数通",
+    "category": "交换技术",
+    "title": "链路聚合",
+    "hcia": true,
+    "hcip": true,
+    "detail": "Eth-Trunk技术原理及配置",
+    "explanation": "多个物理口合为逻辑口以增加总带宽与冗余。LACP协商成员状态；哈希通常按流选一条链路，单流不一定叠加所有成员带宽。两端模式、VLAN、速率和成员状态必须相容。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-004"
+    ],
+    "intro": "两台交换机只有一条上联，带宽不够且断线就停网，能否并联两根网线？先认识逻辑聚合，再解释为什么一条下载未必变快。",
+    "outcome": "理解Eth-Trunk、LACP与逐流分担，读懂成员状态及容量变化。"
+  },
+  {
+    "id": "ICT-006",
+    "group": "数通",
+    "category": "交换技术",
+    "title": "堆叠和集群",
+    "hcia": true,
+    "hcip": true,
+    "detail": "iStack、CSS等技术原理及配置",
+    "explanation": "iStack/CSS把多机组合为逻辑设备，统一管理与控制；需考虑主备选举、堆叠链路、跨设备聚合及分裂检测。型号与版本决定支持方式，不能把所有交换机都按相同命令配置。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-005",
+      "ICT-008"
+    ],
+    "intro": "两台交换机如何对外表现得像一台设备？把“增加一根链路”和“合并设备管理与转发”分开理解，再看堆叠与集群。",
+    "outcome": "区分iStack和CSS的使用对象，理解成员身份、主备及分裂风险。"
+  },
+  {
+    "id": "ICT-007",
+    "group": "数通",
+    "category": "交换技术",
+    "title": "STP",
+    "hcia": true,
+    "hcip": true,
+    "detail": "生成树的防环原理及配置",
+    "explanation": "STP以桥ID选根，再按到根开销等比较规则选根端口和指定端口，阻塞冗余路径防止二层环路。广播帧没有三层TTL保护，环路会放大广播与MAC漂移。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-003",
+      "ICT-005"
+    ],
+    "intro": "为了防止断线而多接一根网线，为什么反而可能让全网变慢？从广播沿环路不断复制开始，理解生成树为何需要暂时阻断一条路径。",
+    "outcome": "推导根桥、根端口与指定端口，解释阻断与故障后的路径恢复。"
+  },
+  {
+    "id": "ICT-008",
+    "group": "数通",
+    "category": "交换技术",
+    "title": "RSTP、MSTP",
+    "hcia": false,
+    "hcip": true,
+    "detail": "RSTP和MSTP的原理及配置",
+    "explanation": "RSTP用端口角色与握手机制缩短收敛，边缘端口面向终端。MSTP把多个VLAN映射到实例实现不同树；区域名称、修订号和VLAN映射共同决定区域一致性。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-007"
+    ],
+    "intro": "STP已经能防环，为什么还需要RSTP和MSTP？分别从缩短切换等待、让不同VLAN使用不同上联这两个问题理解改进。",
+    "outcome": "区分RSTP快速转换条件与MSTP的实例、区域及VLAN映射。"
+  },
+  {
+    "id": "ICT-009",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "静态路由",
+    "hcia": true,
+    "hcip": true,
+    "detail": "掌握基本IP路由基础知识、IPv4和IPv6静态路由配置方式",
+    "explanation": "路由先按目的地址最长前缀匹配；同一前缀候选路由再比较协议优先级等。静态路由下一跳要可递归解析；默认路由是最后兜底。IPv6静态路由使用前缀长度而不是IPv4掩码。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-002",
+      "ICT-004"
+    ],
+    "intro": "A在192.168.10.0/24，B在192.168.20.0/24，仅连一台二层交换机为什么不够？先弄清路由器怎样查表，再手工告诉它远端网段在哪。",
+    "outcome": "用最长前缀选择出口，配置去程与回程；IPv6写法在学完IPv6后回看。",
+    "readingNote": "第一次先读IP路由基础和IPv4静态路由。IPv6静态路由是同一原则的另一种地址写法，可在“IPv6基础知识”和“IPv6地址配置”之后回看。"
+  },
+  {
+    "id": "ICT-010",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "OSPF",
+    "hcia": true,
+    "hcip": true,
+    "detail": "掌握OSPF的基本原理及配置",
+    "explanation": "邻居发现后通过数据库描述、请求、更新和确认同步LSDB，再以自己为根计算SPF。区域0是骨干；广播网络使用DR/BDR减少邻接数量。邻居Full不等于所有业务路由已正确发布。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-009"
+    ],
+    "intro": "办公室从两个网段增长到二十个网段，每台路由器都手工维护路由会怎样？让路由器交换链路信息，再各自计算到目的地的路径。",
+    "outcome": "解释OSPF邻居、链路状态数据库、区域与代价，并把配置与邻接状态对应。"
+  },
+  {
+    "id": "ICT-011",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "OSPFv3",
+    "hcia": false,
+    "hcip": true,
+    "detail": "掌握OSPFv3的基本原理及配置",
+    "explanation": "OSPFv3面向IPv6时通常以链路本地地址作为邻接通信地址，Router ID仍为32位。按接口启用并检查区域、实例和网络类型；与OSPFv2不能仅通过替换地址完成迁移。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-010",
+      "ICT-018"
+    ],
+    "intro": "网络改用IPv6后，OSPF如何建立邻居并发布前缀？带着已经学会的OSPF流程，观察OSPFv3在地址与接口启用上的变化。",
+    "outcome": "区分Router ID与IPv6接口地址，理解链路本地通信及接口加入区域。"
+  },
+  {
+    "id": "ICT-012",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "IS-IS（IPv4）（IPv6）",
+    "hcia": false,
+    "hcip": true,
+    "detail": "掌握IS-IS在IPv4和IPv6场景的基本原理及配置",
+    "explanation": "IS-IS以NET标识路由器，L1负责区域内，L2连接区域。用TLV承载不同地址族可达性，邻接建立不依赖IPv4单播可达。需区分邻接、LSDB和IPv4/IPv6路由安装。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-010",
+      "ICT-018"
+    ],
+    "intro": "大型网络为什么会采用IS-IS来发布路由？先把它看成另一种交换拓扑、计算路径的协议，再理解NET、层级与地址族。",
+    "outcome": "区分L1/L2区域条件，解释同一邻接下IPv4和IPv6前缀如何分别生效。"
+  },
+  {
+    "id": "ICT-013",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "BGP、BGP4+",
+    "hcia": false,
+    "hcip": true,
+    "detail": "掌握BGP在IPv4、IPv6、VPN等场景的基本原理及配置",
+    "explanation": "BGP以TCP建立会话，通告路径属性并依策略选择路径。MP-BGP用地址族扩展承载IPv6与VPN路由；会话Established不表示某地址族已交换路由。下一跳不可达会使路由不能用于转发。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-009",
+      "ICT-010",
+      "ICT-018"
+    ],
+    "intro": "公司同时连接两个运营商，如何表达“哪些网段愿意通告、优先使用哪个出口”？从两个自治系统交换一条前缀开始学习BGP。",
+    "outcome": "区分邻居会话、路由发布、选路属性及下一跳可达；VPN地址族在VPN章后回看。",
+    "readingNote": "先学IPv4、IPv6单播BGP。“BGP VPN场景”涉及后面的VRF、RD与RT，第一次认识它们的职责，学完“VPN基础知识”和“BGP/MPLS IP VPN”后再回读细节。"
+  },
+  {
+    "id": "ICT-014",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "ACL",
+    "hcia": true,
+    "hcip": true,
+    "detail": "ACL的原理及配置",
+    "explanation": "ACL是一组匹配规则，被流量过滤、NAT或路由策略引用才产生具体作用。高级ACL可匹配协议、源/目的IP与端口；通配符0位精确匹配，1位忽略。末尾行为由引用场景决定。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-002",
+      "ICT-009"
+    ],
+    "intro": "只允许办公电脑访问服务器的HTTPS，其他服务禁止，该把条件写在哪里？先把一条真实流拆成地址、协议和端口，再理解ACL的有序匹配。",
+    "outcome": "读懂规则顺序、匹配条件与应用位置，分清匹配结果和最终执行动作。"
+  },
+  {
+    "id": "ICT-015",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "IP Prefix List",
+    "hcia": false,
+    "hcip": true,
+    "detail": "IP Prefix List的原理及配置",
+    "explanation": "前缀列表匹配路由前缀与掩码长度。10.0.0.0/8配合greater-equal 16 less-equal 24匹配该范围内/16到/24子网，不是只匹配主机地址。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-009",
+      "ICT-013"
+    ],
+    "intro": "只接收10.0.0.0/8内部的/16到/24路由，为什么不能简单用一个主机地址过滤条件？把前缀的地址范围与长度范围分开计算。",
+    "outcome": "逐项判断前缀是否匹配，理解greater-equal与less-equal的边界。"
+  },
+  {
+    "id": "ICT-016",
+    "group": "数通",
+    "category": "路由技术",
+    "title": "路由策略、策略路由",
+    "hcia": false,
+    "hcip": true,
+    "detail": "路由策略和策略路由等路由控制技术原理及配置",
+    "explanation": "路由策略作用于路由通告、引入或属性；策略路由作用于数据包转发，可按源地址等决定下一跳。二者处理对象不同，需分别观察路由表、策略命中和转发结果。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-014",
+      "ICT-015"
+    ],
+    "intro": "“不向邻居通告某条路由”和“让某类用户从另一个出口走”看起来相似，改变的对象却不同。分别观察路由信息与真实报文被处理的位置。",
+    "outcome": "区分路由策略与策略路由，解释匹配、动作、应用方向及回退。"
+  },
+  {
+    "id": "ICT-017",
+    "group": "数通",
+    "category": "IPv6技术",
+    "title": "IPv6基础知识",
+    "hcia": true,
+    "hcip": true,
+    "detail": "IPv6协议及地址相关概念",
+    "explanation": "IPv6地址为128位，分单播、组播和任播，不使用广播。链路本地地址只在链路范围有效；邻居发现取代IPv4 ARP的部分功能。压缩表示不能改变前缀边界。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-002",
+      "ICT-009"
+    ],
+    "intro": "IPv4地址不够用时，IPv6为什么使用更长的地址？先学会读写地址，再观察它与IPv4在报文和邻居发现上的差异。",
+    "outcome": "读懂128位、前缀、压缩写法与地址作用域，为自动配置建立基础。"
+  },
+  {
+    "id": "ICT-018",
+    "group": "数通",
+    "category": "IPv6技术",
+    "title": "IPv6地址配置",
+    "hcia": true,
+    "hcip": true,
+    "detail": "ICMPv6和IPv6无状态自动配置、DHCPv6",
+    "explanation": "主机通过RS/RA发现路由器与前缀，可用SLAAC生成地址，并以DAD检查重复。DHCPv6分有状态与无状态配置；IPv6默认网关通常来自RA，不能以取得DHCPv6地址证明网关正确。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-017"
+    ],
+    "intro": "手机连上IPv6网络后，没有手工输入地址，它怎样得到地址、网关和DNS？分别追踪RA、邻居发现、SLAAC与DHCPv6。",
+    "outcome": "把地址生成、默认路由和DNS来源分开，不把一种成功当成全部配置完成。"
+  },
+  {
+    "id": "ICT-019",
+    "group": "数通",
+    "category": "IPv6技术",
+    "title": "IPv6过渡技术",
+    "hcia": false,
+    "hcip": false,
+    "detail": "双栈、6PE、6VPE、NAT64等过渡技术的原理及配置",
+    "explanation": "双栈让两种协议并行；6PE以MPLS骨干承载IPv6公网，6VPE扩展到IPv6 VPN；NAT64在协议间转换，常配合DNS64。隧道、标签承载和地址转换不能混为一谈。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-017",
+      "ICT-018",
+      "ICT-013",
+      "ICT-026",
+      "ICT-027",
+      "ICT-029"
+    ],
+    "intro": "旧网络仍使用IPv4，新业务需要IPv6，怎样让二者逐步共存？先比较双栈、承载与翻译，再决定哪些节点需要理解哪一种协议。",
+    "outcome": "区分双栈、6PE、6VPE和NAT64的适用前提及隔离边界。",
+    "readingNote": "本章安排在MPLS与BGP/MPLS VPN之后，便于直接理解6PE与6VPE的承载和隔离差异。先比较双栈、隧道承载与协议翻译，再按场景选择。"
+  },
+  {
+    "id": "ICT-020",
+    "group": "数通",
+    "category": "IPv6+技术",
+    "title": "IPv6+",
+    "hcia": true,
+    "hcip": false,
+    "detail": "IPv6+（IPv6 Enhanced）的概念、内涵",
+    "explanation": "IPv6+是围绕IPv6的增强技术体系，包含SRv6、网络切片、随流检测等方向；不是一种新IP首部版本。应从可编程转发、业务保障和可观测性理解应用价值。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-019"
+    ],
+    "intro": "网络已有IPv6地址，为什么还要讨论IPv6+？从业务需要指定路径、保障资源与观察质量出发，理解多种能力如何组合。",
+    "outcome": "区分基础IPv6转发与增强能力，解释路径、切片、测量及自动化的关系。"
+  },
+  {
+    "id": "ICT-021",
+    "group": "数通",
+    "category": "IPv6+技术",
+    "title": "SRv6分段路由",
+    "hcia": false,
+    "hcip": false,
+    "detail": "SRv6的基本概念、SRH报文格式、SRv6 BE及SRv6 TE Policy的工作原理及配置",
+    "explanation": "SRv6用IPv6 SID表达节点或功能，SRH保存段列表及Segments Left。BE依赖IGP可达性，TE Policy通过有序段约束路径；要检查SID可达、端点行为与封装MTU。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-017",
+      "ICT-025"
+    ],
+    "intro": "业务希望依次经过指定节点，能不能把路径意图交给入口路由器？先认识SID，再逐跳观察IPv6目的地址和SRH如何变化。",
+    "outcome": "读懂段列表、Segments Left、端点行为，区分BE与TE Policy。"
+  },
+  {
+    "id": "ICT-022",
+    "group": "数通",
+    "category": "IPv6+技术",
+    "title": "FlexE网络切片",
+    "hcia": false,
+    "hcip": false,
+    "detail": "网络切片的应用场景、FlexE的基本概念",
+    "explanation": "FlexE将以太网PHY带宽以时隙方式分配给不同Client，可用于硬隔离承载。业务切片还涉及端到端资源、控制和运维，不是创建一个VLAN就自动获得带宽保障。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-038",
+      "ICT-020"
+    ],
+    "intro": "同一张网络既传普通下载又传对带宽敏感的业务，怎样划出可分配资源？从共享队列与物理层时隙的差异理解切片和FlexE。",
+    "outcome": "计算时隙分配，区分逻辑隔离、带宽资源与端到端保障。"
+  },
+  {
+    "id": "ICT-023",
+    "group": "数通",
+    "category": "IPv6+技术",
+    "title": "IFIT随流检测技术",
+    "hcia": false,
+    "hcip": false,
+    "detail": "IFIT统计模型、IFIT丢包检测机制、IFIT时延检测机制",
+    "explanation": "随流检测沿业务路径采集报文数或时间信息，通过入口与出口统计关联计算丢包和时延。区分真实业务检测与主动探测；精确单向时延依赖时钟及时间戳能力。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-039",
+      "ICT-020"
+    ],
+    "intro": "业务偶尔卡顿，但ping测试一直正常，能否观察业务本身的丢包和时延？沿一条流的入口和出口对齐计数与时间。",
+    "outcome": "用相同统计窗口计算丢包，解释单向时延为何依赖时钟与测量误差。"
+  },
+  {
+    "id": "ICT-024",
+    "group": "数通",
+    "category": "广域网技术",
+    "title": "广域网基础知识和技术",
+    "hcia": true,
+    "hcip": true,
+    "detail": "广域网基本概念，PPP、PPPoE的原理及配置",
+    "explanation": "PPP通过LCP协商链路，再进行可选认证和NCP网络层协商。PPPoE先发现接入集中器并建立会话，之后承载PPP；以太网1500MTU下常见PPP载荷MTU为1492。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-002",
+      "ICT-009"
+    ],
+    "intro": "办公室要连接远方的运营商网络，链路与局域网有什么不同？从点到点链路开始，再看宽带接入如何发现服务并建立会话。",
+    "outcome": "区分广域接入、PPP的协商阶段与PPPoE的发现和会话阶段。"
+  },
+  {
+    "id": "ICT-025",
+    "group": "数通",
+    "category": "广域网技术",
+    "title": "Segment Routing技术",
+    "hcia": false,
+    "hcip": false,
+    "detail": "SR-MPLS的原理及配置",
+    "explanation": "SR-MPLS用标签栈编码一串Segment，节点SID可表示到节点的路径，邻接SID表示特定链路。控制面发布SID，入口压入栈，中间按MPLS转发。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-026",
+      "ICT-012"
+    ],
+    "intro": "MPLS能用标签转发，如何让入口直接决定经过哪些段？从节点段与邻接段构成标签栈的例子理解SR-MPLS。",
+    "outcome": "解释标签栈执行顺序，理解IGP扩展、SID规划与策略引流的配置依赖。"
+  },
+  {
+    "id": "ICT-026",
+    "group": "数通",
+    "category": "MPLS技术",
+    "title": "MPLS相关技术",
+    "hcia": false,
+    "hcip": true,
+    "detail": "MPLS、MPLS LDP等技术基本原理及配置",
+    "explanation": "MPLS按标签而非每跳完整IP查表转发；入节点push，中间swap，出节点pop。LDP分发与FEC关联的标签，依赖IGP下一跳形成LSP；仅LDP邻居正常不保证全部FEC可转发。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-009",
+      "ICT-010"
+    ],
+    "intro": "路由器每跳都要处理IP路由，MPLS为何在包前面再加标签？跟踪一份报文被压入、交换和弹出标签的过程。",
+    "outcome": "区分IP路由与标签转发表，解释LDP如何为转发等价类建立标签映射。"
+  },
+  {
+    "id": "ICT-027",
+    "group": "数通",
+    "category": "VPN技术",
+    "title": "VPN基础知识",
+    "hcia": false,
+    "hcip": true,
+    "detail": "VPN和VRF基本原理及配置",
+    "explanation": "VPN提供逻辑隔离，VRF维护独立路由与转发表，允许不同租户地址重叠。VPN不一定加密；隔离、认证、完整性和保密性需分开验证。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-009"
+    ],
+    "intro": "两家客户都使用10.0.0.0/24，怎样让它们在同一台设备上保持各自的路由？从独立的路由表理解VPN与VRF。",
+    "outcome": "解释逻辑隔离、接口归属和查表上下文，区分VPN与加密。"
+  },
+  {
+    "id": "ICT-028",
+    "group": "数通",
+    "category": "VPN技术",
+    "title": "基本VPN技术",
+    "hcia": false,
+    "hcip": true,
+    "detail": "GRE、L2TP、IPsec等VPN技术基本原理及配置",
+    "explanation": "GRE封装多种协议但自身不提供加密；L2TP承载二层会话也不默认提供保密；IPsec用安全关联提供选择的保护。规划隧道时要同时核对底层路由、封装开销和安全策略。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-024",
+      "ICT-027"
+    ],
+    "intro": "两个分支隔着互联网，怎样像连接在一条虚拟链路上一样通信？分别观察GRE封装、L2TP会话与IPsec保护所解决的问题。",
+    "outcome": "区分隧道承载与加密认证，追踪内外层地址、路由及封装开销。"
+  },
+  {
+    "id": "ICT-029",
+    "group": "数通",
+    "category": "VPN技术",
+    "title": "BGP/MPLS IP VPN",
+    "hcia": false,
+    "hcip": true,
+    "detail": "BGP/MPLS IP VPN基本原理及配置",
+    "explanation": "CE接入PE的VRF，MP-BGP传VPN路由，骨干以标签转发。RD使重叠前缀唯一；RT控制导入/导出。外层标签到PE，内层标签标识业务上下文。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-026",
+      "ICT-027",
+      "ICT-013"
+    ],
+    "intro": "运营商如何让两家客户的多个分支互联，同时允许客户地址重叠？把VRF、MP-BGP和MPLS标签组合起来看一条租户报文。",
+    "outcome": "解释CE/PE/P、RD与RT、两层标签和双向VPN路由。"
+  },
+  {
+    "id": "ICT-030",
+    "group": "数通",
+    "category": "VPN技术",
+    "title": "VXLAN",
+    "hcia": false,
+    "hcip": true,
+    "detail": "VXLAN基本原理及配置（通过VXLAN构建虚拟网络）",
+    "explanation": "VXLAN把租户以太网帧封装在UDP/IP之内，VTEP是隧道端点，24位VNI标识逻辑网络。Underlay必须提供VTEP IP可达与足够MTU；Overlay负责租户业务。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-004",
+      "ICT-009",
+      "ICT-027"
+    ],
+    "intro": "虚拟机搬到另一排机架，能否仍处于同一个逻辑二层网络？先把原始以太网帧放入UDP/IP外层，再跟踪两个隧道端点。",
+    "outcome": "区分VTEP、VNI和Underlay，解释封装、MTU及远端映射。"
+  },
+  {
+    "id": "ICT-031",
+    "group": "数通",
+    "category": "VPN技术",
+    "title": "EVPN",
+    "hcia": false,
+    "hcip": false,
+    "detail": "EVPN基本原理及配置（EVPN在园区和SD-WAN的应用）",
+    "explanation": "EVPN以BGP分发以太网相关可达信息，可承载于MPLS或VXLAN。常见MAC/IP路由用于端点学习，前缀路由用于三层业务；业务RT不匹配会使路由不能进入目标实例。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-013",
+      "ICT-030"
+    ],
+    "intro": "VTEP怎么知道远端终端在哪里，是否只能不断泛洪？从通告一条MAC/IP位置的BGP路由理解EVPN，再看园区与分支应用。",
+    "outcome": "区分控制平面与数据平面，解释终端路由、隔离与跨站点引流。"
+  },
+  {
+    "id": "ICT-032",
+    "group": "数通",
+    "category": "组播技术",
+    "title": "组播基础知识",
+    "hcia": false,
+    "hcip": true,
+    "detail": "组播基本概念，及IGMP原理及配置",
+    "explanation": "组播按组地址把一份内容分发给多个接收者。主机通过IGMP表达成员关系，IGMP Snooping在二层约束组播泛洪；需保留查询器使成员关系可维护。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-002",
+      "ICT-009"
+    ],
+    "intro": "同一段直播要发给很多接收者，服务器必须给每人复制一份吗？先理解组地址与接收者加入，再看路由器如何知道本地有人想收。",
+    "outcome": "解释组播与单播的区别，追踪IGMP成员加入、查询和离开。"
+  },
+  {
+    "id": "ICT-033",
+    "group": "数通",
+    "category": "组播技术",
+    "title": "PIM",
+    "hcia": false,
+    "hcip": false,
+    "detail": "PIM协议原理及配置",
+    "explanation": "PIM依赖单播路由做RPF检查。稀疏模式可经RP形成共享树，满足条件后切向最短路径树；路由不对称时RPF失败可能丢弃正确到达但入接口不符的流。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-032",
+      "ICT-010"
+    ],
+    "intro": "接收者加入后，路由器怎样在多跳网络中建立组播路径？用源、接收者和反向路径检查串起PIM的建树过程。",
+    "outcome": "区分PIM的组播控制和单播路由依赖，理解RP、RPF与转发状态。"
+  },
+  {
+    "id": "ICT-034",
+    "group": "数通",
+    "category": "网络安全技术",
+    "title": "AAA",
+    "hcia": true,
+    "hcip": true,
+    "detail": "AAA原理及配置",
+    "explanation": "认证回答是谁，授权回答能做什么，计费/审计记录做了什么。远端RADIUS或HWTACACS不可达时的本地回退需要明确设计，避免把认证成功误当成已获得正确权限。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-014"
+    ],
+    "intro": "同一个账号可以登录网络，却不能执行管理命令，这矛盾吗？把确认身份、分配权限、记录使用情况拆成AAA的三个环节。",
+    "outcome": "区分认证、授权和计费，并理解本地与远端认证的配置依赖。"
+  },
+  {
+    "id": "ICT-035",
+    "group": "数通",
+    "category": "网络安全技术",
+    "title": "以太网交换安全",
+    "hcia": false,
+    "hcip": true,
+    "detail": "端口隔离、MAC地址表安全、端口安全、MAC地址漂移防止与检测、MACSec、交换机流量控制、DHCP Snooping、IP Source Guard等",
+    "explanation": "DHCP Snooping建立合法租约绑定，信任口只面向合法服务器；IP Source Guard据绑定校验源。端口隔离限制二层互访，MACsec保护链路帧；流控不能替代安全访问策略。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-003",
+      "ICT-004",
+      "ICT-014"
+    ],
+    "intro": "访客插入交换机后，为什么还要防止伪造地址和私接DHCP服务器？先观察交换机原本的学习行为，再逐项添加可信约束。",
+    "outcome": "说明端口、MAC、DHCP绑定与链路保护各自控制什么，理解误配置的影响。"
+  },
+  {
+    "id": "ICT-036",
+    "group": "数通",
+    "category": "网络安全技术",
+    "title": "网络准入控制",
+    "hcia": false,
+    "hcip": false,
+    "detail": "802.1X认证、MAC地址认证、Portal认证及策略联动的原理及配置",
+    "explanation": "802.1X有客户端、认证设备和认证服务器；MAC认证以终端MAC识别身份，抗冒充能力有限；Portal通过Web认证交互。认证后仍需验证动态VLAN、ACL和失效行为。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-034",
+      "ICT-035"
+    ],
+    "intro": "一根网线接上就能进入办公网，怎样先确认使用者身份？比较PC、打印机与访客终端，再选择802.1X、MAC认证或Portal。",
+    "outcome": "追踪认证与授权过程，说明成功、失败和身份变化时的访问范围。"
+  },
+  {
+    "id": "ICT-037",
+    "group": "数通",
+    "category": "网络可靠性与网络优化技术",
+    "title": "网络可靠性技术",
+    "hcia": false,
+    "hcip": true,
+    "detail": "VRRP、BFD等可靠性技术基本原理及配置",
+    "explanation": "VRRP提供虚拟网关身份，主备以优先级等决定角色；BFD快速探测路径活性，可联动路由或VRRP。探测up不是业务质量承诺，抢占与延迟需避免震荡。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-009",
+      "ICT-010"
+    ],
+    "intro": "默认网关坏了，终端是否都要手工改网关？用两台路由器共享虚拟地址理解VRRP，再用BFD观察快速故障检测。",
+    "outcome": "区分故障检测、角色切换与路由收敛，理解业务链路跟踪。"
+  },
+  {
+    "id": "ICT-038",
+    "group": "数通",
+    "category": "网络可靠性与网络优化技术",
+    "title": "网络优化技术",
+    "hcia": false,
+    "hcip": false,
+    "detail": "QoS基本原理及配置",
+    "explanation": "QoS按分类、标记、监管/整形、排队和拥塞避免处理流量。监管超额通常丢弃或重标记，整形缓存平滑输出；优先队列应限额，避免普通业务饥饿。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-002",
+      "ICT-014"
+    ],
+    "intro": "下载占满出口后语音变卡，增加优先级就能凭空获得带宽吗？先找到拥塞队列，再理解分类、标记、排队、整形与丢弃。",
+    "outcome": "计算资源预算，解释QoS策略如何在正确接口方向产生效果。"
+  },
+  {
+    "id": "ICT-039",
+    "group": "数通",
+    "category": "网络管理与网络编程自动化技术",
+    "title": "网络管理与监控技术",
+    "hcia": true,
+    "hcip": false,
+    "detail": "SNMP、LLDP、NQA等技术的基本原理及配置",
+    "explanation": "SNMP采集设备对象与告警，LLDP发现直连邻居，NQA主动模拟业务检测质量。管理面应隔离并使用安全认证；LLDP看见邻居不能证明端到端业务可达。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-009",
+      "ICT-037"
+    ],
+    "intro": "网络出现问题前，管理员如何知道端口利用率和设备邻居？分别用SNMP取指标、LLDP认连接、NQA测业务路径。",
+    "outcome": "区分设备状态、邻接发现与主动探测，理解计数差值和探测条件。"
+  },
+  {
+    "id": "ICT-040",
+    "group": "数通",
+    "category": "网络管理与网络编程自动化技术",
+    "title": "网络编程自动化基础知识",
+    "hcia": false,
+    "hcip": false,
+    "detail": "基础知识，及NETCONF、Python原理和实践",
+    "explanation": "NETCONF以结构化RPC管理配置，常运行在SSH上；Python负责连接、解析、校验和编排。先获取能力集与数据模型，再进行幂等变更；失败要可回滚，不能只检查脚本退出码。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-001",
+      "ICT-039"
+    ],
+    "intro": "一百台设备都要改同一项配置，怎样避免逐台敲命令？先用一台设备的读取—比较—修改—验证流程理解自动化。",
+    "outcome": "解释结构化配置、NETCONF与Python处理，建立幂等、错误处理与回滚意识。"
+  },
+  {
+    "id": "ICT-041",
+    "group": "数通",
+    "category": "网络管理与网络编程自动化技术",
+    "title": "网络编程自动化高阶技术",
+    "hcia": false,
+    "hcip": false,
+    "detail": "SSH、YANG、Telemetry、RESTful基本原理和实践",
+    "explanation": "SSH提供安全传输，YANG定义数据模型，Telemetry推送订阅数据，RESTful通过资源和HTTP方法构建接口。模型、编码和传输是不同层次；采样周期会影响可观测精度与开销。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-040"
+    ],
+    "intro": "脚本能连设备后，如何让数据格式统一并持续获得状态？把安全传输、数据模型、订阅采集和HTTP接口分别放回它们的位置。",
+    "outcome": "区分SSH、YANG、Telemetry和REST接口，理解模型与传输的组合关系。"
+  },
+  {
+    "id": "ICT-042",
+    "group": "数通",
+    "category": "华为各场景相关方案",
+    "title": "园区网络CloudCampus解决方案",
+    "hcia": false,
+    "hcip": false,
+    "detail": "华为CloudCampus解决方案，包括中小型（公有云/MSP自建云管理）及大中型园区（VXLAN虚拟化园区）的发展及挑战，解决方案技术原理、解决方案规划设计与部署",
+    "explanation": "先把访客、办公、IoT分成业务域，再设计接入认证、虚拟网络、出口与运维。小型云管理重视快速纳管，大型VXLAN园区重视Fabric、VN隔离与跨域策略；自动化上线仍依赖底层可达。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-031",
+      "ICT-036",
+      "ICT-090",
+      "ICT-091"
+    ],
+    "intro": "从一间办公室扩展到多栋楼、多租户和远程管理，单台设备配置已经不够。先盘点人员与业务，再选管理模式与园区承载方式。",
+    "outcome": "把CloudCampus管理、认证、VXLAN和规划部署串成完整业务路径。"
+  },
+  {
+    "id": "ICT-043",
+    "group": "数通",
+    "category": "华为各场景相关方案",
+    "title": "分支互联SD-WAN解决方案",
+    "hcia": false,
+    "hcip": false,
+    "detail": "华为SD-WAN解决方案，包括广域互联网络的发展及挑战，解决方案技术原理、解决方案规划设计与部署",
+    "explanation": "SD-WAN在多种广域链路之上构建受控Overlay，依据应用和SLA选路。控制器、边缘CPE和承载网络职责不同；规划需含加密、路由、站点拓扑和控制器失联行为。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-024",
+      "ICT-028",
+      "ICT-038",
+      "ICT-041"
+    ],
+    "intro": "多个分支有不同运营商线路，怎样让会议优先走质量好的那条？区分底层线路、上层隧道与按业务选择路径的策略。",
+    "outcome": "解释SD-WAN的控制、编排和转发，设计地址、选路、出口及故障回退。"
+  },
+  {
+    "id": "ICT-044",
+    "group": "数通",
+    "category": "华为各场景相关方案",
+    "title": "广域网络CloudWAN解决方案",
+    "hcia": false,
+    "hcip": false,
+    "detail": "华为云广域解决方案，包括广域网络的发展及挑战，解决方案技术原理、解决方案规划设计与部署",
+    "explanation": "云广域承载企业、分支与云之间的连接，需统一规划Underlay、SR/隧道、流量工程、切片与可视化。把带宽、隔离、收敛、时延约束映射到可验证的路径和服务指标。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-021",
+      "ICT-022",
+      "ICT-023",
+      "ICT-043"
+    ],
+    "intro": "广域骨干同时服务多个部门与关键业务，如何统一表达路径和质量目标？把IPv6、SR、切片和随流检测放进同一个承载设计。",
+    "outcome": "从需求、资源、策略到测量验证解释CloudWAN，明确每项能力的依赖。"
+  },
+  {
+    "id": "ICT-045",
+    "group": "DCN",
+    "category": "数据中心网络基础知识",
+    "title": "M-LAG、VXLAN、EVPN、微分段、业务链",
+    "hcia": true,
+    "hcip": true,
+    "detail": "掌握M-LAG协议的技术原理和配置、集中式与分布式VXLAN的技术原理和配置、跨域VXLAN场景的技术原理和配置、掌握EVPN技术原理、了解微分段业务链技术的原理和配置",
+    "explanation": "Leaf双归接入与M-LAG保护接入，VXLAN提供租户网络，EVPN提供控制面。集中网关可能引入绕行，分布式网关把三层能力放在接入侧；微分段按细粒度对象实施策略，业务链按顺序引流安全服务。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-006",
+      "ICT-030",
+      "ICT-031",
+      "ICT-046"
+    ],
+    "intro": "服务器双接入、虚拟网络隔离与安全检查为什么会同时出现在DCN架构中？先跟踪虚拟机跨机架访问，再补控制与安全路径。",
+    "outcome": "区分M-LAG、VXLAN/EVPN、微分段与业务链的职责及组合。"
+  },
+  {
+    "id": "ICT-046",
+    "group": "DCN",
+    "category": "数据中心网络高阶技术与应用",
+    "title": "虚拟化技术、存储技术",
+    "hcia": true,
+    "hcip": true,
+    "detail": "掌握服务器虚拟化及网络虚拟化技术，掌握存储技术原理及技术在数据中心中的应用",
+    "explanation": "Hypervisor把算力分配给虚机，vSwitch提供虚拟端口；块、文件与对象存储接口不同。存储网络要看吞吐、IOPS、时延和故障域；无损以太网需端到端支持，不能只开启一个PFC开关。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-004",
+      "ICT-009",
+      "ICT-027"
+    ],
+    "intro": "一台物理服务器如何运行多台独立服务器，它们的网卡和磁盘又从哪里来？从计算、网络与存储资源的抽象开始理解虚拟化。",
+    "outcome": "区分虚拟机、虚拟交换、块/文件/对象存储，理解共享与故障边界。"
+  },
+  {
+    "id": "ICT-047",
+    "group": "DCN",
+    "category": "数据中心网络高阶技术与应用",
+    "title": "OpenStack云平台技术、容器技术",
+    "hcia": false,
+    "hcip": true,
+    "detail": "掌握OpenStack关键组件及应用，掌握容器基础技术和容器管理平台",
+    "explanation": "Nova管理计算，Neutron管理网络，Cinder提供块存储，Glance管理镜像，Keystone管理身份。容器共享宿主机内核，编排负责调度、服务发现和故障恢复；云平台网络与业务Pod网络要分层排查。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-046",
+      "ICT-041"
+    ],
+    "intro": "用户点击创建虚拟机，后台谁负责身份、镜像、计算和网络？再把同样的问题放到容器中，理解平台如何组织资源。",
+    "outcome": "串起OpenStack组件依赖，比较虚拟机、容器与容器编排。"
+  },
+  {
+    "id": "ICT-048",
+    "group": "DCN",
+    "category": "数据中心网络高阶技术与应用",
+    "title": "智能无损技术、高性能与智能计算技术",
+    "hcia": false,
+    "hcip": true,
+    "detail": "掌握智能无损关键技术的原理及典型应用场景，了解高性能计算、人工智能、深度学习的定义",
+    "explanation": "RoCE等业务对丢包和尾时延敏感，PFC按优先级暂停，ECN标记拥塞以驱动端到端减速。PFC也可能引发拥塞扩散与死锁，应结合流控域、缓冲和拥塞控制调优；HPC/AI训练重视集群通信效率。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-038",
+      "ICT-046"
+    ],
+    "intro": "许多计算节点同时训练一个模型，为什么普通“能ping通”的网络仍可能拖慢任务？从多对一拥塞、丢包重传和同步等待开始。",
+    "outcome": "区分PFC、ECN及拥塞控制，理解HPC、AI和深度学习的流量特征。"
+  },
+  {
+    "id": "ICT-049",
+    "group": "DCN",
+    "category": "华为CloudFabric解决方案",
+    "title": "机架出租、计算联动",
+    "hcia": false,
+    "hcip": true,
+    "detail": "掌握数据中心网络解决方案基础场景的业务部署流程，并进一步掌握各基础场景下的业务编排原理、流量模型",
+    "explanation": "机架出租先划分租户与资源边界，计算联动把虚机生命周期与网络绑定自动同步。业务编排应包含网络创建、端口绑定、策略下发、验证和回收；东西向与南北向流量决定容量与服务位置。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-054"
+    ],
+    "intro": "客户租用一个机架后，从接线到可用业务之间还缺哪些步骤？观察服务器创建、端口、租户网络与策略同步变化。",
+    "outcome": "说明机架交付、计算联动、编排依赖和真实流量模型。"
+  },
+  {
+    "id": "ICT-050",
+    "group": "DCN",
+    "category": "华为CloudFabric解决方案",
+    "title": "云网一体化、容器网络",
+    "hcia": true,
+    "hcip": true,
+    "detail": "掌握云网一体化场景的业务部署流程、业务编排原理和流量模型，了解容器网络场景的基本内容",
+    "explanation": "云网一体化让计算平台事件驱动网络资源编排，容器网络通过CNI把Pod接入网络。关注Pod到Pod、Pod到Service及出集群三类路径，区分Overlay封装、服务转发与物理Underlay问题。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-047",
+      "ICT-049"
+    ],
+    "intro": "创建一组容器后，网络如何自动分配地址并连接服务？把云平台创建动作与实际网卡、路由和策略的生效对应起来。",
+    "outcome": "解释云网一体化、业务编排、容器网络与流量路径。"
+  },
+  {
+    "id": "ICT-051",
+    "group": "DCN",
+    "category": "华为CloudFabric解决方案",
+    "title": "多云多DC解决方案",
+    "hcia": false,
+    "hcip": true,
+    "detail": "了解多云多DC方案的基本内容，掌握使用MDC部署多云多DC场景下的网络业务",
+    "explanation": "多DC互联需统一规划租户身份、路由边界、互联带宽与故障隔离。MDC用于相应方案的管理编排，具体功能与步骤依产品版本；跨DC延伸二层需考虑广播、MAC迁移与故障域扩大。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-050",
+      "ICT-029"
+    ],
+    "intro": "应用分别放在两个机房和一个公有云，怎样让它们在故障时继续工作？先区分网络互联、数据复制与应用切换。",
+    "outcome": "理解多云多DC边界、MDC部署和地址/路由/故障域设计。"
+  },
+  {
+    "id": "ICT-052",
+    "group": "DCN",
+    "category": "华为CloudFabric解决方案",
+    "title": "超简网络解决方案、存储网络解决方案",
+    "hcia": false,
+    "hcip": true,
+    "detail": "了解超简网络和存储网络解决方案的内容",
+    "explanation": "超简网络减少管理与连接复杂度，但必须保留容量和故障域设计；存储网络围绕业务SLA选择拓扑、无损机制和隔离。验收要覆盖正常和失效场景的吞吐、尾时延与恢复时间。",
+    "depth": "了解",
+    "prerequisites": [
+      "ICT-048",
+      "ICT-054"
+    ],
+    "intro": "减少网络层级是否一定更简单，存储流量是否可以和普通业务混用？分别从运维复杂度和存储的丢包、时延需求判断。",
+    "outcome": "比较超简架构与存储网络设计，解释容量、可靠性与端到端验证。"
+  },
+  {
+    "id": "ICT-053",
+    "group": "DCN",
+    "category": "华为CloudFabric解决方案",
+    "title": "数据中心网络安全解决方案",
+    "hcia": false,
+    "hcip": true,
+    "detail": "了解数据中心网络安全解决方案的内容，掌握数据中心网络安全设计和安全业务编排",
+    "explanation": "按租户、应用层和管理面建立安全域；东西向流量也需控制。业务编排把防火墙/检测等服务接入路径，确保对称转发、策略命中和失效行为符合业务要求。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-045",
+      "ICT-058",
+      "ICT-055"
+    ],
+    "intro": "数据中心外部有防火墙，内部虚拟机之间就安全了吗？从Web到应用再到数据库的一条访问链寻找真正的控制位置。",
+    "outcome": "区分边界、东西向与管理安全，设计隔离、检测和安全业务编排。"
+  },
+  {
+    "id": "ICT-054",
+    "group": "DCN",
+    "category": "数据中心网络规划与设计",
+    "title": "数据中心网络规划与设计",
+    "hcia": true,
+    "hcip": true,
+    "detail": "了解数据中心网络解决方案及数据中心网络的规划设计，包括网络架构设计、数据规划、Underlay网络设计、Overlay网络设计、多云多DC网络设计、网络安全设计和智能运维设计",
+    "explanation": "先收集服务器数量、端口速率、业务流向与增长，再计算Leaf上联收敛比。地址、Loopback、ASN、VNI与RT要形成统一台账；Underlay可达性与Overlay租户策略应分别验收。",
+    "depth": "了解",
+    "prerequisites": [
+      "ICT-045",
+      "ICT-047",
+      "ICT-048"
+    ],
+    "intro": "要建设两排机架的数据中心，应该先选设备还是先列业务？从业务访问关系出发，逐步生成架构、地址、Underlay与Overlay。",
+    "outcome": "形成有依赖顺序的设计，覆盖多DC、安全与智能运维。"
+  },
+  {
+    "id": "ICT-055",
+    "group": "DCN",
+    "category": "数据中心网络运维",
+    "title": "数据中心网络运维解决方案",
+    "hcia": false,
+    "hcip": true,
+    "detail": "了解智能运维解决方案、数据中心网络典型网络运维和数据中心网络自动化运维",
+    "explanation": "运维从资产与基线出发，关联告警、路径和变更记录。自动化操作应有预检查、小批量实施、事后验证及回滚；故障定位先确认影响范围再比较控制面与数据面。",
+    "depth": "了解",
+    "prerequisites": [
+      "ICT-041",
+      "ICT-054"
+    ],
+    "intro": "虚拟机迁移后访问变慢，如何把应用、Overlay与物理路径联系起来？从用户体验定位到具体对象，再讨论自动化修复。",
+    "outcome": "区分指标、告警、根因与动作，解释典型和自动化运维流程。"
+  },
+  {
+    "id": "ICT-056",
+    "group": "安全",
+    "category": "信息安全",
+    "title": "信息安全基础",
+    "hcia": true,
+    "hcip": true,
+    "detail": "熟悉网络常见网络安全威胁防范，熟悉网络安全常见设备",
+    "explanation": "安全目标包括机密性、完整性、可用性；威胁利用漏洞造成风险。防火墙控制边界，IPS检测并阻断攻击，日志平台关联事件；工具需要正确部署和策略才能发挥作用。",
+    "depth": "熟悉",
+    "prerequisites": [
+      "ICT-014",
+      "ICT-036"
+    ],
+    "intro": "网络连通以后，哪些事情仍会伤害业务？从钓鱼邮件、口令泄露和服务中断理解资产、威胁、漏洞与风险。",
+    "outcome": "按威胁选择控制措施，分清防火墙、IPS、WAF和分析平台的职责。"
+  },
+  {
+    "id": "ICT-057",
+    "group": "安全",
+    "category": "信息安全",
+    "title": "信息安全管理技术",
+    "hcia": true,
+    "hcip": true,
+    "detail": "掌握信息安全防范与趋势、信息安全管理与标准、隐私保护以及隐私保护的法律手段、信息安全保障机制和手段",
+    "explanation": "管理控制把资产、分类、最小权限、审计、培训和应急串起来。隐私保护应遵循适用法规与组织制度；本课不把某一地区规则直接推广为所有场景，正式条款需查当前官方文本。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-056"
+    ],
+    "intro": "买了安全设备，为什么离职账号和失效备份仍会造成事故？把安全从一项配置扩展到人员、流程、数据和持续验证。",
+    "outcome": "理解管理、隐私与保障机制；法律条款以当前官方原文及实际适用范围为准。"
+  },
+  {
+    "id": "ICT-058",
+    "group": "安全",
+    "category": "基础网络安全",
+    "title": "网络安全基础",
+    "hcia": true,
+    "hcip": true,
+    "detail": "了解防火墙安全策略、防火墙网络地址转换技术、防火墙双机热备技术、防火墙用户管理技术、防火墙入侵防御、IPv6安全、终端接入安全等",
+    "explanation": "状态防火墙按首包策略建会话，回包通常依会话处理；NAT解决地址转换，安全策略决定访问许可。双机热备还需会话同步与路径切换；IPv6必须配置对应安全控制。",
+    "depth": "了解",
+    "prerequisites": [
+      "ICT-014",
+      "ICT-027",
+      "ICT-056"
+    ],
+    "intro": "办公电脑能访问Web服务器，但不应访问数据库，防火墙怎样作出决定？固定一条流的地址、端口与方向，逐层看策略、转换与状态。",
+    "outcome": "解释安全域、会话、NAT、用户和检测，并分清IPv4与IPv6控制。"
+  },
+  {
+    "id": "ICT-059",
+    "group": "安全",
+    "category": "基础网络安全",
+    "title": "防火墙高级特性",
+    "hcia": false,
+    "hcip": true,
+    "detail": "熟悉防火墙高可靠技术、防火墙流量管理、防火墙虚拟系统、防火墙智能选路",
+    "explanation": "虚拟系统隔离管理与策略上下文；流量管理按业务分配资源，智能选路结合链路质量。高可靠设计要覆盖设备、链路、会话和路由，不应只观察主备角色标签。",
+    "depth": "熟悉",
+    "prerequisites": [
+      "ICT-037",
+      "ICT-038",
+      "ICT-058"
+    ],
+    "intro": "防火墙承担全部出口业务后，怎样避免一台故障或一类下载拖垮网络？把容量、状态隔离、带宽与选路分别讨论。",
+    "outcome": "理解高可靠、流量管理、虚拟系统与智能选路的边界和故障后容量。"
+  },
+  {
+    "id": "ICT-060",
+    "group": "安全",
+    "category": "基础网络安全",
+    "title": "安全组网规划部署",
+    "hcia": true,
+    "hcip": true,
+    "detail": "掌握不同场景下，网络安全组网规划部署",
+    "explanation": "从资产与访问矩阵确定安全域、出口和管理通道，再部署路由、NAT、策略及日志。测试应包含允许与拒绝用例，以及故障切换；默认放行并不能证明规划正确。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-058",
+      "ICT-059",
+      "ICT-070"
+    ],
+    "intro": "给一家有员工、访客和公开网站的公司部署安全网络，第一步应该做什么？从业务访问矩阵推导区域、路由、策略与发布。",
+    "outcome": "按需求—规划—部署顺序形成可验证方案，保留受控管理与回退路径。"
+  },
+  {
+    "id": "ICT-061",
+    "group": "安全",
+    "category": "VPN技术",
+    "title": "VPN基础（加解密）",
+    "hcia": true,
+    "hcip": true,
+    "detail": "了解加解密技术原理、PKI证书体系、VPN技术基础应用",
+    "explanation": "对称加密适合大数据，非对称技术用于身份与密钥协商等；哈希不同于加密，数字签名提供来源和完整性证明。PKI验证证书链、有效期、用途与撤销状态。",
+    "depth": "了解",
+    "prerequisites": [
+      "ICT-056"
+    ],
+    "intro": "两端都能访问互联网，怎样确认对方身份并保护途中数据？先区分加密、摘要和签名，再看证书与VPN如何组合。",
+    "outcome": "解释对称/非对称机制、PKI信任链和VPN的基本保护范围。"
+  },
+  {
+    "id": "ICT-062",
+    "group": "安全",
+    "category": "VPN技术",
+    "title": "VPN应用",
+    "hcia": true,
+    "hcip": true,
+    "detail": "熟悉IPSec VPN技术与应用、SSL VPN技术与应用",
+    "explanation": "IPsec在网络层保护匹配业务，IKE协商身份与密钥；SSL VPN通常依TLS提供远程接入。检查隧道时分开观察协商、流量选择器、路由和数据计数，隧道up并不等于应用通。",
+    "depth": "熟悉",
+    "prerequisites": [
+      "ICT-028",
+      "ICT-061",
+      "ICT-058"
+    ],
+    "intro": "分公司整段网络互联，与出差人员访问一个内部应用，需要同一种VPN吗？比较站点到站点IPsec与远程接入SSL VPN的路径。",
+    "outcome": "跟踪认证、协商、内层业务与权限，说明隧道成功不等于应用已通。"
+  },
+  {
+    "id": "ICT-063",
+    "group": "安全",
+    "category": "VPN技术",
+    "title": "VPN高可用技术",
+    "hcia": false,
+    "hcip": false,
+    "detail": "掌握VPN高可靠技术（双机场景应用）",
+    "explanation": "双机VPN需同步或重建安全关联，并确保虚拟地址、外部邻居和回程路由及时收敛。不同版本对SA同步的支持不同，应以切换期间业务丢包和重协商时间实测验收。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-059",
+      "ICT-062"
+    ],
+    "intro": "主防火墙故障后，新连接恢复而原VPN连接中断，为什么？把设备接管、隧道身份、SA和路由状态放在一起观察。",
+    "outcome": "解释双机VPN高可用的同步范围、对端收敛与大小包恢复测试。"
+  },
+  {
+    "id": "ICT-064",
+    "group": "安全",
+    "category": "攻击与防御",
+    "title": "基础威胁防御",
+    "hcia": true,
+    "hcip": true,
+    "detail": "熟悉网络攻击与防御、DDoS攻击与防御、Web安全防御、内容安全过滤、渗透测试基础等",
+    "explanation": "攻击防御先识别入口与攻击面，再布置检测、限速和阻断。DDoS可能耗尽上游带宽，单机防护不一定足够；Web防护需结合应用修复，内容过滤依业务与隐私规则。渗透测试只在授权隔离环境开展。",
+    "depth": "熟悉",
+    "prerequisites": [
+      "ICT-056",
+      "ICT-058"
+    ],
+    "intro": "网络攻击、Web攻击和恶意内容为什么需要不同的防护？先确定受影响的是带宽、协议、应用还是终端，再匹配防御点。",
+    "outcome": "解释DDoS、Web防御与内容过滤，理解授权测试的范围与证据。"
+  },
+  {
+    "id": "ICT-065",
+    "group": "安全",
+    "category": "攻击与防御",
+    "title": "APT威胁防御",
+    "hcia": false,
+    "hcip": false,
+    "detail": "掌握APT攻击防御、安全态势感知、安全乾坤云等",
+    "explanation": "APT常跨越初始入侵、驻留、横向移动和外传等阶段。关联端点、网络、身份与日志，比单一特征检测更有价值；检测结果需验证并形成隔离、取证和恢复闭环。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-064"
+    ],
+    "intro": "攻击者已经进入一台终端，怎样发现它长期潜伏与横向移动？把多次看似普通的事件按身份、时间和资产关联。",
+    "outcome": "区分APT阶段、态势分析与云端安全服务，理解告警到处置的证据链。"
+  },
+  {
+    "id": "ICT-066",
+    "group": "安全",
+    "category": "云安全",
+    "title": "云数据中心网络安全技术",
+    "hcia": false,
+    "hcip": false,
+    "detail": "掌握云数据中心网络安全业务需求、云数据中心网络安全部署方案、云数据中心网络安全配置案例",
+    "explanation": "云数据中心需隔离租户、管理面与东西向业务；安全组、分布式防火墙和边界网关承担不同位置的控制。以源身份、目的服务和最小权限构建策略并检查虚拟化迁移后的持续有效性。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-047",
+      "ICT-053",
+      "ICT-058"
+    ],
+    "intro": "虚拟机不断创建和迁移，传统按固定端口配置的安全规则如何跟上？从租户、工作负载和东西向通信重新划分控制对象。",
+    "outcome": "解释云DC安全需求、部署位置和配置案例中的身份与路径依赖。"
+  },
+  {
+    "id": "ICT-067",
+    "group": "安全",
+    "category": "云安全",
+    "title": "华为云安全架构设计",
+    "hcia": false,
+    "hcip": false,
+    "detail": "掌握公有云安全、租户云上安全诉求及方案、租户业务安全设计",
+    "explanation": "云安全遵循责任分工：提供方保护基础设施，租户仍需管理身份、配置、数据和应用安全，具体边界依服务类型变化。规划含IAM最小权限、网络隔离、加密、日志与备份。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-050",
+      "ICT-053",
+      "ICT-061"
+    ],
+    "intro": "应用迁到华为云后，云平台和租户分别负责什么？从一个Web、应用、数据库三层业务梳理网络、身份与数据控制。",
+    "outcome": "理解公有云安全边界，组合VPC、实例规则、IAM和日志形成租户设计。"
+  },
+  {
+    "id": "ICT-068",
+    "group": "安全",
+    "category": "安全运维",
+    "title": "安全管理中心",
+    "hcia": false,
+    "hcip": true,
+    "detail": "熟悉应急响应、网络接入控制",
+    "explanation": "安全管理中心汇集资产、事件与响应流程。应急响应先界定影响并保留证据，再按授权隔离、清除和恢复；准入控制可配合隔离受感染终端，但要保留必要处置通道。",
+    "depth": "熟悉",
+    "prerequisites": [
+      "ICT-036",
+      "ICT-065"
+    ],
+    "intro": "发现一台终端疑似感染后，如何既控制传播又保留分析证据？从准备、确认到隔离、清除、恢复逐步推进。",
+    "outcome": "解释应急响应与接入控制联动，保留修复通道并验证权限恢复。"
+  },
+  {
+    "id": "ICT-069",
+    "group": "安全",
+    "category": "安全运维",
+    "title": "安全运维与分析",
+    "hcia": false,
+    "hcip": false,
+    "detail": "掌握安全运维操作、日志管理、安全审计技术、态势感知技术（HiSec Insight）、华为HiSec解决方案",
+    "explanation": "先统一时间、资产标识和日志字段，再按攻击链关联事件。HiSec Insight等平台用于态势与分析，具体功能依版本；告警数量不能直接等于真实风险，必须复核误报与影响。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-039",
+      "ICT-068"
+    ],
+    "intro": "很多设备每天产生海量日志，如何从中找到有用的安全事件？先统一时间与资产身份，再关联、审计和追踪执行结果。",
+    "outcome": "说明日志、安全审计、HiSec分析与联动处置的职责。"
+  },
+  {
+    "id": "ICT-070",
+    "group": "安全",
+    "category": "安全运维",
+    "title": "安全故障排查",
+    "hcia": false,
+    "hcip": false,
+    "detail": "防火墙故障排查、VPN故障排查、IPS故障排查、内容过滤故障排查等",
+    "explanation": "按接口、路由、会话、NAT、安全策略、内容检测逐层取证。VPN另查IKE/SA与流量选择器，IPS查特征库、配置文件及策略引用；每次只改变一个可验证变量。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-058",
+      "ICT-062",
+      "ICT-064"
+    ],
+    "intro": "业务被安全设备阻断时，怎样找到真正原因？把同一条新连接在路由、策略、转换、VPN和检测链中的证据对齐。",
+    "outcome": "按故障现象逐层缩小范围，避免用全放通或永久关闭检测掩盖原因。"
+  },
+  {
+    "id": "ICT-071",
+    "group": "安全",
+    "category": "安全场景化解决方案",
+    "title": "园区网络安全解决方案",
+    "hcia": false,
+    "hcip": false,
+    "detail": "掌握园区网络安全需求、安全设计、安全业务部署",
+    "explanation": "把员工、访客、IoT与管理网络分域，依据身份动态授权；边界策略、终端防护与日志联动。部署顺序为身份与资产、访问矩阵、准入与策略、负向测试、运维接管。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-036",
+      "ICT-042",
+      "ICT-060"
+    ],
+    "intro": "同一园区里，员工、访客和打印机应获得什么权限？用三类终端的访问关系推导准入、分区与业务部署。",
+    "outcome": "把园区安全需求映射到身份、策略执行点及分批上线流程。"
+  },
+  {
+    "id": "ICT-072",
+    "group": "安全",
+    "category": "安全场景化解决方案",
+    "title": "数据中心网络安全解决方案",
+    "hcia": false,
+    "hcip": false,
+    "detail": "了解传统数据中心网络架构、传统数据中心网络安全需求、掌握华为数据中心网络安全解决方案",
+    "explanation": "传统三层与Leaf-Spine拓扑都需关注东西向业务，服务区、数据库区与管理区应有不同信任边界。安全设备插入路径时检查吞吐、会话容量、对称性和故障旁路风险。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-053",
+      "ICT-060"
+    ],
+    "intro": "传统数据中心的防火墙通常看得到哪些流量，看不到哪些？沿南北向、东西向和同宿主机路径分别寻找安全边界。",
+    "outcome": "解释传统DC架构与性能需求，组合隔离、检测和业务链。"
+  },
+  {
+    "id": "ICT-073",
+    "group": "安全",
+    "category": "安全场景化解决方案",
+    "title": "云网络安全解决方案",
+    "hcia": false,
+    "hcip": false,
+    "detail": "了解云端网络架构、云端业务安全需求，掌握公有云网络安全解决方案和混合云网络安全解决方案",
+    "explanation": "云上与本地互联需规划重叠地址、路由传播、身份与数据边界。安全组常约束资源，网络ACL约束子网路径，云防火墙提供集中检测；具体状态性和优先级依服务文档。",
+    "depth": "掌握",
+    "prerequisites": [
+      "ICT-051",
+      "ICT-062",
+      "ICT-067"
+    ],
+    "intro": "本地机房与公有云通过VPN连接后，哪些访问应该允许？分别画出两侧路由、地址转换、身份与控制规则再组合。",
+    "outcome": "比较公有云与混合云方案，处理重叠地址、最小授权和双向路径。"
+  },
+  {
+    "id": "ICT-074",
+    "group": "WLAN",
+    "category": "WLAN基础业务",
+    "title": "WLAN工作原理",
+    "hcia": true,
+    "hcip": true,
+    "detail": "CAPWAP隧道、WLAN关键报文、STA上线流程等",
+    "explanation": "AP获取管理IP并发现AC，建立CAPWAP控制关系，再下发业务。STA经扫描、认证、关联及相应密钥/准入流程上线，之后获取IP；AP上线与用户上线是两条不同的链。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-002",
+      "ICT-004",
+      "ICT-009"
+    ],
+    "intro": "手机看到Wi-Fi名称后，为什么仍要经过认证、关联和地址获取才能访问网络？先区分手机、AP与无线控制器，再追踪上线消息。",
+    "outcome": "区分AP上线与STA上线，解释CAPWAP和业务转发路径。"
+  },
+  {
+    "id": "ICT-075",
+    "group": "WLAN",
+    "category": "WLAN基础业务",
+    "title": "WLAN组网架构",
+    "hcia": true,
+    "hcip": true,
+    "detail": "FAT AP、Leader AP、WAC+FIT AP、敏捷分布式、Navi AC、Mesh等",
+    "explanation": "FAT AP独立管理，FIT AP通常由WAC管理，Leader AP承载特定协调角色；云管理把配置运维集中到平台，Mesh用于无线回传。管理方式不直接决定数据一定经过云端。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-074"
+    ],
+    "intro": "一间小办公室与一座大型校园应该采用同一种AP管理方式吗？从谁管理AP、谁控制终端、业务从哪里转发比较不同架构。",
+    "outcome": "区分FAT、Leader、FIT/WAC、分布式、Navi AC和Mesh的职责。"
+  },
+  {
+    "id": "ICT-076",
+    "group": "WLAN",
+    "category": "WLAN基础业务",
+    "title": "WLAN可靠性",
+    "hcia": false,
+    "hcip": true,
+    "detail": "VRRP热备份、双链路热备份、双链路冷备份、N+1备份等",
+    "explanation": "热备力求提前维持备份状态以缩短切换，冷备通常需要重新建立部分状态；N+1以一台备机保护多台主机，需核算容量。切换测试要覆盖AP状态、用户会话与业务路径。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-037",
+      "ICT-075"
+    ],
+    "intro": "控制器故障时，Wi-Fi信号还在，用户是否一定能继续上网？把AP管理、终端状态与数据转发分别看待。",
+    "outcome": "比较VRRP、双链路热备/冷备和N+1，解释状态同步与重上线。"
+  },
+  {
+    "id": "ICT-077",
+    "group": "WLAN",
+    "category": "WLAN安全",
+    "title": "WLAN接入安全",
+    "hcia": true,
+    "hcip": true,
+    "detail": "链路认证、用户接入安全、终端黑白名单、安全策略等",
+    "explanation": "关联认证、密钥协商与用户准入承担不同功能。黑白名单按MAC筛选可辅助管理但容易仿冒；安全策略还需约束认证后的访问范围。应区分空口加密与端到端应用加密。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-034",
+      "ICT-078"
+    ],
+    "intro": "知道Wi-Fi密码就能访问所有内网吗？分开讨论无线链路建立、用户身份与最终授权。",
+    "outcome": "理解链路认证、用户安全、名单及完整接入安全策略。"
+  },
+  {
+    "id": "ICT-078",
+    "group": "WLAN",
+    "category": "WLAN安全",
+    "title": "WLAN数据安全",
+    "hcia": true,
+    "hcip": true,
+    "detail": "Open、WEP-Open、WEP-share-key、WPA/WPA2-PSK、WPA/WPA2-802.1X等",
+    "explanation": "Open无链路加密；WEP存在已知缺陷，保留用于理解历史机制。PSK依共享密钥，企业802.1X通过认证服务器实现每用户身份，随后派生会话密钥；版本与密码套件要共同确认。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-061",
+      "ICT-074"
+    ],
+    "intro": "无线信号谁都能接收到，数据怎样避免被旁观者读懂？从开放网络到旧WEP，再到WPA/WPA2的认证与密钥机制。",
+    "outcome": "区分接入认证和数据加密，理解PSK与802.1X密钥建立；旧协议仅用于理解历史。",
+    "readingNote": "Open、WEP和旧WPA用于解释演进及考纲概念。实际部署须按设备版本、终端能力与当前安全要求选取支持的安全方式；本章的旧协议比较不是部署建议。"
+  },
+  {
+    "id": "ICT-079",
+    "group": "WLAN",
+    "category": "WLAN安全",
+    "title": "WLAN安全与防御",
+    "hcia": true,
+    "hcip": true,
+    "detail": "WLAN网络安全威胁及安全方案概述、WLAN管理平面安全、WLAN控制平面安全、WLAN转发平面安全等",
+    "explanation": "管理平面保护运维入口，控制平面保护AP/AC关系，转发平面保护业务。伪造AP、弱凭据、管理暴露和非法接入分别需要发现、身份验证、分域与策略控制。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-058",
+      "ICT-077"
+    ],
+    "intro": "有人私接AP或反复发送异常报文，应该保护无线系统的哪一部分？把管理、控制和转发分成三个平面逐一观察。",
+    "outcome": "按威胁定位检测、管理权限、控制报文与业务隔离措施。"
+  },
+  {
+    "id": "ICT-080",
+    "group": "WLAN",
+    "category": "WLAN安全",
+    "title": "WLAN网络准入控制",
+    "hcia": true,
+    "hcip": true,
+    "detail": "802.1X认证、Portal认证、MAC认证、MAC优先Portal认证等",
+    "explanation": "MAC优先Portal先尝试依据终端记录快速接入，未满足条件时进入Portal流程；Portal重定向依赖地址、DNS与HTTP交互，HTTPS行为需按终端与方案验证。认证后权限可动态下发。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-036",
+      "ICT-077"
+    ],
+    "intro": "员工电脑、访客手机与无浏览器终端接同一个无线网络，怎样分别认证？跟踪802.1X、Portal和MAC认证的依赖。",
+    "outcome": "比较认证能力与授权强度，理解MAC优先Portal的尝试与回退。"
+  },
+  {
+    "id": "ICT-081",
+    "group": "WLAN",
+    "category": "WLAN高阶特性",
+    "title": "WLAN漫游",
+    "hcia": true,
+    "hcip": true,
+    "detail": "WLAN漫游概述、漫游流量转发过程、漫游优化技术、智能漫游等",
+    "explanation": "STA决定何时漫游，网络通过邻居信息和快速密钥机制等辅助。二层/三层漫游的地址与流量处理不同，锚点/家乡代理等机制依方案；同SSID不保证无缝。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-074",
+      "ICT-075",
+      "ICT-077"
+    ],
+    "intro": "手机边走边开视频会议，切换AP时怎样尽量保持连接？先画出旧AP、新AP与网关，再看身份和业务路径如何迁移。",
+    "outcome": "解释二层/三层漫游、转发与优化，区分建议与终端最终选择。"
+  },
+  {
+    "id": "ICT-082",
+    "group": "WLAN",
+    "category": "WLAN高阶特性",
+    "title": "WLAN射频资源管理",
+    "hcia": false,
+    "hcip": true,
+    "detail": "WLAN空口性能、射频调优、终端迁移、频谱导航、基于AP的负载均衡、用户CAC、WLAN抗干扰、WLAN QoS、VIP用户体验保障等",
+    "explanation": "空口是共享介质，低速终端和重传消耗更多时隙。信道、带宽、功率应协同设计；负载均衡与频谱导航影响终端选择，但终端行为也受能力限制。CAC限制新业务以保护现有质量。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-038",
+      "ICT-081",
+      "ICT-086"
+    ],
+    "intro": "Wi-Fi信号很强，速度却很慢，问题可能在哪里？从共享空口、信道竞争和终端速率解释射频资源管理。",
+    "outcome": "理解调优、引导、负载、准入和QoS对空口时间的影响。"
+  },
+  {
+    "id": "ICT-083",
+    "group": "WLAN",
+    "category": "WLAN高阶特性",
+    "title": "WLAN与IoT融合",
+    "hcia": false,
+    "hcip": false,
+    "detail": "物联网概要与发展趋势、物联网短距无线技术概述、华为智简园区物联网方案",
+    "explanation": "物联网终端在功耗、速率、距离与移动性上需求各异，Wi-Fi、BLE等短距技术各有取舍。融合需考虑网关、身份、数据平台与隔离，不能把所有低功耗设备都按普通办公STA设计。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-075",
+      "ICT-080"
+    ],
+    "intro": "摄像头、传感器与手机都在园区，是否都应该使用Wi-Fi？按功耗、距离、速率和网关需求比较无线接入。",
+    "outcome": "理解IoT与短距无线技术，说明融合接入、身份与隔离的关系。"
+  },
+  {
+    "id": "ICT-084",
+    "group": "WLAN",
+    "category": "WLAN高阶特性",
+    "title": "WLAN无线定位",
+    "hcia": false,
+    "hcip": false,
+    "detail": "无线定位简介、无线定位原理、华为智简园区无线定位方案",
+    "explanation": "基于信号强度、到达时间或到达角的方法依赖不同能力与校准；室内多径、遮挡和终端差异影响精度。定位方案要定义测量密度、坐标基准与误差统计。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-082"
+    ],
+    "intro": "不使用GPS，系统如何估计手机在楼里的位置？从信号强度、距离或时间差的测量误差入手。",
+    "outcome": "区分定位方法、锚点部署与精度验收，理解园区定位链路。"
+  },
+  {
+    "id": "ICT-085",
+    "group": "WLAN",
+    "category": "WLAN高阶特性",
+    "title": "构建IPv6 WLAN网络",
+    "hcia": false,
+    "hcip": false,
+    "detail": "IPv6基本概述、基于IPv6的WLAN组网及应用、基于IPv6的WLAN网络准入控制、基于IPv6的WLAN网络安全、WLAN网络的IPv6演进等",
+    "explanation": "IPv6 WLAN仍需保证RA、ND、DHCPv6与组播处理，同时设计IPv6准入和安全策略。管理面、用户面可按不同阶段演进；不能只给网关配IPv6就认为全部应用已兼容。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-018",
+      "ICT-074",
+      "ICT-080"
+    ],
+    "intro": "有线网升级IPv6后，Wi-Fi是否自动获得完整IPv6业务？沿AP管理、终端地址、认证和安全策略逐层检查。",
+    "outcome": "解释IPv6 WLAN组网、准入、安全与双栈演进的独立依赖。"
+  },
+  {
+    "id": "ICT-086",
+    "group": "WLAN",
+    "category": "WLAN网络规划",
+    "title": "WLAN网络规划基础",
+    "hcia": true,
+    "hcip": true,
+    "detail": "WLAN网络规划概述、WLAN覆盖设计、WLAN容量设计等",
+    "explanation": "覆盖设计满足信号与SNR，容量设计满足并发用户和业务吞吐。按有效空口能力而非物理协商速率估算AP数量，再通过现场勘测和验收修正。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-075"
+    ],
+    "intro": "会议室里“每个角落都有信号”为什么仍可能开不了会？把覆盖和容量分开规划，再考虑现场墙体与终端能力。",
+    "outcome": "理解业务需求、覆盖边界、空口容量和AP数量的计算前提。"
+  },
+  {
+    "id": "ICT-087",
+    "group": "WLAN",
+    "category": "WLAN网络规划",
+    "title": "WLAN网络规划工具",
+    "hcia": false,
+    "hcip": true,
+    "detail": "WLAN Planner、CloudCampus APP等",
+    "explanation": "规划工具用于导入平面图、设置比例、墙体材质与AP型号并模拟覆盖。工具结果依赖输入假设，必须用现场测量校准；移动勘测还需记录终端与测试高度。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-086"
+    ],
+    "intro": "在图纸上放几个AP就算完成无线规划吗？把规划工具看作使用输入模型进行估算，再用现场测量修正。",
+    "outcome": "说明WLAN Planner与CloudCampus APP的用途、输入和现场验证边界。"
+  },
+  {
+    "id": "ICT-088",
+    "group": "WLAN",
+    "category": "WLAN网络规划",
+    "title": "WLAN网络规划流程",
+    "hcia": true,
+    "hcip": true,
+    "detail": "网络规划概述、网络规划流程、网络规划案例等",
+    "explanation": "需求调查→现场勘测→覆盖/容量方案→干扰与信道规划→安装部署→验收优化。方案记录目标RSSI/SNR、并发、吞吐、漫游与供电回传约束，并保留测点。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-086",
+      "ICT-087"
+    ],
+    "intro": "给一层办公楼做无线覆盖，应该按什么步骤从需求走到交付？把勘察、仿真、部署、测试与文档连成一条流程。",
+    "outcome": "用一个明确人数与业务的案例解释规划流程和交付证据。"
+  },
+  {
+    "id": "ICT-089",
+    "group": "WLAN",
+    "category": "WLAN网络规划",
+    "title": "WLAN网络优化",
+    "hcia": false,
+    "hcip": true,
+    "detail": "WLAN网络优化概述、WLAN网络优化工具、WLAN网络优化方案、WLAN网络优化案例等",
+    "explanation": "优化从测量与基线开始，分覆盖、干扰、容量、漫游与有线承载定位。一次改变一个主要变量，比较同条件下重传、时延和吞吐，避免只凭信号条评价。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-082",
+      "ICT-088"
+    ],
+    "intro": "上线后有人反映卡顿，如何判断该加AP、改信道还是修有线网络？先建立基线，再让测量结果决定调整。",
+    "outcome": "区分覆盖、干扰、容量与上联问题，说明工具、方案与案例。"
+  },
+  {
+    "id": "ICT-090",
+    "group": "WLAN",
+    "category": "大型WLAN组网实践",
+    "title": "大型WLAN组网实践",
+    "hcia": false,
+    "hcip": false,
+    "detail": "WLAN项目生命周期介绍、WLAN项目交付件详解、WLAN项目案例等",
+    "explanation": "大型项目包括需求、设计、实施、测试与移交。交付件应含图纸、地址/VLAN表、配置基线、验收记录、故障预案和运维手册；变更需更新实际竣工资料。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-088",
+      "ICT-089"
+    ],
+    "intro": "大型校园的无线建设为什么不能按单个房间的方法直接放大？把试点、批量部署和分区验收纳入项目生命周期。",
+    "outcome": "列清交付件、试点结果和恢复方案，以完整项目案例串起实施。"
+  },
+  {
+    "id": "ICT-091",
+    "group": "WLAN",
+    "category": "WLAN网络运维",
+    "title": "云管理",
+    "hcia": false,
+    "hcip": true,
+    "detail": "iMaster NCE-Campus、WAC云化管理、AP云化管理等",
+    "explanation": "云管理流程包括设备发现/注册、认证纳管、模板下发、状态回读和告警闭环。设备到平台的DNS、时间、证书与出口连通均需核对，平台显示已下发不代表终端业务已生效。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-041",
+      "ICT-075"
+    ],
+    "intro": "管理员不在现场时，怎样集中管理许多AP或控制器？分别看设备注册、管理连接、配置下发和业务转发。",
+    "outcome": "解释iMaster NCE-Campus、WAC和AP的云化管理及断管边界。"
+  },
+  {
+    "id": "ICT-092",
+    "group": "WLAN",
+    "category": "WLAN网络运维",
+    "title": "传统运维",
+    "hcia": false,
+    "hcip": true,
+    "detail": "传统WLAN网络运维",
+    "explanation": "传统运维通过WAC/AP状态、接口计数、用户表、日志和抓包取证。先区分单用户、单AP、单区域还是全网，再对比正常对象；维护前后记录配置与用户影响。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-039",
+      "ICT-074",
+      "ICT-075"
+    ],
+    "intro": "没有智能分析平台时，管理员怎样判断无线网络是否健康？从控制器、AP、终端与有线端口的状态和日志建立证据。",
+    "outcome": "按时间和对象对齐传统WLAN巡检、告警、备份与排障。"
+  },
+  {
+    "id": "ICT-093",
+    "group": "WLAN",
+    "category": "WLAN网络运维",
+    "title": "智能运维",
+    "hcia": false,
+    "hcip": true,
+    "detail": "智能运维概述、实时体验可视、分钟级故障定界、智能网络优化等",
+    "explanation": "智能运维把用户体验、设备指标与路径关联，辅助发现根因。算法结论需结合原始证据和时间线验证；自动优化要有边界、变更记录和回退策略。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-091",
+      "ICT-092"
+    ],
+    "intro": "用户体验看板显示“差”，平台是怎样得出这个结论的？从关联、认证、地址获取和应用阶段的指标定位失败点。",
+    "outcome": "区分体验可视、定界与优化，理解数据覆盖、误差和闭环验证。"
+  },
+  {
+    "id": "ICT-094",
+    "group": "WLAN",
+    "category": "WLAN网络运维",
+    "title": "故障排查",
+    "hcia": true,
+    "hcip": true,
+    "detail": "WLAN故障排查概述、可靠性类故障、云管理类故障、无线网桥业务故障、射频管理业务故障、漫游业务故障等",
+    "explanation": "按AP上线、STA关联认证、地址获取、DNS、网关与应用分段排查；可靠性看切换链路，网桥看回传与环路，射频看信道/功率/干扰，漫游看密钥与地址保持。",
+    "depth": "原理/配置（原文未标级）",
+    "prerequisites": [
+      "ICT-076",
+      "ICT-081",
+      "ICT-089",
+      "ICT-093"
+    ],
+    "intro": "手机能看到SSID却无法上网，与漫游掉线是同一类故障吗？先确定失败阶段，再分别追踪可靠性、管理、网桥、射频与漫游。",
+    "outcome": "用固定终端、时间与路径分层排障，把现象、原因和修复证据对应。"
+  }
+]
