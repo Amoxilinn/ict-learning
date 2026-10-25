@@ -194,7 +194,14 @@
      "accessed": "2026-10-24"
     }
    ],
-   "visuals": [],
+   "visuals": [
+    {
+     "id": "vlan-frame-path",
+     "title": "一帧：两头无标签，中间带标签",
+     "summary": "跟着一帧无标签报文穿过两台交换机：哪个口把它归进 VLAN，哪段链路带标签，哪个口出发前把标签摘掉。",
+     "boundary": "本例单向传一帧：两端 access 口 PVID 为 10，Trunk 口 PVID 为 1 且允许列表放行 VLAN 10。不模拟 VLAN 等于 PVID 时 Trunk 不带标签发出的行为、多 VLAN 共用 Trunk 的全部规则、voice VLAN、GVRP 与跨 VLAN 互通；标签处理按正文的常见 VRP 行为，上机差异以命令参考为准。"
+    }
+   ],
    "chapter_title": "VLAN"
   },
   {
@@ -493,7 +500,14 @@
      "accessed": "2026-10-24"
     }
    ],
-   "visuals": [],
+   "visuals": [
+    {
+     "id": "stp-roles",
+     "title": "三角形里的环是怎样被剪成树的",
+     "summary": "SW-A、SW-B、SW-C 两两互联，逐步看根桥、根端口和阻塞端口怎样确定下来。",
+     "boundary": "本场景模拟 STP 的通用选举流程与稳态角色，不模拟选举计时器细节、RSTP 的快速迁移和链路故障后的收敛过程；默认开销与优先级取值随标准和产品实现不同。"
+    }
+   ],
    "chapter_title": "STP"
   },
   {

@@ -9,6 +9,15 @@ for(let p=0;p<=32;p++){let x=m.calcSubnet('203.0.113.255',p);ok(x.net<=x.ip&&x.i
 ok(m.calcSubnet('10.0.0.0',31).usable===2,'/31');ok(m.calcSubnet('10.0.0.1',32).usable===1,'/32');ok(m.calcSubnet('255.255.255.255',0).size===4294967296,'/0 size');
 for(const s of ['256.1.1.1','1.2.3','-1.0.0.1','1.2.3.4abc'])fail(()=>m.ipNum(s));fail(()=>m.calcSubnet('1.2.3.4',33));fail(()=>m.calcSubnet('1.2.3.4',1.1));
 ok(m.vlanSim(10,1,[10],1,[10],10).ok,'tagged');ok(!m.vlanSim(10,1,[20],1,[10],10).ok,'out permit');ok(!m.vlanSim(10,1,[10],1,[20],10).ok,'in permit');ok(!m.vlanSim(10,10,[10],20,[10],10).ok,'PVID mismatch');ok(m.vlanSim(10,10,[10],20,[20],20).ok,'reclassification');ok(!m.vlanSim(10,1,[10],1,[10],20).ok,'access mismatch');
+const vsTagged=m.vlanSim(10,1,[10],1,[10],10),vsPvid=m.vlanSim(10,10,[10],20,[20],20),vsBlock1=m.vlanSim(10,1,[20],1,[10],10),vsBlock2=m.vlanSim(10,1,[10],1,[20],10),vsBPort=m.vlanSim(10,1,[10],1,[10],20);
+ok(vsTagged.states.length===4&&vsTagged.states.every(s=>s.length===4&&typeof s[2]==='boolean'&&Number.isInteger(s[3])),'vlan states snapshot shape');
+ok(vsTagged.states[1][2]===true,'trunk send keeps VLAN tag when VLAN differs from PVID');
+ok(vsPvid.states[1][2]===false,'trunk send is untagged when VLAN equals PVID');
+ok(vsPvid.states[2][3]===20,'SW2 reclassifies untagged trunk frame to local PVID');
+ok(vsBlock1.states.length===2,'SW1 permit block stops snapshot at the drop point');
+ok(vsBlock1.states[1][0].includes('丢弃')&&vsBlock1.states[1][2]===false,'SW1 drop row marks the drop point');
+ok(vsBlock2.states.length===4&&vsBlock2.states[3][0].includes('丢弃'),'SW2 permit block drops at step four');
+ok(vsBPort.states.length===4&&vsBPort.states[3][2]===false&&vsBPort.states[3][3]===10,'access mismatch blocks delivery without retagging');
 const rows=[{network:'0.0.0.0/0',pref:1,cost:0,next:'a',proto:'Static'},{network:'10.1.0.0/16',pref:10,cost:1,next:'b',proto:'OSPF'},{network:'10.1.2.0/24',pref:200,cost:0,next:'c',proto:'Static'}];
 ok(m.selectRoute('10.1.2.99',rows).best[0].next==='c','longest before preference');ok(m.selectRoute('8.8.8.8',rows).best[0].next==='a','default');ok(m.selectRoute('8.8.8.8',[]).best.length===0,'no route');
 let eq=[...rows,{network:'10.1.2.0/24',pref:60,cost:0,next:'d',proto:'Static'}];ok(m.selectRoute('10.1.2.1',eq).best[0].next==='d','same prefix preference');eq.push({network:'10.1.2.0/24',pref:60,cost:0,next:'e',proto:'Static'});ok(m.selectRoute('10.1.2.1',eq).best.length===2,'equal candidate');eq.push({network:'10.1.2.0/24',pref:60,cost:100,next:'f',proto:'OSPF'});ok(m.selectRoute('10.1.2.1',eq).ambiguous,'no cross-protocol cost');
@@ -41,7 +50,9 @@ for(const u of units){
  ok(u.sources.length>0&&u.sources.every(s=>/^https:\/\//.test(s.url)),'reference supplied '+u.id);
 }
 for(const id of ['ICT-001','ICT-002','ICT-003'])ok(ev(`lessonPage('${id}')`).includes('data-teach='),'pilot contains teaching components '+id);
-ok(!ev("lessonPage('ICT-004')").includes('data-teach='),'rollout remains bounded to pilot');
+const appJS=fs.readFileSync(__dirname+'/dist/app.js','utf8');
+ok([...appJS.matchAll(/'(ICT-\d{3}\.\d{2})':\s*\['(subnet|switch|vlan|route)'/g)].map(x=>x[1]).sort().join()==='ICT-002.05,ICT-003.02,ICT-004.01,ICT-009.01','diagram hook table unitDiagrams stays bounded to the four pilot units');
+for(const uid of ['ICT-010','ICT-062','ICT-074','ICT-045'])ok(ev(`lessonPage('${uid}')`).includes('data-teach='),'V01 rollout reaches '+uid);
 const basics=ev("lessonPage('ICT-002')");
 ok(basics.indexOf('id="ICT-002.05"')<basics.indexOf('id="ICT-002.02"')&&basics.indexOf('id="ICT-002.04"')<basics.indexOf('id="ICT-002.02"'),'IP and ARP precede TCP');
  ok(basics.includes('chapter-progress')&&basics.includes('chapter-objectives')&&basics.includes('level-badge'),'chapter goals, levels and progress control');

@@ -325,7 +325,14 @@
      "accessed": "2026-10-24"
     }
    ],
-   "visuals": [],
+   "visuals": [
+    {
+     "id": "ospf-neighbor",
+     "title": "从发出第一个 Hello 到各自算出同一条路径",
+     "summary": "跟着两台路由器逐帧观察：报文发出时对面不动，到达才变；2-Way 是邻居，Full 才是数据库同步完成。",
+     "boundary": "单区域、广播型网络，只演示 A 与 DR 之间的一对邻接。DR 的选举结果按本例直接给出，不模拟优先级比较、Wait 计时器、重传定时器与 LSAge，也不模拟点对点与 NBMA 网络的邻接差别。状态名用 RFC 2328 的写法。"
+    }
+   ],
    "chapter_title": "OSPF"
   },
   {

@@ -8,11 +8,10 @@
 
 - 考纲章节：94；知识点：322。
 - 已合并教学数据：94 章 / 322 个知识点。
-- 已冻结并合并：全部 batch-00—batch-35。
-- 术语库：135 条；交互：6 个数据场景 + 1 个生成场景 + 4 个可操作实验。
-- **图文讲解：未完成。** 只有 9/322 个知识点（5/94 章）有可视化；全部为原有资源，未新增关键机制图。V01 未开始。
+- 已冻结并合并：全部 batch-00—batch-35（其中 15 个批次因 V01 visualCue 于 2026-10-25 重新冻结）。
+- 术语库：135 条；交互：**21 个数据场景 + 1 个生成场景 + 4 个可操作实验**；带可视化知识点 **23/322（18/94 章）**，覆盖数通/安全/WLAN/DCN 四方向。V01 已完成（2026-10-25），见 `docs/reviews/audit-content.md`。
 - **浏览器实际布局：未完成。** 用户在实际浏览器反馈布局有问题，具体页面/浏览器/视口待补；自动化截图未复现。U01 未开始。详见 `docs/reviews/layout-issues.md`。
-- 构建通过：322/322、94/94，无 LEGACY；`node test-models.cjs`（4734）、`node test-teaching.cjs`（674）、`node scripts/render_check.cjs` 通过；`audit_content.py` 0 error / 81 warning。
+- 构建通过：322/322、94/94，无 LEGACY；`node test-models.cjs`（**4746**）、`node test-teaching.cjs`（**1002**）、`node scripts/render_check.cjs` 通过；`audit_content.py` 0 error / 81 warning。
 
 复核命令（只读）：
 
@@ -66,7 +65,7 @@ PY
 | Q04 | 基础 UI/交互验收（已完成，抽查范围；图文覆盖见 V01，布局问题见 U01） | `dist/app.js`、`style.css`、`teaching.js` | M02 | — |
 | Q05 | 测试与 CI 收口（已完成） | `test-*.cjs`、`scripts/*.py`、CI | M02 | — |
 | Q06 | 文档与最终交付（已完成） | README、PROGRESS、TASKS、HANDOFF | Q01—Q05 | — |
-| V01 | 补关键机制可视化（未开始） | `content/visualizations.json`、`dist/teaching.js`、`dist/diagrams.js`、对应 `out/batch-XX.json`、测试 | M02 | 否（单写者） |
+| V01 | 补关键机制可视化（**已完成 2026-10-25**：+15 场景，9/322→23/322，四方向） | `content/visualizations.json`、`dist/diagrams.js`、`out/source/batch-*.json`（cue/visuals）、`content/teaching-*.json`、`test-*.cjs`、`scripts/validate_v01_drafts.cjs`、`scripts/merge_v01.py` | M02 | — |
 | U01 | 修复浏览器实际布局问题（未开始） | `dist/style.css`、`dist/app.js`、`dist/index.html` | M02 | 否（单写者） |
 
 ## 3. 内容批次任务模板（C04—C13 通用）
@@ -225,7 +224,9 @@ python3 scripts/validate_rewrite.py <batch>
 - 无控制台错误；打印样式包含正文与实验，不包含控制按钮。
 - 改动后 `python3 build.py` 更新资源哈希。
 
-### V01 · 补关键机制可视化（未完成）
+### V01 · 补关键机制可视化（已完成 2026-10-25）
+
+**完成记录**：新增 15 个场景（dhcp-dora、vlan-frame-path、stp-roles、ospf-neighbor、bgp-path-select、mpls-label-hop、vxlan-encap、evpn-type2、dot1x-port-access、mlag-failover、napt-rewrite、ipsec-ike-phases、vpc-egress-path、ap-find-ac、wlan-roam-hold），覆盖从 9/322 提升到 **23/322（18/94 章、四方向）**；VLAN 实验加状态快照表；15 个批次补 `visualCue` 后重新冻结合并。编写以"out 正文 + source 旧稿为唯一事实来源"，经两批独立技术复核修复 1 处必修（mlag peer-link 代传）与 4 处次级问题。测试 test-teaching 674→1002、test-models 4734→4746，render_check/audit/build 全过。方法契约见 `docs/reviews/v01-contract.md`，明细见 `docs/reviews/audit-content.md`。草稿留档 `content/rewrite/v01-drafts/`（已全部合并，可删）。视觉呈现未经人眼确认（本轮纯文本验收），人工浏览时留意 SVG 布局与窄屏内部滚动。
 
 **背景**：当前只有 9/322 个知识点（5/94 章）有可视化，且全部是原有资源。文本、案例、检查已基本完成；本任务只补“可视化承担原理讲解”的缺口，不重写正文。
 
@@ -320,7 +321,7 @@ python3 scripts/validate_rewrite.py <batch>
 3. `audit_content.py` 0 error。
 4. `node test-models.cjs`、`node test-teaching.cjs`、`node scripts/render_check.cjs` 全 PASS。
 5. 1280px 与 500px 截图检查通过；关键交互操作通过。
-6. V01 关键机制可视化完成，覆盖从 9/322 提升到至少 21/322，且覆盖 4 个方向。
+6. V01 关键机制可视化完成，覆盖从 9/322 提升到至少 21/322，且覆盖 4 个方向。（**已达成：23/322、18/94 章、四方向**）
 7. U01 浏览器实际布局问题修复，真实 Chrome/Safari 在 1280/1024/768/500 与 125%/150% 缩放下无重叠/裁切/错位。
 8. README/PROGRESS/HANDOFF 与实际状态一致。
 9. 未完成项和已知限制写清楚，不虚报“全部实机验证”。

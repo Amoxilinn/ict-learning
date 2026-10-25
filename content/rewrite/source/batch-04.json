@@ -399,7 +399,14 @@
      "accessed": "2026-10-24"
     }
    ],
-   "visuals": [],
+   "visuals": [
+    {
+     "id": "bgp-path-select",
+     "title": "Established 之后，这条路由还要过几关",
+     "summary": "同一目的前缀的多条路径，按顺序比属性选出 best，再查下一跳是否可达，最后才谈装进 IP 路由表。",
+     "boundary": "IPv4 单播、单条前缀的选路示意。属性名与比较顺序按本节正文所列，不同平台的属性集合、比较顺序与默认值有差异，未列出平台默认值。前缀如何被注入 BGP（network 精确命中、路由引入）与 IBGP 转发限制、路由反射不在本演示内。"
+    }
+   ],
    "chapter_title": "BGP、BGP4+"
   },
   {

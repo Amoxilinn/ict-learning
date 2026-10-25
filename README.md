@@ -16,7 +16,7 @@
 - 每个知识点有本节目标、自然分节讲解、已解案例、一句话结论和折叠的理解检查。基础必学全部配检查；进阶与技术细节按需深入。
 - 配置命令、命令说明、常见误区和技术边界收进折叠区，不打断基础原理阅读。
 - 术语首次出现时给出简短提示，可点开查看通俗解释与折叠的专业定义；统一术语库共 135 条。
-- 子网、交换转发、VLAN 标签与路由查表四个可操作演示，以及路径、VRP、封装、TCP、ARP 等步骤/时序/报文组件嵌入对应知识点。**这些可视化目前集中在基础章节；全站图文讲解尚未完成，详见 [TASKS](TASKS.md) V01。**
+- 子网、交换转发、VLAN 标签与路由查表四个可操作演示（VLAN 实验带转发状态快照表），以及 21 个步骤/时序/报文场景嵌入对应知识点：除基础章节外，还覆盖 DHCP、VLAN 帧路径、STP、OSPF、BGP、MPLS、802.1X、NAPT、IPsec/IKE、VXLAN、EVPN、M-LAG、AP 上线、WLAN 漫游与云上 VPC，共 23/322 个知识点、四个方向。
 - 每章可手动标记“已学完”，只保存在本机浏览器，不统计时长、不记录答题，也不上传。
 
 ## 内容与构建
@@ -57,7 +57,7 @@ python3 scripts/audit_content.py            # 全局去重、层次与结构审�
 
 - 内容覆盖 94 章、322 个考纲细则，构建强制校验章节、细则、知识点的一一对应。
 - 技术结论尽量保留原始来源与适用条件；配置为学习示例，尚未在赛事指定设备上逐条执行。具体命令、版本和型号兼容性仍需按目标环境核对。
-- 交互模型只模拟正常流程或明确列出的对照分支，边界写在每个演示的“模型条件与技术边界”中。当前只有 9/322 个知识点带可视化，且全部为原有资源；VLAN/STP/OSPF/BGP/MPLS/IPsec/WLAN/DCN 等关键机制的图尚未补。浏览器实际布局仍有用户反馈问题，尚未修复，见 [TASKS](TASKS.md) U01 与 [布局问题记录](docs/reviews/layout-issues.md)。
+- 交互模型只模拟正常流程或明确列出的对照分支，边界写在每个演示的“模型条件与技术边界”中。23/322 个知识点带可视化，覆盖数通/安全/WLAN/DCN 四方向（V01，2026-10-25）；配图针对高价值机制，不追求逐条覆盖。浏览器实际布局仍有用户反馈问题、尚未修复（缺复现信息），见 [TASKS](TASKS.md) U01 与 [布局问题记录](docs/reviews/layout-issues.md)。
 - 离线手册保留教学正文、案例、配置和检查，不包含交互演示。
 
 ## 维护与交接
@@ -66,7 +66,7 @@ python3 scripts/audit_content.py            # 全局去重、层次与结构审�
 - 剩余/后续任务拆分：[TASKS](TASKS.md)
 - 无原始对话上下文的接续说明、文件矩阵与已知问题：[HANDOFF](HANDOFF.md)
 - 批次源材料与冻结副本：`content/rewrite/source/`、`content/rewrite/frozen/`
-- 全量验收：`python3 build.py`（322/322、94/94）、`python3 scripts/audit_content.py`（0 error）、`node test-models.cjs`（4734）、`node test-teaching.cjs`（674）、`node scripts/render_check.cjs`。
+- 全量验收：`python3 build.py`（322/322、94/94）、`python3 scripts/audit_content.py`（0 error）、`node test-models.cjs`（4746）、`node test-teaching.cjs`（1002）、`node scripts/render_check.cjs`。
 
 配置与命令仍未在赛事指定设备上实测；交互模型只覆盖各场景 `boundary` 写明的条件。
 

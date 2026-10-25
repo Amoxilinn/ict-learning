@@ -1,0 +1,79 @@
+{
+  "scene": {
+    "id": "vlan-frame-path",
+    "unit": "ICT-004.01",
+    "title": "一帧：两头无标签，中间带标签",
+    "summary": "跟着一帧无标签报文穿过两台交换机：哪个口把它归进 VLAN，哪段链路带标签，哪个口出发前把标签摘掉。",
+    "nodes": [
+      ["pc1", "PC1", 80, 80],
+      ["sw1", "SW1", 240, 80],
+      ["sw2", "SW2", 400, 80],
+      ["pc2", "PC2", 560, 80]
+    ],
+    "links": [
+      ["pc1", "sw1"],
+      ["sw1", "sw2"],
+      ["sw2", "pc2"]
+    ],
+    "columns": ["位置", "标签", "VLAN"],
+    "steps": [
+      {
+        "title": "PC1 发出：帧上没有标签",
+        "text": "PC1 刚上线，发出的只是一个普通以太网帧：电脑不认识 VLAN，帧上不带标签。它到达 SW1 的 access 口。",
+        "active": [["pc1", "sw1"]],
+        "rows": [
+          ["PC1 → SW1 access口", "无标签", "未标注VLAN"]
+        ]
+      },
+      {
+        "title": "SW1 按入端口 PVID 定归属",
+        "text": "这个 access 口的 PVID 是 10：无标签帧进来都算 VLAN 10，后面的转发也在这个 VLAN 里查。",
+        "rows": [
+          ["SW1 内部", "无标签", "VLAN 10（按PVID归类）"]
+        ]
+      },
+      {
+        "title": "Trunk 出口先查允许列表",
+        "text": "这帧的出口是 Trunk 口，允许列表里有 VLAN 10，可以通过；不在列表里的 VLAN 会在这里被丢下。",
+        "rows": [
+          ["SW1 Trunk出口（列表放行）", "无标签", "VLAN 10"]
+        ]
+      },
+      {
+        "title": "上 Trunk 链路：打上标签",
+        "text": "这个 Trunk 口的 PVID 是 1，不等于 VLAN 10，帧便带着 802.1Q 标签上线，标签里写着编号 10。",
+        "active": [["sw1", "sw2"]],
+        "rows": [
+          ["SW1 → SW2 Trunk链路", "802.1Q标签 · VLAN 10", "VLAN 10"]
+        ]
+      },
+      {
+        "title": "SW2 看标签认出归属",
+        "text": "SW2 直接从标签读编号，知道这帧属于 VLAN 10，不必再按 PVID 归类；这一侧的口也放行它。",
+        "rows": [
+          ["SW2 Trunk入口", "802.1Q标签 · VLAN 10", "VLAN 10（按标签识别）"]
+        ]
+      },
+      {
+        "title": "出 access 口前把标签摘掉",
+        "text": "PC2 所在的是 access 口，帧交付前交换机会去掉标签。PC2 收到的是普通帧，不知道它刚从哪个 VLAN 过来。",
+        "active": [["sw2", "pc2"]],
+        "rows": [
+          ["SW2 → PC2 access出口", "无标签（已剥离）", "VLAN 10（对PC不可见）"]
+        ],
+        "terminal": true,
+        "endLabel": "观察结束"
+      }
+    ],
+    "boundary": "本例单向传一帧：两端 access 口 PVID 为 10，Trunk 口 PVID 为 1 且允许列表放行 VLAN 10。不模拟 VLAN 等于 PVID 时 Trunk 不带标签发出的行为、多 VLAN 共用 Trunk 的全部规则、voice VLAN、GVRP 与跨 VLAN 互通；标签处理按正文的常见 VRP 行为，上机差异以命令参考为准。",
+    "sources": [
+      ["华为 S12700 / S12700E 以太网交换配置指南", "https://info.support.huawei.com/enterprise/en/doc/EDOC1100333871/fb927751/configuration-examples-for-mstp"]
+    ]
+  },
+  "visualCue": "看三列快照随高亮链路的变化：标签列何时从无到有、又回到无；VLAN 编号是入端口 PVID 替帧定的，PC 自始至终不认识它。",
+  "tests": [
+    "ok(scene('vlan-frame-path').steps[1].rows[0][2].startsWith('VLAN 10'),'无标签帧在access口按PVID归入VLAN 10')",
+    "ok(scene('vlan-frame-path').steps[3].rows[0][1]==='802.1Q标签 · VLAN 10','帧只在Trunk链路这一段带标签')",
+    "ok(scene('vlan-frame-path').steps[5].rows[0][1]==='无标签（已剥离）','出access口前剥离标签，PC收到普通帧')"
+  ]
+}

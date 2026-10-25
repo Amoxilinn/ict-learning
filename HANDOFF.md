@@ -1,6 +1,6 @@
 # HANDOFF · ICT 教程全站重构
 
-更新：2026-10-24（Asia/Shanghai）。本文件面向没有原始对话上下文的接续 Agent。先读本文件，再读 `TASKS.md` 与 `docs/教学标准.md`。
+更新：2026-10-25（Asia/Shanghai）。本文件面向没有原始对话上下文的接续 Agent。先读本文件，再读 `TASKS.md` 与 `docs/教学标准.md`。
 
 ## 1. 项目是什么
 
@@ -21,12 +21,12 @@
 | 已通过校验但未合并 | 无；全部批次已冻结并合并 |
 | 正在生成/待生成 | 无；36 批全部完成、冻结并合并 |
 | 术语库 | 135 条（旧 35 + 新 100），236 个别名，105 条可正文标注（旧 35 + 新 70） |
-| 交互 | 6 个步骤场景（journey/vrp/encapsulation/tcp/arp-local/arp-gateway）+ 1 个生成场景（switch-learning）+ 4 个可操作实验（subnet/switch/vlan/route） |
-| 图文讲解 | **未完成**：只有 9/322 个知识点（5/94 章）带可视化；全部是原有资源，未新增 SVG/拓扑/时序/状态表 |
+| 交互 | 21 个数据场景（6 旧 + 15 新，V01 2026-10-25）+ 1 个生成场景（switch-learning）+ 4 个可操作实验（subnet/switch/vlan/route；VLAN 实验含转发状态快照表） |
+| 图文讲解 | **覆盖已达标（V01 2026-10-25）**：23/322 知识点（18/94 章）带可视化，覆盖数通/安全/WLAN/DCN 四方向；新场景均带 boundary/sources/visualCue，经双批复核。视觉呈现尚未经人眼确认（本轮纯文本验收） |
 | 浏览器布局 | **未完成**：用户实际浏览器反馈布局有问题；自动化 1280/1024/768/500 截图未复现，具体页面/浏览器/视口待补 |
 | 章节完成 | 浏览器 `localStorage['ict-progress-v1']` 保存已学完章节 ID；侧栏/首页显示阶段进度 |
 | 构建 | 通过；322/322、94/94，无 LEGACY |
-| 全量测试 | `node test-models.cjs`（4734）、`node test-teaching.cjs`（674）、`node scripts/render_check.cjs` 通过 |
+| 全量测试 | `node test-models.cjs`（4746）、`node test-teaching.cjs`（1002）、`node scripts/render_check.cjs` 通过 |
 | 全量审计 | 0 error / 81 warning；warning 为长单元与术语启发式 |
 | 部署 | 2026-10-25 用户明确授权 Git 提交及更新网站；通过 main 推送触发 GitHub Pages，结果以 Actions 为准 |
 
@@ -41,7 +41,7 @@ content/units-*.json                  322 条技术元数据：term/depth/source
 content/curriculum.json               9 阶段推荐顺序
 content/subskills.json                322 条考纲细则 ID
 content/glossary.json                 135 条双层术语
-content/visualizations.json           6 个步骤场景
+content/visualizations.json           21 个步骤场景（6 旧 + 15 个 V01 新场景）
 content/teaching-chapters.json        新章节教学数据（合并生成）
 content/teaching-units.json           新知识点教学数据（合并生成）
 content/rewrite/source/batch-XX.json  每批源材料（旧稿+可视化+相邻章节）
@@ -55,6 +55,10 @@ scripts/merge_rewrite.py              批次合并（支持 --partial/--skip）
 scripts/merge_glossary.py             术语库合并
 scripts/audit_content.py              全局教学审计
 scripts/make_batches_final.py         生成 36 批源材料（已执行）
+scripts/validate_v01_drafts.cjs       V01 场景草稿校验（--allow-existing 用于合并后再编辑）
+scripts/merge_v01.py                  V01 草稿→visualizations/out/source 整合（保留各文件原 JSON 风格）
+docs/reviews/v01-contract.md          可视化扩展契约（schema、绑定机制、陷阱、测试契约）
+content/rewrite/v01-drafts/           V01 草稿留档（已全部合并，可删）
 dist/                                 构建产物
 ```
 
@@ -155,7 +159,7 @@ Chrome headless 在 macOS 的窗口最小宽度约为 500px；`--window-size=390
 4. **部分批次偏长。** batch-13（23k 字）、batch-18（31k 字）等有 total text >2400 的 warning；不是 schema error。全量后统一判断是否需要压缩，不要为警告删技术条件。
 5. **章节 bridge 已核对。** ICT-004 原写“下一章建 VLANIF”，实际下一章是链路聚合，已修正；94 条 bridge 已逐条核对。后续若改章节顺序或增删章，需要重新核对。
 6. **术语覆盖警告是启发式。** `audit_content.py` 会报 “term not found” 等 warning，很多是中文同义改写或英文缩写拆分，不等于内容缺失。逐条判断。
-7. **图文讲解未完成，不是设计取舍。** 只有 9/322 个知识点（5/94 章）带可视化：ICT-001.01/.02、002.01/.02/.04/.05、003.02、004.01、009.01。现有 6 个数据场景 + 1 个生成场景 + 4 个实验全部是上一轮已有资源；本轮只做了接入、定位和 visualCue，没有新增 VLAN/STP/OSPF/BGP/MPLS/IPsec/DHCP/WLAN/DCN 等关键机制的图。原要求“图文结合、可视化承担原理讲解”未达成，不能因为“不是每个知识点都要配图”就把它写成已完成。
+7. **图文讲解覆盖已达标（2026-10-25，V01 完成）。** 从 9/322 提升到 23/322（18/94 章、四方向）：新增 15 个关键机制场景（DHCP、VLAN 帧路径、STP、OSPF、BGP、MPLS、VXLAN、EVPN、802.1X、M-LAG、NAPT、IPsec/IKE、云上 VPC、AP 上线、WLAN 漫游）+ VLAN 实验状态快照。方法与验收见 `docs/reviews/v01-contract.md`、`docs/reviews/audit-content.md`。**残余风险**：本轮为纯文本工作，SVG 实际观感与窄屏滚动未经人眼确认，首次人工浏览时检查；VXLAN 场景按"正文未给数值不新增"原则未标 UDP 端口号。
 8. **未实机验证。** 所有配置、命令、设备行为均未在赛事指定版本执行；这是内容边界，不是本轮可以补上的事实。
 9. **`dist/` 是生成物。** 不要手改 `dist/app.js` 之外的构建产物后不回写源；`app.js/style.css/teaching.js/diagrams.js` 是手写源，`data.js/units.json/handbook.html` 是生成物。
 10. **浏览器实际布局未验收。** 用户在实际浏览器中发现布局问题，具体页面/浏览器/视口待补；headless 截图通过不等于真实浏览器通过。不要用 `overflow:hidden` 掩盖裁切。详见 `docs/reviews/layout-issues.md` 与 TASKS U01。
@@ -164,19 +168,19 @@ Chrome headless 在 macOS 的窗口最小宽度约为 500px；`--window-size=390
 ## 8. 接续顺序（推荐）
 
 1. 只读复核：`python3 build.py`、`audit_content.py`、三项测试；确认 94/322、0 error、无 LEGACY。
-2. 按 TASKS U01 复现并修复浏览器实际布局问题；先拿到用户截图/视口/浏览器信息，不要盲改 CSS。
-3. 按 TASKS V01 补 12—20 个关键机制可视化（当前 9/322，是最大内容缺口）；每完成一个场景就补测试、边界和 visualCue。
-4. 补完后重跑 build/audit/test-models/test-teaching/render_check，并做 1280/1024/768/500 与 125%/150% 真实浏览器检查。
+2. 按 TASKS U01 复现并修复浏览器实际布局问题（当前唯一内容型未完成任务）；先拿到用户截图/视口/浏览器信息，不要盲改 CSS。
+3. ~~V01 关键机制可视化~~ 已完成（2026-10-25，23/322、四方向）；后续新增场景按 `docs/reviews/v01-contract.md` 的契约与 `scripts/validate_v01_drafts.cjs` 执行。
+4. 改动内容或 UI 后重跑 build/audit/test-models/test-teaching/render_check，并做 1280/1024/768/500 与 125%/150% 真实浏览器检查。
 5. 如用户要求赛事级验收，再做真机/模拟器命令验证、322 项来源映射、真实手机/读屏/打印检查。
 6. 更新 README/PROGRESS/TASKS/HANDOFF 的覆盖率与验证数字。
-7. 不部署、不 push，除非用户明确授权。
+7. 发布按 §7.11 的用户授权执行；无新授权不 push。
 
 ## 9. 不要重复的工作
 
 - 不要重新生成 batch-00—batch-35 的内容（除非审计给出具体 unit 问题）。
 - 不要重做术语库 135 条（除非发现明确错误）。
 - 不要重做 UI 基础布局、进度机制、术语弹窗、四个实验；它们已可运行。
-- 不要把“已有 9 个可视化”当成“图文讲解已完成”；V01 是独立未完成任务，不要跳过。
+- V01 已完成（2026-10-25，23/322、四方向）；不要为"凑满 322 配图"再批量加图，新增须对应真实机制讲解。
 - 不要重新生成 36 批源材料；`content/rewrite/source/` 已稳定。
 - 不要改 `knowledge.json`、`subskills.json`、`curriculum.json` 的 94/322 范围；本轮保留考纲体系。
 
@@ -202,13 +206,13 @@ Chrome headless 在 macOS 的窗口最小宽度约为 500px；`--window-size=390
 
 ## 12. 交付前检查清单
 
-- [ ] `teaching-chapters.json` 94 条，`teaching-units.json` 322 条。
-- [ ] `build.py` 输出 322/322、94/94，无 LEGACY。
-- [ ] `audit_content.py` 0 error；warning 已记录并判断。
-- [ ] `node test-models.cjs`、`node test-teaching.cjs`、`node scripts/render_check.cjs` 全 PASS（不带 `REQUIRE_COMPLETE=0`）。
-- [ ] 首页/章节/目录/参考资料/术语/进度/四个实验/步骤场景可用。
-- [ ] U01 真实浏览器布局修复：1280/1024/768/500 与 125%/150% 缩放下无重叠、裁切、错位。
-- [ ] V01 关键机制可视化完成；可视化覆盖不再停留在 9/322。
-- [ ] 94 条 bridge 与下一章匹配。
-- [ ] README/PROGRESS/HANDOFF 数字一致。
-- [ ] 未部署、未推送；配置未实机验证的声明仍在。
+- [x] `teaching-chapters.json` 94 条，`teaching-units.json` 322 条。
+- [x] `build.py` 输出 322/322、94/94，无 LEGACY。
+- [x] `audit_content.py` 0 error；warning 已记录并判断。
+- [x] `node test-models.cjs`（4746）、`node test-teaching.cjs`（1002）、`node scripts/render_check.cjs` 全 PASS（不带 `REQUIRE_COMPLETE=0`）。
+- [x] 首页/章节/目录/参考资料/术语/进度/四个实验/步骤场景可用。
+- [ ] U01 真实浏览器布局修复：1280/1024/768/500 与 125%/150% 缩放下无重叠、裁切、错位。（待用户提供复现信息）
+- [x] V01 关键机制可视化完成：23/322（18/94 章）、四方向（2026-10-25）。
+- [x] 94 条 bridge 与下一章匹配。
+- [x] README/PROGRESS/HANDOFF 数字一致。
+- [ ] 部署按 2026-10-25 用户授权进行（main → Pages，结果以 Actions 为准）；配置未实机验证的声明仍在。

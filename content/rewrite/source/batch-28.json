@@ -99,7 +99,14 @@
      "accessed": "2026-10-24"
     }
    ],
-   "visuals": [],
+   "visuals": [
+    {
+     "id": "mlag-failover",
+     "title": "坏一台交换机，服务器为何还在线",
+     "summary": "服务器双归两台 Leaf，按事件看双活转发、链路故障、整机故障和 peer-link 故障时业务的状态。",
+     "boundary": "只演示正文列出的故障分支：单成员断链、单台整机故障、peer-link 故障。保护策略下哪些接口退出转发随产品实现不同；双主检测配置错误的后果与脑裂场景不做模拟；peer-link 与检测链路本是两条独立路径，图中以一条线代表互联。"
+    }
+   ],
    "chapter_title": "M-LAG、VXLAN、EVPN、微分段、业务链"
   },
   {
