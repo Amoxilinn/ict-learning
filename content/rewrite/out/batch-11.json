@@ -340,7 +340,8 @@
         "conclusion": "判断报文走到哪一段，要同时读目的地址、Segments Left 和 Last Entry；只看列表顺序一定读错。"
       },
       "takeaway": "段列表按逆向索引存放，Segments Left 才是“还剩几段”的计数器。",
-      "boundary": "本节按完整 SRH 说明字段关系，简化封装与压缩变体的布局不同，需按对应规范分析。Hdr Ext Len 的换算单位和 TLV 编码不在本节展开。"
+      "boundary": "本节按完整 SRH 说明字段关系，简化封装与压缩变体的布局不同，需按对应规范分析。Hdr Ext Len 的换算单位和 TLV 编码不在本节展开。",
+      "visualCue": "观察“SRH：段列表为何与访问顺序相反？”：源节点通过策略封装，按 SID A → B → C 的顺序执行本例 End 行为。"
     },
     "ICT-021.03": {
       "level": "core",

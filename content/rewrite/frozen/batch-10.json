@@ -175,7 +175,8 @@
     "conclusion": "RT 决定路由能否进入 VRF，承载标签决定报文能否到达对端 PE。两层要分别验证，修好一层不等于业务恢复。"
    },
    "takeaway": "VRF 分表、RD 保唯一、RT 定归属，两层标签把业务送到对端。",
-   "boundary": "BGP/MPLS IP VPN 提供的是路由与转发的隔离，默认不做加密；跨不可信承载的保密需求要另行设计。RD、RT 的具体格式与 自治系统号长度按规划确定。"
+   "boundary": "BGP/MPLS IP VPN 提供的是路由与转发的隔离，默认不做加密；跨不可信承载的保密需求要另行设计。RD、RT 的具体格式与 自治系统号长度按规划确定。",
+   "visualCue": "观察“MPLS VPN：两层标签各负责哪一段？”：CE-A → PE1 → P → PE2 → CE-B；假设 RT 导入正确，采用 PHP。"
   },
   "ICT-029.02": {
    "level": "advanced",

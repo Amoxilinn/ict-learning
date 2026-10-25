@@ -7,7 +7,7 @@ let topologySerial=0;
 function topology(nodes,links,active=[]){
  const positions=Object.fromEntries(nodes.map(n=>[n[0],n]));
  const marker='teach-arrow-'+(++topologySerial);
- return `<svg class="teach-topology" viewBox="0 0 640 160" role="img" aria-label="网络拓扑，带箭头的实线表示本步数据流向"><defs><marker id="${marker}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>${links.map(([a,b])=>{let A=positions[a],B=positions[b],forward=active.some(x=>x[0]===a&&x[1]===b),reverse=active.some(x=>x[0]===b&&x[1]===a);let dx=B[2]-A[2],dy=B[3]-A[3],ratio=Math.min(55/Math.abs(dx),27/Math.abs(dy));return `<line x1="${A[2]+dx*ratio}" y1="${A[3]+dy*ratio}" x2="${B[2]-dx*ratio}" y2="${B[3]-dy*ratio}" class="${forward||reverse?'active':''}" ${forward?'marker-end="url(#${marker})"':''} ${reverse?'marker-start="url(#${marker})"':''}/>`}).join('')}${nodes.map(([id,label,x,y])=>`<g><rect x="${x-51}" y="${y-23}" width="102" height="46" rx="7"/><text x="${x}" y="${y+5}" text-anchor="middle">${e(label)}</text></g>`).join('')}</svg>`;
+ return `<svg class="teach-topology" viewBox="0 0 640 160" role="img" aria-label="网络拓扑，带箭头的实线表示本步数据流向"><defs><marker id="${marker}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#08715e"/></marker></defs>${links.map(([a,b])=>{let A=positions[a],B=positions[b],forward=active.some(x=>x[0]===a&&x[1]===b),reverse=active.some(x=>x[0]===b&&x[1]===a);let dx=B[2]-A[2],dy=B[3]-A[3],ratio=Math.min(55/Math.abs(dx),27/Math.abs(dy));return `<line x1="${A[2]+dx*ratio}" y1="${A[3]+dy*ratio}" x2="${B[2]-dx*ratio}" y2="${B[3]-dy*ratio}" class="${forward||reverse?'active':''}" ${forward?`marker-end="url(#${marker})"`:''} ${reverse?`marker-start="url(#${marker})"`:''}/>`}).join('')}${nodes.map(([id,label,x,y])=>`<g><rect x="${x-51}" y="${y-23}" width="102" height="46" rx="7"/><text x="${x}" y="${y+5}" text-anchor="middle">${e(label)}</text></g>`).join('')}</svg>`;
 }
 function packet(fields=[],tree){
  if(tree){
@@ -61,9 +61,65 @@ function switching(){let table={},steps=[{title:'空表开始',text:'三个端�
  }
  return {id:'switch-learning',unit:'ICT-003.02',title:'收帧 → 学源地址 → 查目的地址',summary:'连续观察三帧：未知单播泛洪如何变成已知单播。',nodes:[['A','A · 端口 A',80,40],['sw','交换机',320,80],['B','B · 端口 B',560,40],['C','C · 端口 C',560,130]],links:[['A','sw'],['sw','B'],['sw','C']],columns:['VLAN','MAC','出口端口'],steps,boundary:'三个接口同属 VLAN 10、无环路、均可转发。只模拟合法单播源学习与目的查表，不模拟老化、STP、安全策略及真实线速。C 收到泛洪的副本不等于应用接收了该数据。重置会清空整个演示的表。',sources:[['华为 · MAC 地址学习机制','https://info.support.huawei.com/hedex/api/pages/EDOC1000053358/YEF0907R/25/resources/en-us_concept_0133020482.html']]};
 }
+// Pure teaching models: ordered rules, first match, explicit caller semantics.
+function ipv4Number(value){
+ const parts=String(value).split('.');
+ if(parts.length!==4||parts.some(p=>!/^\d{1,3}$/.test(p)||Number(p)>255))throw new Error('请输入四段 0–255 的 IPv4 地址。');
+ return parts.reduce((n,p)=>n*256+Number(p),0);
+}
+function routePrefix(value){
+ const match=String(value).trim().match(/^([^/]+)\/(\d{1,2})$/);
+ if(!match||Number(match[2])>32)throw new Error('请输入合法前缀，例如 10.1.0.0/16。');
+ const address=ipv4Number(match[1]),length=Number(match[2]),block=2**(32-length);
+ if(address%block!==0)throw new Error('请输入网络前缀，主机位必须为 0。');
+ return {address,length};
+}
+function inPrefix(address,network,length){const block=2**(32-length);return Math.floor(address/block)===Math.floor(ipv4Number(network)/block)}
+function evaluateRules(kind,input){
+ const steps=[];
+ const step=(title,text,rule,result)=>steps.push({title,text,rows:[['输入',input],['当前规则',rule],['结果',result]]});
+ if(kind==='acl'){
+  const parts=String(input).trim().split(/\s+/);
+  if(parts.length!==3||!['tcp','udp','icmp'].includes(parts[0].toLowerCase()))throw new Error('格式：tcp 10.1.1.10 443；ICMP 端口填 0。');
+  const protocol=parts[0].toLowerCase(),address=ipv4Number(parts[1]);
+  if(!/^\d+$/.test(parts[2])||Number(parts[2])>65535)throw new Error('端口必须是 0–65535 的整数。');
+  const port=Number(parts[2]);if(protocol==='icmp'&&port!==0)throw new Error('ICMP 不使用端口，本模型请填 0。');
+  step('固定调用场景','ACL 按配置顺序用于接口入方向包过滤；未匹配时按本模型显式丢弃。目的地址固定为业务服务器。','规则顺序 5 → 10 → 20','开始');
+  const rules=[['5 deny tcp source 10.1.1.0/24 dport 22',protocol==='tcp'&&inPrefix(address,'10.1.1.0',24)&&port===22,'拒绝'],['10 permit tcp source 10.0.0.0/8 dport 443',protocol==='tcp'&&inPrefix(address,'10.0.0.0',8)&&port===443,'允许'],['20 deny ip any',true,'拒绝']];
+  for(const [rule,match,result] of rules){step(match?'命中，停止':'不匹配，继续',match?'满足本规则的全部条件，后续规则不再执行。':'至少一个条件不满足，检查下一条。',rule,match?result:'未匹配');if(match)break;}
+ }else{
+  const {address,length}=routePrefix(input);
+  const match=inPrefix(address,'10.0.0.0',8)&&length>=16&&length<=24;
+  if(kind==='prefix'){
+   step('检查条目 10','同时检查网络范围与前缀长度，不是只比较前几段地址。','10 permit 10.0.0.0/8 ge 16 le 24',match?'匹配，允许并停止':'未匹配，继续');
+   if(!match)step('检查条目 20','只匹配默认路由 0.0.0.0/0；该条没有 ge/le。','20 permit 0.0.0.0/0',length===0?'匹配，允许并停止':'未匹配，继续');
+   if(!match&&length!==0)step('列表末尾','前面所有条目均未匹配，前缀列表返回拒绝。','隐含拒绝','拒绝');
+  }else if(kind==='policy'){
+   step('节点 10 / if-match','节点 10 为 permit，引用前缀列表 P：10.0.0.0/8 ge 16 le 24。','permit node 10 / if-match P',match?'条件成立':'条件不成立，继续节点 20');
+   if(match)step('执行 apply 并结束','本模型为 BGP 导入策略，给路由设置 Local Preference=200；没有 goto-next-node。','apply local-preference 200','接收路由，LocalPref=200');
+   else step('节点 20 / 无条件 deny','前一节点条件不成立才到这里；无 if-match 的节点匹配所有剩余路由。','deny node 20','拒绝路由');
+  }else throw new Error('未知规则模型。');
+ }
+ return steps;
+}
+const ruleTools={
+ acl:{unit:'ICT-014.01',title:'输入报文：逐条执行 ACL',value:'tcp 10.1.1.10 443',label:'协议 源IPv4 目的端口',examples:['tcp 10.1.1.10 22','tcp 10.1.1.10 443','udp 192.0.2.1 53'],rules:'5 deny tcp source 10.1.1.0/24 dport 22\n10 permit tcp source 10.0.0.0/8 dport 443\n20 deny ip any'},
+ prefix:{unit:'ICT-015.01',title:'输入路由：范围与长度共同匹配',value:'10.1.0.0/16',label:'IPv4 网络前缀',examples:['10.1.0.0/16','10.1.1.0/25','0.0.0.0/0'],rules:'10 permit 10.0.0.0/8 ge 16 le 24\n20 permit 0.0.0.0/0\n其余隐含拒绝'},
+ policy:{unit:'ICT-016.01',title:'输入路由：if-match、apply 与节点结果',value:'10.1.0.0/16',label:'IPv4 网络前缀',examples:['10.1.0.0/16','10.1.1.0/25','192.0.2.0/24'],rules:'P: permit 10.0.0.0/8 ge 16 le 24\npermit node 10: if-match P; apply local-preference 200\ndeny node 20: 无 if-match'}
+};
+function ruleToolHtml(unit){return Object.entries(ruleTools).filter(([,v])=>v.unit===unit).map(([kind,v])=>`<section class="teach-card rule-tool" data-rule-tool="${kind}" aria-label="${e(v.title)}"><div class="eyebrow">交互原理 · 输入并逐条判断</div><h3>${e(v.title)}</h3><p>先输入报文或网络前缀，再逐步查看匹配过程。修改输入后点击“开始判断”。</p><pre>${e(v.rules)}</pre><form><label>${e(v.label)}<input name="rule-input" value="${e(v.value)}" required autocomplete="off" spellcheck="false"></label><button class="primary" type="submit">开始判断</button></form><div class="rule-examples">${v.examples.map(x=>`<button type="button" class="secondary" data-example="${e(x)}">${e(x)}</button>`).join('')}</div><div data-rule-result role="status" aria-live="polite"></div><div class="teach-controls"><button class="secondary" data-rule-prev>上一步</button><button class="primary" data-rule-next>下一条 →</button><button class="secondary" data-rule-reset>重置</button></div><details class="teach-boundary"><summary>模型条件与技术边界</summary><p>固定规则与调用场景，按配置顺序首匹配；仅支持 IPv4。ACL 规则语义还取决于引用它的模块，不能把本例丢弃结论直接推广到 QoS 分类或路由策略；前缀列表拒绝在本例策略中表示 if-match 不成立，会继续后续节点。无 goto-next-node，不模拟设备自动重排、IPv6 或完整命令解析。</p></details></section>`).join('')}
+function mountRuleTools(root){root.querySelectorAll('[data-rule-tool]').forEach(host=>{
+ const kind=host.dataset.ruleTool,config=ruleTools[kind],input=host.querySelector('input');let steps=[],index=0;
+ const draw=()=>{const s=steps[index];host.querySelector('[data-rule-result]').innerHTML=s?`<strong>第 ${index+1} / ${steps.length} 步 · ${e(s.title)}</strong><p>${e(s.text)}</p>${stateTable(['观察对象','当前值'],s.rows,index?steps[index-1].rows:[])}`:'';host.querySelector('[data-rule-prev]').disabled=!s||index===0;host.querySelector('[data-rule-next]').disabled=!s||index===steps.length-1;};
+ const run=()=>{try{steps=evaluateRules(kind,input.value);index=0;draw()}catch(error){steps=[];index=0;draw();host.querySelector('[data-rule-result]').textContent=error.message}};
+ host.querySelector('form').onsubmit=event=>{event.preventDefault();run()};
+ host.onclick=event=>{const b=event.target.closest('button');if(!b)return;if(b.dataset.example!==undefined){input.value=b.dataset.example;run()}else if(b.hasAttribute('data-rule-reset')){input.value=config.value;run()}else if(b.hasAttribute('data-rule-next')&&!b.disabled){index++;draw()}else if(b.hasAttribute('data-rule-prev')&&!b.disabled){index--;draw()}};
+ input.oninput=()=>{steps=[];index=0;draw()};run();
+})}
+
 function scenarios(){return [...data.scenarios,switching()]}
-function forUnit(id){let list=scenarios().filter(s=>s.unit===id);return list.filter((s,i)=>!s.variant||list.findIndex(t=>t.variant===s.variant)===i).map(s=>`<div class="teach-host" data-teach="${e(s.id)}"></div>`).join('')}
-function mount(root){root.querySelectorAll('[data-teach]').forEach(host=>{
+function forUnit(id){let list=scenarios().filter(s=>s.unit===id);return list.filter((s,i)=>!s.variant||list.findIndex(t=>t.variant===s.variant)===i).map(s=>`<div class="teach-host" data-teach="${e(s.id)}"></div>`).join('')+ruleToolHtml(id)}
+function mount(root){mountRuleTools(root);root.querySelectorAll('[data-teach]').forEach(host=>{
  let scene=scenarios().find(s=>s.id===host.dataset.teach),history=[0],answers=new Map(),feedback=null;
  const draw=(animate=false)=>{
   const index=history[history.length-1],step=scene.steps[index],previous=scene.steps[history[history.length-2]]?.rows||[],variants=scene.variant?scenarios().filter(s=>s.variant===scene.variant):[],selected=answers.get(index),boundaryOpen=host.querySelector('.teach-boundary')?.open,panLeft=host.querySelector('.teach-visual')?.scrollLeft||0;
@@ -110,5 +166,5 @@ function openGlossary(id,options={}){
  dialog.innerHTML=`<form method="dialog"><div class="dialog-top"><h2 id="term-title">${id?'术语解释':'统一术语库'}</h2><button aria-label="关闭术语解释">关闭 ✕</button></div></form>${list.map(g=>termExplanation(g,options.layered)).join('')}`;
  dialog.setAttribute('aria-labelledby','term-title');dialog.showModal();
 }
-return {forUnit,mount,annotate,forwarding,scenarios,topology,packet,sequence,stateTable,protocolState,nextIndex,predictionResult,termExplanation};
+return {evaluateRules,routePrefix,ipv4Number,forUnit,mount,annotate,forwarding,scenarios,topology,packet,sequence,stateTable,protocolState,nextIndex,predictionResult,termExplanation};
 })();

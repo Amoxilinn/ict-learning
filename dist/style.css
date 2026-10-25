@@ -177,3 +177,12 @@ main.small .lesson p,main.small .lesson li{font-size:14px!important}
 @media(max-width:520px){main.small .lesson p,main.small .lesson li{font-size:13px!important}}
 
 .teach-visual:empty{display:none}
+
+/* Input-driven rule walkthroughs share the teaching card and state table. */
+.rule-tool form{display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin:16px 0}
+.rule-tool form label{display:grid;gap:6px;flex:1;min-width:0}
+.rule-tool input{width:100%;min-width:0;padding:10px;border:1px solid var(--line,#cbd5d1);border-radius:7px;font:inherit}
+.rule-examples{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.rule-examples button{font-size:.85rem;overflow-wrap:anywhere}
+.rule-tool [data-rule-result]{margin:16px 0}
+@media print{.rule-tool form,.rule-examples{display:none}}
