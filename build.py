@@ -112,6 +112,14 @@ for u in units:
 teaching = read_optional('visualizations', {'scenarios': []})
 glossary = read_optional('glossary', [])
 teaching['glossary'] = glossary
+teaching['labs'] = read_optional('labs', [])
+for figure in teaching.get('referenceFigures', []):
+    assert figure['unit'] in {u['id'] for u in units}, 'Unknown reference figure unit'
+    assert (P / 'dist' / figure['image']).is_file(), 'Missing reference image: ' + figure['image']
+    assert figure['alt'] and figure['caption'] and figure['source'].startswith('https://')
+for lab in teaching['labs']:
+    assert lab['unit'] in {u['id'] for u in units}, 'Unknown lab unit'
+    assert len(lab['steps']) >= 3 and lab['expected'] and lab['recovery']
 for scene in teaching['scenarios']:
     assert scene['unit'] in {u['id'] for u in units}, 'Unknown visual unit: ' + scene['unit']
     assert scene['steps'] and scene['boundary']
@@ -189,6 +197,21 @@ for x in ordered:
             w = u.get('walkthrough')
             if w:
                 parts.append(f'<div class="example"><h4>跟着例子走：{e(w["title"])}</h4><p>{e(w["setup"])}</p><ol>' + ''.join(f'<li>{e(s)}</li>' for s in w['steps']) + f'</ol><p><b>由此可见：</b>{e(w["conclusion"])}</p></div>')
+        for figure in teaching.get('referenceFigures', []):
+            if figure['unit'] != u['id']:
+                continue
+            parts.append(f'<figure><h4>{e(figure["title"])}</h4><img style="max-width:100%;height:auto" src="{e(figure["image"], quote=True)}" alt="{e(figure["alt"], quote=True)}"><figcaption>{e(figure["caption"])} <a href="{e(figure["source"], quote=True)}">华为官方操作说明</a> · 图片版权归华为技术有限公司，不属于本站MIT许可。</figcaption></figure>')
+        for lab in teaching['labs']:
+            if lab['unit'] != u['id']:
+                continue
+            parts.append(f'<h4>配套实验：{e(lab["title"])}</h4><p>{e(lab["status"])}</p><pre>{e(lab["topology"])}</pre>')
+            parts.append('<ul>' + ''.join(f'<li>{e(a)}：{e(b)}</li>' for a, b in lab['addresses']) + '</ul>')
+            parts.append(f'<p>适用环境：{e(lab["platform"])}</p><ol>' + ''.join(f'<li>{e(x)}</li>' for x in lab['steps']) + '</ol>')
+            parts.append(f'<pre>{e(lab["expected"])}</pre><p>故障：{e(lab["fault"])}</p><p>恢复：{e(lab["recovery"])}</p><p>{e(lab["limit"])}</p>')
+            if lab.get('sources'):
+                parts.append('<p>' + ' · '.join(f'<a href="{e(url, quote=True)}">{e(title)}</a>' for title, url in lab['sources']) + '</p>')
+            if lab.get('code'):
+                parts.append(f'<pre>{e(lab["code"])}</pre>')
         if u.get('config'):
             parts.append(f'<h4>配置与查询（进阶）</h4><pre>{e(u["config"]["code"])}</pre><p class="meta">{e(u["config"]["platform"])}</p>')
         if u.get('commandNotes'):

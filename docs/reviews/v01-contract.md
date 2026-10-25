@@ -29,7 +29,7 @@
 **visualCue 流水线**（谁读、谁校验、谁生成）：
 - 写：`content/rewrite/out/batch-XX.json` → `scripts/validate_rewrite.py:115` 查长度 10–180（批次 schema `content/rewrite/schema.json` 写 10–160，**按 ≤160 写两头都过**）→ `scripts/freeze_batch.py`（校验+拷贝到 frozen/+记 sha256）→ `scripts/merge_rewrite.py` 全量重写 `content/teaching-units.json`。
 - build.py:69-75 把它并入 `dist/units.json`；app.js:67 渲染。
-- 反查方向：`validate_rewrite.py:117-118` 用 **source 批次** 的 `src_unit.visuals`（make_batches 时从 visualizations.json 快照进 source，scripts/make_batches.py:12,57）做两条**警告**（非 error）："有 visuals 无 visualCue"、"有 visualCue 无 source visual"。现网就有一条存量警告：`ICT-003.01: visualCue without a source visual`——cue 挂在了 ICT-003.01，而场景 unit 是 ICT-003.02，所以 cue 实际从不渲染（app.js:67）。**教训：visualCue 与场景 unit 必须同知识点。**
+- 反查方向：`validate_rewrite.py:117-118` 用 **source 批次** 的 `src_unit.visuals`（make_batches 时从 visualizations.json 快照进 source，scripts/make_batches_final.py）做两条**警告**（非 error）："有 visuals 无 visualCue"、"有 visualCue 无 source visual"。现网就有一条存量警告：`ICT-003.01: visualCue without a source visual`——cue 挂在了 ICT-003.01，而场景 unit 是 ICT-003.02，所以 cue 实际从不渲染（app.js:67）。**教训：visualCue 与场景 unit 必须同知识点。**
 - `scripts/audit_content.py` 全文不检查 visualCue/visuals（:9-101），不参与本链路。
 
 **结论：新场景挂到知识点 = ① visualizations.json 写 unit 字段（渲染即生效，不必动批次）；② visualCue 文案要动 out/batch-XX.json + validate + freeze + merge。** 只加场景不加 visualCue，功能完整，只是 validate 多一条警告（:117 方向）。
@@ -173,6 +173,6 @@ V01 新协议时序**建议用 C 不用 D**；确需 D 时必须同步改写 tes
 挂接：app.js unitDiagrams :55、unitSection 视觉槽 :62-67、loadDiagram :90、mount/annotate 调用 :91。
 构建：build.py :112-123、:126-127、:215（手册 refs）、:226-230。
 测试：test-teaching.cjs :8-18/:40/:41-58/:87-92；test-models.cjs :7-15/:43-44/:69-72；render_check.cjs :12-19。
-批次链：validate_rewrite.py :71/:107-118、schema.json、freeze_batch.py 全文、merge_rewrite.py :24-48、make_batches.py :12/:57。
+批次链：validate_rewrite.py :71/:107-118、schema.json、freeze_batch.py 全文、merge_rewrite.py :24-48、make_batches_final.py。
 规范：TASKS.md :228-266；docs/教学可视化组件体系.md :25-36/:73-78；HANDOFF.md :158。
 样式：style.css :1（focus/table-wrap）、:22/:114/:116（内滚与 500px）、:28（reduced-motion）、:75-77（unit-visual/visual-cue）。

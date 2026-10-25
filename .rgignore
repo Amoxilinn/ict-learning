@@ -1,0 +1,11 @@
+# Search noise only. These files remain tracked/available to builds.
+# Inspect a skipped path with: rg --no-ignore PATTERN explicit/path
+/dist/data.js
+/dist/teaching-data.js
+/dist/*.json
+/dist/handbook.html
+/content/teaching-chapters.json
+/content/teaching-units.json
+/content/rewrite/source/
+/content/rewrite/frozen/
+*.png

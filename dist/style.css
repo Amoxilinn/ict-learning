@@ -186,3 +186,15 @@ main.small .lesson p,main.small .lesson li{font-size:14px!important}
 .rule-examples button{font-size:.85rem;overflow-wrap:anywhere}
 .rule-tool [data-rule-result]{margin:16px 0}
 @media print{.rule-tool form,.rule-examples{display:none}}
+/* Spatial teaching tools scroll inside their card; text retains readable size. */
+.teach-concept,.teach-floor{display:block;width:100%;min-width:640px;height:auto;background:#fff;border:1px solid #d2e0d8;border-radius:6px;overflow:hidden}
+.teach-concept text,.teach-floor text{font:14px system-ui,sans-serif;fill:#203e33}
+.teach-concept.concept-window text{font-size:12px}
+[data-floor-tool] .lab-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+[data-floor-tool] label{display:flex;align-items:start;flex-direction:column;margin:6px 0;gap:5px;font-size:13px}
+[data-floor-tool] input,[data-floor-tool] select{width:100%;min-width:0;box-sizing:border-box;border:1px solid #bdd4c8;border-radius:4px;padding:8px;background:white;color:#203e33}
+[data-floor-result]{margin-top:12px;line-height:1.8;font-size:14px}
+.floor-key{font-size:12px!important}.lab-guide>summary{cursor:pointer;font-weight:650;color:#155b49}.lab-guide li{margin:10px 0;line-height:1.85}.lab-guide pre{white-space:pre-wrap;overflow-wrap:anywhere}.teach-controls [aria-pressed=true]{outline:2px solid #08715e;outline-offset:2px}
+@media(max-width:520px){[data-floor-tool] .lab-controls{grid-template-columns:1fr}}
+@media print{.teach-concept,.teach-floor{min-width:0!important;width:100%}[data-floor-tool] .lab-controls{display:none}}
+.reference-gallery figure{margin:24px 0 0;padding-top:12px;border-top:1px solid #d9e5de;min-width:0}.reference-gallery img{display:block;max-width:100%;width:100%;height:auto;border:1px solid #cddfd7;border-radius:4px}.reference-gallery figcaption{font-size:12px;line-height:1.8}.reference-gallery figcaption a{color:#086351;text-decoration:underline}.reference-gallery figcaption small{display:block;margin-top:7px;color:#537060}

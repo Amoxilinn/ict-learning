@@ -1,0 +1,339 @@
+[
+  {
+    "unit": "ICT-011.02",
+    "title": "两台路由器的 OSPFv3 邻接",
+    "topology": "R1 GE1/0/0 ─── GE1/0/0 R2（隔离直连链路）",
+    "addresses": [
+      [
+        "R1",
+        "2001:db8:12::1/64，RID 1.1.1.1"
+      ],
+      [
+        "R2",
+        "2001:db8:12::2/64，RID 2.2.2.2"
+      ],
+      [
+        "区域",
+        "Area 0，两端一致"
+      ]
+    ],
+    "platform": "ME60 V800R023C00SPC500，Basic IP Routing配置指南的OSPFv3语法",
+    "steps": [
+      "记录 display version、现有接口配置和路由；核实 GE1/0/0 为隔离测试口，连接两端并确认链路 up。",
+      "按下方 R1/R2 配置分别执行；每端提交后先检查链路本地地址可达，再执行 display ospfv3 peer。",
+      "广播接口上检查 DR/BDR 选举与最终邻接；只有两台路由器时预期达到 Full。",
+      "执行 display ipv6 routing-table；该 /64 是直连路由，不能把它当作通过 OSPF 学到的远端 LAN。扩展远端前缀需在相应接口启用并另验。",
+      "把 R2 接口区域改为 0.0.0.1 并提交；等待邻接失效，保存两端区域与 peer 证据，再恢复 Area 0。"
+    ],
+    "expected": "peer：对端 RID / Full（列顺序依版本）\n路由表：2001:db8:12::/64 为 Direct，不伪称 OSPF 路由",
+    "fault": "区域不一致后 Hello 不建立正常邻接；接口仍可 up。",
+    "recovery": "将测试区域恢复为 0.0.0.0，提交，核对邻居恢复和原业务；收尾时按基线撤销实验配置。",
+    "status": "隔离实验方案；下列输出为预期判读模式，尚无赛事设备实测记录。",
+    "limit": "执行前核对实际型号、版本与功能许可；保存原配置，使用带外或本地控制台保留恢复通道。预期输出不代表已在该环境复现。",
+    "code": "R1：\nsystem-view\nospfv3 1\n router-id 1.1.1.1\n quit\ninterface GigabitEthernet 1/0/0\n ipv6 enable\n ipv6 address 2001:db8:12::1/64\n ospfv3 1 area 0.0.0.0\n quit\ncommit\ndisplay ospfv3 peer\ndisplay ipv6 routing-table\n\nR2：\nsystem-view\nospfv3 1\n router-id 2.2.2.2\n quit\ninterface GigabitEthernet 1/0/0\n ipv6 enable\n ipv6 address 2001:db8:12::2/64\n ospfv3 1 area 0.0.0.0\n quit\ncommit\ndisplay ospfv3 peer\ndisplay ipv6 routing-table"
+  },
+  {
+    "unit": "ICT-012.01",
+    "title": "IS-IS L2 邻接与数据库",
+    "topology": "R1 GE0/0/0 ─── GE0/0/0 R2",
+    "addresses": [
+      [
+        "R1",
+        "10.0.12.1/30，NET 49.0001.0000.0000.0001.00"
+      ],
+      [
+        "R2",
+        "10.0.12.2/30，NET 49.0001.0000.0000.0002.00"
+      ]
+    ],
+    "platform": "支持相关功能的VRP V200设备；命令据相应华为配置指南，目标型号另核对",
+    "steps": [
+      "核对接口、NET 唯一性和设备版本；备份基线，确认两端测试接口直连。",
+      "分别执行下方两端配置，确认双方层级均为 level-2、接口均启用 isis 1。",
+      "读取 display isis peer、display isis lsdb 与 display isis route；区分邻接 Up、LSP 同步与安装业务前缀。",
+      "在 R2 隔离接口临时撤销 IS-IS 使能，观察邻接失效；仅链路 IP 可达不能证明 IS-IS 正常。",
+      "恢复原接口使能后重复三项查询，最终恢复实验前基线。"
+    ],
+    "expected": "peer：对端 System ID，Up，L2\nlsdb：存在双方生成的 LSP\n没有额外业务前缀时，不虚构远端 LAN 路由",
+    "fault": "一端未在接口启用 IS-IS 时，IP 可以互通但邻接不建立。",
+    "recovery": "恢复接口 isis enable 1，检查层级与 NET；按型号是否需要 commit 决定提交。",
+    "status": "隔离实验方案；下列输出为预期判读模式，尚无赛事设备实测记录。",
+    "limit": "执行前核对实际型号、版本与功能许可；保存原配置，使用带外或本地控制台保留恢复通道。预期输出不代表已在该环境复现。",
+    "code": "R1：\nsystem-view\nisis 1\n network-entity 49.0001.0000.0000.0001.00\n is-level level-2\n cost-style wide\n quit\ninterface GigabitEthernet 0/0/0\n ip address 10.0.12.1 255.255.255.252\n isis enable 1\n quit\ndisplay isis peer\ndisplay isis lsdb\ndisplay isis route\n\nR2：\nsystem-view\nisis 1\n network-entity 49.0002.0000.0000.0002.00\n is-level level-2\n cost-style wide\n quit\ninterface GigabitEthernet 0/0/0\n ip address 10.0.12.2 255.255.255.252\n isis enable 1\n quit\ndisplay isis peer\ndisplay isis lsdb\ndisplay isis route"
+  },
+  {
+    "unit": "ICT-034.04",
+    "title": "AAA 认证、授权与会话记录",
+    "topology": "终端 ─ NAS ─ AAA 服务（隔离管理网）",
+    "addresses": [
+      [
+        "NAS",
+        "192.0.2.2/24"
+      ],
+      [
+        "AAA",
+        "192.0.2.20/24"
+      ],
+      [
+        "测试用户",
+        "reader / operator，使用独立实验凭据"
+      ]
+    ],
+    "platform": "按 NAS 与 AAA 服务的实际版本选择 RADIUS/TACACS+；未指定版本不提供假定通用的完整 CLI",
+    "steps": [
+      "先保留本地控制台与本地恢复账户；核对 NAS 到服务器路由、时间与共享秘密。",
+      "在 AAA 服务创建只读和操作员两类测试身份；在 NAS 绑定测试域、服务器和最小授权策略，记录实际配置。",
+      "用错误密码登录，确认失败且无正常业务会话；保存脱敏认证日志。",
+      "用 reader 成功登录后尝试禁止的变更，应收到权限拒绝；用 operator 只执行获准操作。",
+      "退出并用会话 ID 核对开始与结束记录，再临时阻断测试 AAA 路径验证已定义的超时/本地回退策略。"
+    ],
+    "expected": "认证拒绝：无正常业务会话\n认证成功 + reader：登录允许，变更拒绝\n计费：同一会话 ID 关联 Start / Stop",
+    "fault": "把权限不足误判为密码错误，或服务器超时后无恢复入口。",
+    "recovery": "从保留的控制台恢复测试域与服务器策略；检查只读身份仍无法变更，操作员按最小权限工作。",
+    "status": "隔离实验方案；下列输出为预期判读模式，尚无赛事设备实测记录。",
+    "limit": "执行前核对实际型号、版本与功能许可；保存原配置，使用带外或本地控制台保留恢复通道。预期输出不代表已在该环境复现。"
+  },
+  {
+    "unit": "ICT-035.07",
+    "title": "非法 DHCP 应答与可信端口",
+    "topology": "客户端 ─ GE1/0/1 LAB-SW GE1/0/2 ─ GE1/0/1 LAB-DHCP\n                    └ GE1/0/3 非法服务器（仅隔离试验）",
+    "addresses": [
+      [
+        "LAB-DHCP Vlanif10",
+        "192.0.2.1/24，池LAB10"
+      ],
+      [
+        "客户端",
+        "动态租约，以实际binding记录为准；192.0.2.10仅是图中示例"
+      ],
+      [
+        "接口映射",
+        "p1=GE1/0/1；p2=GE1/0/2可信；p3=GE1/0/3非信任"
+      ]
+    ],
+    "platform": "S9300/S9300X V200R023C00，EDOC1100333835的动态DHCP绑定示例；接口及地址按本隔离拓扑改编。不是赛事型号兼容性承诺，未执行实机验证。",
+    "steps": [
+      "使用控制台备份两个测试设备的原配置，确认3个端口均无生产业务；按拓扑接线并记录实际型号、版本和接口名。",
+      "执行阶段A与B。客户端重新获取租约后，查询 display dhcp snooping user-bind all，记录实际IP、MAC、VLAN和入口；本例地址池不保证分到192.0.2.10。",
+      "从非信任p3注入隔离测试DHCP服务，给出错误网关192.0.2.254；抓包对照p3入口和p1出口，确认非法Offer/ACK未交付客户端。",
+      "核对合法服务器p2应答通过、客户端网关为192.0.2.1、绑定入口为p1。错误网关.254不作为合法DHCP服务器配置的一部分。",
+      "停止非法测试服务，客户端重新申请合法租约并验证到192.0.2.1；若要演示误信任p3，仅在隔离环境操作，结束必须恢复p3非信任。"
+    ],
+    "expected": "可信 p2：合法租约\n非信任 p3：非法服务器应答丢弃计数增加\n绑定：VLAN10 / 客户端MAC / 192.0.2.10 / p1",
+    "fault": "错误地将所有口设为可信，或合法服务器方向未设可信。",
+    "recovery": "按端口角色恢复，仅保留合法上联可信；重新申请租约，确认网关、DNS 与绑定一致。 收尾从控制台将各测试接口、VLAN10和LAB10池恢复到事前配置；这份脚本仅可用于新建隔离环境，不可盲目覆盖现网。",
+    "status": "隔离实验方案；下列输出为预期判读模式，尚无赛事设备实测记录。",
+    "limit": "执行前核对实际型号、版本与功能许可；保存原配置，使用带外或本地控制台保留恢复通道。预期输出不代表已在该环境复现。 官方示例的操作步骤使用ip source check，配置文件显示可能规范化为ipv4/ipv6 source check；以该版本命令帮助与实际回读为准，不混用不同产品语法。",
+    "sources": [
+      [
+        "华为 · DHCP动态绑定与IPSG完整示例（含服务器）",
+        "https://support.huawei.cn/enterprise/en/doc/EDOC1100333835/adce1116/example-for-configuring-ipsg-based-on-a-dhcp-snooping-dynamic-binding-table-to-prevent-hosts-from-changing-their-own-ip-addresses"
+      ]
+    ],
+    "code": "阶段A：先配置合法DHCP服务器 LAB-DHCP\nsystem-view\nsysname LAB-DHCP\nvlan batch 10\ndhcp enable\nip pool LAB10\n network 192.0.2.0 mask 255.255.255.0\n gateway-list 192.0.2.1\n quit\ninterface Vlanif10\n ip address 192.0.2.1 255.255.255.0\n dhcp select global\n quit\ninterface GigabitEthernet1/0/1\n port link-type trunk\n port trunk allow-pass vlan 10\n quit\nreturn\n\n阶段B：接入交换机 LAB-SW（尚未开启IPSG）\nsystem-view\nsysname LAB-SW\nvlan batch 10\ndhcp enable\ndhcp snooping enable\ninterface GigabitEthernet1/0/1\n port link-type access\n port default vlan 10\n quit\ninterface GigabitEthernet1/0/2\n port link-type trunk\n port trunk allow-pass vlan 10\n quit\ninterface GigabitEthernet1/0/3\n port link-type access\n port default vlan 10\n quit\nvlan 10\n dhcp snooping enable\n dhcp snooping trusted interface GigabitEthernet1/0/2\n quit\nreturn\ndisplay dhcp snooping user-bind all"
+  },
+  {
+    "unit": "ICT-035.08",
+    "title": "IPSG 检查绑定与恢复",
+    "topology": "客户端 ─ GE1/0/1 LAB-SW GE1/0/2 ─ GE1/0/1 LAB-DHCP\n                    └ GE1/0/3 非法服务器（仅隔离试验）",
+    "addresses": [
+      [
+        "LAB-DHCP Vlanif10",
+        "192.0.2.1/24，池LAB10"
+      ],
+      [
+        "客户端",
+        "动态租约，以实际binding记录为准；192.0.2.10仅是图中示例"
+      ],
+      [
+        "接口映射",
+        "p1=GE1/0/1；p2=GE1/0/2可信；p3=GE1/0/3非信任"
+      ]
+    ],
+    "platform": "S9300/S9300X V200R023C00，EDOC1100333835的动态DHCP绑定示例；接口及地址按本隔离拓扑改编。不是赛事型号兼容性承诺，未执行实机验证。",
+    "steps": [
+      "使用控制台备份两个测试设备的原配置，确认3个端口均无生产业务；按拓扑接线并记录实际型号、版本和接口名。",
+      "执行阶段A与B。客户端重新获取租约后，查询 display dhcp snooping user-bind all，记录实际IP、MAC、VLAN和入口；本例地址池不保证分到192.0.2.10。",
+      "确认绑定完整再执行阶段C。用客户端实际租约地址 ping 192.0.2.1，再改成未租给该主机的空闲测试地址192.0.2.99，观察入口丢弃和业务失败；事前确认.99未被分配，避免地址冲突。",
+      "把客户端改回DHCP，重新申请租约并核对绑定；合法访问应恢复。若绑定缺失，从控制台临时撤销检查，修复Snooping与租约后再启用。"
+    ],
+    "expected": "合法源 → 通过\nIP 与绑定不一致 → 入口丢弃\n恢复租约 → 合法流量通过",
+    "fault": "绑定缺失时，合法终端也可能被拒；不要直接停用所有保护。",
+    "recovery": "优先恢复终端真实租约与正确入口；若动态绑定未建立且误阻合法业务，从控制台按所列undo命令只撤销本实验VLAN检查，修复后重新启用并重测。检查租约与静态绑定适用性，再恢复正确的地址/MAC/端口/VLAN组合。 收尾从控制台将各测试接口、VLAN10和LAB10池恢复到事前配置；这份脚本仅可用于新建隔离环境，不可盲目覆盖现网。",
+    "status": "隔离实验方案；下列输出为预期判读模式，尚无赛事设备实测记录。",
+    "limit": "执行前核对实际型号、版本与功能许可；保存原配置，使用带外或本地控制台保留恢复通道。预期输出不代表已在该环境复现。 官方示例的操作步骤使用ip source check，配置文件显示可能规范化为ipv4/ipv6 source check；以该版本命令帮助与实际回读为准，不混用不同产品语法。",
+    "sources": [
+      [
+        "华为 · DHCP动态绑定与IPSG完整示例（含服务器）",
+        "https://support.huawei.cn/enterprise/en/doc/EDOC1100333835/adce1116/example-for-configuring-ipsg-based-on-a-dhcp-snooping-dynamic-binding-table-to-prevent-hosts-from-changing-their-own-ip-addresses"
+      ]
+    ],
+    "code": "阶段A：先配置合法DHCP服务器 LAB-DHCP\nsystem-view\nsysname LAB-DHCP\nvlan batch 10\ndhcp enable\nip pool LAB10\n network 192.0.2.0 mask 255.255.255.0\n gateway-list 192.0.2.1\n quit\ninterface Vlanif10\n ip address 192.0.2.1 255.255.255.0\n dhcp select global\n quit\ninterface GigabitEthernet1/0/1\n port link-type trunk\n port trunk allow-pass vlan 10\n quit\nreturn\n\n阶段B：接入交换机 LAB-SW（尚未开启IPSG）\nsystem-view\nsysname LAB-SW\nvlan batch 10\ndhcp enable\ndhcp snooping enable\ninterface GigabitEthernet1/0/1\n port link-type access\n port default vlan 10\n quit\ninterface GigabitEthernet1/0/2\n port link-type trunk\n port trunk allow-pass vlan 10\n quit\ninterface GigabitEthernet1/0/3\n port link-type access\n port default vlan 10\n quit\nvlan 10\n dhcp snooping enable\n dhcp snooping trusted interface GigabitEthernet1/0/2\n quit\nreturn\ndisplay dhcp snooping user-bind all\n\n阶段C：确认绑定存在后，再在 LAB-SW 启用IPSG\nsystem-view\nvlan 10\n ip source check user-bind enable\n quit\nreturn\ndisplay dhcp snooping user-bind all\n\n故障恢复第一步：仅在控制台临时撤销本实验的源检查，再校正绑定\nsystem-view\nvlan 10\n undo ip source check user-bind enable\n quit\nreturn"
+  },
+  {
+    "unit": "ICT-025.02",
+    "title": "SR-MPLS 的基础承载与标签转发",
+    "topology": "R1 ─ R2 ─ R3",
+    "addresses": [
+      [
+        "Loopback",
+        "R1/2/3：10.0.0.1/2/3 /32"
+      ],
+      [
+        "SRGB",
+        "16000–16999 教学范围；索引1/2/3"
+      ]
+    ],
+    "platform": "按本节配置折叠区所列参考平台；方案必须补录实际型号、软件版本与功能许可",
+    "steps": [
+      "先完成三节点 IS-IS，确认所有 Loopback 由 IGP 可达；保存底层邻居和路由证据。",
+      "按本节已注明的设备语法配置 SR；为每个节点分配唯一 Prefix SID 索引并提交，不把仅本机片段当全网配置。",
+      "读取 segment-routing 的标签转发表，核对 SID 与下一跳；从入口对目标 Loopback 发起探测并检查转发计数。",
+      "撤销隔离的中间链路后观察路径失效；此线形拓扑没有备用物理路径，不能预期自动绕过。"
+    ],
+    "expected": "标签表：目标 Prefix SID → 正确下一跳\n线形路径断开：目标不可达",
+    "fault": "SID 索引冲突、IGP 未通，或把断开的线形拓扑当成有保护路径。",
+    "recovery": "恢复链路和唯一索引，核对 IGP、标签表和端到端探测。",
+    "status": "隔离实验方案；下列输出为预期判读模式，尚无赛事设备实测记录。",
+    "limit": "执行前核对实际型号、版本与功能许可；保存原配置，使用带外或本地控制台保留恢复通道。预期输出不代表已在该环境复现。"
+  },
+  {
+    "unit": "ICT-028.01",
+    "title": "GRE 的内外层与 MTU",
+    "topology": "LAN-A ─ GW-A ═公网═ GW-B ─ LAN-B",
+    "addresses": [
+      [
+        "业务",
+        "192.0.2.0/24 ↔ 198.51.100.0/24"
+      ],
+      [
+        "隧道端点",
+        "203.0.113.1 ↔ 203.0.113.2（隔离模拟）"
+      ]
+    ],
+    "platform": "按本节配置折叠区所列参考平台；方案必须补录实际型号、软件版本与功能许可",
+    "steps": [
+      "先让端点外层地址双向可达，核对公网没有业务私网路由。",
+      "按目标 VRP 版本创建 GRE 隧道，写明源/目的与内层地址，并配置双方业务路由和许可；先保留变更前配置。",
+      "从 LAN-A 发往 LAN-B，分别抓取入口内层、核心外层与出口解封装报文。",
+      "逐步增加探测大小并记录是否分片或丢弃；不要只用小 ping 判定全部业务正常。",
+      "在隔离环境删除一侧业务回程路由，观察请求到达但响应失败。"
+    ],
+    "expected": "核心：外层端点地址 + GRE + 原始业务包\n出口：去 GRE 后的业务包",
+    "fault": "外层可达但业务回程缺失，或封装后超过路径 MTU。",
+    "recovery": "恢复回程路由，按测试结果调整可支持的 MTU/MSS 策略；GRE 不提供加密。",
+    "status": "隔离实验方案；下列输出为预期判读模式，尚无赛事设备实测记录。",
+    "limit": "执行前核对实际型号、版本与功能许可；保存原配置，使用带外或本地控制台保留恢复通道。预期输出不代表已在该环境复现。"
+  },
+  {
+    "unit": "ICT-028.03",
+    "title": "IPsec 的协商与业务选择器",
+    "topology": "LAN-A ─ VPN-A ═不可信网═ VPN-B ─ LAN-B",
+    "addresses": [
+      [
+        "保护网段",
+        "192.0.2.0/24 ↔ 198.51.100.0/24"
+      ],
+      [
+        "外层端点",
+        "203.0.113.1 ↔ 203.0.113.2"
+      ]
+    ],
+    "platform": "按本节配置折叠区所列参考平台；方案必须补录实际型号、软件版本与功能许可",
+    "steps": [
+      "核对两端时间、认证方式、IKE/ESP 提议与保护网段镜像一致；先建立外层可达与恢复通道。",
+      "按两端目标版本配置隧道、路由与安全许可，记录实际脱敏配置和使用的隧道模式。",
+      "用明确命中选择器的 LAN 流量触发协商，区分 IKE SA 与 IPsec SA，记录双向加解密计数。",
+      "临时使一端选择器不匹配，观察协商或业务不通过；单有 IKE SA 不能证明数据隧道正常。"
+    ],
+    "expected": "IKE SA 与 IPsec SA 均建立\n双向加密/解密计数随测试增加\n核心抓包看不到原始明文业务载荷",
+    "fault": "选择器不对称、回程缺失、MTU或NAT-T条件不满足。",
+    "recovery": "恢复对称选择器与路由，按文档重建受影响测试 SA，确认双向计数与原业务恢复。",
+    "status": "隔离实验方案；下列输出为预期判读模式，尚无赛事设备实测记录。",
+    "limit": "执行前核对实际型号、版本与功能许可；保存原配置，使用带外或本地控制台保留恢复通道。预期输出不代表已在该环境复现。"
+  },
+  {
+    "unit": "ICT-043.04",
+    "title": "SD-WAN 质量劣化与恢复窗口",
+    "topology": "分支 CPE ═链路 A / 链路 B═ 总部 CPE ─ 语音服务",
+    "addresses": [
+      [
+        "教学SLA",
+        "丢包≤1%，时延≤80ms"
+      ],
+      [
+        "A / B",
+        "初始0.1%/20ms；0.2%/50ms"
+      ]
+    ],
+    "platform": "按本节配置折叠区所列参考平台；方案必须补录实际型号、软件版本与功能许可",
+    "steps": [
+      "记录底层线路、隧道、业务路由和策略四类基线，先确保两条单独可用。",
+      "给语音匹配明确应用规则与教学 SLA，记录主备偏好和恢复保持窗口。",
+      "在隔离承载给 A 注入3%丢包，用语音流和质量探测观察切换，记录时间戳与会话影响。",
+      "清除损伤后等恢复窗口，确认不反复抖动；校验故障态容量与策略计数。"
+    ],
+    "expected": "接口可保持 up，但 A 不满足SLA\n满足条件的 B 承载语音；恢复按保持窗口",
+    "fault": "只拔线验证接口故障，未覆盖接口up但质量下降。",
+    "recovery": "清除损伤并核对回切条件；把策略恢复到基线，保留前后探测记录。",
+    "status": "隔离实验方案；下列输出为预期判读模式，尚无赛事设备实测记录。",
+    "limit": "执行前核对实际型号、版本与功能许可；保存原配置，使用带外或本地控制台保留恢复通道。预期输出不代表已在该环境复现。"
+  },
+  {
+    "unit": "ICT-087.01",
+    "title": "一层办公区的规划交付",
+    "topology": "40m × 20m；x=20m 处墙体，南侧门；AP在墙两侧",
+    "addresses": [
+      [
+        "AP1 / AP2",
+        "图纸(10,10) / (30,10)"
+      ],
+      [
+        "假设",
+        "15dBm；墙损8dB；阈值−67dBm"
+      ]
+    ],
+    "platform": "按本节配置折叠区所列参考平台；方案必须补录实际型号、软件版本与功能许可",
+    "steps": [
+      "在上方工作台按已知10m标尺校准，核对整层40×20m，保存底图版本。",
+      "标注墙体与门，选定墙损假设，先以左侧一台 AP 运行预测并记为调整前。",
+      "改为墙两侧各一台，保持相同比例尺和功率，记录覆盖比例变化；再将墙损改为18dB比较。",
+      "在真实 WLAN Planner 目标版本导入同一底图，按相同参数建模；记录工具版本和导出报告，本站工作台不替代产品仿真。",
+      "现场抽测会议室、走廊与墙后点位的RSSI/SNR、忙时吞吐和时延，将结果与预测差异记录在交付表。"
+    ],
+    "expected": "交付：底图版本、尺寸、墙体/AP点位、参数、预测与实测对照\n本站覆盖比例只按教学网格计算",
+    "fault": "比例尺错误可使面积与传播距离同时失真；信号达标不等于容量足够。",
+    "recovery": "先纠正底图尺寸再复算；固定终端、位置、时段做调整前后对比。",
+    "status": "隔离实验方案；下列输出为预期判读模式，尚无赛事设备实测记录。",
+    "limit": "执行前核对实际型号、版本与功能许可；保存原配置，使用带外或本地控制台保留恢复通道。预期输出不代表已在该环境复现。"
+  },
+  {
+    "unit": "ICT-040.03",
+    "title": "可复现自动化流水线",
+    "topology": "本机 Python ─ 离线 fixture demo-r1（无网络连接）",
+    "addresses": [
+      [
+        "清单",
+        "demo-r1=192.0.2.11"
+      ],
+      [
+        "目标",
+        "description=LAB-UPLINK"
+      ]
+    ],
+    "platform": "Python 3.9+ 标准库，无第三方依赖",
+    "steps": [
+      "下载 automation_fixture.py，执行 python3 automation_fixture.py，观察读取OLD、差异变更、回读通过和第二次NO_CHANGE。",
+      "执行 python3 automation_fixture.py --failure timeout；预期退出码1，changed=false，状态未变更。",
+      "执行 python3 automation_fixture.py --failure drift；预期VERIFY_FAIL并验证回滚为OLD。",
+      "执行 python3 automation_fixture.py --failure rollback-fail；预期手工恢复标记；不可把补偿请求等同恢复成功。",
+      "可通过 --inventory 文件校验清单；空清单、重复地址、非法地址均应拒绝。fixture仅接受示例单设备。"
+    ],
+    "expected": "CONNECTED demo-r1\nREAD description=OLD\nCHANGED description=LAB-UPLINK\nVERIFY PASS\nSECOND RUN\nCONNECTED demo-r1\nREAD description=LAB-UPLINK\nNO_CHANGE changed=false\nVERIFY PASS",
+    "fault": "连接失败、回读漂移、补偿失败；状态未知时不能盲目重试写入。",
+    "recovery": "离线驱动每次从OLD基线开始；真实环境先读状态，再决定重试、补偿或人工恢复。",
+    "status": "离线示例已在 Python 标准库环境运行；不连接设备，不验证厂商驱动。",
+    "limit": "脚本不会建立网络连接。实际输出可通过下载脚本重现；接入 SSH/NETCONF/REST 前需补充已验证驱动、凭据与能力检查。",
+    "download": "labs/automation_fixture.py"
+  }
+]

@@ -1,9 +1,10 @@
+// Linear-scene browser smoke; use check-visual-browser.cjs for ALL branches.
 // Optional browser regression: install Playwright and start python3 serve.py first.
 const {chromium}=require('playwright');
 const fs=require('fs'),assert=require('assert/strict');
 (async()=>{
  const browser=await chromium.launch({channel:'chrome',headless:true});const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
- const base=process.env.ICT_TEST_URL||'http://127.0.0.1:8765';const scenes=JSON.parse(fs.readFileSync('content/visualizations.json')).scenarios.slice(21);let steps=0,chapters=0;
+ const base=process.env.ICT_TEST_URL||'http://127.0.0.1:8765';const scenes=JSON.parse(fs.readFileSync('content/visualizations.json')).scenarios.slice(21).filter(s=>!s.steps.some(st=>st.actions));let steps=0,chapters=0;
  for(const width of [1280,390]){
   await page.setViewportSize({width,height:900});
   for(const lesson of JSON.parse(fs.readFileSync('content/knowledge.json'))){

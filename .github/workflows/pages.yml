@@ -37,6 +37,8 @@ jobs:
           node test-models.cjs
           node test-teaching.cjs
           node scripts/test-expanded.cjs
+          node scripts/test-visual-completion.cjs
+          python3 scripts/test_automation_fixture.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

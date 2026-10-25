@@ -36,8 +36,11 @@ ok(scene('switch-learning').steps[2].rows.length===1&&scene('switch-learning').s
 ok(scene('vrp').steps[3].rows[1][1]==='新描述 / 旧配置','return does not save');
 ok(scene('vrp').steps[4].rows[1][1]==='新描述 / 新描述','successful save updates startup configuration');
 ok(scene('encapsulation').steps[3].packet.header[0][0].startsWith('目的 MAC'),'Ethernet field order starts with destination');
-// ICT-002 opts in without changing other chapter scenarios.
-for(const s of scenes.filter(s=>!s.unit.startsWith('ICT-002.')))ok(!s.richSequence&&!s.steps.some(step=>step.prediction||step.packet),'new interactions restricted to ICT-002');
+// Interactive branches and packet nesting now extend beyond ICT-002.
+for(const s of scenes)for(const st of s.steps){
+ if(st.actions)for(const action of st.actions)ok(Number.isInteger(action.target)&&s.steps[action.target]&&t.nextIndex(s,s.steps.indexOf(st),action.target)===action.target,'branch targets an existing step');
+ if(st.packet)ok(!t.packet([],st.packet).includes('undefined'),'nested packets render in every chapter');
+}
 for(const s of scenes.filter(s=>s.richSequence)){
  const ids=new Set(s.events.map(event=>event.id));
  for(const event of s.events)ok(event.to.length>0&&event.to.every(to=>to!==event.from&&s.actors[to]),'message recipients exist');
@@ -96,9 +99,9 @@ ok(scenes.every(s=>s.sources.length>0&&s.sources.every(([t,u])=>/^https:\/\//.te
 ok(scene('ap-find-ac').steps[0].rows[0][1].includes('无管理地址'),'出厂 AP 既无地址也无配置')
 ok(scene('ap-find-ac').steps[2].rows[1][1]==='尚不知道这台 AP','加入请求发出未到达，控制器状态不变')
 ok(scene('ap-find-ac').steps[3].rows[1][1].includes('已接纳'),'通过合法性检查才被允许加入')
-ok(scene('bgp-path-select').steps[0].rows[3][2].startsWith('未进入 BGP 表'),'被入方向策略拒绝的路径不参与选路')
-ok(scene('bgp-path-select').steps[3].rows[0][2]==='选为 best，尚未确认可用','属性比完先出 best，还不等于可用')
-ok(scene('bgp-path-select').steps[4].rows[0][2]==='best 保留，但不作为可用路由','下一跳不可达时 best 也不装进 IP 路由表')
+ok(scene('bgp-path-select').steps[0].rows[3][4]==='策略拒绝','策略拒绝候选不参与选路');
+ok(scene('bgp-path-select').steps[0].rows[0][4]==='不可达，排除','下一跳不可达在属性比较前排除');
+ok(scene('bgp-path-select').steps[2].rows[0][4].includes('重新计算后最佳'),'下一跳恢复后重新参与选路');
 ok(scene('dhcp-dora').steps[1].rows[2][1]==='暂无交互记录','请求在途，服务器租约状态不因发送而变')
 ok(scene('dhcp-dora').steps[4].rows[0][1]==='已收到Offer · 选定192.168.10.100','ACK在途，客户端尚未安装地址')
 ok(scene('dhcp-dora').steps[5].rows[0][1].startsWith('生效') && scene('dhcp-dora').steps[5].rows[2][1].startsWith('租约已记'),'ACK送达后客户端生效、服务器记租约')
