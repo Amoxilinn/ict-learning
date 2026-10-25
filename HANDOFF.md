@@ -28,7 +28,7 @@
 | 构建 | 通过；322/322、94/94，无 LEGACY |
 | 全量测试 | `node test-models.cjs`（4746）、`node test-teaching.cjs`（1002）、`node scripts/render_check.cjs` 通过 |
 | 全量审计 | 0 error / 81 warning；warning 为长单元与术语启发式 |
-| 部署 | 2026-10-25 用户明确授权 Git 提交及更新网站；通过 main 推送触发 GitHub Pages，结果以 Actions 为准 |
+| 部署 | 2026-10-25 用户明确授权 Git 提交及更新网站；V01 改动已提交 `ba17506` 并推送 main，GitHub Pages 构建已触发，结果以 Actions 为准 |
 
 复核命令见 `TASKS.md` 第 0 节。当前已全量合并；状态以文件与校验结果为准。
 
@@ -215,4 +215,4 @@ Chrome headless 在 macOS 的窗口最小宽度约为 500px；`--window-size=390
 - [x] V01 关键机制可视化完成：23/322（18/94 章）、四方向（2026-10-25）。
 - [x] 94 条 bridge 与下一章匹配。
 - [x] README/PROGRESS/HANDOFF 数字一致。
-- [ ] 部署按 2026-10-25 用户授权进行（main → Pages，结果以 Actions 为准）；配置未实机验证的声明仍在。
+- [ ] 部署按 2026-10-25 用户授权进行：`ba17506` 已推送 main，Pages 构建已触发、待 Actions 结果确认；配置未实机验证的声明仍在。
