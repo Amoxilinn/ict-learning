@@ -32,7 +32,7 @@
 | `docs/教学标准.md` | 全站统一教学质量标准与合格线 |
 | `content/rewrite/` | 分批改写源材料、批次输出与合并记录 |
 
-`build.py` 合并教学数据与技术元数据，输出六组阅读数据、离线手册，并为静态资源附加内容哈希。`dist/` 是生成产物，不要手改。
+`build.py` 合并教学数据与技术元数据，输出六组阅读数据、离线手册，并为静态资源附加内容哈希。`dist/app.js`、`style.css`、`teaching.js`、`diagrams.js` 和 `index.html` 是手写源，可以直接修改；构建只更新入口的资源哈希。`dist/data.js`、`teaching-data.js`、JSON 与 `handbook.html` 是生成物，不要手改，也不要删除整个 `dist/`。
 
 ```sh
 python3 build.py
@@ -42,6 +42,8 @@ node test-models.cjs
 node test-teaching.cjs
 node scripts/render_check.cjs
 python3 scripts/audit_content.py
+python3 scripts/validate_glossary.py
+python3 scripts/test_validators.py
 ```
 
 批量重写时：
@@ -49,7 +51,8 @@ python3 scripts/audit_content.py
 ```sh
 python3 scripts/make_batches_final.py       # 生成 36 个批次源材料
 python3 scripts/validate_rewrite.py batch-02
-python3 scripts/merge_rewrite.py            # 全部批次完成后合并
+python3 scripts/freeze_batch.py batch-02    # 验证后冻结并更新校验和
+python3 scripts/merge_rewrite.py --frozen   # 合并冻结副本
 python3 scripts/audit_content.py            # 全局去重、层次与结构审查
 ```
 
@@ -57,7 +60,7 @@ python3 scripts/audit_content.py            # 全局去重、层次与结构审�
 
 - 内容覆盖 94 章、322 个考纲细则，构建强制校验章节、细则、知识点的一一对应。
 - 技术结论尽量保留原始来源与适用条件；配置为学习示例，尚未在赛事指定设备上逐条执行。具体命令、版本和型号兼容性仍需按目标环境核对。
-- 交互模型只模拟正常流程或明确列出的对照分支，边界写在每个演示的“模型条件与技术边界”中。23/322 个知识点带可视化，覆盖数通/安全/WLAN/DCN 四方向（V01，2026-10-25）；配图针对高价值机制，不追求逐条覆盖。浏览器实际布局仍有用户反馈问题、尚未修复（缺复现信息），见 [TASKS](TASKS.md) U01 与 [布局问题记录](docs/reviews/layout-issues.md)。
+- 交互模型只模拟正常流程或明确列出的对照分支，边界写在每个演示的“模型条件与技术边界”中。23/322 个知识点带可视化，覆盖数通/安全/WLAN/DCN 四方向（V01，2026-10-25）；配图针对高价值机制，不追求逐条覆盖。阅读布局已修复正文标签样式串用、全页裁切和移动目录交互；94 章通过 5 视口检查，并完成 Chrome 缩放与打印验收。Safari/真实手机等未测试环境见 [验收报告](docs/reviews/polish-2026-10-25.md)。
 - 离线手册保留教学正文、案例、配置和检查，不包含交互演示。
 
 ## 维护与交接
@@ -66,9 +69,13 @@ python3 scripts/audit_content.py            # 全局去重、层次与结构审�
 - 剩余/后续任务拆分：[TASKS](TASKS.md)
 - 无原始对话上下文的接续说明、文件矩阵与已知问题：[HANDOFF](HANDOFF.md)
 - 批次源材料与冻结副本：`content/rewrite/source/`、`content/rewrite/frozen/`
-- 全量验收：`python3 build.py`（322/322、94/94）、`python3 scripts/audit_content.py`（0 error）、`node test-models.cjs`（4746）、`node test-teaching.cjs`（1002）、`node scripts/render_check.cjs`。
+- 全量验收：`python3 build.py`（322/322、94/94）、`python3 scripts/audit_content.py`（0 error）、`node test-models.cjs`（4746）、`node test-teaching.cjs`（1011）、`node scripts/render_check.cjs`。
 
 配置与命令仍未在赛事指定设备上实测；交互模型只覆盖各场景 `boundary` 写明的条件。
+
+## 当前打磨结果
+
+2026-10-25：整理 8 个长知识点，保留案例、检查与技术边界；修正三端时序箭头，补图示滚动和打印展开/恢复。词库校验不再要求恢复旧文件，词库合并可重复执行。最新构建与测试结果、截图和测试环境见 [验收报告](docs/reviews/polish-2026-10-25.md)。2026-10-25 用户已授权将本轮修复提交并推送 GitHub，main 推送后由 Pages 自动验证和部署；发布结果以对应 Actions 为准。
 
 ## 发布
 

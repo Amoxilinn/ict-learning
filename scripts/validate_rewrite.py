@@ -76,8 +76,8 @@ def check_batch(name):
         for k in ['goal','lead','takeaway']:
             v=u.get(k)
             if not isinstance(v,str): errors.append(f'{uid}: {k} not string'); continue
-            if len(v)<UNIT_MIN[k]: errors.append(f'{uid}: {k} too short ({len(v)}<{MIN[k]})')
-            if len(v)>UNIT_MAX[k]: warnings.append(f'{uid}: {k} longer than {MAX[k]} ({len(v)})')
+            if len(v)<UNIT_MIN[k]: errors.append(f'{uid}: {k} too short ({len(v)}<{UNIT_MIN[k]})')
+            if len(v)>UNIT_MAX[k]: warnings.append(f'{uid}: {k} longer than {UNIT_MAX[k]} ({len(v)})')
         secs=u.get('sections')
         if not isinstance(secs,list) or not (2<=len(secs)<=5): errors.append(f'{uid}: sections must be 2-5')
         else:

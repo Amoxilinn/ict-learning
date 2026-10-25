@@ -136,4 +136,12 @@ ok(scene('vxlan-encap').steps[6].rows[1][0]==='外层','出口解封装剥掉外
 ok(scene('wlan-roam-hold').steps[2].rows[0][1]==='在 AP2 重建','换 AP 时关联必然重建')
 ok(scene('wlan-roam-hold').steps[2].rows[2][1].includes('保持'),'同网段漫游业务 IP 不变')
 ok(scene('wlan-roam-hold').steps[4].rows[4][1]==='改为经 AP2','转发路径随接入位置更新')
+// Three-party sequence arrows span only the named sender and receiver.
+for(const [from,to,start,width] of [[1,2,50,100/3],[0,2,100/6,200/3],[2,0,100/6,200/3]]){
+ const html=t.sequence(['左端','中间','右端'],[{message:[from,to,'测试消息']}],0);
+ const span=html.match(/margin-left:([\d.]+)%;width:([\d.]+)%/);
+ ok(span&&Math.abs(Number(span[1])-start)<1e-6,'sequence starts at the named actor');
+ ok(Math.abs(Number(span[2])-width)<1e-6,'sequence ends at the named recipient');
+ ok(html.includes(['左端','中间','右端'][from]+' → '+['左端','中间','右端'][to]),'sequence states its sender and recipient in text');
+}
 console.log(`PASS ${checks} teaching assertions: snapshots, TCP timing, ARP next hop, switching and glossary.`);

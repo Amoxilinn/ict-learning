@@ -1,218 +1,79 @@
-# HANDOFF · ICT 教程全站重构
+# ICT 教程 · 接续说明
 
-更新：2026-10-25（Asia/Shanghai）。本文件面向没有原始对话上下文的接续 Agent。先读本文件，再读 `TASKS.md` 与 `docs/教学标准.md`。
+更新：2026-10-25（Asia/Shanghai）。现行状态见本文件、TASKS.md 和 docs/PROGRESS.md。旧交接已归档到 [历史交接](docs/history/HANDOFF-before-polish-2026-10-25.md)，不再执行其中恢复旧词库等过时操作。
 
-## 1. 项目是什么
+## 项目与最新授权范围
 
-`ict-learning` 是一个本地静态学习网站，覆盖华为 ICT 网络赛道考纲的 4 个方向、94 个章节、322 个知识点：
+静态中文网络教程，面向零基础学生，保留数通 44 章、DCN 11 章、安全 18 章、WLAN 21 章，共 94 章/322 个知识点。九阶段目录串联阅读，配置和检查可折叠，学习标记只存本机。
 
-- 数通 44 章、DCN 11 章、安全 18 章、WLAN 21 章。
-- 目标读者：完全没有网络工程基础的学生。
-- 本轮工作：把原先偏技术文档的“知识手册”改写为按认知顺序展开的教程，并保留考纲范围、技术事实、交互与视觉风格。
-- 站点入口：`dist/index.html`；本地服务：`python3 serve.py`（默认 8765）或任意静态服务器。
-- 生成物：`dist/` 全部由 `build.py` 生成，**不要手改**。
+最新一轮用户要求：修复整体审查的问题 1、2、4、5、6，打磨项目完整度；明确排除问题 3（赛事版本、设备与逐项来源审定）。用户允许直接用 Computer Use 检查 Chrome，只有无法解决的问题再询问。
 
-## 2. 当前状态（务必先复核）
+本轮修复与本地验收完成；2026-10-25 用户已授权 Git 提交及推送。此前基线为 ba17506（V01）及文档提交 d2b0dd1；本次 main 推送触发 Pages，最终上线状态以对应 Actions 为准。
 
-| 项目 | 状态 |
+## 当前验证事实
+
+| 项目 | 结果 |
 | --- | --- |
-| 考纲章节/知识点 | 94 / 322 |
-| 已合并教学数据 | 94 章 / 322 知识点 |
-| 已通过校验但未合并 | 无；全部批次已冻结并合并 |
-| 正在生成/待生成 | 无；36 批全部完成、冻结并合并 |
-| 术语库 | 135 条（旧 35 + 新 100），236 个别名，105 条可正文标注（旧 35 + 新 70） |
-| 交互 | 21 个数据场景（6 旧 + 15 新，V01 2026-10-25）+ 1 个生成场景（switch-learning）+ 4 个可操作实验（subnet/switch/vlan/route；VLAN 实验含转发状态快照表） |
-| 图文讲解 | **覆盖已达标（V01 2026-10-25）**：23/322 知识点（18/94 章）带可视化，覆盖数通/安全/WLAN/DCN 四方向；新场景均带 boundary/sources/visualCue，经双批复核。视觉呈现尚未经人眼确认（本轮纯文本验收） |
-| 浏览器布局 | **未完成**：用户实际浏览器反馈布局有问题；自动化 1280/1024/768/500 截图未复现，具体页面/浏览器/视口待补 |
-| 章节完成 | 浏览器 `localStorage['ict-progress-v1']` 保存已学完章节 ID；侧栏/首页显示阶段进度 |
-| 构建 | 通过；322/322、94/94，无 LEGACY |
-| 全量测试 | `node test-models.cjs`（4746）、`node test-teaching.cjs`（1002）、`node scripts/render_check.cjs` 通过 |
-| 全量审计 | 0 error / 81 warning；warning 为长单元与术语启发式 |
-| 部署 | 2026-10-25 用户明确授权 Git 提交及更新网站；V01 改动已提交 `ba17506` 并推送 main，GitHub Pages 构建已触发，结果以 Actions 为准 |
+| 教学覆盖 | 94/94 章、322/322 知识点，全量改写，无 LEGACY |
+| 词库 | 135 条、236 别名、105 条允许自动标注 |
+| 图示 | 21 数据场景 + 1 生成场景 + 4 操作实验；23/322 知识点、18/94 章、四方向 |
+| JS 测试 | test-models 4746，test-teaching 1011，render_check 全通过 |
+| Python | 内容审计 0 错误/73 术语提示；词库校验 0 错误/0 提示；7 项回归测试通过 |
+| 浏览器 | 94 章 × 5 宽度无整页横向溢出；22 可选场景 × 2 宽度、266 步及重置通过 |
+| 视觉/实际 Chrome | 15 个新增场景两种宽度逐张查看；Chrome 100/125/150% 与 VLAN 打印预览通过 |
+| 测试范围限制 | Safari 启动检查超时；未测试真实手机、Windows 和读屏软件 |
 
-复核命令见 `TASKS.md` 第 0 节。当前已全量合并；状态以文件与校验结果为准。
+报告与截图：docs/reviews/polish-2026-10-25.md。布局问题原因与修复：docs/reviews/layout-issues.md。
 
-## 3. 数据流与目录
+## 源文件与生成物
 
-```
-content/knowledge.json                 94 条考纲元数据（不要改）
-content/pedagogy.json                 旧版章节导语（新数据在 teaching-chapters）
-content/units-*.json                  322 条技术元数据：term/depth/sources/config/fault
-content/curriculum.json               9 阶段推荐顺序
-content/subskills.json                322 条考纲细则 ID
-content/glossary.json                 135 条双层术语
-content/visualizations.json           21 个步骤场景（6 旧 + 15 个 V01 新场景）
-content/teaching-chapters.json        新章节教学数据（合并生成）
-content/teaching-units.json           新知识点教学数据（合并生成）
-content/rewrite/source/batch-XX.json  每批源材料（旧稿+可视化+相邻章节）
-content/rewrite/out/batch-XX.json     每批重写输出（唯一写入点）
-content/rewrite/frozen/               已验收批次的冻结副本（建议使用）
-content/rewrite/manifest.json         36 批清单
-docs/教学标准.md                       统一教学质量标准
-content/rewrite/schema.json           批次输出 schema
-scripts/validate_rewrite.py           单批校验
-scripts/merge_rewrite.py              批次合并（支持 --partial/--skip）
-scripts/merge_glossary.py             术语库合并
-scripts/audit_content.py              全局教学审计
-scripts/make_batches_final.py         生成 36 批源材料（已执行）
-scripts/validate_v01_drafts.cjs       V01 场景草稿校验（--allow-existing 用于合并后再编辑）
-scripts/merge_v01.py                  V01 草稿→visualizations/out/source 整合（保留各文件原 JSON 风格）
-docs/reviews/v01-contract.md          可视化扩展契约（schema、绑定机制、陷阱、测试契约）
-content/rewrite/v01-drafts/           V01 草稿留档（已全部合并，可删）
-dist/                                 构建产物
-```
+| 文件 | 编辑规则 |
+| --- | --- |
+| dist/index.html | 手写入口；build 只更新资源哈希 |
+| dist/app.js、style.css、teaching.js、diagrams.js | 手写 UI/组件/实验源，允许直接修改 |
+| dist/assets/ | 静态资源；不要随构建清理整个 dist |
+| content/rewrite/out/batch-XX.json | 教学正文的唯一编辑入口 |
+| content/rewrite/frozen/ | 校验通过后的快照；checksums.json 记录 SHA-256 |
+| content/teaching-chapters.json、teaching-units.json | 批次合并产物，不手改 |
+| content/units-*.json | 技术元数据、原配置、来源、排障；不在本轮重写 |
+| content/glossary.json | 合并后的统一库；保留 35 条基础词库，新增词条编辑 rewrite/out/glossary.json |
+| content/visualizations.json | 数据场景源；条件和 sources 保留，不凭 UI 修复新增技术结论 |
+| content/knowledge.json、subskills.json、curriculum.json | 94/322 考纲范围与九阶段顺序；不要随意改动 |
+| dist/data.js、teaching-data.js、*.json、handbook.html | build.py 生成，不手改 |
 
-构建流程：
+数据流：批次 out → validate_rewrite → freeze_batch → merge_rewrite --frozen → teaching-*.json → build.py → dist 数据/手册。手写 UI 文件仍留在 dist，是当前仓库约定。
 
-1. `build.py` 读取 `knowledge/pedagogy/units-*/curriculum/subskills`。
-2. 用 `teaching-chapters.json` 覆盖章节教学字段；用 `teaching-units.json` 覆盖知识点教学字段。
-3. 对已重写单元，丢弃旧 `explain/process/walkthrough`，保留 `term/depth/sources/config/commandNotes/fault`。
-4. 输出 `dist/data.js`、`dist/*.json`、`dist/handbook.html`、`dist/teaching-data.js`，并给 `index.html` 的资源 URL 加内容哈希。
-5. 前端 `dist/app.js` 渲染；`dist/teaching.js` 挂载交互与术语；`dist/diagrams.js` 提供四个实验模型。
+## 常用操作
 
-## 4. 新内容 schema
-
-章节（`teaching-chapters.json` 的 value）：
-
-```json
-{"intro":"场景/问题","why":"为什么现在学","objectives":["...","..."],
- "outcome":"能力目标","recap":"本章小结","bridge":"下一章要解决的新问题"}
-```
-
-知识点（`teaching-units.json` 的 value）：
-
-```json
-{"level":"core|advanced|detail","order":1,"goal":"本节要解决的一句话",
- "lead":"场景/矛盾","sections":[{"title":"具体问题","text":"1-3段","steps":["可选"]}],
- "check":{"question":"","answer":"","why":""},
- "example":{"title":"","setup":"","steps":["3-6步"],"conclusion":""},
- "takeaway":"一句话","boundary":"可选","visualCue":"可选"}
-```
-
-约束：`sections` 2—5 个；单节 300—700 字；一个知识点合计 600—1500 字；core 必须有 check；example 3—6 步；不要整句重复；`bridge` 指向课程顺序的下一章。
-
-## 5. 统一规范（摘要）
-
-完整标准在 `docs/教学标准.md`。不可妥协的几条：
-
-### 语言
-
-- 先场景/问题，后定义；首次出现的缩写必须解释。
-- 一句话一个核心意思；一段围绕一个问题。
-- 少用“具有/进行/实现/相关/上述”，不写“本节将/综上所述/值得注意的是/众所周知/赋能/使能”。
-- 不机械使用“首先、其次、最后”和固定小标题。
-- 通俗但不幼稚；技术边界集中写，不在每段重复“以设备为准”。
-
-### 层次
-
-- `core` 基础必学：零基础主线，完整解释，不依赖后文。
-- `advanced` 进阶理解：条件、对比、设计取舍。
-- `detail` 技术细节：报文位段、定时器、异常分支、型号差异；允许第二遍读。
-- 配置命令、命令说明、故障、边界放入折叠区，不打断原理。
-
-### 技术
-
-- 保留旧稿技术结论、方向、条件、命令、数字；不新增未核实的命令/版本/性能数字。
-- 先常见情况，再例外；不把厂商实现写成协议标准。
-- 配置是学习示例，未在赛事设备实测；不得宣称实机验证。
-- 交互模型只模拟明确列出的条件，边界写在场景 `boundary`。
-
-### 视觉与交互
-
-- 沿用现有绿色阅读风格；不引入依赖、不生图。
-- 空间关系用拓扑，封装用报文结构，消息交换用时序，查表用状态表；不是每个知识点都配图。
-- 图形承担关系，文字承担因果；不要文字复述图形。
-- 术语首现提示只在叙事正文，跳过标题、章节导语、答案、配置、案例和组件内部。
-- 进度只记录“本章已学完”，不记录时长/答题/分数。
-
-## 6. 测试与验收
+启动：`python3 serve.py`，默认 http://127.0.0.1:8765。完整检查见 README。
 
 ```sh
-cd "/Users/qiqi2988/Desktop/HUAWEI ICT/ict-learning"
+python3 scripts/validate_rewrite.py batch-XX
+python3 scripts/freeze_batch.py batch-XX
+python3 scripts/merge_rewrite.py --frozen
 python3 build.py
 python3 scripts/audit_content.py
-python3 scripts/validate_glossary.py   # 注意：需用 HEAD 的 35 条基线或先恢复，详见已知问题
-export PATH="/Users/qiqi2988/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/node/bin:$PATH"
-node --check dist/app.js
-node --check dist/teaching.js
-node scripts/render_check.cjs
+python3 scripts/validate_glossary.py
+python3 scripts/test_validators.py
 node test-models.cjs
 node test-teaching.cjs
+node scripts/render_check.cjs
 ```
 
-当前 `test-models.cjs` 支持 `REQUIRE_COMPLETE=0` 的临时模式：跳过“必须已重写”的断言，仅用于未全量合并时。**最终验收不得使用该变量。**
+词库：`validate_glossary.py` 直接检查当前 135 条库，不需要 git checkout 或恢复旧文件。可选 `--baseline /path/to/legacy.json` 只用于额外保护独立旧基线。`merge_glossary.py` 按 ID 更新新增项，重复运行不改变结果。
 
-浏览器检查建议：
+## 本轮修复与维护约束
 
-```sh
-python3 -m http.server 8766 --bind 127.0.0.1
-# 打开 http://127.0.0.1:8766/dist/index.html
-```
+- 层次颜色只挂在 `.level-badge.level-*` 上，不能再用通用 `.level-*` 给正文加背景。
+- 不用 `html/body overflow-x:hidden` 遮住溢出；拓扑在 `.teach-visual` 内滚动，切步保留 scrollLeft。
+- 三端时序的箭头位置按 actors/from/to 计算，并显示端点文字；不要退回整条跨栏箭头。
+- 移动导航由 setNavigation 管理，遮罩、inert、焦点和 aria-expanded 同步；尺寸回到桌面时关闭抽屉。
+- preparePrint/finishPrint 保存并恢复折叠状态，打印时初始化实验。不要只靠 display:block 试图展开 details。
+- 8 个长单元只精简 sections[].text，案例/检查/步骤/边界保留，已重新冻结并合并。
+- 73 条术语启发式提示继续保留；不要降阈值或仅为消警堆关键词。
+- 不重做 36 批改写、不增加题库/考试系统、不为凑覆盖给所有知识点配图。
+- 所有配置仍未在赛事指定设备验证；用户本轮排除了这一事项。
 
-Chrome headless 在 macOS 的窗口最小宽度约为 500px；`--window-size=390` 会按 500 布局后裁图，不能据此判断 390 溢出。用 500px 或 DevTools 设备模拟检查窄屏。
+## 发布
 
-## 7. 已知问题与风险
-
-1. **批次文件会被后写覆盖。** 生成 Agent 有时先写部分单元、后续再覆盖；batch-14 曾从 11 单元被覆盖成 4 单元，已从较早的 `teaching-units.json` 恢复。规则：校验通过后立即冻结到 `content/rewrite/frozen/`，合并只读冻结副本。
-2. **Agent 结束后仍可能运行。** 已完成的子 Agent 可能继续占用并发槽或重写文件。合并前确认对应 Agent 已停止；必要时 `interrupt_agent`。
-3. **`validate_glossary.py` 的基线问题。** 它把 `content/glossary.json` 当作旧 35 条基线，但该文件已被合并成 135 条；直接跑会报“alias collides with existing glossary”。复验前先 `git checkout HEAD -- content/glossary.json`（恢复 35 条），或改脚本接受 `--baseline` 参数。不要为此重写术语。
-4. **部分批次偏长。** batch-13（23k 字）、batch-18（31k 字）等有 total text >2400 的 warning；不是 schema error。全量后统一判断是否需要压缩，不要为警告删技术条件。
-5. **章节 bridge 已核对。** ICT-004 原写“下一章建 VLANIF”，实际下一章是链路聚合，已修正；94 条 bridge 已逐条核对。后续若改章节顺序或增删章，需要重新核对。
-6. **术语覆盖警告是启发式。** `audit_content.py` 会报 “term not found” 等 warning，很多是中文同义改写或英文缩写拆分，不等于内容缺失。逐条判断。
-7. **图文讲解覆盖已达标（2026-10-25，V01 完成）。** 从 9/322 提升到 23/322（18/94 章、四方向）：新增 15 个关键机制场景（DHCP、VLAN 帧路径、STP、OSPF、BGP、MPLS、VXLAN、EVPN、802.1X、M-LAG、NAPT、IPsec/IKE、云上 VPC、AP 上线、WLAN 漫游）+ VLAN 实验状态快照。方法与验收见 `docs/reviews/v01-contract.md`、`docs/reviews/audit-content.md`。**残余风险**：本轮为纯文本工作，SVG 实际观感与窄屏滚动未经人眼确认，首次人工浏览时检查；VXLAN 场景按"正文未给数值不新增"原则未标 UDP 端口号。
-8. **未实机验证。** 所有配置、命令、设备行为均未在赛事指定版本执行；这是内容边界，不是本轮可以补上的事实。
-9. **`dist/` 是生成物。** 不要手改 `dist/app.js` 之外的构建产物后不回写源；`app.js/style.css/teaching.js/diagrams.js` 是手写源，`data.js/units.json/handbook.html` 是生成物。
-10. **浏览器实际布局未验收。** 用户在实际浏览器中发现布局问题，具体页面/浏览器/视口待补；headless 截图通过不等于真实浏览器通过。不要用 `overflow:hidden` 掩盖裁切。详见 `docs/reviews/layout-issues.md` 与 TASKS U01。
-11. **发布授权已更新。** 2026-10-25 用户明确要求 Git 提交并更新网站；本次通过 main 推送触发 Pages。后续发布仍以用户授权为准。
-
-## 8. 接续顺序（推荐）
-
-1. 只读复核：`python3 build.py`、`audit_content.py`、三项测试；确认 94/322、0 error、无 LEGACY。
-2. 按 TASKS U01 复现并修复浏览器实际布局问题（当前唯一内容型未完成任务）；先拿到用户截图/视口/浏览器信息，不要盲改 CSS。
-3. ~~V01 关键机制可视化~~ 已完成（2026-10-25，23/322、四方向）；后续新增场景按 `docs/reviews/v01-contract.md` 的契约与 `scripts/validate_v01_drafts.cjs` 执行。
-4. 改动内容或 UI 后重跑 build/audit/test-models/test-teaching/render_check，并做 1280/1024/768/500 与 125%/150% 真实浏览器检查。
-5. 如用户要求赛事级验收，再做真机/模拟器命令验证、322 项来源映射、真实手机/读屏/打印检查。
-6. 更新 README/PROGRESS/TASKS/HANDOFF 的覆盖率与验证数字。
-7. 发布按 §7.11 的用户授权执行；无新授权不 push。
-
-## 9. 不要重复的工作
-
-- 不要重新生成 batch-00—batch-35 的内容（除非审计给出具体 unit 问题）。
-- 不要重做术语库 135 条（除非发现明确错误）。
-- 不要重做 UI 基础布局、进度机制、术语弹窗、四个实验；它们已可运行。
-- V01 已完成（2026-10-25，23/322、四方向）；不要为"凑满 322 配图"再批量加图，新增须对应真实机制讲解。
-- 不要重新生成 36 批源材料；`content/rewrite/source/` 已稳定。
-- 不要改 `knowledge.json`、`subskills.json`、`curriculum.json` 的 94/322 范围；本轮保留考纲体系。
-
-## 10. 关键决策记录
-
-- 教学顺序：先基础路径 → 交换 → 路由 → 园区安全/自动化 → 广域/VPN → 安全 → WLAN → DCN → 方案。章节顺序沿用 `curriculum.json`，只允许在章内调 unit `order`。
-- 分层：用 `level` 标注，不隐藏 advanced/detail；配置/边界折叠，基础主线连续。
-- 术语：135 条双层库；`annotate:false` 只进库不插入正文；首现提示跳过导语/标题/答案，减少打断。
-- 进度：只做章节级手动完成标记，不做答题/时长/账户。
-- 审计：先自动检查结构/重复/覆盖，再做领域人工抽读；不追求“每节都有图/交互”。
-- 技术边界：不虚报实机验证；配置按旧稿保留，页面统一注明“尚未在赛事设备验证”。
-
-## 11. 文件写入矩阵（防止冲突）
-
-| 角色 | 可写 | 只读 |
-| --- | --- | --- |
-| 批次生成 Agent | `content/rewrite/out/batch-XX.json` | 其他全部 |
-| 冻结/合并 | `content/rewrite/frozen/`、`content/teaching-*.json`、`dist/`（build） | 批次 out、源数据 |
-| 内容修复 | 指定 `out/batch-XX.json` 或 `teaching-*.json` | 其他批次 |
-| UI | `dist/app.js`、`dist/style.css`、`dist/teaching.js` | 内容 JSON、`diagrams.js` 模型逻辑 |
-| 测试/CI | `test-*.cjs`、`scripts/*.py`、`.github/workflows/pages.yml` | 内容、UI |
-| 文档 | `README.md`、`docs/PROGRESS.md`、`TASKS.md`、`HANDOFF.md` | 其他全部 |
-
-## 12. 交付前检查清单
-
-- [x] `teaching-chapters.json` 94 条，`teaching-units.json` 322 条。
-- [x] `build.py` 输出 322/322、94/94，无 LEGACY。
-- [x] `audit_content.py` 0 error；warning 已记录并判断。
-- [x] `node test-models.cjs`（4746）、`node test-teaching.cjs`（1002）、`node scripts/render_check.cjs` 全 PASS（不带 `REQUIRE_COMPLETE=0`）。
-- [x] 首页/章节/目录/参考资料/术语/进度/四个实验/步骤场景可用。
-- [ ] U01 真实浏览器布局修复：1280/1024/768/500 与 125%/150% 缩放下无重叠、裁切、错位。（待用户提供复现信息）
-- [x] V01 关键机制可视化完成：23/322（18/94 章）、四方向（2026-10-25）。
-- [x] 94 条 bridge 与下一章匹配。
-- [x] README/PROGRESS/HANDOFF 数字一致。
-- [ ] 部署按 2026-10-25 用户授权进行：`ba17506` 已推送 main，Pages 构建已触发、待 Actions 结果确认；配置未实机验证的声明仍在。
+GitHub：https://github.com/Amoxilinn/ict-learning；线上：https://amoxilinn.github.io/ict-learning/。main 推送后 Pages 自动执行构建、审计、词库/Python 回归、JS 语法与现有测试后部署。本轮用户已授权提交并推送；发布状态应分别确认源码、Actions 和线上资源版本。

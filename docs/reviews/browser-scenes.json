@@ -1,0 +1,310 @@
+[
+  {
+    "sceneId": "journey",
+    "width": 390,
+    "steps": 4,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "vrp",
+    "width": 390,
+    "steps": 5,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "encapsulation",
+    "width": 390,
+    "steps": 4,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "tcp",
+    "width": 390,
+    "steps": 5,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "arp-local",
+    "width": 390,
+    "steps": 7,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "arp-gateway",
+    "width": 390,
+    "steps": 7,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "switch-learning",
+    "width": 390,
+    "steps": 10,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "dhcp-dora",
+    "width": 390,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "vlan-frame-path",
+    "width": 390,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "stp-roles",
+    "width": 390,
+    "steps": 5,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "ospf-neighbor",
+    "width": 390,
+    "steps": 8,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "bgp-path-select",
+    "width": 390,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "mpls-label-hop",
+    "width": 390,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "vxlan-encap",
+    "width": 390,
+    "steps": 7,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "evpn-type2",
+    "width": 390,
+    "steps": 5,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "dot1x-port-access",
+    "width": 390,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "mlag-failover",
+    "width": 390,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "napt-rewrite",
+    "width": 390,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "ipsec-ike-phases",
+    "width": 390,
+    "steps": 7,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "vpc-egress-path",
+    "width": 390,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "ap-find-ac",
+    "width": 390,
+    "steps": 5,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "wlan-roam-hold",
+    "width": 390,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "journey",
+    "width": 1280,
+    "steps": 4,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "vrp",
+    "width": 1280,
+    "steps": 5,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "encapsulation",
+    "width": 1280,
+    "steps": 4,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "tcp",
+    "width": 1280,
+    "steps": 5,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "arp-local",
+    "width": 1280,
+    "steps": 7,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "arp-gateway",
+    "width": 1280,
+    "steps": 7,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "switch-learning",
+    "width": 1280,
+    "steps": 10,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "dhcp-dora",
+    "width": 1280,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "vlan-frame-path",
+    "width": 1280,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "stp-roles",
+    "width": 1280,
+    "steps": 5,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "ospf-neighbor",
+    "width": 1280,
+    "steps": 8,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "bgp-path-select",
+    "width": 1280,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "mpls-label-hop",
+    "width": 1280,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "vxlan-encap",
+    "width": 1280,
+    "steps": 7,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "evpn-type2",
+    "width": 1280,
+    "steps": 5,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "dot1x-port-access",
+    "width": 1280,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "mlag-failover",
+    "width": 1280,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "napt-rewrite",
+    "width": 1280,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "ipsec-ike-phases",
+    "width": 1280,
+    "steps": 7,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "vpc-egress-path",
+    "width": 1280,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "ap-find-ac",
+    "width": 1280,
+    "steps": 5,
+    "resetWorks": true,
+    "issues": []
+  },
+  {
+    "sceneId": "wlan-roam-hold",
+    "width": 1280,
+    "steps": 6,
+    "resetWorks": true,
+    "issues": []
+  }
+]
