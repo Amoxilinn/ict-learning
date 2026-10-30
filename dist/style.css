@@ -99,7 +99,7 @@
 .learning-nav summary{display:flex;align-items:center;gap:8px;justify-content:space-between}
 .learning-nav summary>span:first-child{flex:1}
 .stage-count{font-size:10px;color:#6f8878;font-weight:500;white-space:nowrap;background:#f0f5f1;padding:1px 6px;border-radius:8px}
-.learning-nav li a.done{color:#3d7a5c}
+.learning-nav li a.is-complete:not(.current){color:#3d7a5c}
 .learning-chapters a.done strong{color:#3a7a5b}
 .outline-items{display:flex;flex-wrap:wrap;gap:7px 14px}
 .outline-items a{display:inline-flex;align-items:center;gap:6px;text-decoration:none}

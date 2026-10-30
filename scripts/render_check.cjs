@@ -17,5 +17,24 @@ for(const x of context.fixture.content){
   }catch(e){console.log('THROW',x.id,e.message);bad++}
 }
 for(const route of ['learningPage()','mapPage(null)','sourcePage()']){try{const html=vm.runInContext(route,context);if(!html||html.includes('undefined')){console.log('BAD',route);bad++}}catch(e){console.log('THROW',route,e.message);bad++}}
-console.log(bad?`FAILED ${bad}`:'PASS render all chapters');
+// Exercise every sidebar entry both before and after completion, including current links.
+elements['#learning-order']={innerHTML:'',querySelectorAll:()=>[],querySelector:()=>null};
+elements['.sidebar']={scrollTop:0};
+for(const completed of [false,true]){
+  vm.runInContext(`progress=new Set(${completed?'content.map(x=>x.id)':'[]'})`,context);
+  for(const x of context.fixture.content){
+    vm.runInContext(`learningSidebar(${JSON.stringify(x.id)})`,context);
+    const links=[...elements['#learning-order'].innerHTML.matchAll(/<a\b([^>]*)>(.*?)<\/a>/gs)];
+    for(const [,attrs,body] of links){
+      const ticks=(body.match(/✓/g)||[]).length;
+      if(ticks!==(completed?1:0)||/\bdone\b/.test(attrs)||attrs.includes('is-complete')!==completed){
+        console.log('BAD SIDEBAR CHECKMARK',x.id,attrs);bad++;
+      }
+    }
+    if(links.length!==context.fixture.content.length||links.filter(([,a])=>a.includes('aria-current="page"')).length!==1){
+      console.log('BAD SIDEBAR LINKS',x.id);bad++;
+    }
+  }
+}
+console.log(bad?`FAILED ${bad}`:'PASS render all chapters and sidebar completion states');
 process.exit(bad?1:0);
