@@ -2185,7 +2185,7 @@
     "config": {
       "code": "system-view\nbgp 65001\n router-id 1.1.1.1\n peer 10.0.12.2 as-number 65002\n ipv4-family unicast\n  peer 10.0.12.2 enable\n  network 192.168.10.0 255.255.255.0\n  quit\n quit\ndisplay bgp peer\ndisplay bgp routing-table",
       "platform": "S系列/AR支持BGP的VRP V200常见语法",
-      "notes": "R1已有192.168.1.0/24精确有效路由、互联10.0.12.1/30；对端AS65002设peer10.0.12.1 as-number65001并通告自己的LAN。只用于隔离私有AS实验。"
+      "notes": "R1已有192.168.10.0/24精确有效路由、互联10.0.12.1/30；对端AS65002设peer10.0.12.1 as-number65001并通告自己的LAN。只用于隔离私有AS实验。"
     },
     "sources": [
       {
@@ -2199,6 +2199,12 @@
         "url": "https://support.huawei.com/enterprise/en/doc/EDOC1000089038/206aba42/example-for-configuring-ospf-gr",
         "version": "V200R008 C00/C10",
         "accessed": "2026-10-24"
+      },
+      {
+        "title": "华为 · BGP原理与路由发布",
+        "url": "https://info.support.huawei.com/info-finder/encyclopedia/en/BGP.html",
+        "version": "原理与边界参考；型号能力另验",
+        "accessed": "2026-10-31"
       }
     ],
     "walkthrough": {
@@ -2254,7 +2260,7 @@
     "config": {
       "code": "system-view\nbgp 65001\n router-id 1.1.1.1\n peer 2001:db8:12::2 as-number 65002\n ipv6-family unicast\n  peer 2001:db8:12::2 enable\n  network 2001:db8:10:: 64\n  quit\n quit\ndisplay bgp ipv6 peer\ndisplay bgp ipv6 routing-table",
       "platform": "S7700 V200R021C00/C01等支持BGP4+的VRP设备",
-      "notes": "IPv6接口与到对端的路由先就绪；2001:db8:1::/64必须在本机IPv6路由表存在，R2使用不同AS/Router ID和自己的前缀。VRP8产品需commit。"
+      "notes": "IPv6接口与到对端的路由先就绪；2001:db8:10::/64必须在本机IPv6路由表存在，R2使用不同AS/Router ID和自己的前缀。VRP8产品需commit。"
     },
     "sources": [
       {
@@ -2268,6 +2274,12 @@
         "url": "https://www.rfc-editor.org/rfc/rfc8200",
         "version": "2017 / RFC 8200",
         "accessed": "2026-10-24"
+      },
+      {
+        "title": "华为 · BGP原理与路由发布",
+        "url": "https://info.support.huawei.com/info-finder/encyclopedia/en/BGP.html",
+        "version": "原理与边界参考；型号能力另验",
+        "accessed": "2026-10-31"
       }
     ],
     "walkthrough": {
@@ -2576,7 +2588,7 @@
     "config": {
       "code": "system-view\nip ip-prefix LAB index 10 permit 192.168.1.0 24\ndisplay ip ip-prefix LAB",
       "platform": "VRP传统ip ip-prefix语法",
-      "notes": "匹配地址落在10/8且长度16—24的路由；创建后需在filter-policy、route-policy或邻居过滤等正确位置调用。"
+      "notes": "仅精确匹配192.168.1.0/24，不包含其他/24或更具体前缀；创建后需在filter-policy、route-policy或邻居过滤等正确位置调用。"
     },
     "sources": [
       {
